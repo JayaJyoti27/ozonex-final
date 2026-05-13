@@ -1,26 +1,68 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { useEffect } from "react";
+import Lenis from "lenis";
+import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { Nav } from "@/components/Nav";
+import { ScrollLineV } from "@/components/ScrollLineV";
+import { Hero } from "@/components/Hero";
+import { Statement } from "@/components/Statement";
+import { Stats } from "@/components/Stats";
+import { HorizontalScroll } from "@/components/HorizontalScroll";
+import { WhoFor, FAQ, GlobalCTA, Footer } from "@/components/Sections";
+
+gsap.registerPlugin(ScrollTrigger);
 
 export const Route = createFileRoute("/")({
   component: Index,
 });
 
-// IMPORTANT: Replace this placeholder. For sites with multiple pages (About, Services, Contact, etc.),
-// create separate route files (about.tsx, services.tsx, contact.tsx) — don't put all pages in this file.
-function PlaceholderIndex() {
-  return (
-    <div
-      className="flex min-h-screen items-center justify-center"
-      style={{ backgroundColor: "#fcfbf8" }}
-    >
-      <img
-        data-lovable-blank-page-placeholder="REMOVE_THIS"
-        src="https://cdn.gpteng.co/blank-app-v1.svg"
-        alt="Your app will live here!"
-      />
-    </div>
-  );
-}
-
 function Index() {
-  return <PlaceholderIndex />;
+  useEffect(() => {
+    const lenis = new Lenis({
+      duration: 1.2,
+      easing: (t: number) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+    });
+    function raf(time: number) {
+      lenis.raf(time);
+      requestAnimationFrame(raf);
+    }
+    requestAnimationFrame(raf);
+    lenis.on("scroll", ScrollTrigger.update);
+    gsap.ticker.add((time) => lenis.raf(time * 1000));
+    gsap.ticker.lagSmoothing(0);
+
+    // Generic .reveal animation
+    const reveals = gsap.utils.toArray<HTMLElement>(".reveal");
+    reveals.forEach((el) => {
+      gsap.fromTo(
+        el,
+        { y: 50, opacity: 0 },
+        {
+          y: 0, opacity: 1, duration: 1, ease: "power3.out",
+          scrollTrigger: { trigger: el, start: "top 82%", toggleActions: "play none none none" },
+        }
+      );
+    });
+
+    return () => {
+      lenis.destroy();
+      ScrollTrigger.getAll().forEach((s) => s.kill());
+    };
+  }, []);
+
+  return (
+    <main className="relative">
+      <Nav />
+      <ScrollLineV />
+      <Hero />
+      <Statement />
+      <Stats />
+      <HorizontalScroll />
+      <WhoFor />
+      <FAQ />
+      <GlobalCTA />
+      <Footer />
+    </main>
+  );
 }
