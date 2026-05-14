@@ -7,6 +7,7 @@ import { Nav } from "@/components/Nav";
 import { ScrollLineV } from "@/components/ScrollLineV";
 import { Footer } from "@/components/Sections";
 import { TornEdge } from "@/components/TornEdge";
+import { ProductFeatureModules } from "@/components/ProductFeatureModules";
 
 import heroImg from "@/assets/product-hero.jpg";
 import bookingImg from "@/assets/product-booking.jpg";
@@ -402,89 +403,8 @@ function ProductPage() {
         </div>
       </section>
 
-      {/* SECTION 3 — MODULES */}
-      <section id="features" className="relative w-full" style={{ background: "var(--cream)", padding: "120px 24px" }}>
-        <div className="text-center max-w-[1320px] mx-auto">
-          <div className="eyebrow" style={{ color: "var(--gold)" }}>What's inside the platform</div>
-          <h2 className="font-display mt-6" style={{ fontSize: "clamp(40px,5vw,64px)", color: "var(--ink)", lineHeight: 1.0 }}>
-            Six modules.<br />One connected workflow.
-          </h2>
-        </div>
-
-        <div className="max-w-[1320px] mx-auto mt-24 flex flex-col" style={{ gap: 96 }}>
-          {modules.map((m, i) => {
-            const even = i % 2 === 1;
-            return (
-              <div key={m.n} className={`mod-block ${even ? "even" : "odd"} relative`}>
-                <div
-                  className="grid grid-cols-1 lg:grid-cols-2 items-center"
-                  style={{ gap: 80, padding: "0 32px" }}
-                >
-                  {/* photo */}
-                  <div className={`relative ${even ? "lg:order-2" : "lg:order-1"}`}>
-                    <div className="mod-photo relative" style={{ width: "100%", maxWidth: 520 }}>
-                      <img
-                        src={m.img}
-                        alt={m.title}
-                        loading="lazy"
-                        style={{
-                          width: "100%", height: 500, objectFit: "cover",
-                          filter: "brightness(0.95) saturate(1.1)",
-                        }}
-                      />
-                      <div
-                        className="mod-num absolute font-display flex items-center justify-center"
-                        style={{
-                          width: 56, height: 56, borderRadius: "50%",
-                          background: "var(--ink)", color: "#fff", fontSize: 24,
-                          [even ? "top" : "top"]: -28,
-                          [even ? "left" : "right"]: -28,
-                        } as React.CSSProperties}
-                      >
-                        {m.n}
-                      </div>
-                    </div>
-                  </div>
-
-                  {/* text */}
-                  <div className={`mod-text ${even ? "lg:order-1" : "lg:order-2"}`} style={{ maxWidth: 480 }}>
-                    <h3 className="font-display" style={{ fontSize: "clamp(36px,4vw,48px)", color: "var(--ink)", lineHeight: 1.0 }}>
-                      {m.title}
-                    </h3>
-                    <div className="mt-4" style={{ fontSize: 15, color: "var(--gold)", letterSpacing: "0.08em" }}>
-                      {m.tag}
-                    </div>
-                    <p className="mt-6" style={{ fontSize: 16, color: "var(--muted-warm)", lineHeight: 1.8, maxWidth: 420 }}>
-                      {m.desc}
-                    </p>
-                    <div className="mt-8 grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-5">
-                      {m.subs.map(([label, desc]) => (
-                        <div key={label} className="mod-sub">
-                          <div style={{ fontSize: 13, color: "var(--ink)", fontWeight: 600 }}>{label}</div>
-                          <div style={{ fontSize: 13, color: "var(--muted-warm)", marginTop: 4, lineHeight: 1.6 }}>{desc}</div>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-                </div>
-
-                {/* connecting squiggle */}
-                {i < modules.length - 1 && (
-                  <svg
-                    className="hidden lg:block absolute left-1/2 -translate-x-1/2 pointer-events-none"
-                    style={{ bottom: -80, width: 200, height: 96, opacity: 0.4 }}
-                    viewBox="0 0 200 96" fill="none" stroke="var(--sand)" strokeWidth="1.5"
-                  >
-                    <path d={even
-                      ? "M40,0 C40,30 160,30 160,60 C160,80 100,80 100,96"
-                      : "M160,0 C160,30 40,30 40,60 C40,80 100,80 100,96"} />
-                  </svg>
-                )}
-              </div>
-            );
-          })}
-        </div>
-      </section>
+      {/* SECTION 3 — FEATURE MODULES (rebuilt) */}
+      <ProductFeatureModules />
 
       {/* SECTION 4 — CONNECTED WORKFLOW */}
       <section className="cw-section relative w-full overflow-hidden grid-overlay" style={{ background: "var(--ink)", padding: "160px 24px 140px" }}>
