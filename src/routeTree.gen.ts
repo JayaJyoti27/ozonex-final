@@ -11,6 +11,7 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as SolutionsRouteImport } from './routes/solutions'
 import { Route as ProductRouteImport } from './routes/product'
+import { Route as MiceEventsRouteImport } from './routes/mice-events'
 import { Route as IndexRouteImport } from './routes/index'
 
 const SolutionsRoute = SolutionsRouteImport.update({
@@ -23,6 +24,11 @@ const ProductRoute = ProductRouteImport.update({
   path: '/product',
   getParentRoute: () => rootRouteImport,
 } as any)
+const MiceEventsRoute = MiceEventsRouteImport.update({
+  id: '/mice-events',
+  path: '/mice-events',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
@@ -31,30 +37,34 @@ const IndexRoute = IndexRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/mice-events': typeof MiceEventsRoute
   '/product': typeof ProductRoute
   '/solutions': typeof SolutionsRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/mice-events': typeof MiceEventsRoute
   '/product': typeof ProductRoute
   '/solutions': typeof SolutionsRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/mice-events': typeof MiceEventsRoute
   '/product': typeof ProductRoute
   '/solutions': typeof SolutionsRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/product' | '/solutions'
+  fullPaths: '/' | '/mice-events' | '/product' | '/solutions'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/product' | '/solutions'
-  id: '__root__' | '/' | '/product' | '/solutions'
+  to: '/' | '/mice-events' | '/product' | '/solutions'
+  id: '__root__' | '/' | '/mice-events' | '/product' | '/solutions'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  MiceEventsRoute: typeof MiceEventsRoute
   ProductRoute: typeof ProductRoute
   SolutionsRoute: typeof SolutionsRoute
 }
@@ -75,6 +85,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ProductRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/mice-events': {
+      id: '/mice-events'
+      path: '/mice-events'
+      fullPath: '/mice-events'
+      preLoaderRoute: typeof MiceEventsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
@@ -87,6 +104,7 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  MiceEventsRoute: MiceEventsRoute,
   ProductRoute: ProductRoute,
   SolutionsRoute: SolutionsRoute,
 }
