@@ -133,11 +133,11 @@ export function Nav() {
             onMouseLeave={(e) => (e.currentTarget.style.background = "transparent")}
           >
             Book a Demo
-          </Link>
+          </a>
 
-          <Link
-            to="/"
-            onClick={() => setOpen(false)}
+          <a
+            href="/"
+            onClick={(e) => { e.preventDefault(); setOpen(false); router.navigate({ to: "/" }); }}
             className="absolute"
             style={{
               left: "50%",
@@ -152,7 +152,7 @@ export function Nav() {
             }}
           >
             OZONEX
-          </Link>
+          </a>
 
           <button
             onClick={() => setOpen((v) => !v)}
