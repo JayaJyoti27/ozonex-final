@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { gsap } from "gsap";
-import { Link, useRouter } from "@tanstack/react-router";
+import { useRouter } from "@tanstack/react-router";
 
 const mainLinks = [
   { n: "01", label: "Home", href: "/" },
@@ -113,8 +113,9 @@ export function Nav() {
         }}
       >
         <div className="relative h-full flex items-center justify-between" style={{ padding: "0 48px" }}>
-          <Link
-            to="/contact"
+          <a
+            href="/contact"
+            onClick={(e) => { e.preventDefault(); router.navigate({ to: "/" }); window.location.href = "/contact"; }}
             className="inline-flex items-center transition-colors"
             style={{
               border: "1px solid rgba(255,255,255,0.45)",
