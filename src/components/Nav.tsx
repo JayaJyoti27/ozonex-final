@@ -143,16 +143,26 @@ export function Nav() {
             style={{
               left: "50%",
               transform: "translateX(-50%)",
-              fontFamily: "'Cormorant Garamond', serif",
-              fontSize: 20,
-              fontWeight: 400,
-              letterSpacing: "0.3em",
-              color: "white",
               textDecoration: "none",
               pointerEvents: "auto",
+              background: "transparent",
+              boxShadow: "none",
+              lineHeight: 0,
             }}
+            aria-label="Ozonex home"
           >
-            OZONEX
+            <img
+              src={ozonexLogo}
+              alt="Ozonex"
+              style={{
+                height: 28,
+                width: "auto",
+                display: "block",
+                mixBlendMode: "screen",
+                filter: "brightness(10)",
+                background: "transparent",
+              }}
+            />
           </a>
 
           <button
