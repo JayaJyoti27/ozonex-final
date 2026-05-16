@@ -184,6 +184,21 @@ export function Footer() {
       <div className="absolute inset-0" style={{ background: "rgba(10,8,6,0.84)" }} />
 
       <div className="relative z-10 px-12 pt-24 pb-40 text-white max-w-[1400px] mx-auto">
+        <div className="mb-16">
+          <img
+            src={ozonexLogo}
+            alt="Ozonex"
+            style={{
+              height: 36,
+              width: "auto",
+              display: "block",
+              mixBlendMode: "screen",
+              filter: "brightness(10)",
+              opacity: 0.85,
+              background: "transparent",
+            }}
+          />
+        </div>
         <div className="grid grid-cols-1 md:grid-cols-4 gap-12">
           <div>
             <div className="eyebrow text-white/55">Menu</div>
