@@ -6,6 +6,7 @@ import hr from "@/assets/who-hr.jpg";
 import exec from "@/assets/who-exec.jpg";
 import cta from "@/assets/cta-skyline.jpg";
 import footer from "@/assets/footer-bg.jpg";
+import ozonexLogo from "@/assets/ozonex-logo.png";
 
 gsap.registerPlugin(ScrollTrigger);
 
