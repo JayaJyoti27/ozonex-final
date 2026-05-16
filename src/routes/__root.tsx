@@ -72,14 +72,18 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Ozonex — Corporate Travel Management Software" },
-      { name: "description", content: "One platform for corporate bookings, approvals, policy compliance, and expense tracking — built for global enterprises." },
+      { title: "Ozonex - Corporate Travel Management Software" },
+      { name: "description", content: "One platform for corporate bookings, approvals, policy compliance, and expense tracking - built for global enterprises." },
       { name: "author", content: "Ozonex" },
-      { property: "og:title", content: "Ozonex — Corporate Travel Management Software" },
-      { property: "og:description", content: "One platform for corporate bookings, approvals, policy compliance, and expense tracking — built for global enterprises." },
+      { property: "og:title", content: "Ozonex - Corporate Travel Management Software" },
+      { property: "og:description", content: "One platform for corporate bookings, approvals, policy compliance, and expense tracking - built for global enterprises." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary" },
       { name: "twitter:site", content: "@Lovable" },
+      { name: "twitter:title", content: "Ozonex - Corporate Travel Management Software" },
+      { name: "twitter:description", content: "One platform for corporate bookings, approvals, policy compliance, and expense tracking - built for global enterprises." },
+      { property: "og:image", content: "https://storage.googleapis.com/gpt-engineer-file-uploads/qXbErmlRR7MTjCnlxOOKyq58jYW2/social-images/social-1778904108837-Ozonex_new_1-01-removebg-preview.webp" },
+      { name: "twitter:image", content: "https://storage.googleapis.com/gpt-engineer-file-uploads/qXbErmlRR7MTjCnlxOOKyq58jYW2/social-images/social-1778904108837-Ozonex_new_1-01-removebg-preview.webp" },
     ],
     links: [
       {
