@@ -199,12 +199,24 @@ export function Footer() {
             }}
           />
         </div>
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-12">
+        <div className="grid grid-cols-1 md:grid-cols-5 gap-12">
           <div>
             <div className="eyebrow text-white/55">Menu</div>
             <ul className="mt-5 space-y-3">
               {["Solutions", "Platform", "Enterprise", "Pricing", "Careers", "Contact"].map((x) => (
                 <li key={x}><a href="#" className="text-white/85 hover:text-white" style={{ fontSize: 15 }}>{x}</a></li>
+              ))}
+            </ul>
+          </div>
+          <div>
+            <div className="eyebrow text-white/55">Cities</div>
+            <ul className="mt-5 space-y-3">
+              {[
+                ["Chennai", "/corporate-travel-management-chennai"],
+                ["Bangalore", "/corporate-travel-management-bangalore"],
+                ["Delhi NCR", "/corporate-travel-management-delhi"],
+              ].map(([label, href]) => (
+                <li key={label}><a href={href} className="text-white/85 hover:text-white" style={{ fontSize: 15 }}>{label}</a></li>
               ))}
             </ul>
           </div>
