@@ -12,6 +12,9 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as SolutionsRouteImport } from './routes/solutions'
 import { Route as ProductRouteImport } from './routes/product'
 import { Route as MiceEventsRouteImport } from './routes/mice-events'
+import { Route as CorporateTravelManagementDelhiRouteImport } from './routes/corporate-travel-management-delhi'
+import { Route as CorporateTravelManagementChennaiRouteImport } from './routes/corporate-travel-management-chennai'
+import { Route as CorporateTravelManagementBangaloreRouteImport } from './routes/corporate-travel-management-bangalore'
 import { Route as IndexRouteImport } from './routes/index'
 
 const SolutionsRoute = SolutionsRouteImport.update({
@@ -29,6 +32,24 @@ const MiceEventsRoute = MiceEventsRouteImport.update({
   path: '/mice-events',
   getParentRoute: () => rootRouteImport,
 } as any)
+const CorporateTravelManagementDelhiRoute =
+  CorporateTravelManagementDelhiRouteImport.update({
+    id: '/corporate-travel-management-delhi',
+    path: '/corporate-travel-management-delhi',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const CorporateTravelManagementChennaiRoute =
+  CorporateTravelManagementChennaiRouteImport.update({
+    id: '/corporate-travel-management-chennai',
+    path: '/corporate-travel-management-chennai',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const CorporateTravelManagementBangaloreRoute =
+  CorporateTravelManagementBangaloreRouteImport.update({
+    id: '/corporate-travel-management-bangalore',
+    path: '/corporate-travel-management-bangalore',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
@@ -37,12 +58,18 @@ const IndexRoute = IndexRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/corporate-travel-management-bangalore': typeof CorporateTravelManagementBangaloreRoute
+  '/corporate-travel-management-chennai': typeof CorporateTravelManagementChennaiRoute
+  '/corporate-travel-management-delhi': typeof CorporateTravelManagementDelhiRoute
   '/mice-events': typeof MiceEventsRoute
   '/product': typeof ProductRoute
   '/solutions': typeof SolutionsRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/corporate-travel-management-bangalore': typeof CorporateTravelManagementBangaloreRoute
+  '/corporate-travel-management-chennai': typeof CorporateTravelManagementChennaiRoute
+  '/corporate-travel-management-delhi': typeof CorporateTravelManagementDelhiRoute
   '/mice-events': typeof MiceEventsRoute
   '/product': typeof ProductRoute
   '/solutions': typeof SolutionsRoute
@@ -50,20 +77,48 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/corporate-travel-management-bangalore': typeof CorporateTravelManagementBangaloreRoute
+  '/corporate-travel-management-chennai': typeof CorporateTravelManagementChennaiRoute
+  '/corporate-travel-management-delhi': typeof CorporateTravelManagementDelhiRoute
   '/mice-events': typeof MiceEventsRoute
   '/product': typeof ProductRoute
   '/solutions': typeof SolutionsRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/mice-events' | '/product' | '/solutions'
+  fullPaths:
+    | '/'
+    | '/corporate-travel-management-bangalore'
+    | '/corporate-travel-management-chennai'
+    | '/corporate-travel-management-delhi'
+    | '/mice-events'
+    | '/product'
+    | '/solutions'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/mice-events' | '/product' | '/solutions'
-  id: '__root__' | '/' | '/mice-events' | '/product' | '/solutions'
+  to:
+    | '/'
+    | '/corporate-travel-management-bangalore'
+    | '/corporate-travel-management-chennai'
+    | '/corporate-travel-management-delhi'
+    | '/mice-events'
+    | '/product'
+    | '/solutions'
+  id:
+    | '__root__'
+    | '/'
+    | '/corporate-travel-management-bangalore'
+    | '/corporate-travel-management-chennai'
+    | '/corporate-travel-management-delhi'
+    | '/mice-events'
+    | '/product'
+    | '/solutions'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  CorporateTravelManagementBangaloreRoute: typeof CorporateTravelManagementBangaloreRoute
+  CorporateTravelManagementChennaiRoute: typeof CorporateTravelManagementChennaiRoute
+  CorporateTravelManagementDelhiRoute: typeof CorporateTravelManagementDelhiRoute
   MiceEventsRoute: typeof MiceEventsRoute
   ProductRoute: typeof ProductRoute
   SolutionsRoute: typeof SolutionsRoute
@@ -92,6 +147,27 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof MiceEventsRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/corporate-travel-management-delhi': {
+      id: '/corporate-travel-management-delhi'
+      path: '/corporate-travel-management-delhi'
+      fullPath: '/corporate-travel-management-delhi'
+      preLoaderRoute: typeof CorporateTravelManagementDelhiRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/corporate-travel-management-chennai': {
+      id: '/corporate-travel-management-chennai'
+      path: '/corporate-travel-management-chennai'
+      fullPath: '/corporate-travel-management-chennai'
+      preLoaderRoute: typeof CorporateTravelManagementChennaiRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/corporate-travel-management-bangalore': {
+      id: '/corporate-travel-management-bangalore'
+      path: '/corporate-travel-management-bangalore'
+      fullPath: '/corporate-travel-management-bangalore'
+      preLoaderRoute: typeof CorporateTravelManagementBangaloreRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
@@ -104,6 +180,10 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  CorporateTravelManagementBangaloreRoute:
+    CorporateTravelManagementBangaloreRoute,
+  CorporateTravelManagementChennaiRoute: CorporateTravelManagementChennaiRoute,
+  CorporateTravelManagementDelhiRoute: CorporateTravelManagementDelhiRoute,
   MiceEventsRoute: MiceEventsRoute,
   ProductRoute: ProductRoute,
   SolutionsRoute: SolutionsRoute,
