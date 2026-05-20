@@ -159,7 +159,19 @@ export function GlobalCTA() {
             </span>
           ))}
         </h2>
-        <a href="#contact" className="cta-btn pill mt-12">Shall we begin?</a>
+        <a
+          href="/contact"
+          className="cta-btn mt-12"
+          style={{
+            display: "inline-flex", alignItems: "center", justifyContent: "center",
+            background: "#2563EB", color: "#fff", borderRadius: 50,
+            padding: "14px 40px", fontFamily: "Inter, sans-serif", fontSize: 12,
+            letterSpacing: "0.12em", textTransform: "uppercase", fontWeight: 500,
+            textDecoration: "none", transition: "all 0.25s ease",
+          }}
+          onMouseEnter={(e) => { e.currentTarget.style.background = "#1D4ED8"; e.currentTarget.style.transform = "scale(1.02)"; }}
+          onMouseLeave={(e) => { e.currentTarget.style.background = "#2563EB"; e.currentTarget.style.transform = "scale(1)"; }}
+        >Let's Get Started</a>
       </div>
     </section>
   );

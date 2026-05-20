@@ -65,19 +65,19 @@ export function Statement() {
             className="st-h font-display text-white"
             style={{ fontSize: "clamp(56px, 8vw, 108px)", lineHeight: 0.95 }}
           >
-            We make<br />corporate travel<br />effortless
+            Stop managing<br />travel. Start<br />controlling it.
           </h2>
         </div>
         <div className="col-span-5 flex items-end">
           <div className="max-w-[420px] space-y-5 text-white/80" style={{ fontSize: 15, lineHeight: 1.7 }}>
-            <p className="st-p">We don't just book flights and hotels.</p>
+            <p className="st-p">Most companies don't have a travel problem. They have a visibility problem.</p>
             <p className="st-p">
-              Ozonex manages the entire corporate journey — before, during, and after travel —
-              automating approvals, enforcing policies, and tracking every rupee spent.
+              Ozonex puts every booking, every approval, and every rupee on one
+              screen — so finance sees the truth in real time and employees
+              never wonder what is in policy.
             </p>
             <p className="st-p">
-              From frequent business travel to global executive mobility, Ozonex operates as an
-              extension of your finance and HR operations.
+              Less chasing. Less leakage. More money back in the budget.
             </p>
           </div>
         </div>

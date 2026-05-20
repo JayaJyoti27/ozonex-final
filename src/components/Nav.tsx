@@ -119,8 +119,8 @@ export function Nav() {
             onClick={(e) => { e.preventDefault(); router.navigate({ to: "/" }); window.location.href = "/contact"; }}
             className="inline-flex items-center transition-colors"
             style={{
-              border: "1px solid rgba(255,255,255,0.45)",
-              background: "transparent",
+              border: "none",
+              background: "#2563EB",
               color: "white",
               borderRadius: 50,
               padding: "8px 22px",
@@ -128,12 +128,13 @@ export function Nav() {
               fontSize: 11,
               textTransform: "uppercase",
               letterSpacing: "0.1em",
+              fontWeight: 500,
               transition: "background 0.25s ease",
             }}
-            onMouseEnter={(e) => (e.currentTarget.style.background = "rgba(255,255,255,0.1)")}
-            onMouseLeave={(e) => (e.currentTarget.style.background = "transparent")}
+            onMouseEnter={(e) => (e.currentTarget.style.background = "#1D4ED8")}
+            onMouseLeave={(e) => (e.currentTarget.style.background = "#2563EB")}
           >
-            Book a Demo
+            Get Started
           </a>
 
           <a
@@ -274,12 +275,12 @@ export function Nav() {
                 <ul className="nav-cta-links">
                   <li>
                     <a href="/contact" onClick={(e) => handleNav(e, "/contact")}>
-                      Book a Demo <span>→</span>
+                      Get Started <span>→</span>
                     </a>
                   </li>
                   <li>
                     <a href="/contact" onClick={(e) => handleNav(e, "/contact")}>
-                      Talk to Sales <span>→</span>
+                      Talk to Our Team <span>→</span>
                     </a>
                   </li>
                 </ul>
