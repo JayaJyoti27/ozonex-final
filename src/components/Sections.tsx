@@ -19,8 +19,8 @@ const cards = [
 export function WhoFor() {
   return (
     <section className="relative w-full py-32 px-12 overflow-hidden" style={{ background: "var(--cream)" }}>
-      <h2 className="font-display text-center" style={{ fontSize: "clamp(40px, 5vw, 64px)", color: "var(--ink)" }}>
-        Perfectly built for
+      <h2 className="font-display text-center" style={{ fontSize: "clamp(40px, 5vw, 64px)", color: "var(--ink)", lineHeight: 1.05 }}>
+        Everything your team needs.<br />Nothing they don't.
       </h2>
 
       <div className="relative max-w-[1200px] mx-auto mt-20 grid grid-cols-1 md:grid-cols-3 gap-12">
