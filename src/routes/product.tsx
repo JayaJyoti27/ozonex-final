@@ -322,7 +322,7 @@ function ProductPage() {
           </div>
 
           <h1 className="font-display mt-8 text-white" style={{ fontSize: "clamp(56px,8vw,96px)", lineHeight: 0.92 }}>
-            {[["One", "platform."], ["Every", "journey."], ["Total", "control."]].map((line, i) => (
+            {[["Book", "it."], ["Approve", "it.", "Track", "it."], ["All", "in", "one", "place."]].map((line, i) => (
               <span key={i} className="block">
                 {line.map((w, j) => (
                   <span key={j} className="hero-word inline-block mr-3">{w}</span>
@@ -332,17 +332,17 @@ function ProductPage() {
           </h1>
 
           <p className="hero-fade mt-10 mx-auto" style={{ maxWidth: 560, fontSize: 17, color: "rgba(255,255,255,0.7)", lineHeight: 1.75 }}>
-            Ozonex unifies corporate travel booking, approvals, policy enforcement, and expense intelligence into a single platform built for how modern enterprises actually move.
+            Ozonex unifies corporate travel booking, approvals, policy, and expenses into one platform — so your team books faster, finance sees everything live, and nothing slips through the cracks.
           </p>
 
           <div className="hero-fade mt-10 flex flex-wrap items-center justify-center gap-4">
-            <a href="#features" className="pill">Explore Features</a>
+            <a href="#features" className="pill">See How It Works</a>
             <a
-              href="#demo"
+              href="/contact"
               className="pill"
-              style={{ background: "var(--gold)", borderColor: "var(--gold)" }}
+              style={{ background: "#2563EB", borderColor: "#2563EB" }}
             >
-              Book a Demo
+              Book a Free Demo
             </a>
           </div>
         </div>
@@ -363,7 +363,7 @@ function ProductPage() {
 
         <div className="relative max-w-[1320px] mx-auto grid grid-cols-1 lg:grid-cols-2 gap-20">
           <h2 className="st-headline font-display" style={{ fontSize: "clamp(48px,6vw,88px)", color: "var(--ink)", lineHeight: 0.95 }}>
-            The operating<br />system for<br />corporate travel
+            What takes your<br />team days takes<br />Ozonex seconds
           </h2>
           <div className="flex flex-col gap-6" style={{ maxWidth: 480 }}>
             <p className="st-para" style={{ fontSize: 16, color: "var(--muted-warm)", lineHeight: 1.8 }}>
@@ -552,8 +552,8 @@ function ProductPage() {
             A 30-minute live walkthrough shows you exactly how Ozonex would work for your org structure, your approval hierarchy, and your travel spend profile.
           </p>
           <div className="pcta-btn mt-10 flex flex-wrap items-center justify-center gap-4">
-            <a href="#demo" className="pill" style={{ background: "var(--gold)", borderColor: "var(--gold)", padding: "16px 48px" }}>Book a Live Demo</a>
-            <a href="#brief" className="pill" style={{ padding: "16px 48px" }}>Download Platform Brief</a>
+            <a href="/contact" className="pill" style={{ background: "#2563EB", borderColor: "#2563EB", padding: "16px 48px" }}>Book a Free Demo</a>
+            <a href="#brief" className="pill" style={{ padding: "16px 48px" }}>Get the Overview</a>
           </div>
         </div>
       </section>

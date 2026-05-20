@@ -201,7 +201,7 @@ function Hero() {
           MICE & EVENTS
         </div>
         <Words
-          text="MOVE HUNDREDS. FEEL LIKE ONE."
+          text="RUN YOUR NEXT EVENT WITHOUT THE CHAOS."
           className="font-display text-white"
           style={{ fontSize: "clamp(56px, 8vw, 100px)", lineHeight: 0.88, fontWeight: 300 }}
         />

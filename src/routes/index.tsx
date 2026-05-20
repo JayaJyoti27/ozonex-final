@@ -10,6 +10,7 @@ import { Statement } from "@/components/Statement";
 import { Stats } from "@/components/Stats";
 import { HorizontalScroll } from "@/components/HorizontalScroll";
 import { WhoFor, FAQ, GlobalCTA, Footer } from "@/components/Sections";
+import { LogoStrip, ValueProps, Comparison, SavingsCalculator, PricingTeaser } from "@/components/MarketingSections";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -56,11 +57,16 @@ function Index() {
       <Nav />
       <ScrollLineV />
       <Hero />
+      <LogoStrip />
+      <ValueProps />
+      <Comparison />
       <Statement />
       <Stats />
+      <SavingsCalculator />
       <HorizontalScroll />
       <WhoFor />
       <FAQ />
+      <PricingTeaser />
       <GlobalCTA />
       <Footer />
     </main>

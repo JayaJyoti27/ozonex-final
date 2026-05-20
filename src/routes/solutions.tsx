@@ -224,9 +224,9 @@ function SolutionsPage() {
             style={{ fontSize: "clamp(56px,8vw,84px)", lineHeight: 0.9, fontWeight: 300 }}
           >
             {[
-              ["THE", "PLATFORM", "THAT"],
-              ["FITS", "YOUR", "FUNCTION,"],
-              ["NOT", "THE", "OTHER", "WAY."],
+              ["BUILT", "FOR", "YOUR", "TEAM."],
+              ["NOT", "A", "GENERIC"],
+              ["COMPANY."],
             ].map((line, i) => (
               <span key={i} className="block">
                 {line.map((w, j) => (
