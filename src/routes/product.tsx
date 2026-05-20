@@ -8,6 +8,7 @@ import { ScrollLineV } from "@/components/ScrollLineV";
 import { Footer } from "@/components/Sections";
 import { TornEdge } from "@/components/TornEdge";
 import { ProductFeatureModules } from "@/components/ProductFeatureModules";
+import { LogoStrip } from "@/components/MarketingSections";
 
 import heroImg from "@/assets/product-hero.jpg";
 import bookingImg from "@/assets/product-booking.jpg";
@@ -349,6 +350,8 @@ function ProductPage() {
 
         <TornEdge fill="#F5F0EA" position="bottom" />
       </section>
+
+      <LogoStrip />
 
       {/* SECTION 2 — STATEMENT */}
       <section className="relative w-full overflow-hidden" style={{ background: "var(--cream)", padding: "120px 24px" }}>

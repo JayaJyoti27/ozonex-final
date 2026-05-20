@@ -7,6 +7,7 @@ import { Nav } from "@/components/Nav";
 import { ScrollLineV } from "@/components/ScrollLineV";
 import { Footer } from "@/components/Sections";
 import { TornEdge } from "@/components/TornEdge";
+import { LogoStrip } from "@/components/MarketingSections";
 
 import heroImg from "@/assets/sol-hero-boardroom.jpg";
 import enterprisesImg from "@/assets/sol-enterprises-tower.jpg";
@@ -285,6 +286,8 @@ function SolutionsPage() {
         </div>
         <TornEdge fill="#F5F0EA" position="bottom" />
       </section>
+
+      <LogoStrip />
 
       {/* ============== 2. ENTERPRISES & MNCs ============== */}
       <section id="enterprises" className="relative w-full grid grid-cols-1 lg:grid-cols-2" style={{ minHeight: "100vh" }}>
