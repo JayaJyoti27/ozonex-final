@@ -19,8 +19,8 @@ const cards = [
 export function WhoFor() {
   return (
     <section className="relative w-full py-32 px-12 overflow-hidden" style={{ background: "var(--cream)" }}>
-      <h2 className="font-display text-center" style={{ fontSize: "clamp(40px, 5vw, 64px)", color: "var(--ink)" }}>
-        Perfectly built for
+      <h2 className="font-display text-center" style={{ fontSize: "clamp(40px, 5vw, 64px)", color: "var(--ink)", lineHeight: 1.05 }}>
+        Everything your team needs.<br />Nothing they don't.
       </h2>
 
       <div className="relative max-w-[1200px] mx-auto mt-20 grid grid-cols-1 md:grid-cols-3 gap-12">
@@ -159,7 +159,19 @@ export function GlobalCTA() {
             </span>
           ))}
         </h2>
-        <a href="#contact" className="cta-btn pill mt-12">Shall we begin?</a>
+        <a
+          href="/contact"
+          className="cta-btn mt-12"
+          style={{
+            display: "inline-flex", alignItems: "center", justifyContent: "center",
+            background: "#2563EB", color: "#fff", borderRadius: 50,
+            padding: "14px 40px", fontFamily: "Inter, sans-serif", fontSize: 12,
+            letterSpacing: "0.12em", textTransform: "uppercase", fontWeight: 500,
+            textDecoration: "none", transition: "all 0.25s ease",
+          }}
+          onMouseEnter={(e) => { e.currentTarget.style.background = "#1D4ED8"; e.currentTarget.style.transform = "scale(1.02)"; }}
+          onMouseLeave={(e) => { e.currentTarget.style.background = "#2563EB"; e.currentTarget.style.transform = "scale(1)"; }}
+        >Let's Get Started</a>
       </div>
     </section>
   );

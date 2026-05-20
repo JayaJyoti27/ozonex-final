@@ -198,8 +198,8 @@ export function CityPage({ data }: { data: CityData }) {
               "linear-gradient(rgba(28,20,16,0.72) 0%, rgba(28,20,16,0.85) 100%)",
           }}
         />
-        <span className="absolute left-12 top-1/2 -translate-y-1/2 text-lg select-none hidden md:block" style={{ color: "#C4956A", opacity: 0.5 }}>✦</span>
-        <span className="absolute right-12 top-1/2 -translate-y-1/2 text-lg select-none hidden md:block" style={{ color: "#C4956A", opacity: 0.5 }}>✦</span>
+        <span className="absolute left-12 top-1/2 -translate-y-1/2 text-lg select-none hidden md:block" style={{ color: "#3B82F6", opacity: 0.5 }}>✦</span>
+        <span className="absolute right-12 top-1/2 -translate-y-1/2 text-lg select-none hidden md:block" style={{ color: "#3B82F6", opacity: 0.5 }}>✦</span>
 
         <div className="relative z-10 h-full flex flex-col items-center justify-center text-center px-6 max-w-[1200px] mx-auto">
           <div
@@ -208,7 +208,7 @@ export function CityPage({ data }: { data: CityData }) {
               fontSize: 11,
               letterSpacing: "0.2em",
               textTransform: "uppercase",
-              color: "#C4956A",
+              color: "#3B82F6",
               marginBottom: 28,
               animation: "fadeUp 0.8s 0.2s ease forwards",
             }}
@@ -246,7 +246,7 @@ export function CityPage({ data }: { data: CityData }) {
             <a
               href="#contact"
               style={{
-                background: "#B8864E",
+                background: "#2563EB",
                 color: "white",
                 borderRadius: 50,
                 padding: "14px 40px",
@@ -257,11 +257,11 @@ export function CityPage({ data }: { data: CityData }) {
                 transition: "all 0.25s ease",
               }}
               onMouseEnter={(e) => {
-                e.currentTarget.style.background = "#C4956A";
+                e.currentTarget.style.background = "#3B82F6";
                 e.currentTarget.style.transform = "scale(1.02)";
               }}
               onMouseLeave={(e) => {
-                e.currentTarget.style.background = "#B8864E";
+                e.currentTarget.style.background = "#2563EB";
                 e.currentTarget.style.transform = "scale(1)";
               }}
             >
@@ -288,7 +288,7 @@ export function CityPage({ data }: { data: CityData }) {
                 e.currentTarget.style.borderColor = "rgba(255,255,255,0.4)";
               }}
             >
-              Explore Platform
+              See How It Works
             </a>
           </div>
         </div>
@@ -302,8 +302,8 @@ export function CityPage({ data }: { data: CityData }) {
           <div
             className="grid grid-cols-2 md:grid-cols-4 reveal-stagger"
             style={{
-              borderTop: "1px solid rgba(196,149,106,0.2)",
-              borderBottom: "1px solid rgba(196,149,106,0.2)",
+              borderTop: "1px solid rgba(37,99,235,0.2)",
+              borderBottom: "1px solid rgba(37,99,235,0.2)",
               padding: "48px 0",
             }}
           >
@@ -312,7 +312,7 @@ export function CityPage({ data }: { data: CityData }) {
                 key={i}
                 className="reveal-child"
                 style={{
-                  borderLeft: i > 0 ? "1px solid rgba(196,149,106,0.2)" : "none",
+                  borderLeft: i > 0 ? "1px solid rgba(37,99,235,0.2)" : "none",
                 }}
               >
                 <Stat value={s.num} label={s.label} />
@@ -331,7 +331,7 @@ export function CityPage({ data }: { data: CityData }) {
               className="reveal"
               style={{
                 fontSize: 11,
-                color: "#B8864E",
+                color: "#2563EB",
                 letterSpacing: "0.15em",
                 textTransform: "uppercase",
                 marginBottom: 24,
@@ -371,7 +371,7 @@ export function CityPage({ data }: { data: CityData }) {
               className="reveal"
               style={{
                 marginTop: 48,
-                borderLeft: "3px solid #B8864E",
+                borderLeft: "3px solid #2563EB",
                 paddingLeft: 20,
               }}
             >
@@ -396,7 +396,7 @@ export function CityPage({ data }: { data: CityData }) {
                   transition: "all 0.3s ease",
                 }}
               >
-                <div style={{ fontSize: 11, color: "#B8864E", letterSpacing: "0.15em" }}>
+                <div style={{ fontSize: 11, color: "#2563EB", letterSpacing: "0.15em" }}>
                   {String(i + 1).padStart(2, "0")}
                 </div>
                 <h3 className="font-display" style={{ fontSize: 28, color: "white", fontWeight: 300, marginTop: 12 }}>
@@ -410,7 +410,7 @@ export function CityPage({ data }: { data: CityData }) {
           </div>
         </div>
         <TornEdge fill="#F5F0EA" position="bottom" />
-        <style>{`.city-why-card:hover{background:rgba(255,255,255,0.05);border-color:rgba(184,134,78,0.25);}`}</style>
+        <style>{`.city-why-card:hover{background:rgba(255,255,255,0.05);border-color:rgba(29,78,216,0.25);}`}</style>
       </section>
 
       {/* SECTION 4: INDUSTRIES */}
@@ -421,7 +421,7 @@ export function CityPage({ data }: { data: CityData }) {
               className="reveal"
               style={{
                 fontSize: 11,
-                color: "#B8864E",
+                color: "#2563EB",
                 letterSpacing: "0.15em",
                 textTransform: "uppercase",
                 marginBottom: 24,
@@ -457,7 +457,7 @@ export function CityPage({ data }: { data: CityData }) {
                 className="reveal-child city-tile"
                 style={{
                   padding: "40px 36px",
-                  border: "1px solid rgba(196,149,106,0.2)",
+                  border: "1px solid rgba(37,99,235,0.2)",
                   background: "white",
                   minHeight: 220,
                   marginLeft: -1,
@@ -469,7 +469,7 @@ export function CityPage({ data }: { data: CityData }) {
                   style={{
                     fontSize: 12,
                     letterSpacing: "0.15em",
-                    color: "#B8864E",
+                    color: "#2563EB",
                     fontWeight: 600,
                   }}
                 >
@@ -539,7 +539,7 @@ export function CityPage({ data }: { data: CityData }) {
                         height: 56,
                         borderRadius: "50%",
                         background: "rgba(255,255,255,0.06)",
-                        border: "1px solid rgba(184,134,78,0.4)",
+                        border: "1px solid rgba(29,78,216,0.4)",
                         color: "white",
                         display: "flex",
                         alignItems: "center",
@@ -581,7 +581,7 @@ export function CityPage({ data }: { data: CityData }) {
             className="font-display absolute"
             style={{
               fontSize: 120,
-              color: "#C4956A",
+              color: "#3B82F6",
               opacity: 0.2,
               top: -40,
               left: 0,
@@ -607,7 +607,7 @@ export function CityPage({ data }: { data: CityData }) {
             style={{
               width: 80,
               height: 1,
-              background: "rgba(196,149,106,0.3)",
+              background: "rgba(37,99,235,0.3)",
               margin: "40px auto",
             }}
           />
@@ -671,7 +671,7 @@ export function CityPage({ data }: { data: CityData }) {
             className="reveal"
             style={{
               marginTop: 40,
-              background: "#B8864E",
+              background: "#2563EB",
               color: "white",
               borderRadius: 50,
               padding: "16px 48px",
@@ -682,11 +682,11 @@ export function CityPage({ data }: { data: CityData }) {
               transition: "all 0.25s ease",
             }}
             onMouseEnter={(e) => {
-              e.currentTarget.style.background = "#C4956A";
+              e.currentTarget.style.background = "#3B82F6";
               e.currentTarget.style.transform = "scale(1.02)";
             }}
             onMouseLeave={(e) => {
-              e.currentTarget.style.background = "#B8864E";
+              e.currentTarget.style.background = "#2563EB";
               e.currentTarget.style.transform = "scale(1)";
             }}
           >

@@ -135,24 +135,49 @@ export function Hero() {
           style={{ fontSize: "clamp(48px, 7vw, 88px)", lineHeight: 1.05 }}
         >
           <span className="block">
-            <span className="hero-word inline-block">Manage</span>{" "}
-            <span className="hero-word inline-block">every</span>
+            <span className="hero-word inline-block">Simplify</span>{" "}
+            <span className="hero-word inline-block">corporate</span>
           </span>
           <span className="block">
-            <span className="hero-word inline-block">corporate</span>{" "}
-            <span className="hero-word inline-block">journey</span>
+            <span className="hero-word inline-block">travel.</span>{" "}
+            <span className="hero-word inline-block">Control</span>
+          </span>
+          <span className="block">
+            <span className="hero-word inline-block">every</span>{" "}
+            <span className="hero-word inline-block">rupee</span>{" "}
+            <span className="hero-word inline-block">spent.</span>
           </span>
         </h1>
         <p
-          className="hero-sub mt-8 max-w-[520px]"
-          style={{ fontSize: 16, color: "rgba(255,255,255,0.78)", lineHeight: 1.7 }}
+          className="hero-sub mt-8 max-w-[560px]"
+          style={{ fontSize: 17, color: "rgba(255,255,255,0.78)", lineHeight: 1.7 }}
         >
-          One platform for bookings, approvals, policy compliance, and expense
-          tracking — built for global enterprises.
+          Ozonex is the all-in-one corporate travel platform that handles
+          bookings, approvals, expenses, and policy — automatically. So your
+          team travels more, spends less, and finance closes faster.
         </p>
-        <a href="#platform" className="hero-cta pill mt-10">
-          Explore Platform
-        </a>
+        <div className="hero-cta mt-10 flex flex-wrap items-center justify-center gap-4">
+          <a
+            href="/contact"
+            style={{
+              display: "inline-flex", alignItems: "center", justifyContent: "center",
+              background: "#2563EB", color: "#fff",
+              borderRadius: 50, padding: "14px 40px",
+              fontFamily: "Inter, sans-serif", fontSize: 12,
+              letterSpacing: "0.12em", textTransform: "uppercase", fontWeight: 500,
+              textDecoration: "none", transition: "all 0.25s ease",
+            }}
+            onMouseEnter={(e) => { e.currentTarget.style.background = "#1D4ED8"; e.currentTarget.style.transform = "scale(1.02)"; }}
+            onMouseLeave={(e) => { e.currentTarget.style.background = "#2563EB"; e.currentTarget.style.transform = "scale(1)"; }}
+          >Get Started Free</a>
+          <a href="#demo" className="pill">Watch a Demo</a>
+        </div>
+        <p className="hero-cta" style={{
+          fontFamily: "Inter, sans-serif", fontSize: 12,
+          color: "rgba(255,255,255,0.45)", marginTop: 16,
+        }}>
+          Trusted by 200+ enterprises across India and UAE
+        </p>
       </div>
 
       {/* Torn paper edge bottom */}
