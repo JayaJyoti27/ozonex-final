@@ -44,8 +44,8 @@
   --radius: 0.25rem;
   --ink: oklch(0.18 0.018 50);            /* #1C1410 dark warm */
   --cream: oklch(0.952 0.012 70);         /* #F5F0EA */
-  --sand: oklch(0.72 0.085 60);           /* #C4956A amber */
-  --gold: oklch(0.66 0.10 65);            /* #B8864E */
+  --sand: oklch(0.72 0.085 60);           /* #3B82F6 amber */
+  --gold: oklch(0.66 0.10 65);            /* #2563EB */
   --yellow-line: oklch(0.85 0.16 90);     /* #F0C040 */
   --muted-warm: oklch(0.50 0.012 60);     /* #6B6258 */
 
@@ -177,7 +177,7 @@
   text-decoration: none; transition: color 0.2s ease;
   display: inline-flex; align-items: center; gap: 8px;
 }
-.nav-cta-links a:hover { color: #C4956A; }
+.nav-cta-links a:hover { color: #3B82F6; }
 .nav-meta { display: flex; flex-direction: column; gap: 6px; }
 .nav-loc { font-family: Inter, sans-serif; font-size: 13px; color: rgba(255,255,255,0.4); }
 .nav-date { font-family: Inter, sans-serif; font-size: 11px; color: rgba(255,255,255,0.3); }

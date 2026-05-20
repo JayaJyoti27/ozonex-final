@@ -197,7 +197,7 @@ function Hero() {
       <div className="absolute right-12 top-1/2 -translate-y-1/2 text-white/30 text-2xl" style={{ zIndex: 2 }}>✦</div>
 
       <div className="relative text-center px-6 max-w-5xl" style={{ zIndex: 3 }}>
-        <div ref={eyebrowRef} className="eyebrow" style={{ color: "#C4956A", opacity: 0.9, letterSpacing: "0.2em", marginBottom: 28 }}>
+        <div ref={eyebrowRef} className="eyebrow" style={{ color: "#3B82F6", opacity: 0.9, letterSpacing: "0.2em", marginBottom: 28 }}>
           MICE & EVENTS
         </div>
         <Words
@@ -234,8 +234,8 @@ function Hero() {
                   letterSpacing: "0.08em",
                 }}
                 onMouseEnter={(e) => {
-                  e.currentTarget.style.borderColor = "#C4956A";
-                  e.currentTarget.style.background = "rgba(196,149,106,0.1)";
+                  e.currentTarget.style.borderColor = "#3B82F6";
+                  e.currentTarget.style.background = "rgba(37,99,235,0.1)";
                 }}
                 onMouseLeave={(e) => {
                   e.currentTarget.style.borderColor = "rgba(255,255,255,0.2)";
@@ -251,14 +251,14 @@ function Hero() {
               href="#cta"
               className="inline-block transition-colors"
               style={{
-                color: "#C4956A",
+                color: "#3B82F6",
                 fontSize: 13,
                 letterSpacing: "0.12em",
                 textTransform: "uppercase",
                 fontWeight: 500,
               }}
               onMouseEnter={(e) => (e.currentTarget.style.color = "#fff")}
-              onMouseLeave={(e) => (e.currentTarget.style.color = "#C4956A")}
+              onMouseLeave={(e) => (e.currentTarget.style.color = "#3B82F6")}
             >
               PLAN YOUR NEXT EVENT →
             </a>
@@ -372,7 +372,7 @@ function EditorialBlock({
           <img src={photo} alt={eyebrow} loading="lazy" className="absolute inset-0 w-full h-full object-cover" />
         </div>
         <div ref={contentRef} className={`flex flex-col justify-center ${photoLeft ? "lg:order-2" : "lg:order-1"}`} style={{ padding: "100px 80px" }}>
-          <div data-stagger className="eyebrow" style={{ color: "#B8864E", letterSpacing: "0.18em" }}>{eyebrow}</div>
+          <div data-stagger className="eyebrow" style={{ color: "#2563EB", letterSpacing: "0.18em" }}>{eyebrow}</div>
           <div data-stagger className="font-display" style={{ color: fg, fontSize: "clamp(40px, 5vw, 60px)", lineHeight: 0.92, fontWeight: 300, marginTop: 24 }}>
             {title}
           </div>
@@ -403,7 +403,7 @@ function CorporateBlock() {
     >
       <div>
         {rows.map(([t, d]) => (
-          <div key={t} className="flex justify-between items-center" style={{ padding: "16px 0", borderBottom: "1px solid rgba(196,149,106,0.18)", gap: 20 }}>
+          <div key={t} className="flex justify-between items-center" style={{ padding: "16px 0", borderBottom: "1px solid rgba(37,99,235,0.18)", gap: 20 }}>
             <span style={{ fontSize: 14, fontWeight: 500, color: "var(--ink)" }}>{t}</span>
             <span style={{ fontSize: 13, color: "#6B6258", textAlign: "right" }}>{d}</span>
           </div>
@@ -467,7 +467,7 @@ function IncentiveBlock() {
     >
       <div className="grid grid-cols-1 sm:grid-cols-2" style={{ gap: 28 }}>
         {features.map(([t, b]) => (
-          <div key={t} style={{ paddingTop: 20, borderTop: "1px solid rgba(196,149,106,0.2)" }}>
+          <div key={t} style={{ paddingTop: 20, borderTop: "1px solid rgba(37,99,235,0.2)" }}>
             <div style={{ fontSize: 13, fontWeight: 600, color: "var(--ink)", letterSpacing: "0.08em", textTransform: "uppercase" }}>{t}</div>
             <p style={{ color: "#6B6258", fontSize: 13, marginTop: 8, lineHeight: 1.7 }}>{b}</p>
           </div>
@@ -503,7 +503,7 @@ function GroupBlock() {
     >
       <div ref={sRef} className="flex flex-wrap" style={{ gap: 40 }}>
         {stats.map(([n, l]) => (
-          <div key={l} style={{ borderLeft: "2px solid #B8864E", paddingLeft: 20 }}>
+          <div key={l} style={{ borderLeft: "2px solid #2563EB", paddingLeft: 20 }}>
             <div className="font-display text-white" style={{ fontSize: 48, fontWeight: 300 }}>{n}</div>
             <div style={{ color: "rgba(255,255,255,0.5)", fontSize: 12, letterSpacing: "0.1em", textTransform: "uppercase", marginTop: 4 }}>{l}</div>
           </div>
@@ -527,7 +527,7 @@ function ProcessSection() {
   return (
     <section style={{ background: "var(--cream)", padding: "160px 80px" }}>
       <div className="text-center max-w-2xl mx-auto" style={{ marginBottom: 120 }}>
-        <div className="eyebrow" style={{ color: "#B8864E", letterSpacing: "0.18em" }}>THE OZONEX EVENT PROCESS</div>
+        <div className="eyebrow" style={{ color: "#2563EB", letterSpacing: "0.18em" }}>THE OZONEX EVENT PROCESS</div>
         <h2 className="font-display" style={{ color: "var(--ink)", fontSize: "clamp(40px, 5vw, 64px)", fontWeight: 300, lineHeight: 0.95, marginTop: 18 }}>
           FROM BRIEF TO<br />DEBRIEF. EVERY<br />STEP MANAGED.
         </h2>
@@ -554,7 +554,7 @@ function Squiggle({ flip }: { flip?: boolean }) {
       <path
         d="M50,10 C200,90 350,-10 520,60 C680,120 820,0 980,70 C1080,110 1130,40 1180,80"
         fill="none"
-        stroke="#C4956A"
+        stroke="#3B82F6"
         strokeWidth="1.5"
         strokeDasharray="6 6"
       />
@@ -589,7 +589,7 @@ function ProcessStep({ step, reverse }: { step: { n: number; t: string; b: strin
         <p style={{ color: "#6B6258", fontSize: 15, lineHeight: 1.82, maxWidth: 400, marginTop: 20 }}>{step.b}</p>
         <div ref={tagsRef} className="flex flex-wrap" style={{ gap: 10, marginTop: 28 }}>
           {step.tags.map((tag) => (
-            <span key={tag} style={{ border: "1px solid #B8864E", color: "#B8864E", borderRadius: 50, padding: "6px 16px", fontSize: 11, letterSpacing: "0.08em", textTransform: "uppercase" }}>{tag}</span>
+            <span key={tag} style={{ border: "1px solid #2563EB", color: "#2563EB", borderRadius: 50, padding: "6px 16px", fontSize: 11, letterSpacing: "0.08em", textTransform: "uppercase" }}>{tag}</span>
           ))}
         </div>
       </div>
@@ -677,7 +677,7 @@ function CapabilitiesScroll() {
     <section className="relative grid-overlay" style={{ background: "#1C1410" }}>
       <TornEdge fill="#1C1410" position="top" />
       <div style={{ padding: "100px 80px 60px" }}>
-        <div className="eyebrow" style={{ color: "#B8864E", letterSpacing: "0.18em" }}>PLATFORM CAPABILITIES FOR EVENTS</div>
+        <div className="eyebrow" style={{ color: "#2563EB", letterSpacing: "0.18em" }}>PLATFORM CAPABILITIES FOR EVENTS</div>
         <h2 className="font-display text-white" style={{ fontSize: "clamp(40px, 5vw, 64px)", fontWeight: 300, lineHeight: 0.95, marginTop: 18 }}>
           BUILT FOR<br />SCALE. TESTED<br />AT SCALE.
         </h2>
@@ -691,12 +691,12 @@ function CapabilitiesScroll() {
                 {p.letter}
               </div>
               <div className="relative max-w-3xl">
-                <div className="eyebrow" style={{ color: "#B8864E" }}>{p.h}</div>
+                <div className="eyebrow" style={{ color: "#2563EB" }}>{p.h}</div>
                 <h3 className="font-display text-white" style={{ fontSize: 52, fontWeight: 300, marginTop: 16 }}>{p.title}</h3>
                 <p style={{ color: "rgba(255,255,255,0.65)", fontSize: 16, lineHeight: 1.82, maxWidth: 560, marginTop: 28 }}>{p.body}</p>
                 <div className="flex flex-col" style={{ gap: 20, marginTop: 40 }}>
                   {p.caps.map((c) => (
-                    <div key={c} style={{ borderLeft: "2px solid #B8864E", paddingLeft: 16, color: "#fff", fontSize: 15 }}>{c}</div>
+                    <div key={c} style={{ borderLeft: "2px solid #2563EB", paddingLeft: 16, color: "#fff", fontSize: 15 }}>{c}</div>
                   ))}
                 </div>
               </div>
@@ -804,14 +804,14 @@ function WhyMice() {
       <TornEdge fill="#1C1410" position="top" />
       <div className="grid grid-cols-1 lg:grid-cols-12 max-w-[1320px] mx-auto" style={{ gap: 80 }}>
         <div className="lg:col-span-7">
-          <div className="eyebrow" style={{ color: "#B8864E", letterSpacing: "0.18em" }}>WHY OZONEX FOR MICE</div>
+          <div className="eyebrow" style={{ color: "#2563EB", letterSpacing: "0.18em" }}>WHY OZONEX FOR MICE</div>
           <h2 className="font-display text-white" style={{ fontSize: "clamp(44px, 6vw, 72px)", fontWeight: 300, lineHeight: 0.9, marginTop: 18 }}>
             MOST EVENTS<br />FAIL IN THE<br />LOGISTICS.<br />NOT THE CONTENT.
           </h2>
           <p style={{ color: "rgba(255,255,255,0.65)", maxWidth: 520, lineHeight: 1.82, marginTop: 32, fontSize: 16 }}>
             Event planners are exceptional at designing experiences. What exhausts them is the operational machinery underneath — the booking spreadsheets, the delegate email chains, the last-minute hotel reallocation, the finance reconciliation that takes three weeks to close. Ozonex absorbs all of that machinery so the people who design great events can focus on designing great events.
           </p>
-          <div style={{ marginTop: 48, borderLeft: "3px solid #C4956A", paddingLeft: 28 }}>
+          <div style={{ marginTop: 48, borderLeft: "3px solid #3B82F6", paddingLeft: 28 }}>
             <p className="font-display text-white" style={{ fontSize: 28, fontWeight: 300, lineHeight: 1.5, fontStyle: "italic" }}>
               "The ops team ran our 800-person annual conference from one screen. Every delegate arrived on time. Finance had the full cost report the next morning."
             </p>
@@ -883,9 +883,9 @@ function CTA() {
         <div ref={btnRef} className="flex flex-wrap justify-center gap-4" style={{ marginTop: 48 }}>
           <button
             className="transition-all"
-            style={{ background: "#B8864E", color: "#fff", border: "none", borderRadius: 50, padding: "16px 48px", fontSize: 12, letterSpacing: "0.15em", textTransform: "uppercase", fontWeight: 500, cursor: "pointer" }}
-            onMouseEnter={(e) => { e.currentTarget.style.background = "#C4956A"; e.currentTarget.style.transform = "scale(1.02)"; }}
-            onMouseLeave={(e) => { e.currentTarget.style.background = "#B8864E"; e.currentTarget.style.transform = "scale(1)"; }}
+            style={{ background: "#2563EB", color: "#fff", border: "none", borderRadius: 50, padding: "16px 48px", fontSize: 12, letterSpacing: "0.15em", textTransform: "uppercase", fontWeight: 500, cursor: "pointer" }}
+            onMouseEnter={(e) => { e.currentTarget.style.background = "#3B82F6"; e.currentTarget.style.transform = "scale(1.02)"; }}
+            onMouseLeave={(e) => { e.currentTarget.style.background = "#2563EB"; e.currentTarget.style.transform = "scale(1)"; }}
           >
             PLAN YOUR EVENT
           </button>

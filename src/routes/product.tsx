@@ -375,7 +375,7 @@ function ProductPage() {
           </div>
         </div>
 
-        <div className="relative max-w-[1320px] mx-auto" style={{ margin: "64px auto", height: 1, background: "rgba(196,149,106,0.3)" }} />
+        <div className="relative max-w-[1320px] mx-auto" style={{ margin: "64px auto", height: 1, background: "rgba(37,99,235,0.3)" }} />
 
         <div className="st-stats relative max-w-[1320px] mx-auto grid grid-cols-2 lg:grid-cols-4 gap-12 text-center">
           {[

@@ -297,7 +297,7 @@ function SolutionsPage() {
           />
         </div>
         <div className="se-text" style={{ background: "#F5F0EA", padding: "120px 80px", display: "flex", flexDirection: "column", justifyContent: "center" }}>
-          <div style={{ color: "#B8864E", fontFamily: "Inter", fontSize: 11, letterSpacing: "0.18em", textTransform: "uppercase", fontWeight: 500 }}>
+          <div style={{ color: "#2563EB", fontFamily: "Inter", fontSize: 11, letterSpacing: "0.18em", textTransform: "uppercase", fontWeight: 500 }}>
             For Enterprises & MNCs
           </div>
           <h2 className="font-display" style={{ fontSize: "clamp(40px,5vw,64px)", color: "#1C1410", lineHeight: 0.92, fontWeight: 300, marginTop: 24 }}>
@@ -327,7 +327,7 @@ function SolutionsPage() {
               ["Region-specific travel policies in one platform", "Local rules, global oversight"],
               ["SSO and ERP integration for enterprise IT stacks", "Plugs into SAP, Oracle, Workday, Okta"],
             ].map(([t, d]) => (
-              <div key={t} style={{ borderLeft: "2px solid #C4956A", paddingLeft: 20 }}>
+              <div key={t} style={{ borderLeft: "2px solid #3B82F6", paddingLeft: 20 }}>
                 <div style={{ fontFamily: "Inter", fontSize: 14, color: "#1C1410", fontWeight: 500 }}>{t}</div>
                 <div style={{ fontFamily: "Inter", fontSize: 13, color: "#6B6258", marginTop: 2 }}>{d}</div>
               </div>
@@ -335,7 +335,7 @@ function SolutionsPage() {
           </div>
           <a
             href="/product"
-            style={{ fontFamily: "Inter", fontSize: 13, color: "#B8864E", letterSpacing: "0.08em", marginTop: 32, textTransform: "uppercase" }}
+            style={{ fontFamily: "Inter", fontSize: 13, color: "#2563EB", letterSpacing: "0.08em", marginTop: 32, textTransform: "uppercase" }}
           >
             Explore enterprise features →
           </a>
@@ -347,7 +347,7 @@ function SolutionsPage() {
         <TornEdge fill="#1C1410" position="top" />
         <div className="max-w-[1320px] mx-auto grid lg:grid-cols-[40fr_60fr] gap-20">
           <div className="lg:sticky" style={{ top: 120, alignSelf: "start" }}>
-            <div style={{ color: "#B8864E", fontFamily: "Inter", fontSize: 11, letterSpacing: "0.18em", textTransform: "uppercase", fontWeight: 500 }}>
+            <div style={{ color: "#2563EB", fontFamily: "Inter", fontSize: 11, letterSpacing: "0.18em", textTransform: "uppercase", fontWeight: 500 }}>
               For HR & Admin Teams
             </div>
             <h2 className="font-display" style={{ fontSize: "clamp(40px,5vw,64px)", color: "#fff", lineHeight: 0.92, fontWeight: 300, marginTop: 24 }}>
@@ -401,14 +401,14 @@ function SolutionsPage() {
                 }}
                 onMouseEnter={(e) => {
                   e.currentTarget.style.background = "rgba(255,255,255,0.06)";
-                  e.currentTarget.style.borderColor = "rgba(184,134,78,0.3)";
+                  e.currentTarget.style.borderColor = "rgba(29,78,216,0.3)";
                 }}
                 onMouseLeave={(e) => {
                   e.currentTarget.style.background = "rgba(255,255,255,0.03)";
                   e.currentTarget.style.borderColor = "rgba(255,255,255,0.07)";
                 }}
               >
-                <div className="font-display" style={{ fontSize: 20, color: "#B8864E", fontWeight: 400 }}>
+                <div className="font-display" style={{ fontSize: 20, color: "#2563EB", fontWeight: 400 }}>
                   {n}
                 </div>
                 <h3 className="font-display" style={{ fontSize: 32, color: "#fff", fontWeight: 300, marginTop: 8 }}>
@@ -430,8 +430,8 @@ function SolutionsPage() {
           className="max-w-[1320px] mx-auto grid grid-cols-2 lg:grid-cols-4"
           style={{
             padding: "48px 0",
-            borderTop: "1px solid rgba(196,149,106,0.25)",
-            borderBottom: "1px solid rgba(196,149,106,0.25)",
+            borderTop: "1px solid rgba(37,99,235,0.25)",
+            borderBottom: "1px solid rgba(37,99,235,0.25)",
           }}
         >
           {[
@@ -445,7 +445,7 @@ function SolutionsPage() {
               style={{
                 textAlign: "center",
                 padding: "0 24px",
-                borderLeft: i === 0 ? "none" : "1px solid rgba(196,149,106,0.2)",
+                borderLeft: i === 0 ? "none" : "1px solid rgba(37,99,235,0.2)",
               }}
             >
               <div className="font-display" style={{ fontSize: "clamp(36px,4.5vw,56px)", color: "#1C1410", fontWeight: 300, lineHeight: 1 }}>
@@ -467,7 +467,7 @@ function SolutionsPage() {
 
         <div className="max-w-[1320px] mx-auto grid lg:grid-cols-[52fr_48fr] gap-20" style={{ marginTop: 100 }}>
           <div>
-            <div style={{ color: "#B8864E", fontFamily: "Inter", fontSize: 11, letterSpacing: "0.18em", textTransform: "uppercase", fontWeight: 500 }}>
+            <div style={{ color: "#2563EB", fontFamily: "Inter", fontSize: 11, letterSpacing: "0.18em", textTransform: "uppercase", fontWeight: 500 }}>
               For Finance Teams
             </div>
             <h2 className="font-display" style={{ fontSize: "clamp(40px,5vw,64px)", color: "#1C1410", lineHeight: 0.92, fontWeight: 300, marginTop: 24 }}>
@@ -515,7 +515,7 @@ function SolutionsPage() {
                     color: "#6B6258",
                     letterSpacing: "0.1em",
                     padding: "8px 16px",
-                    border: "1px solid rgba(196,149,106,0.3)",
+                    border: "1px solid rgba(37,99,235,0.3)",
                   }}
                 >
                   {t}
@@ -546,7 +546,7 @@ function SolutionsPage() {
         />
         <div className="absolute inset-0" style={{ background: "rgba(28,20,16,0.78)" }} />
         <div className="relative z-10 flex flex-col items-center text-center" style={{ padding: "160px 80px" }}>
-          <div style={{ color: "#B8864E", fontFamily: "Inter", fontSize: 11, letterSpacing: "0.18em", textTransform: "uppercase", fontWeight: 500 }}>
+          <div style={{ color: "#2563EB", fontFamily: "Inter", fontSize: 11, letterSpacing: "0.18em", textTransform: "uppercase", fontWeight: 500 }}>
             For Growing SMEs & Startups
           </div>
           <h2 className="font-display" style={{ fontSize: "clamp(48px,6vw,72px)", color: "#fff", lineHeight: 0.92, fontWeight: 300, marginTop: 24 }}>
@@ -583,7 +583,7 @@ function SolutionsPage() {
               ))}
             </div>
             <div style={{ borderLeft: "1px solid rgba(255,255,255,0.08)", paddingLeft: 48 }}>
-              <div style={{ fontFamily: "Inter", fontSize: 12, color: "#B8864E", letterSpacing: "0.12em", textTransform: "uppercase", marginBottom: 24 }}>
+              <div style={{ fontFamily: "Inter", fontSize: 12, color: "#2563EB", letterSpacing: "0.12em", textTransform: "uppercase", marginBottom: 24 }}>
                 With Ozonex
               </div>
               {[
@@ -593,7 +593,7 @@ function SolutionsPage() {
                 "GL-ready data exported in one click",
               ].map((t) => (
                 <div key={t} style={{ fontFamily: "Inter", fontSize: 15, color: "rgba(255,255,255,0.75)", lineHeight: 2 }}>
-                  <span style={{ color: "#B8864E", marginRight: 12 }}>✓</span>
+                  <span style={{ color: "#2563EB", marginRight: 12 }}>✓</span>
                   {t}
                 </div>
               ))}
@@ -610,7 +610,7 @@ function SolutionsPage() {
         style={{ background: "#F5F0EA", padding: "160px 80px 80px" }}
       >
         <div className="text-center max-w-[820px] mx-auto">
-          <div style={{ color: "#B8864E", fontFamily: "Inter", fontSize: 11, letterSpacing: "0.18em", textTransform: "uppercase", fontWeight: 500 }}>
+          <div style={{ color: "#2563EB", fontFamily: "Inter", fontSize: 11, letterSpacing: "0.18em", textTransform: "uppercase", fontWeight: 500 }}>
             For IT & Ops Teams
           </div>
           <h2 className="font-display" style={{ fontSize: "clamp(40px,5vw,64px)", color: "#1C1410", lineHeight: 0.95, fontWeight: 300, marginTop: 16 }}>
@@ -673,7 +673,7 @@ function SolutionsPage() {
                 width: 340,
                 minHeight: 420,
                 background: "#fff",
-                border: "1px solid rgba(196,149,106,0.2)",
+                border: "1px solid rgba(37,99,235,0.2)",
                 padding: "48px 40px",
                 scrollSnapAlign: "start",
                 transition: "all 0.3s ease",
@@ -717,7 +717,7 @@ function SolutionsPage() {
                       color: "#6B6258",
                       letterSpacing: "0.1em",
                       textTransform: "uppercase",
-                      border: "1px solid rgba(196,149,106,0.25)",
+                      border: "1px solid rgba(37,99,235,0.25)",
                       padding: "4px 10px",
                     }}
                   >
@@ -728,7 +728,7 @@ function SolutionsPage() {
             </div>
           ))}
         </div>
-        <div className="max-w-[1320px] mx-auto relative" style={{ height: 2, background: "rgba(196,149,106,0.15)" }}>
+        <div className="max-w-[1320px] mx-auto relative" style={{ height: 2, background: "rgba(37,99,235,0.15)" }}>
           <div id="sol-strip-fill" style={{ height: 2, width: 0, background: "#F0C040" }} />
         </div>
       </section>
@@ -785,7 +785,7 @@ function SolutionsPage() {
               <tr
                 key={String(row[0])}
                 style={{
-                  background: i % 2 === 0 ? "#fff" : "rgba(196,149,106,0.04)",
+                  background: i % 2 === 0 ? "#fff" : "rgba(37,99,235,0.04)",
                 }}
               >
                 <td
@@ -795,7 +795,7 @@ function SolutionsPage() {
                     color: "#1C1410",
                     fontWeight: 500,
                     padding: "20px 28px",
-                    border: "1px solid rgba(196,149,106,0.15)",
+                    border: "1px solid rgba(37,99,235,0.15)",
                   }}
                 >
                   {row[0]}
@@ -806,9 +806,9 @@ function SolutionsPage() {
                     style={{
                       textAlign: "center",
                       padding: "20px 28px",
-                      border: "1px solid rgba(196,149,106,0.15)",
+                      border: "1px solid rgba(37,99,235,0.15)",
                       fontSize: 16,
-                      color: v ? "#2D7A3A" : "rgba(196,149,106,0.4)",
+                      color: v ? "#2D7A3A" : "rgba(37,99,235,0.4)",
                     }}
                   >
                     {v ? "✓" : "—"}
@@ -817,14 +817,14 @@ function SolutionsPage() {
               </tr>
             ))}
             <tr>
-              <td style={{ border: "1px solid rgba(196,149,106,0.15)" }} />
+              <td style={{ border: "1px solid rgba(37,99,235,0.15)" }} />
               {["GET STARTED", "CONTACT SALES", "CONTACT SALES"].map((c) => (
                 <td
                   key={c}
                   style={{
                     textAlign: "center",
                     padding: "20px 28px",
-                    border: "1px solid rgba(196,149,106,0.15)",
+                    border: "1px solid rgba(37,99,235,0.15)",
                   }}
                 >
                   <a
@@ -834,7 +834,7 @@ function SolutionsPage() {
                       fontSize: 11,
                       letterSpacing: "0.1em",
                       textTransform: "uppercase",
-                      color: "#B8864E",
+                      color: "#2563EB",
                       fontWeight: 500,
                     }}
                   >
@@ -871,7 +871,7 @@ function SolutionsPage() {
             ],
           ].map(([q, a]) => (
             <div key={a} className="sol-quote">
-              <div className="font-display" style={{ fontSize: 80, color: "#C4956A", opacity: 0.3, lineHeight: 1, fontWeight: 300 }}>
+              <div className="font-display" style={{ fontSize: 80, color: "#3B82F6", opacity: 0.3, lineHeight: 1, fontWeight: 300 }}>
                 "
               </div>
               <p
@@ -920,7 +920,7 @@ function SolutionsPage() {
             <a
               href="#demo"
               style={{
-                background: "#B8864E",
+                background: "#2563EB",
                 color: "#fff",
                 border: "none",
                 borderRadius: 50,

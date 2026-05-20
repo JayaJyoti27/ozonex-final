@@ -163,7 +163,7 @@ export function ProductFeatureModules() {
         <div className="text-center max-w-[820px] mx-auto">
           <div
             style={{
-              color: "#B8864E",
+              color: "#2563EB",
               fontFamily: "Inter",
               fontSize: 11,
               letterSpacing: "0.18em",
@@ -283,7 +283,7 @@ function Module1() {
           </div>
           <div
             style={{
-              color: "#B8864E",
+              color: "#2563EB",
               fontFamily: "Inter",
               fontSize: 11,
               letterSpacing: "0.2em",
@@ -326,20 +326,20 @@ function Module1() {
             style={{
               width: 80,
               height: 1,
-              background: "rgba(196,149,106,0.25)",
+              background: "rgba(37,99,235,0.25)",
               margin: "32px 0",
             }}
           />
           <div
             style={{
-              background: "rgba(184,134,78,0.08)",
-              borderLeft: "3px solid #B8864E",
+              background: "rgba(29,78,216,0.08)",
+              borderLeft: "3px solid #2563EB",
               padding: "20px 24px",
             }}
           >
             <div
               className="font-display"
-              style={{ fontSize: 42, color: "#B8864E", lineHeight: 1 }}
+              style={{ fontSize: 42, color: "#2563EB", lineHeight: 1 }}
             >
               94%
             </div>
@@ -479,7 +479,7 @@ function FlipCard({
           padding: 48,
           backfaceVisibility: "hidden",
           transform: "rotateY(180deg)",
-          border: "1px solid rgba(196,149,106,0.25)",
+          border: "1px solid rgba(37,99,235,0.25)",
         }}
       >
         <h4
@@ -503,9 +503,9 @@ function FlipCard({
           style={{
             fontFamily: "Inter",
             fontSize: 13,
-            color: "#B8864E",
+            color: "#2563EB",
             marginTop: 20,
-            borderLeft: "2px solid #B8864E",
+            borderLeft: "2px solid #2563EB",
             paddingLeft: 12,
           }}
         >
@@ -542,8 +542,8 @@ function Module2() {
         <svg width="160" height="120" viewBox="0 0 160 120" fill="none">
           {[20, 55, 90].map((y, i) => (
             <g key={i}>
-              <line x1="10" y1={y} x2="110" y2={y} stroke="rgba(196,149,106,0.4)" strokeWidth="1.5" />
-              <path d={`M120 ${y - 4} l5 6 l10 -10`} stroke="#B8864E" strokeWidth="2" fill="none" />
+              <line x1="10" y1={y} x2="110" y2={y} stroke="rgba(37,99,235,0.4)" strokeWidth="1.5" />
+              <path d={`M120 ${y - 4} l5 6 l10 -10`} stroke="#2563EB" strokeWidth="2" fill="none" />
             </g>
           ))}
         </svg>
@@ -557,7 +557,7 @@ function Module2() {
         <svg width="160" height="120" viewBox="0 0 160 120" fill="none">
           <circle cx="80" cy="20" r="10" stroke="rgba(255,255,255,0.4)" strokeWidth="1.5" />
           <circle cx="35" cy="90" r="10" stroke="rgba(255,255,255,0.4)" strokeWidth="1.5" />
-          <circle cx="125" cy="90" r="10" fill="#B8864E" stroke="#B8864E" strokeWidth="1.5" />
+          <circle cx="125" cy="90" r="10" fill="#2563EB" stroke="#2563EB" strokeWidth="1.5" />
           <line x1="80" y1="30" x2="35" y2="80" stroke="rgba(255,255,255,0.3)" strokeWidth="1.5" />
           <line x1="80" y1="30" x2="125" y2="80" stroke="rgba(255,255,255,0.3)" strokeWidth="1.5" />
         </svg>
@@ -573,7 +573,7 @@ function Module2() {
           <line x1="20" y1="30" x2="160" y2="30" stroke="rgba(255,255,255,0.3)" strokeWidth="2" />
           <line x1="20" y1="55" x2="180" y2="55" stroke="rgba(255,255,255,0.15)" strokeWidth="1.5" />
           <line x1="20" y1="70" x2="170" y2="70" stroke="rgba(255,255,255,0.15)" strokeWidth="1.5" />
-          <rect x="20" y="100" width="80" height="24" rx="12" fill="#B8864E" />
+          <rect x="20" y="100" width="80" height="24" rx="12" fill="#2563EB" />
           <rect x="110" y="100" width="80" height="24" rx="12" stroke="rgba(255,255,255,0.3)" strokeWidth="1" />
         </svg>
       ),
@@ -584,10 +584,10 @@ function Module2() {
       body: "On approval, the booking is automatically confirmed with the vendor, itinerary is sent to the traveller, a calendar invite is generated, and a cost record is created in the Finance module — all within 30 seconds of approval. Zero manual steps post-decision.",
       svg: (
         <svg width="200" height="120" viewBox="0 0 200 120" fill="none">
-          <circle cx="40" cy="60" r="28" stroke="#C4956A" strokeWidth="2" opacity="0.5" />
-          <path d="M28 60 l9 9 l16 -18" stroke="#C4956A" strokeWidth="2" fill="none" opacity="0.7" />
-          <rect x="100" y="32" width="80" height="56" stroke="rgba(196,149,106,0.5)" strokeWidth="1.5" />
-          <line x1="100" y1="44" x2="180" y2="44" stroke="rgba(196,149,106,0.5)" strokeWidth="1.5" />
+          <circle cx="40" cy="60" r="28" stroke="#3B82F6" strokeWidth="2" opacity="0.5" />
+          <path d="M28 60 l9 9 l16 -18" stroke="#3B82F6" strokeWidth="2" fill="none" opacity="0.7" />
+          <rect x="100" y="32" width="80" height="56" stroke="rgba(37,99,235,0.5)" strokeWidth="1.5" />
+          <line x1="100" y1="44" x2="180" y2="44" stroke="rgba(37,99,235,0.5)" strokeWidth="1.5" />
         </svg>
       ),
       stat: "Average end-to-end approval time: 5.8 minutes",
@@ -616,7 +616,7 @@ function Module2() {
         </div>
         <div
           style={{
-            color: "#B8864E",
+            color: "#2563EB",
             fontFamily: "Inter",
             fontSize: 11,
             letterSpacing: "0.2em",
@@ -688,7 +688,7 @@ function Module2() {
                   width: 56,
                   height: 56,
                   borderRadius: "50%",
-                  background: "#B8864E",
+                  background: "#2563EB",
                   color: "#fff",
                   fontSize: 16,
                   fontWeight: 500,
@@ -792,7 +792,7 @@ function Module3() {
           </div>
           <div
             style={{
-              color: "#B8864E",
+              color: "#2563EB",
               fontFamily: "Inter",
               fontSize: 11,
               letterSpacing: "0.2em",
@@ -836,12 +836,12 @@ function Module3() {
                 key={l}
                 style={{
                   padding: "20px 0",
-                  borderBottom: "1px solid rgba(196,149,106,0.2)",
+                  borderBottom: "1px solid rgba(37,99,235,0.2)",
                 }}
               >
                 <div
                   className="font-display"
-                  style={{ fontSize: 36, color: "#B8864E", lineHeight: 1 }}
+                  style={{ fontSize: 36, color: "#2563EB", lineHeight: 1 }}
                 >
                   {n}
                 </div>
@@ -867,7 +867,7 @@ function Module3() {
           className="m3-dash"
           style={{
             background: "#fff",
-            border: "1px solid rgba(196,149,106,0.25)",
+            border: "1px solid rgba(37,99,235,0.25)",
             padding: 40,
             boxShadow: "0 24px 64px rgba(28,20,16,0.08)",
           }}
@@ -886,12 +886,12 @@ function Module3() {
             </div>
             <div
               style={{
-                border: "1px solid rgba(196,149,106,0.3)",
+                border: "1px solid rgba(37,99,235,0.3)",
                 padding: "4px 14px",
                 borderRadius: 999,
                 fontFamily: "Inter",
                 fontSize: 11,
-                color: "#B8864E",
+                color: "#2563EB",
               }}
             >
               Q2 2026
@@ -915,15 +915,15 @@ function Module3() {
 
           {/* 3 metric cards */}
           <div className="grid grid-cols-3" style={{ gap: 12, marginTop: 32 }}>
-            <div style={{ border: "1px solid rgba(196,149,106,0.15)", padding: 20 }}>
+            <div style={{ border: "1px solid rgba(37,99,235,0.15)", padding: 20 }}>
               <svg width="64" height="64" viewBox="0 0 64 64">
-                <circle cx="32" cy="32" r="28" stroke="rgba(196,149,106,0.15)" strokeWidth="4" fill="none" />
+                <circle cx="32" cy="32" r="28" stroke="rgba(37,99,235,0.15)" strokeWidth="4" fill="none" />
                 <circle
                   className="m3-ring"
                   cx="32"
                   cy="32"
                   r="28"
-                  stroke="#B8864E"
+                  stroke="#2563EB"
                   strokeWidth="4"
                   fill="none"
                   strokeDasharray="176"
@@ -943,7 +943,7 @@ function Module3() {
                 Compliance Rate
               </div>
             </div>
-            <div style={{ border: "1px solid rgba(196,149,106,0.15)", padding: 20 }}>
+            <div style={{ border: "1px solid rgba(37,99,235,0.15)", padding: 20 }}>
               <div className="font-display" style={{ fontSize: 32, color: "#1C1410", lineHeight: 1 }}>
                 ₹ 38,200
               </div>
@@ -951,21 +951,21 @@ function Module3() {
                 style={{
                   marginTop: 12,
                   height: 4,
-                  background: "rgba(196,149,106,0.15)",
+                  background: "rgba(37,99,235,0.15)",
                   position: "relative",
                 }}
               >
                 <div
                   className="m3-bar-fill"
                   data-w="68%"
-                  style={{ height: "100%", width: 0, background: "#C4956A" }}
+                  style={{ height: "100%", width: 0, background: "#3B82F6" }}
                 />
               </div>
               <div style={{ fontFamily: "Inter", fontSize: 11, color: "#6B6258", marginTop: 8 }}>
                 vs ₹56,000 industry avg
               </div>
             </div>
-            <div style={{ border: "1px solid rgba(196,149,106,0.15)", padding: 20 }}>
+            <div style={{ border: "1px solid rgba(37,99,235,0.15)", padding: 20 }}>
               <div
                 className="font-display pfm-count"
                 data-to="847"
@@ -980,13 +980,13 @@ function Module3() {
                 style={{
                   marginTop: 12,
                   height: 4,
-                  background: "rgba(196,149,106,0.15)",
+                  background: "rgba(37,99,235,0.15)",
                 }}
               >
                 <div
                   className="m3-bar-fill"
                   data-w="91%"
-                  style={{ height: "100%", width: 0, background: "#B8864E" }}
+                  style={{ height: "100%", width: 0, background: "#2563EB" }}
                 />
               </div>
             </div>
@@ -1004,7 +1004,7 @@ function Module3() {
                 textTransform: "uppercase",
                 color: "#6B6258",
                 paddingBottom: 14,
-                borderBottom: "1px solid rgba(196,149,106,0.15)",
+                borderBottom: "1px solid rgba(37,99,235,0.15)",
               }}
             >
               <span>Traveller</span>
@@ -1027,7 +1027,7 @@ function Module3() {
                   fontSize: 13,
                   color: "#1C1410",
                   padding: "20px 0",
-                  borderBottom: "1px solid rgba(196,149,106,0.15)",
+                  borderBottom: "1px solid rgba(37,99,235,0.15)",
                 }}
               >
                 <span>{t}</span>
@@ -1056,9 +1056,9 @@ function Badge({ label }: { label: string }) {
         textTransform: "uppercase",
         padding: "4px 10px",
         borderRadius: 2,
-        background: isMatched ? "rgba(74,163,90,0.1)" : "rgba(184,134,78,0.12)",
-        color: isMatched ? "#2D7A3A" : "#B8864E",
-        border: `1px solid ${isMatched ? "rgba(74,163,90,0.25)" : "rgba(184,134,78,0.3)"}`,
+        background: isMatched ? "rgba(74,163,90,0.1)" : "rgba(29,78,216,0.12)",
+        color: isMatched ? "#2D7A3A" : "#2563EB",
+        border: `1px solid ${isMatched ? "rgba(74,163,90,0.25)" : "rgba(29,78,216,0.3)"}`,
       }}
     >
       {label}
@@ -1117,7 +1117,7 @@ function Module4() {
           </div>
           <div
             style={{
-              color: "#B8864E",
+              color: "#2563EB",
               fontFamily: "Inter",
               fontSize: 11,
               letterSpacing: "0.2em",
@@ -1164,7 +1164,7 @@ function Module4() {
           <div className="flex items-baseline" style={{ gap: 16, marginTop: 24 }}>
             <span
               className="font-display"
-              style={{ fontSize: 48, color: "#B8864E", lineHeight: 1, fontWeight: 300 }}
+              style={{ fontSize: 48, color: "#2563EB", lineHeight: 1, fontWeight: 300 }}
             >
               91%
             </span>
@@ -1191,7 +1191,7 @@ function Module4() {
                 key={title}
                 style={{
                   borderBottom: "1px solid rgba(255,255,255,0.07)",
-                  borderLeft: isOpen ? "2px solid #B8864E" : "2px solid transparent",
+                  borderLeft: isOpen ? "2px solid #2563EB" : "2px solid transparent",
                   background: isOpen ? "rgba(255,255,255,0.03)" : "transparent",
                   paddingLeft: 20,
                   transition: "background 0.3s, border-color 0.3s",
@@ -1277,7 +1277,7 @@ function Module5() {
         </div>
         <div
           style={{
-            color: "#B8864E",
+            color: "#2563EB",
             fontFamily: "Inter",
             fontSize: 11,
             letterSpacing: "0.2em",
@@ -1324,7 +1324,7 @@ function Module5() {
       <div className="max-w-[1320px] mx-auto" style={{ marginTop: 80 }}>
         <div
           className="flex justify-center"
-          style={{ borderBottom: "1px solid rgba(196,149,106,0.2)" }}
+          style={{ borderBottom: "1px solid rgba(37,99,235,0.2)" }}
         >
           {tabs.map((t, i) => (
             <button
@@ -1337,7 +1337,7 @@ function Module5() {
                 textTransform: "uppercase",
                 padding: "16px 32px",
                 color: active === i ? "#1C1410" : "#6B6258",
-                borderBottom: active === i ? "2px solid #B8864E" : "2px solid transparent",
+                borderBottom: active === i ? "2px solid #2563EB" : "2px solid transparent",
                 marginBottom: -1,
                 fontWeight: 500,
               }}
@@ -1390,7 +1390,7 @@ function TabText({ h, body, bullets }: { h: string; body: string; bullets: strin
           <div
             key={b}
             style={{
-              borderLeft: "2px solid rgba(184,134,78,0.4)",
+              borderLeft: "2px solid rgba(29,78,216,0.4)",
               paddingLeft: 16,
               fontFamily: "Inter",
               fontSize: 14,
@@ -1410,7 +1410,7 @@ function MockShell({ children }: { children: React.ReactNode }) {
     <div
       style={{
         background: "#fff",
-        border: "1px solid rgba(196,149,106,0.2)",
+        border: "1px solid rgba(37,99,235,0.2)",
         padding: 32,
         boxShadow: "0 16px 40px rgba(28,20,16,0.05)",
       }}
@@ -1434,7 +1434,7 @@ function CFOTab() {
       />
       <MockShell>
         <div className="grid grid-cols-2" style={{ gap: 16 }}>
-          <div style={{ border: "1px solid rgba(196,149,106,0.15)", padding: 20 }}>
+          <div style={{ border: "1px solid rgba(37,99,235,0.15)", padding: 20 }}>
             <div className="font-display" style={{ fontSize: 40, color: "#1C1410", fontWeight: 300, lineHeight: 1 }}>
               ₹ 2.4 Cr
             </div>
@@ -1442,7 +1442,7 @@ function CFOTab() {
               Total Spend Q2
             </div>
           </div>
-          <div style={{ border: "1px solid rgba(196,149,106,0.15)", padding: 20 }}>
+          <div style={{ border: "1px solid rgba(37,99,235,0.15)", padding: 20 }}>
             <div className="font-display" style={{ fontSize: 40, color: "#2D7A3A", fontWeight: 300, lineHeight: 1 }}>
               ₹ 38L
             </div>
@@ -1455,10 +1455,10 @@ function CFOTab() {
           <svg width="160" height="160" viewBox="0 0 160 160">
             {(() => {
               const segs = [
-                { color: "#B8864E", len: 0.42 },
-                { color: "#C4956A", len: 0.28 },
-                { color: "rgba(196,149,106,0.4)", len: 0.18 },
-                { color: "rgba(196,149,106,0.2)", len: 0.12 },
+                { color: "#2563EB", len: 0.42 },
+                { color: "#3B82F6", len: 0.28 },
+                { color: "rgba(37,99,235,0.4)", len: 0.18 },
+                { color: "rgba(37,99,235,0.2)", len: 0.12 },
               ];
               const C = 2 * Math.PI * 60;
               let acc = 0;
@@ -1493,10 +1493,10 @@ function CFOTab() {
           </svg>
           <div className="flex flex-col" style={{ gap: 10 }}>
             {[
-              ["#B8864E", "Flights"],
-              ["#C4956A", "Hotels"],
-              ["rgba(196,149,106,0.4)", "Ground"],
-              ["rgba(196,149,106,0.2)", "Other"],
+              ["#2563EB", "Flights"],
+              ["#3B82F6", "Hotels"],
+              ["rgba(37,99,235,0.4)", "Ground"],
+              ["rgba(37,99,235,0.2)", "Other"],
             ].map(([c, l]) => (
               <div key={l} className="flex items-center" style={{ gap: 8 }}>
                 <span style={{ width: 10, height: 10, background: c, display: "inline-block" }} />
@@ -1526,19 +1526,19 @@ function HRTab() {
         <svg viewBox="0 0 600 320" style={{ width: "100%", height: "auto" }}>
           <path
             d="M40,160 Q120,100 200,150 T400,140 T560,170"
-            stroke="#C4956A"
+            stroke="#3B82F6"
             strokeOpacity="0.3"
             fill="none"
           />
           <path
             d="M50,200 Q160,250 280,210 T520,220"
-            stroke="#C4956A"
+            stroke="#3B82F6"
             strokeOpacity="0.3"
             fill="none"
           />
           <path
             d="M80,90 Q200,60 340,90 T540,100"
-            stroke="#C4956A"
+            stroke="#3B82F6"
             strokeOpacity="0.25"
             fill="none"
           />
@@ -1548,11 +1548,11 @@ function HRTab() {
             { x: 130, y: 130, l: "London" },
           ].map((p) => (
             <g key={p.l}>
-              <circle cx={p.x} cy={p.y} r="14" fill="#B8864E" opacity="0.25">
+              <circle cx={p.x} cy={p.y} r="14" fill="#2563EB" opacity="0.25">
                 <animate attributeName="r" values="6;18;6" dur="2s" repeatCount="indefinite" />
                 <animate attributeName="opacity" values="0.6;0;0.6" dur="2s" repeatCount="indefinite" />
               </circle>
-              <circle cx={p.x} cy={p.y} r="4" fill="#B8864E" />
+              <circle cx={p.x} cy={p.y} r="4" fill="#2563EB" />
               <rect x={p.x - 24} y={p.y + 12} width="48" height="14" rx="2" fill="#1C1410" />
               <text
                 x={p.x}
@@ -1596,11 +1596,11 @@ function ManagerTab() {
           {bars.map(([l, p]) => (
             <div key={l} className="flex items-center" style={{ gap: 16 }}>
               <span style={{ fontFamily: "Inter", fontSize: 12, color: "#1C1410", width: 90 }}>{l}</span>
-              <div style={{ flex: 1, height: 8, background: "rgba(196,149,106,0.15)", position: "relative" }}>
+              <div style={{ flex: 1, height: 8, background: "rgba(37,99,235,0.15)", position: "relative" }}>
                 <div
                   className="m3-bar-fill"
                   data-w={`${p}%`}
-                  style={{ height: "100%", width: 0, background: "#C4956A" }}
+                  style={{ height: "100%", width: 0, background: "#3B82F6" }}
                 />
               </div>
               <span style={{ fontFamily: "Inter", fontSize: 12, color: "#6B6258", width: 40, textAlign: "right" }}>
@@ -1640,7 +1640,7 @@ function FinanceTab() {
             textTransform: "uppercase",
             color: "#6B6258",
             paddingBottom: 12,
-            borderBottom: "1px solid rgba(196,149,106,0.2)",
+            borderBottom: "1px solid rgba(37,99,235,0.2)",
           }}
         >
           <span>Dept</span>
@@ -1663,7 +1663,7 @@ function FinanceTab() {
               fontSize: 13,
               color: "#1C1410",
               padding: "20px 0",
-              borderBottom: "1px solid rgba(196,149,106,0.1)",
+              borderBottom: "1px solid rgba(37,99,235,0.1)",
             }}
           >
             <span>{d}</span>
@@ -1733,7 +1733,7 @@ function Module6() {
         </div>
         <div
           style={{
-            color: "#B8864E",
+            color: "#2563EB",
             fontFamily: "Inter",
             fontSize: 11,
             letterSpacing: "0.2em",
@@ -1794,7 +1794,7 @@ function RoleCard({ role, letter, desc }: { role: string; letter: string; desc: 
         minHeight: 380,
         padding: "48px 36px",
         border: "1px solid rgba(255,255,255,0.07)",
-        borderTop: hover ? "2px solid #B8864E" : "1px solid rgba(255,255,255,0.07)",
+        borderTop: hover ? "2px solid #2563EB" : "1px solid rgba(255,255,255,0.07)",
         background: hover ? "rgba(255,255,255,0.06)" : "rgba(255,255,255,0.02)",
         transform: hover ? "translateY(-16px)" : "translateY(0)",
         transition: "all 0.4s cubic-bezier(0.4,0,0.2,1)",
@@ -1845,7 +1845,7 @@ function RoleCard({ role, letter, desc }: { role: string; letter: string; desc: 
           right: 36,
           bottom: 36,
           height: 1,
-          background: "#B8864E",
+          background: "#2563EB",
           width: hover ? "calc(100% - 72px)" : 0,
           transition: "width 0.4s ease",
         }}
