@@ -288,7 +288,7 @@ export function CityPage({ data }: { data: CityData }) {
                 e.currentTarget.style.borderColor = "rgba(255,255,255,0.4)";
               }}
             >
-              Explore Platform
+              See How It Works
             </a>
           </div>
         </div>
