@@ -240,8 +240,7 @@ function AboutPage() {
         </div>
       </section>
 
-       
-      </section>
+  
 
       {/* CTA */}
       <section className="about-cta relative w-full overflow-hidden grid-overlay flex flex-col items-center justify-center text-center px-6 py-40" style={{ background: "var(--ink)", minHeight: "60vh" }}>
