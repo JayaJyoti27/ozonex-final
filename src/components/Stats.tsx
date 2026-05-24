@@ -1,19 +1,15 @@
 import { useEffect, useRef } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-
 gsap.registerPlugin(ScrollTrigger);
-
 const stats = [
   { num: 94, suffix: "%", label: "Repeat bookings", desc: "Our growth is fueled by the loyalty of enterprises who return to us journey after journey." },
   { num: 89, suffix: "%", label: "Net promoter score (NPS)", desc: "An industry-leading satisfaction rating that reflects our commitment to operational excellence." },
   { num: 5, suffix: "", supersuffix: "Years", label: "Average platform experience", desc: "We don't deploy juniors. Your travel operations are handled by seasoned product and ops experts." },
   { num: 25, suffix: "+", label: "Enterprise clients", desc: "A diverse, multinational portfolio capable of navigating global markets and complex travel policies." },
 ];
-
 export function Stats() {
   const ref = useRef<HTMLDivElement>(null);
-
   useEffect(() => {
     if (!ref.current) return;
     const ctx = gsap.context(() => {
@@ -34,10 +30,8 @@ export function Stats() {
     }, ref);
     return () => ctx.revert();
   }, []);
-
   return (
     <section ref={ref} className="relative w-full py-32 px-12 overflow-hidden" style={{ background: "var(--cream)" }}>
-      {/* Faint world map watermark */}
       <div
         className="absolute inset-0 pointer-events-none"
         style={{
@@ -49,21 +43,34 @@ export function Stats() {
           filter: "grayscale(1)",
         }}
       />
-
       <div className="relative z-10 max-w-[1400px] mx-auto">
         <div className="grid grid-cols-12 gap-8 mb-24">
           <h2
             className="col-span-7 font-display"
             style={{ fontSize: "clamp(56px, 7vw, 96px)", lineHeight: 0.95, color: "var(--ink)" }}
           >
-            3 Worldwide<br />Locations
+            4 Worldwide<br />Locations
           </h2>
           <p className="col-span-5 self-end max-w-[480px]" style={{ color: "var(--muted-warm)", fontSize: 16, lineHeight: 1.7 }}>
-            Strategic hubs in India and the UAE — ensuring truly global coverage with seamless
+            Strategic hubs across India, UAE and Kuwait — ensuring truly global coverage with seamless
             coordination and reliable support.
           </p>
         </div>
-
+        {/* Location tags */}
+        <div className="flex flex-wrap gap-4 mb-16">
+          {["Trivandrum, India", "Chennai, India", "Dubai, UAE", "Kuwait City, Kuwait"].map((loc) => (
+            <span key={loc} style={{
+              fontFamily: "Poppins, sans-serif",
+              fontSize: 12,
+              letterSpacing: "0.1em",
+              textTransform: "uppercase",
+              color: "#2563EB",
+              border: "1px solid rgba(37,99,235,0.3)",
+              borderRadius: 50,
+              padding: "6px 20px",
+            }}>{loc}</span>
+          ))}
+        </div>
         <div className="grid grid-cols-1 md:grid-cols-4 gap-12 border-t pt-16" style={{ borderColor: "rgba(28,20,16,0.12)" }}>
           {stats.map((s, i) => (
             <div key={i}>
