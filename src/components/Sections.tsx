@@ -140,17 +140,12 @@ export function Footer() {
   ];
 
   const cityLinks = [
-    { label: "Bangalore", href: "/cities/bangalore" },
-    { label: "Chennai", href: "/cities/chennai" },
-    { label: "Delhi", href: "/cities/delhi" },
+    { label: "Bangalore", href: "src/routes/corporate-travel-management-bangalore" },
+    { label: "Chennai", href: "src/routes/corporate-travel-management-chennai" },
+    { label: "Delhi", href: "src/routes/corporate-travel-management-delhi" },
   ];
 
-  const socials = [
-    { label: "Facebook", href: "https://www.facebook.com/OzoneGroupGlobal" },
-    { label: "Instagram", href: "https://www.instagram.com/ozonegroupglobal" },
-    { label: "LinkedIn", href: "https://www.linkedin.com/company/ozone-group-global" },
-    { label: "YouTube", href: "https://www.youtube.com/@ozonegroupglobal" },
-  ];
+
 
   return (
     <footer style={{ background: "#1C1410", borderTop: "1px solid rgba(255,255,255,0.06)", padding: "100px 80px 40px" }}>
@@ -168,16 +163,7 @@ export function Footer() {
             <div style={{ fontFamily: "Poppins, sans-serif", fontSize: 11, color: "rgba(255,255,255,0.35)", letterSpacing: "0.1em", textTransform: "uppercase", marginBottom: 8 }}>
               IATA Certified · Est. 2014
             </div>
-            <div className="flex flex-wrap" style={{ gap: 16, marginTop: 20 }}>
-              {socials.map((s) => (
-                <a key={s.label} href={s.href} target="_blank" rel="noopener noreferrer"
-                  style={{ fontFamily: "Poppins, sans-serif", fontSize: 11, color: "rgba(255,255,255,0.4)", letterSpacing: "0.08em", textTransform: "uppercase", transition: "color 0.2s" }}
-                  onMouseEnter={(e) => (e.currentTarget.style.color = "#fff")}
-                  onMouseLeave={(e) => (e.currentTarget.style.color = "rgba(255,255,255,0.4)")}>
-                  {s.label}
-                </a>
-              ))}
-            </div>
+           
           </div>
 
           {/* Navigation */}
