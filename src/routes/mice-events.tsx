@@ -882,6 +882,7 @@ function CTA() {
         </p>
         <div ref={btnRef} className="flex flex-wrap justify-center gap-4" style={{ marginTop: 48 }}>
           <button
+            href="/pricing#enquire"
             className="transition-all"
             style={{ background: "#2563EB", color: "#fff", border: "none", borderRadius: 50, padding: "16px 48px", fontSize: 12, letterSpacing: "0.15em", textTransform: "uppercase", fontWeight: 500, cursor: "pointer" }}
             onMouseEnter={(e) => { e.currentTarget.style.background = "#3B82F6"; e.currentTarget.style.transform = "scale(1.02)"; }}
@@ -890,6 +891,7 @@ function CTA() {
             PLAN YOUR EVENT
           </button>
           <button
+            href="/pricing#enquire"
             className="transition-all"
             style={{ background: "transparent", color: "#fff", border: "1px solid rgba(255,255,255,0.4)", borderRadius: 50, padding: "16px 48px", fontSize: 12, letterSpacing: "0.15em", textTransform: "uppercase", fontWeight: 500, cursor: "pointer" }}
             onMouseEnter={(e) => { e.currentTarget.style.background = "rgba(255,255,255,0.08)"; }}
