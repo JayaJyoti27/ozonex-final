@@ -140,9 +140,9 @@ export function Footer() {
   ];
 
   const cityLinks = [
-    { label: "Bangalore", href: "src/routes/corporate-travel-management-bangalore" },
-    { label: "Chennai", href: "src/routes/corporate-travel-management-chennai" },
-    { label: "Delhi", href: "src/routes/corporate-travel-management-delhi" },
+    { label: "Bangalore", href: "/corporate-travel-management-bangalore" },
+  { label: "Chennai", href: "/corporate-travel-management-chennai" },
+  { label: "Delhi", href: "/corporate-travel-management-delhi" },
   ];
 
 
