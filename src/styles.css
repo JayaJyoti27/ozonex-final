@@ -1,7 +1,9 @@
 @import "tailwindcss" source(none);
 @source "../src";
 @import "tw-animate-css";
-@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500&family=Inter:wght@400;500;600&display=swap');
+
+/* FIX #3: Replaced Cormorant Garamond + Inter with Poppins */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400&display=swap');
 
 @custom-variant dark (&:is(.dark *));
 
@@ -36,18 +38,19 @@
   --color-yellow-line: var(--yellow-line);
   --color-muted-warm: var(--muted-warm);
 
-  --font-display: "Cormorant Garamond", serif;
-  --font-sans: "Inter", system-ui, sans-serif;
+  /* FIX #3: Both display and sans now use Poppins */
+  --font-display: "Poppins", sans-serif;
+  --font-sans: "Poppins", system-ui, sans-serif;
 }
 
 :root {
   --radius: 0.25rem;
-  --ink: oklch(0.18 0.018 50);            /* #1C1410 dark warm */
-  --cream: oklch(0.952 0.012 70);         /* #F5F0EA */
-  --sand: oklch(0.623 0.214 259);         /* #3B82F6 secondary blue */
-  --gold: oklch(0.546 0.245 262);         /* #2563EB primary blue */
-  --yellow-line: oklch(0.85 0.16 90);     /* #F0C040 (unchanged) */
-  --muted-warm: oklch(0.50 0.012 60);     /* #6B6258 */
+  --ink: oklch(0.18 0.018 50);
+  --cream: oklch(0.952 0.012 70);
+  --sand: oklch(0.623 0.214 259);
+  --gold: oklch(0.546 0.245 262);
+  --yellow-line: oklch(0.85 0.16 90);
+  --muted-warm: oklch(0.50 0.012 60);
 
   --brand-blue: #2563EB;
   --brand-blue-hover: #1D4ED8;
@@ -85,7 +88,7 @@
   html, body {
     background-color: var(--color-background);
     color: var(--color-foreground);
-    font-family: var(--font-sans);
+    font-family: "Poppins", system-ui, sans-serif;
     -webkit-font-smoothing: antialiased;
   }
   body { overflow-x: hidden; }
@@ -93,13 +96,14 @@
 }
 
 @layer utilities {
-  .font-display { font-family: var(--font-display); letter-spacing: -0.02em; font-weight: 300; }
-  .eyebrow { font-family: var(--font-sans); font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase; font-weight: 500; }
-  .nav-link { font-family: var(--font-sans); font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; font-weight: 500; }
+  /* FIX #3: font-display now Poppins light weight */
+  .font-display { font-family: "Poppins", sans-serif; letter-spacing: -0.01em; font-weight: 300; }
+  .eyebrow { font-family: "Poppins", sans-serif; font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase; font-weight: 500; }
+  .nav-link { font-family: "Poppins", sans-serif; font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; font-weight: 500; }
   .pill {
     display: inline-flex; align-items: center; justify-content: center;
     border-radius: 9999px; padding: 14px 40px;
-    font-family: var(--font-sans); font-size: 12px; letter-spacing: 0.12em;
+    font-family: "Poppins", sans-serif; font-size: 12px; letter-spacing: 0.12em;
     text-transform: uppercase; font-weight: 500;
     border: 1px solid rgba(255,255,255,0.5);
     background: rgba(255,255,255,0.12);
@@ -140,19 +144,19 @@
 }
 .nav-row-left { display: inline-flex; align-items: baseline; }
 .nav-num {
-  font-family: Inter, sans-serif; font-size: 11px;
+  font-family: "Poppins", sans-serif; font-size: 11px;
   color: rgba(255,255,255,0.3); letter-spacing: 0.1em;
   margin-right: 20px;
 }
 .nav-text {
-  font-family: 'Cormorant Garamond', serif; font-size: 36px;
+  font-family: "Poppins", sans-serif; font-size: 36px;
   font-weight: 300; color: rgba(255,255,255,0.55);
   letter-spacing: -0.01em;
   transition: color 0.3s ease;
 }
 .nav-row:hover .nav-text { color: #fff; }
 .nav-arrow {
-  font-family: Inter, sans-serif; font-size: 20px; color: #fff;
+  font-family: "Poppins", sans-serif; font-size: 20px; color: #fff;
   opacity: 0; transform: translateX(0);
   transition: opacity 0.3s ease, transform 0.3s ease;
 }
@@ -164,13 +168,13 @@
   border-left: 1px solid rgba(255,255,255,0.07);
 }
 .nav-section-label {
-  font-family: Inter, sans-serif; font-size: 10px;
+  font-family: "Poppins", sans-serif; font-size: 10px;
   text-transform: uppercase; letter-spacing: 0.2em;
   color: rgba(255,255,255,0.3); margin-bottom: 20px;
 }
 .nav-quick-links { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 14px; }
 .nav-quick-links a {
-  font-family: Inter, sans-serif; font-size: 14px;
+  font-family: "Poppins", sans-serif; font-size: 14px;
   color: rgba(255,255,255,0.65); text-decoration: none;
   transition: color 0.2s ease;
 }
@@ -178,22 +182,22 @@
 .nav-divider { height: 1px; background: rgba(255,255,255,0.07); margin: 36px 0; }
 .nav-cta-links { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 14px; }
 .nav-cta-links a {
-  font-family: Inter, sans-serif; font-size: 14px; color: #fff;
+  font-family: "Poppins", sans-serif; font-size: 14px; color: #fff;
   text-decoration: none; transition: color 0.2s ease;
   display: inline-flex; align-items: center; gap: 8px;
 }
 .nav-cta-links a:hover { color: #3B82F6; }
 .nav-meta { display: flex; flex-direction: column; gap: 6px; }
-.nav-loc { font-family: Inter, sans-serif; font-size: 13px; color: rgba(255,255,255,0.4); }
-.nav-date { font-family: Inter, sans-serif; font-size: 11px; color: rgba(255,255,255,0.3); }
-.nav-time { font-family: Inter, sans-serif; font-size: 11px; color: rgba(255,255,255,0.25); }
+.nav-loc { font-family: "Poppins", sans-serif; font-size: 13px; color: rgba(255,255,255,0.4); }
+.nav-date { font-family: "Poppins", sans-serif; font-size: 11px; color: rgba(255,255,255,0.3); }
+.nav-time { font-family: "Poppins", sans-serif; font-size: 11px; color: rgba(255,255,255,0.25); }
 
 .nav-overlay-footer {
   position: absolute; bottom: 0; left: 0; width: 100%;
   padding: 28px 80px;
   border-top: 1px solid rgba(255,255,255,0.07);
   display: flex; align-items: center; justify-content: space-between;
-  font-family: Inter, sans-serif; font-size: 11px;
+  font-family: "Poppins", sans-serif; font-size: 11px;
   color: rgba(255,255,255,0.3);
 }
 .nav-footer-links { display: flex; gap: 24px; }
@@ -237,7 +241,7 @@
   to { transform: translateX(0); }
 }
 .marquee-item {
-  font-family: Inter, sans-serif; font-size: 13px;
+  font-family: "Poppins", sans-serif; font-size: 13px;
   color: #6B6258; letter-spacing: 0.05em;
   padding: 0 32px; white-space: nowrap;
   border-right: 1px solid rgba(37,99,235,0.18);
