@@ -50,8 +50,8 @@ export function Hero() {
   return (
     <section
       ref={heroRef}
-      className="relative w-full h-[100vh] overflow-hidden grid-overlay"
-      style={{ background: "var(--ink)" }}
+      className="relative w-full overflow-hidden grid-overlay"
+      style={{ background: "var(--ink)", minHeight: "100vh" }}
     >
       {/* Decorative asterisks */}
       <span className="absolute left-12 top-1/2 -translate-y-1/2 text-white/40 text-lg select-none">✦</span>
@@ -125,26 +125,33 @@ export function Hero() {
       {/* Hero text */}
       <div
         ref={textRef}
-        className="relative z-10 h-full w-full flex flex-col items-center justify-center px-6 text-center text-white"
+        className="relative z-10 w-full flex flex-col items-center justify-center px-6 text-center text-white"
+        style={{ minHeight: "100vh", paddingTop: "80px", paddingBottom: "80px" }}
       >
         <p className="hero-eyebrow eyebrow text-white/70">
-          Corporate Travel Management Software
+          {/* FIX #2: Updated eyebrow to "Solution" */}
+          Corporate Travel Management Solution
         </p>
         <h1
           className="font-display mt-6"
-          style={{ fontSize: "clamp(48px, 7vw, 88px)", lineHeight: 1.05 }}
+          style={{ fontSize: "clamp(40px, 6vw, 88px)", lineHeight: 1.05 }}
         >
+          {/* FIX #2: New heading — "Corporate Travel Management Solution" */}
           <span className="block">
-            <span className="hero-word inline-block">Simplify</span>{" "}
-            <span className="hero-word inline-block">corporate</span>
+            <span className="hero-word inline-block">Corporate</span>{" "}
+            <span className="hero-word inline-block">Travel</span>
           </span>
           <span className="block">
-            <span className="hero-word inline-block">travel.</span>{" "}
+            <span className="hero-word inline-block">Management</span>
+          </span>
+          <span className="block">
+            {/* FIX #4: "rupee" → "money" */}
+            <span className="hero-word inline-block">Solution.</span>{" "}
             <span className="hero-word inline-block">Control</span>
           </span>
           <span className="block">
             <span className="hero-word inline-block">every</span>{" "}
-            <span className="hero-word inline-block">rupee</span>{" "}
+            <span className="hero-word inline-block">money</span>{" "}
             <span className="hero-word inline-block">spent.</span>
           </span>
         </h1>
