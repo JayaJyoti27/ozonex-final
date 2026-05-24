@@ -8,8 +8,9 @@ const mainLinks = [
   { n: "02", label: "Product", href: "/product" },
   { n: "03", label: "Solutions", href: "/solutions" },
   { n: "04", label: "MICE & Events", href: "/mice-events" },
-  { n: "05", label: "About", href: "/about" },
-  { n: "06", label: "Privacy Policy", href: "/privacy" },
+  { n: "05", label: "Pricing", href: "/pricing" },
+  { n: "06", label: "About", href: "/about" },
+  { n: "07", label: "Privacy Policy", href: "/privacy" },
 ];
 
 export function Nav() {
@@ -61,7 +62,13 @@ export function Nav() {
         </a>
 
         <div className="hidden lg:flex items-center" style={{ gap: 36 }}>
-          {mainLinks.slice(0, 4).map((l) => (
+          {[
+            { label: "Home", href: "/" },
+            { label: "Product", href: "/product" },
+            { label: "Solutions", href: "/solutions" },
+            { label: "MICE & Events", href: "/mice-events" },
+            { label: "Pricing", href: "/pricing" },
+          ].map((l) => (
             <a
               key={l.href}
               href={l.href}
@@ -99,7 +106,7 @@ export function Nav() {
             About
           </a>
           <a
-            href="/pricing"
+            href="/pricing#enquire"
             style={{
               background: "#2563EB",
               color: "#fff",
@@ -171,7 +178,7 @@ export function Nav() {
             </button>
           ))}
           <a
-            href="/pricing"
+            href="/pricing#enquire"
             onClick={() => setOpen(false)}
             style={{
               display: "inline-block",
