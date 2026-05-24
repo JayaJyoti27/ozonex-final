@@ -120,13 +120,13 @@ export function GlobalCTA() {
 
 /* ─── FOOTER ─── */
 export function Footer() {
-  const offices = [
-    { city: "Trivandrum (HQ)", address: "Surya Hills, near Technopark, Kazhakkoottam PO, Kerala 695582", phone: "+91 471 3500 598" },
-    { city: "Chennai", address: "New No. 12, First Floor, Thambiah Road, West Mambalam, Chennai 600033", phone: "+91 44 3130 2651" },
-    { city: "Cochin", address: "Praveen Chandran Building, Pipeline JN, Palarivattam, Ernakulam 682024", phone: "+91 9605766200" },
-    { city: "Delhi", address: "2-A/3, S/F Front Side, Kundan Mansion, Asaf Ali Road, New Delhi 110002", phone: "+91 92092 86872" },
-    { city: "Dubai", address: "Shop No. 51, Al Durrah Tower, Trade Center First, Sheikh Zayed Rd", phone: "+971 56 455 7700" },
-    { city: "Kuwait", address: "Kuwait City, Kuwait", phone: "+965 000 0000" },
+  const officeLocations = [
+    "Trivandrum",
+    "Chennai",
+    "Cochin",
+    "Delhi",
+    "Dubai",
+    "Kuwait",
   ];
 
   const footerLinks = [
@@ -214,28 +214,26 @@ export function Footer() {
             </div>
           </div>
 
-          {/* Offices — first 3 */}
+          {/* Offices — city names only */}
           <div>
             <div style={{ fontFamily: "Poppins, sans-serif", fontSize: 11, letterSpacing: "0.15em", textTransform: "uppercase", color: "rgba(255,255,255,0.35)", marginBottom: 24, fontWeight: 500 }}>
               Offices
             </div>
-            <div className="flex flex-col" style={{ gap: 20 }}>
-              {offices.slice(0, 3).map((o) => (
-                <div key={o.city}>
-                  <div style={{ fontFamily: "Poppins, sans-serif", fontSize: 13, color: "#fff", fontWeight: 500, marginBottom: 2 }}>{o.city}</div>
-                  <div style={{ fontFamily: "Poppins, sans-serif", fontSize: 12, color: "rgba(255,255,255,0.4)", lineHeight: 1.5 }}>{o.address}</div>
-                  <div style={{ fontFamily: "Poppins, sans-serif", fontSize: 12, color: "rgba(255,255,255,0.4)", marginTop: 2 }}>{o.phone}</div>
+            <div className="flex flex-col" style={{ gap: 12 }}>
+              {officeLocations.map((city) => (
+                <div key={city} style={{ fontFamily: "Poppins, sans-serif", fontSize: 13, color: "rgba(255,255,255,0.6)" }}>
+                  {city}
                 </div>
               ))}
             </div>
           </div>
 
-          {/* Contact + Offices 4-6 */}
+          {/* Contact */}
           <div>
             <div style={{ fontFamily: "Poppins, sans-serif", fontSize: 11, letterSpacing: "0.15em", textTransform: "uppercase", color: "rgba(255,255,255,0.35)", marginBottom: 24, fontWeight: 500 }}>
               Contact
             </div>
-            <div className="flex flex-col" style={{ gap: 12, marginBottom: 32 }}>
+            <div className="flex flex-col" style={{ gap: 12 }}>
               <a href="mailto:tresaj@ozonegroupglobal.com"
                 style={{ fontFamily: "Poppins, sans-serif", fontSize: 13, color: "rgba(255,255,255,0.6)", transition: "color 0.2s" }}
                 onMouseEnter={(e) => (e.currentTarget.style.color = "#fff")}
@@ -252,18 +250,6 @@ export function Footer() {
                 style={{ fontFamily: "Poppins, sans-serif", fontSize: 12, color: "#2563EB", letterSpacing: "0.08em", textTransform: "uppercase", fontWeight: 500, marginTop: 8 }}>
                 Enquire Now →
               </a>
-            </div>
-            <div style={{ fontFamily: "Poppins, sans-serif", fontSize: 11, letterSpacing: "0.15em", textTransform: "uppercase", color: "rgba(255,255,255,0.35)", marginBottom: 16, fontWeight: 500 }}>
-              More Offices
-            </div>
-            <div className="flex flex-col" style={{ gap: 20 }}>
-              {offices.slice(3).map((o) => (
-                <div key={o.city}>
-                  <div style={{ fontFamily: "Poppins, sans-serif", fontSize: 13, color: "#fff", fontWeight: 500, marginBottom: 2 }}>{o.city}</div>
-                  <div style={{ fontFamily: "Poppins, sans-serif", fontSize: 12, color: "rgba(255,255,255,0.4)", lineHeight: 1.5 }}>{o.address}</div>
-                  <div style={{ fontFamily: "Poppins, sans-serif", fontSize: 12, color: "rgba(255,255,255,0.4)", marginTop: 2 }}>{o.phone}</div>
-                </div>
-              ))}
             </div>
           </div>
         </div>
