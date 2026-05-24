@@ -89,13 +89,13 @@ const modules = [
   {
     n: "03",
     title: "EXPENSE TRACKING",
-    tag: "From receipt to reconciliation in minutes.",
+    tag: "From submission to reconciliation in minutes.",
     desc:
-      "Capture expenses at the point of spend. Ozonex auto-matches receipts to bookings, maps costs to budget codes, and flags anomalies before they reach finance.",
+      "Capture expenses at the point of spend. Ozonex auto-matches expenses to bookings, maps costs to budget codes, and flags anomalies before they reach finance.",
     img: expenseImg,
     subs: [
       ["Real-time dashboards", "Live spend by traveller and department"],
-      ["Receipt capture", "Mobile OCR scanning, zero manual entry"],
+      ["Expense capture", "Mobile submission, zero manual entry"],
       ["Cost centre mapping", "Automatic GL code assignment"],
       ["Budget alerts", "Threshold notifications before overspend"],
     ],
@@ -458,7 +458,7 @@ function ProductPage() {
                         <circle r="8" fill="var(--ink)" stroke="var(--sand)" strokeWidth="1.5" />
                         <text
                           y="26" textAnchor="middle" fill="#fff"
-                          style={{ fontSize: 11, fontFamily: "Inter", letterSpacing: "0.1em" }}
+                          style={{ fontSize: 11, fontFamily: "Poppins", letterSpacing: "0.1em" }}
                         >{n.l}</text>
                       </g>
                     ))}
@@ -556,7 +556,7 @@ function ProductPage() {
           </p>
           <div className="pcta-btn mt-10 flex flex-wrap items-center justify-center gap-4">
             <a href="/contact" className="pill" style={{ background: "#2563EB", borderColor: "#2563EB", padding: "16px 48px" }}>Book a Free Demo</a>
-            <a href="#brief" className="pill" style={{ padding: "16px 48px" }}>Get the Overview</a>
+            <a href="/contact" className="pill" style={{ padding: "16px 48px" }}>Get the Overview</a>
           </div>
         </div>
       </section>
