@@ -921,7 +921,7 @@ function SolutionsPage() {
           </p>
           <div className="scta-btn flex flex-wrap items-center justify-center" style={{ gap: 16, marginTop: 40 }}>
             <a
-              href="#demo"
+              href="/pricing#enquire"
               style={{
                 background: "#2563EB",
                 color: "#fff",
@@ -939,7 +939,7 @@ function SolutionsPage() {
               Book a Demo
             </a>
             <a
-              href="#sales"
+              href="/pricing#enquire"
               style={{
                 background: "transparent",
                 border: "1px solid rgba(255,255,255,0.4)",
