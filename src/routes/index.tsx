@@ -9,7 +9,7 @@ import { Hero } from "@/components/Hero";
 import { Statement } from "@/components/Statement";
 import { Stats } from "@/components/Stats";
 import { HorizontalScroll } from "@/components/HorizontalScroll";
-import { WhoFor, FAQ, GlobalCTA, Footer } from "@/components/Sections";
+import { WhoSection, GlobalCTA, Footer } from "@/components/Sections";
 import { LogoStrip, ValueProps, Comparison, SavingsCalculator, PricingTeaser } from "@/components/MarketingSections";
 
 gsap.registerPlugin(ScrollTrigger);
@@ -64,8 +64,7 @@ function Index() {
       <Stats />
       <SavingsCalculator />
       <HorizontalScroll />
-      <WhoFor />
-      <FAQ />
+       <WhoSection />
       <PricingTeaser />
       <GlobalCTA />
       <Footer />
