@@ -100,7 +100,7 @@ export function GlobalCTA() {
           Tell us your team size and travel challenges. We'll show you exactly how Ozonex would work for your operation.
         </p>
         <a
-          href="/pricing"
+          href="/pricing#enquire"
           className="gcta-sub inline-block"
           style={{
             background: "#2563EB",
@@ -135,6 +135,7 @@ export function Footer() {
   const officesCol2 = [
     { city: "Delhi", address: "Ozone Tourism and Travel, New Delhi", phone: "+91 11 000 0000" },
     { city: "Dubai", address: "Ozone Tourism and Travel, Dubai, UAE", phone: "+971 4 000 0000" },
+    { city: "Kuwait", address: "Ozone Tourism and Travel, Kuwait City, Kuwait", phone: "+965 000 0000" },
   ];
 
   const footerLinks = [
@@ -142,9 +143,15 @@ export function Footer() {
     { label: "Product", href: "/product" },
     { label: "Solutions", href: "/solutions" },
     { label: "MICE & Events", href: "/mice-events" },
-    { label: "About Us", href: "/about" },
     { label: "Pricing", href: "/pricing" },
+    { label: "About Us", href: "/about" },
     { label: "Privacy Policy", href: "/privacy" },
+  ];
+
+  const cityLinks = [
+    { label: "Bangalore", href: "/cities/bangalore" },
+    { label: "Chennai", href: "/cities/chennai" },
+    { label: "Delhi", href: "/cities/delhi" },
   ];
 
   const socials = [
@@ -159,7 +166,7 @@ export function Footer() {
       <div className="max-w-[1320px] mx-auto">
 
         {/* Top row */}
-        <div className="grid grid-cols-1 lg:grid-cols-4" style={{ gap: 60, paddingBottom: 80, borderBottom: "1px solid rgba(255,255,255,0.06)" }}>
+        <div className="grid grid-cols-1 lg:grid-cols-5" style={{ gap: 60, paddingBottom: 80, borderBottom: "1px solid rgba(255,255,255,0.06)" }}>
 
           {/* Brand */}
           <div className="lg:col-span-1">
@@ -170,7 +177,7 @@ export function Footer() {
             <div style={{ fontFamily: "Poppins, sans-serif", fontSize: 11, color: "rgba(255,255,255,0.35)", letterSpacing: "0.1em", textTransform: "uppercase", marginBottom: 8 }}>
               IATA Certified · Est. 2014
             </div>
-            <div className="flex" style={{ gap: 16, marginTop: 20 }}>
+            <div className="flex flex-wrap" style={{ gap: 16, marginTop: 20 }}>
               {socials.map((s) => (
                 <a
                   key={s.label}
@@ -194,6 +201,26 @@ export function Footer() {
             </div>
             <div className="flex flex-col" style={{ gap: 14 }}>
               {footerLinks.map((l) => (
+                <a
+                  key={l.href}
+                  href={l.href}
+                  style={{ fontFamily: "Poppins, sans-serif", fontSize: 13, color: "rgba(255,255,255,0.6)", transition: "color 0.2s" }}
+                  onMouseEnter={(e) => (e.currentTarget.style.color = "#fff")}
+                  onMouseLeave={(e) => (e.currentTarget.style.color = "rgba(255,255,255,0.6)")}
+                >
+                  {l.label}
+                </a>
+              ))}
+            </div>
+          </div>
+
+          {/* City Pages */}
+          <div>
+            <div style={{ fontFamily: "Poppins, sans-serif", fontSize: 11, letterSpacing: "0.15em", textTransform: "uppercase", color: "rgba(255,255,255,0.35)", marginBottom: 24, fontWeight: 500 }}>
+              Cities
+            </div>
+            <div className="flex flex-col" style={{ gap: 14 }}>
+              {cityLinks.map((l) => (
                 <a
                   key={l.href}
                   href={l.href}
@@ -239,7 +266,7 @@ export function Footer() {
                 onMouseLeave={(e) => (e.currentTarget.style.color = "rgba(255,255,255,0.6)")}>
                 WhatsApp: +91 81398 31118
               </a>
-              <a href="/pricing" style={{ fontFamily: "Poppins, sans-serif", fontSize: 12, color: "#2563EB", letterSpacing: "0.08em", textTransform: "uppercase", fontWeight: 500, marginTop: 8 }}>
+              <a href="/pricing#enquire" style={{ fontFamily: "Poppins, sans-serif", fontSize: 12, color: "#2563EB", letterSpacing: "0.08em", textTransform: "uppercase", fontWeight: 500, marginTop: 8 }}>
                 Enquire Now →
               </a>
             </div>
@@ -268,7 +295,7 @@ export function Footer() {
               Privacy Policy
             </a>
             <span style={{ color: "rgba(255,255,255,0.15)", fontSize: 12 }}>·</span>
-            <a href="/pricing" style={{ fontFamily: "Poppins, sans-serif", fontSize: 12, color: "rgba(255,255,255,0.35)", transition: "color 0.2s" }}
+            <a href="/pricing#enquire" style={{ fontFamily: "Poppins, sans-serif", fontSize: 12, color: "rgba(255,255,255,0.35)", transition: "color 0.2s" }}
               onMouseEnter={(e) => (e.currentTarget.style.color = "#fff")}
               onMouseLeave={(e) => (e.currentTarget.style.color = "rgba(255,255,255,0.35)")}>
               Contact
