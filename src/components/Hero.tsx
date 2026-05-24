@@ -14,7 +14,6 @@ export function Hero() {
   useEffect(() => {
     if (!heroRef.current) return;
     const ctx = gsap.context(() => {
-      // Load animation
       gsap.fromTo(
         ".hero-word",
         { y: 80, opacity: 0 },
@@ -31,7 +30,6 @@ export function Hero() {
         { y: 0, opacity: 1, duration: 1, ease: "power3.out", stagger: 0.12, delay: 0.6 }
       );
 
-      // Scroll: zoom map + parallax photo + fade text
       const tl = gsap.timeline({
         scrollTrigger: {
           trigger: heroRef.current,
@@ -66,7 +64,7 @@ export function Hero() {
         style={{ willChange: "transform" }}
       >
         <div className="relative w-[110%] h-[80%]">
-          {/* Amber base layer (continents tinted) */}
+          {/* Amber base layer */}
           <div
             className="absolute inset-0"
             style={{
@@ -81,7 +79,7 @@ export function Hero() {
               WebkitMaskPosition: "center",
             }}
           />
-          {/* Photo layer with multiply blend, only inside continents */}
+          {/* Photo layer — no blue tint, pure multiply */}
           <div
             ref={photoRef}
             className="absolute inset-0"
@@ -102,23 +100,7 @@ export function Hero() {
               willChange: "transform",
             }}
           />
-          {/* Outline strokes on continents */}
-          <div
-            className="absolute inset-0"
-            style={{
-              backgroundColor: "rgba(255,255,255,0.18)",
-              maskImage: "url(/images/world.svg)",
-              WebkitMaskImage: "url(/images/world.svg)",
-              maskSize: "contain",
-              WebkitMaskSize: "contain",
-              maskRepeat: "no-repeat",
-              WebkitMaskRepeat: "no-repeat",
-              maskPosition: "center",
-              WebkitMaskPosition: "center",
-              mixBlendMode: "overlay",
-              opacity: 0.4,
-            }}
-          />
+          {/* Removed bluish overlay layer */}
         </div>
       </div>
 
@@ -129,14 +111,12 @@ export function Hero() {
         style={{ minHeight: "100vh", paddingTop: "80px", paddingBottom: "80px" }}
       >
         <p className="hero-eyebrow eyebrow text-white/70">
-          {/* FIX #2: Updated eyebrow to "Solution" */}
           Corporate Travel Management Solution
         </p>
         <h1
           className="font-display mt-6"
           style={{ fontSize: "clamp(40px, 6vw, 88px)", lineHeight: 1.05 }}
         >
-          {/* FIX #2: New heading — "Corporate Travel Management Solution" */}
           <span className="block">
             <span className="hero-word inline-block">Corporate</span>{" "}
             <span className="hero-word inline-block">Travel</span>
@@ -145,7 +125,6 @@ export function Hero() {
             <span className="hero-word inline-block">Management</span>
           </span>
           <span className="block">
-            {/* FIX #4: "rupee" → "money" */}
             <span className="hero-word inline-block">Solution.</span>{" "}
             <span className="hero-word inline-block">Control</span>
           </span>
@@ -165,7 +144,7 @@ export function Hero() {
         </p>
         <div className="hero-cta mt-10 flex flex-wrap items-center justify-center gap-4">
           <a
-            href="/contact"
+            href="/pricing#enquire"
             style={{
               display: "inline-flex", alignItems: "center", justifyContent: "center",
               background: "#2563EB", color: "#fff",
@@ -177,7 +156,10 @@ export function Hero() {
             onMouseEnter={(e) => { e.currentTarget.style.background = "#1D4ED8"; e.currentTarget.style.transform = "scale(1.02)"; }}
             onMouseLeave={(e) => { e.currentTarget.style.background = "#2563EB"; e.currentTarget.style.transform = "scale(1)"; }}
           >Get Started Free</a>
-          <a href="#demo" className="pill">Watch a Demo</a>
+          <a
+            href="/pricing#enquire"
+            className="pill"
+          >Book a Free Demo</a>
         </div>
         <p className="hero-cta" style={{
           fontFamily: "Inter, sans-serif", fontSize: 12,
