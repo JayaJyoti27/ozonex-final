@@ -5,17 +5,29 @@ import { PiggyBank, ShieldCheck, Zap, BarChart3 } from "lucide-react";
 
 gsap.registerPlugin(ScrollTrigger);
 
-/* ============ LOGO STRIP ============ */
-const ROW1 = [
-  "Tata Consultancy Services","Infosys","Wipro","HCL Technologies","Tech Mahindra",
-  "Bajaj Auto","Mahindra & Mahindra","Larsen & Toubro","Sun Pharma","Dr. Reddy's",
-  "Godrej Industries","ITC Limited","Titan Company","Hero MotoCorp",
+/* ============ LOGO STRIP — FIX #6: "Sectors We Serve" ============ */
+
+// FIX #6: Replaced company names with sectors
+const SECTORS = [
+  "Information Technology (IT)",
+  "Healthcare & Medical",
+  "Education & Training",
+  "Travel & Tourism",
+  "Finance & Banking",
+  "Construction",
+  "Manufacturing",
+  "Hospitality & Hotels",
+  "Logistics & Transportation",
+  "Media & Entertainment",
+  "Import & Export",
+  "Marketing & Advertising",
+  "Event Management",
+  "Interior Design & Furniture",
 ];
-const ROW2 = [
-  "Reliance Industries","Adani Enterprises","Vedanta Limited","JSW Steel","Hindalco",
-  "Bharat Petroleum","ONGC","Coal India","Indian Oil","Power Grid","NTPC","BHEL",
-  "Hindustan Unilever","Nestle India",
-];
+
+// Split into two rows
+const ROW1 = SECTORS.slice(0, 7);
+const ROW2 = SECTORS.slice(7);
 
 export function LogoStrip() {
   return (
@@ -26,7 +38,8 @@ export function LogoStrip() {
         textTransform: "uppercase", letterSpacing: "0.2em",
         color: "#6B6258", padding: "60px 0 32px",
       }}>
-        Trusted by Leading Enterprises
+        {/* FIX #6: Changed label */}
+        Sectors We Serve
       </div>
       <MarqueeRow items={ROW1} />
       <div style={{ height: 16 }} />
@@ -164,14 +177,28 @@ export function Comparison() {
   );
 }
 
-/* ============ CALCULATOR ============ */
+/* ============ CALCULATOR — FIX #4: Rupee → Money, FIX #12: Dubai currency ============ */
+
+// FIX #12: Currency options including Dubai (AED)
+const CURRENCIES = [
+  { label: "INR (₹)", symbol: "₹", locale: "en-IN", multiplier: 4200 },
+  { label: "USD ($)", symbol: "$", locale: "en-US", multiplier: 50 },
+  { label: "AED (د.إ)", symbol: "د.إ", locale: "ar-AE", multiplier: 184 },
+];
+
 export function SavingsCalculator() {
   const [employees, setEmployees] = useState(500);
   const [trips, setTrips] = useState(8);
+  // FIX #12: Currency selector state
+  const [currencyIdx, setCurrencyIdx] = useState(0);
+  const currency = CURRENCIES[currencyIdx];
 
-  const saving = Math.round(employees * trips * 4200 * 0.23);
+  const saving = Math.round(employees * trips * currency.multiplier * 0.23);
   const hours = Math.round(employees * 0.8);
-  const fmtINR = (n: number) => "₹ " + n.toLocaleString("en-IN");
+
+  // FIX #4: removed "rupee" label, now uses selected currency
+  const fmtMoney = (n: number) =>
+    currency.symbol + " " + n.toLocaleString(currency.locale);
 
   return (
     <section className="relative grid-overlay" style={{ background: "#1C1410", padding: "120px 24px", position: "relative" }}>
@@ -202,6 +229,34 @@ export function SavingsCalculator() {
           border: "1px solid rgba(255,255,255,0.08)",
           padding: 48, textAlign: "left",
         }}>
+
+          {/* FIX #12: Currency selector */}
+          <div style={{ marginBottom: 32, display: "flex", alignItems: "center", gap: 12 }}>
+            <span style={{
+              fontFamily: "Inter, sans-serif", fontSize: 11,
+              color: "rgba(255,255,255,0.5)", textTransform: "uppercase", letterSpacing: "0.1em",
+            }}>Currency</span>
+            <div style={{ display: "flex", gap: 8 }}>
+              {CURRENCIES.map((c, i) => (
+                <button
+                  key={c.label}
+                  onClick={() => setCurrencyIdx(i)}
+                  style={{
+                    padding: "6px 14px",
+                    borderRadius: 20,
+                    border: "1px solid",
+                    borderColor: currencyIdx === i ? "#2563EB" : "rgba(255,255,255,0.15)",
+                    background: currencyIdx === i ? "#2563EB" : "transparent",
+                    color: currencyIdx === i ? "#fff" : "rgba(255,255,255,0.5)",
+                    fontFamily: "Inter, sans-serif", fontSize: 11,
+                    cursor: "pointer", transition: "all 0.2s ease",
+                    letterSpacing: "0.05em",
+                  }}
+                >{c.label}</button>
+              ))}
+            </div>
+          </div>
+
           <Slider
             label="Number of employees who travel"
             value={employees} min={50} max={5000} step={50}
@@ -217,7 +272,7 @@ export function SavingsCalculator() {
           <div style={{ marginTop: 40, display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 12 }}>
             <ResultBox
               label="Estimated annual saving"
-              value={fmtINR(saving)} valueColor="#2563EB"
+              value={fmtMoney(saving)} valueColor="#2563EB"
               sub="vs unmanaged travel spend"
             />
             <ResultBox
@@ -311,7 +366,7 @@ function ResultBox({ label, value, valueColor = "#fff", sub }: {
   );
 }
 
-/* ============ PRICING TEASER ============ */
+/* ============ PRICING TEASER — FIX #9: Remove "See Pricing Plans" button ============ */
 export function PricingTeaser() {
   return (
     <section style={{ background: "#F5F0EA", padding: "80px 24px" }}>
@@ -335,18 +390,8 @@ export function PricingTeaser() {
           No hidden charges. Just one monthly platform fee per traveller —
           and savings that more than cover it.
         </p>
+        {/* FIX #9: Removed "See Pricing Plans" button, kept only "Talk to Our Team" */}
         <div style={{ marginTop: 36, display: "flex", gap: 16, justifyContent: "center", flexWrap: "wrap" }}>
-          <a href="/pricing" style={{
-            border: "1px solid #2563EB", color: "#2563EB",
-            background: "transparent", borderRadius: 50,
-            padding: "12px 32px", fontFamily: "Inter, sans-serif",
-            fontSize: 12, letterSpacing: "0.12em", textTransform: "uppercase",
-            fontWeight: 500, textDecoration: "none",
-            transition: "all 0.25s ease",
-          }}
-          onMouseEnter={(e) => { e.currentTarget.style.background = "#2563EB"; e.currentTarget.style.color = "#fff"; }}
-          onMouseLeave={(e) => { e.currentTarget.style.background = "transparent"; e.currentTarget.style.color = "#2563EB"; }}
-          >See Pricing Plans</a>
           <a href="/contact" style={{
             border: "1px solid rgba(107,98,88,0.4)", color: "#6B6258",
             background: "transparent", borderRadius: 50,
