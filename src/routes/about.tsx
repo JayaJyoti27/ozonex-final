@@ -26,17 +26,7 @@ const milestones = [
   { year: "2024", event: "Delhi office inaugurated. Active operations across India, Middle East, Asia, and beyond." },
 ];
 
-const markets = [
-  { flag: "🇮🇳", name: "India" },
-  { flag: "🇦🇪", name: "Middle East" },
-  { flag: "🇨🇳", name: "China" },
-  { flag: "🇸🇬", name: "Singapore" },
-  { flag: "🇺🇸", name: "USA" },
-  { flag: "🇦🇺", name: "Australia" },
-  { flag: "🇬🇧", name: "United Kingdom" },
-  { flag: "🇳🇿", name: "New Zealand" },
-  { flag: "🇪🇺", name: "Europe" },
-];
+
 
 const services = [
   ["✈", "Flight Booking", "Domestic and international air across all major carriers with preferred corporate fares."],
@@ -95,8 +85,7 @@ function AboutPage() {
       gsap.fromTo(".svc-card", { y: 30, opacity: 0 }, { y: 0, opacity: 1, duration: 0.7, ease: "power2.out", stagger: 0.1, scrollTrigger: { trigger: ".services-section", start: "top 80%" } });
 
       // Markets
-      gsap.fromTo(".market-pill", { scale: 0.8, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.5, ease: "back.out(1.7)", stagger: 0.06, scrollTrigger: { trigger: ".markets-section", start: "top 85%" } });
-
+      
       // CTA
       gsap.fromTo(".cta-word", { y: 80, opacity: 0 }, { y: 0, opacity: 1, duration: 1, stagger: 0.08, ease: "power3.out", scrollTrigger: { trigger: ".about-cta", start: "top 60%" } });
       gsap.fromTo(".cta-btn", { y: 30, opacity: 0 }, { y: 0, opacity: 1, duration: 0.9, delay: 0.5, ease: "power3.out", scrollTrigger: { trigger: ".about-cta", start: "top 60%" } });
@@ -251,23 +240,7 @@ function AboutPage() {
         </div>
       </section>
 
-      {/* MARKETS */}
-      <section className="markets-section relative w-full" style={{ background: "var(--cream)", padding: "100px 24px" }}>
-        <div className="text-center max-w-[1320px] mx-auto mb-14">
-          <div className="eyebrow" style={{ color: "var(--gold)" }}>Global reach</div>
-          <h2 className="font-display mt-6" style={{ fontSize: "clamp(32px,4vw,48px)", color: "var(--ink)", lineHeight: 1.05 }}>
-            Markets we serve
-          </h2>
-        </div>
-
-        <div className="max-w-[900px] mx-auto flex flex-wrap justify-center gap-4">
-          {markets.map((m) => (
-            <div key={m.name} className="market-pill flex items-center gap-2" style={{ background: "#fff", border: "1px solid rgba(212,201,190,0.5)", borderRadius: 999, padding: "12px 22px", boxShadow: "0 2px 12px rgba(28,20,16,0.05)" }}>
-              <span style={{ fontSize: 20 }}>{m.flag}</span>
-              <span style={{ fontSize: 14, color: "var(--ink)", fontFamily: "Poppins, sans-serif" }}>{m.name}</span>
-            </div>
-          ))}
-        </div>
+       
       </section>
 
       {/* CTA */}
@@ -287,11 +260,11 @@ function AboutPage() {
         </h2>
 
         <p className="cta-btn mt-8 mx-auto" style={{ maxWidth: 460, fontSize: 16, color: "rgba(255,255,255,0.65)", lineHeight: 1.8 }}>
-          Talk to our enterprise team and get a plan built around your organisation — not a generic tier.
+          Talk to our enterprise team and get a plan built around your organisation, not a generic tier.
         </p>
 
         <div className="cta-btn mt-10 flex flex-wrap items-center justify-center gap-4">
-          <a href="/pricing" className="pill" style={{ background: "#2563EB", borderColor: "#2563EB", padding: "16px 48px" }}>Get a Custom Quote</a>
+          <a href="/pricing#enquire" className="pill" style={{ background: "#2563EB", borderColor: "#2563EB", padding: "16px 48px" }}>Get a Custom Quote</a>
           <a href="/product" className="pill" style={{ padding: "16px 48px" }}>See the Platform</a>
         </div>
 
