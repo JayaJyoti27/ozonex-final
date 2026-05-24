@@ -244,7 +244,7 @@ export function CityPage({ data }: { data: CityData }) {
             style={{ marginTop: 48, animation: "fadeUp 0.9s 0.85s ease forwards" }}
           >
             <a
-              href="#contact"
+              href="/pricing#enquire"
               style={{
                 background: "#2563EB",
                 color: "white",
@@ -667,7 +667,7 @@ export function CityPage({ data }: { data: CityData }) {
             {data.cta.body}
           </p>
           <a
-            href="#contact"
+            href="/pricing#enquire"
             className="reveal"
             style={{
               marginTop: 40,
