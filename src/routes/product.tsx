@@ -339,7 +339,7 @@ function ProductPage() {
           <div className="hero-fade mt-10 flex flex-wrap items-center justify-center gap-4">
             <a href="#features" className="pill">See How It Works</a>
             <a
-              href="/contact"
+              href="/pricing#enquire"
               className="pill"
               style={{ background: "#2563EB", borderColor: "#2563EB" }}
             >
@@ -555,8 +555,8 @@ function ProductPage() {
             A 30-minute live walkthrough shows you exactly how Ozonex would work for your org structure, your approval hierarchy, and your travel spend profile.
           </p>
           <div className="pcta-btn mt-10 flex flex-wrap items-center justify-center gap-4">
-            <a href="/contact" className="pill" style={{ background: "#2563EB", borderColor: "#2563EB", padding: "16px 48px" }}>Book a Free Demo</a>
-            <a href="/contact" className="pill" style={{ padding: "16px 48px" }}>Get the Overview</a>
+            <a href="/pricing#enquire" className="pill" style={{ background: "#2563EB", borderColor: "#2563EB", padding: "16px 48px" }}>Book a Free Demo</a>
+            <a href="/pricing#enquire" className="pill" style={{ padding: "16px 48px" }}>Get the Overview</a>
           </div>
         </div>
       </section>
