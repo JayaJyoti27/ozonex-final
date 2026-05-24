@@ -18,6 +18,7 @@ const offices = [
   { city: "Cochin", flag: "🇮🇳", detail: "Praveen Chandran Building, Pipeline JN, Palarivattam, Ernakulam, Kerala 682024", phone: "+91 9605766200" },
   { city: "Delhi", flag: "🇮🇳", detail: "2-A/3, S/F Front Side, Kundan Mansion, Asaf Ali Road, Turkman Gate, New Delhi 110002", phone: "+91 92092 86872" },
   { city: "Dubai", flag: "🇦🇪", detail: "Shop No. 51, Al Durrah Tower, Trade Center First, Sheikh Zayed Rd, Opp Museum of the Future", phone: "+971 56 455 7700" },
+  { city: "Kuwait", flag: "🇰🇼", detail: "Kuwait City, Kuwait", phone: "+965 000 0000" },
 ];
 
 const teamSizes = ["1–50 travellers", "51–200 travellers", "201–500 travellers", "500+ travellers"];
@@ -77,6 +78,14 @@ function PricingPage() {
       gsap.fromTo(".office-card", { y: 30, opacity: 0 }, { y: 0, opacity: 1, duration: 0.7, ease: "power2.out", stagger: 0.08, scrollTrigger: { trigger: ".offices-section", start: "top 80%" } });
     });
 
+    // Scroll to #enquire if hash is present
+    if (window.location.hash === "#enquire") {
+      setTimeout(() => {
+        const el = document.getElementById("enquire");
+        if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
+      }, 600);
+    }
+
     return () => { ctx.revert(); lenis.destroy(); ScrollTrigger.getAll().forEach((s) => s.kill()); };
   }, []);
 
@@ -89,7 +98,6 @@ function PricingPage() {
     if (!form.name || !form.email || !form.message) return;
     setStatus("sending");
 
-    // Build mailto body
     const body = [
       `Name: ${form.name}`,
       `Company: ${form.company}`,
@@ -100,8 +108,6 @@ function PricingPage() {
       `Message: ${form.message}`,
     ].join("\n");
 
-    // Use mailto as primary (works without backend)
-    // For production, replace with fetch to your API/email service
     const mailtoLink = `mailto:${CONTACT_EMAIL}?subject=Ozonex Enquiry from ${encodeURIComponent(form.name)} — ${encodeURIComponent(form.company)}&body=${encodeURIComponent(body)}`;
     window.location.href = mailtoLink;
     setStatus("sent");
@@ -166,8 +172,8 @@ function PricingPage() {
         <TornEdge fill="var(--cream)" position="bottom" />
       </section>
 
-      {/* FORM + SIDE INFO */}
-      <section className="relative w-full" style={{ background: "var(--cream)", padding: "100px 24px 120px" }}>
+      {/* FORM + SIDE INFO — id="enquire" for anchor links */}
+      <section id="enquire" className="relative w-full" style={{ background: "var(--cream)", padding: "100px 24px 120px", scrollMarginTop: "80px" }}>
         <div className="max-w-[1320px] mx-auto grid grid-cols-1 lg:grid-cols-[1fr_420px] gap-16 items-start">
 
           {/* FORM */}
@@ -181,27 +187,22 @@ function PricingPage() {
             </p>
 
             <div className="mt-10 grid grid-cols-1 md:grid-cols-2 gap-6">
-              {/* Name */}
               <div>
                 <label style={labelStyle}>Full Name *</label>
                 <input name="name" value={form.name} onChange={handleChange} placeholder="Jane Smith" style={inputStyle} />
               </div>
-              {/* Company */}
               <div>
                 <label style={labelStyle}>Company Name</label>
                 <input name="company" value={form.company} onChange={handleChange} placeholder="Acme Corp" style={inputStyle} />
               </div>
-              {/* Email */}
               <div>
                 <label style={labelStyle}>Work Email *</label>
                 <input name="email" type="email" value={form.email} onChange={handleChange} placeholder="jane@company.com" style={inputStyle} />
               </div>
-              {/* Phone */}
               <div>
                 <label style={labelStyle}>Phone Number</label>
                 <input name="phone" value={form.phone} onChange={handleChange} placeholder="+91 98765 43210" style={inputStyle} />
               </div>
-              {/* Team Size */}
               <div>
                 <label style={labelStyle}>Approximate Team Size</label>
                 <select name="teamSize" value={form.teamSize} onChange={handleChange} style={inputStyle}>
@@ -209,7 +210,6 @@ function PricingPage() {
                   {teamSizes.map((s) => <option key={s} value={s}>{s}</option>)}
                 </select>
               </div>
-              {/* Service */}
               <div>
                 <label style={labelStyle}>Service Interested In</label>
                 <select name="service" value={form.service} onChange={handleChange} style={inputStyle}>
@@ -217,7 +217,6 @@ function PricingPage() {
                   {services.map((s) => <option key={s} value={s}>{s}</option>)}
                 </select>
               </div>
-              {/* Message */}
               <div className="md:col-span-2">
                 <label style={labelStyle}>Tell us about your requirements *</label>
                 <textarea
@@ -261,7 +260,6 @@ function PricingPage() {
 
           {/* SIDE INFO */}
           <div className="info-section flex flex-col gap-8">
-            {/* Direct contact */}
             <div className="info-card" style={{ background: "var(--ink)", borderRadius: 16, padding: "36px 32px" }}>
               <div className="eyebrow" style={{ color: "rgba(255,255,255,0.45)" }}>Direct contact</div>
               <h3 className="font-display text-white mt-3" style={{ fontSize: 24 }}>Prefer to talk?</h3>
@@ -281,7 +279,6 @@ function PricingPage() {
               </div>
             </div>
 
-            {/* What to expect */}
             <div className="info-card" style={{ background: "#fff", borderRadius: 16, padding: "36px 32px", boxShadow: "0 2px 20px rgba(28,20,16,0.06)" }}>
               <div className="eyebrow" style={{ color: "var(--gold)" }}>What happens next</div>
               <div className="mt-6 flex flex-col gap-5">
@@ -298,10 +295,9 @@ function PricingPage() {
               </div>
             </div>
 
-            {/* Trust badges */}
             <div className="info-card" style={{ borderRadius: 16, padding: "28px 32px", border: "1px solid rgba(212,201,190,0.5)" }}>
               <div className="flex flex-wrap gap-4">
-                {["IATA Certified", "Est. 2014", "5 Global Offices", "24/7 Support"].map((b) => (
+                {["IATA Certified", "Est. 2014", "6 Global Offices", "24/7 Support"].map((b) => (
                   <span key={b} style={{ fontSize: 11, letterSpacing: "0.08em", color: "var(--muted-warm)", background: "rgba(28,20,16,0.04)", borderRadius: 999, padding: "6px 14px" }}>
                     {b}
                   </span>
