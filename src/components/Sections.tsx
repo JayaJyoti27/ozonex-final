@@ -128,16 +128,14 @@ export function GlobalCTA() {
 /* ─── FOOTER ─── */
 export function Footer() {
   const officesCol1 = [
-    { city: "Trivandrum (HQ)", address: "Ozone Tourism and Travel, Trivandrum, Kerala", phone: "+91 471 000 0000" },
-    { city: "Chennai", address: "Ozone Tourism and Travel, Chennai, Tamil Nadu", phone: "+91 44 000 0000" },
-    { city: "Cochin", address: "Ozone Tourism and Travel, Cochin, Kerala", phone: "+91 484 000 0000" },
+    { city: "Trivandrum (HQ)"},
+    { city: "Chennai"},
+    { city: "Cochin"},
+    { city: "Delhi"},
+    { city: "Dubai"},
+    { city: "Kuwait"},
   ];
-  const officesCol2 = [
-    { city: "Delhi", address: "Ozone Tourism and Travel, New Delhi", phone: "+91 11 000 0000" },
-    { city: "Dubai", address: "Ozone Tourism and Travel, Dubai, UAE", phone: "+971 4 000 0000" },
-    { city: "Kuwait", address: "Ozone Tourism and Travel, Kuwait City, Kuwait", phone: "+965 000 0000" },
-  ];
-
+ 
   const footerLinks = [
     { label: "Home", href: "/" },
     { label: "Product", href: "/product" },
@@ -273,13 +271,7 @@ export function Footer() {
             <div style={{ fontFamily: "Poppins, sans-serif", fontSize: 11, letterSpacing: "0.15em", textTransform: "uppercase", color: "rgba(255,255,255,0.35)", marginBottom: 16, fontWeight: 500 }}>
               More Offices
             </div>
-            {officesCol2.map((o) => (
-              <div key={o.city} style={{ marginBottom: 20 }}>
-                <div style={{ fontFamily: "Poppins, sans-serif", fontSize: 13, color: "#fff", fontWeight: 500, marginBottom: 4 }}>{o.city}</div>
-                <div style={{ fontFamily: "Poppins, sans-serif", fontSize: 12, color: "rgba(255,255,255,0.4)", lineHeight: 1.5 }}>{o.address}</div>
-                <div style={{ fontFamily: "Poppins, sans-serif", fontSize: 12, color: "rgba(255,255,255,0.4)", marginTop: 2 }}>{o.phone}</div>
-              </div>
-            ))}
+            
           </div>
         </div>
 
