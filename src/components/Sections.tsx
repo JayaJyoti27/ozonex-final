@@ -4,7 +4,7 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import enterprises from "@/assets/who-enterprises.jpg";
 import hr from "@/assets/who-hr.jpg";
 import exec from "@/assets/who-exec.jpg";
-import cta from "@/assets/cta-bg.jpg";
+import cta from "@/assets/cta-skyline.jpg";
 
 gsap.registerPlugin(ScrollTrigger);
 
