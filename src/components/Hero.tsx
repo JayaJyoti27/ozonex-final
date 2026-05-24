@@ -126,12 +126,7 @@ export function Hero() {
           </span>
           <span className="block">
             <span className="hero-word inline-block">Solution.</span>{" "}
-            <span className="hero-word inline-block">Control</span>
-          </span>
-          <span className="block">
-            <span className="hero-word inline-block">every</span>{" "}
-            <span className="hero-word inline-block">money</span>{" "}
-            <span className="hero-word inline-block">spent.</span>
+      
           </span>
         </h1>
         <p
