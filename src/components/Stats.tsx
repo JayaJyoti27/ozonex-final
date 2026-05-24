@@ -58,7 +58,7 @@ export function Stats() {
         </div>
         {/* Location tags */}
         <div className="flex flex-wrap gap-4 mb-16">
-          {["Trivandrum, India", "Chennai, India", "Dubai, UAE", "Kuwait City, Kuwait"].map((loc) => (
+          {["India", "UAE", "Kuwait"].map((loc) => (
             <span key={loc} style={{
               fontFamily: "Poppins, sans-serif",
               fontSize: 12,
