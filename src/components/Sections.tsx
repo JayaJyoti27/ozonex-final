@@ -30,7 +30,7 @@ export function WhoFor() {
           <path d="M780,160 C840,210 860,130 920,190" stroke="var(--sand)" strokeWidth="1.5" fill="none" opacity="0.6" />
         </svg>
 
-        {cards.map((c, i) => (
+        {cards.map((c) => (
           <div
             key={c.title}
             className="reveal"
@@ -165,7 +165,7 @@ export function GlobalCTA() {
           style={{
             display: "inline-flex", alignItems: "center", justifyContent: "center",
             background: "#2563EB", color: "#fff", borderRadius: 50,
-            padding: "14px 40px", fontFamily: "Inter, sans-serif", fontSize: 12,
+            padding: "14px 40px", fontFamily: "Poppins, sans-serif", fontSize: 12,
             letterSpacing: "0.12em", textTransform: "uppercase", fontWeight: 500,
             textDecoration: "none", transition: "all 0.25s ease",
           }}
@@ -241,10 +241,23 @@ export function Footer() {
             </ul>
           </div>
           <div>
-            <div className="eyebrow text-white/55">Location</div>
-            <div className="mt-5 text-white" style={{ fontSize: 18, fontFamily: "var(--font-display)" }}>Dubai, UAE</div>
-            <div className="mt-2 text-white/70" style={{ fontSize: 13 }}>{date}</div>
-            <div className="text-white/70 tabular-nums" style={{ fontSize: 13 }}>{time}</div>
+            <div className="eyebrow text-white/55">Locations</div>
+            <div className="mt-5 space-y-4">
+              <div>
+                <div className="text-white" style={{ fontSize: 16, fontFamily: "var(--font-display)" }}>
+                  🇦🇪 Dubai, UAE
+                </div>
+                <div className="text-white/60" style={{ fontSize: 12, marginTop: 2 }}>United Arab Emirates</div>
+              </div>
+              <div>
+                <div className="text-white" style={{ fontSize: 16, fontFamily: "var(--font-display)" }}>
+                  🇰🇼 Kuwait City, Kuwait
+                </div>
+                <div className="text-white/60" style={{ fontSize: 12, marginTop: 2 }}>State of Kuwait</div>
+              </div>
+              <div className="text-white/70 mt-3" style={{ fontSize: 13 }}>{date}</div>
+              <div className="text-white/70 tabular-nums" style={{ fontSize: 13 }}>{time}</div>
+            </div>
           </div>
           <div className="text-right md:text-left">
             <div className="eyebrow text-white/55">Accreditation</div>
