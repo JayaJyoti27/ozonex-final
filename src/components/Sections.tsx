@@ -12,23 +12,38 @@ gsap.registerPlugin(ScrollTrigger);
 export function WhoSection() {
   const sectionRef = useRef<HTMLElement>(null);
 
-  useEffect(() => {
-    if (!sectionRef.current) return;
-    const isMobile = window.innerWidth < 768;
-    if (isMobile) return; // skip animations on mobile
-const ctx = gsap.context(() => {
-  gsap.fromTo(".who-card", { y: 60, opacity: 1 }, {
-    y: 0, opacity: 1, duration: 0.9, stagger: 0.15, ease: "power3.out",
-   scrollTrigger: { trigger: sectionRef.current, start: "top 95%", once: true },
-  });
-}, sectionRef);
-return () => ctx.revert();
-
   const cards = [
     { img: enterprises, label: "Enterprises & MNCs", desc: "Multi-entity policy, consolidated reporting, ERP integration." },
     { img: hr, label: "HR & Finance Teams", desc: "Duty of care, approval automation, GL-ready expense data." },
     { img: exec, label: "SMBs & Startups", desc: "Enterprise-grade travel control without the enterprise price tag." },
   ];
+
+  useEffect(() => {
+    if (!sectionRef.current) return;
+    const isMobile = window.innerWidth < 768;
+    if (isMobile) return;
+
+    const ctx = gsap.context(() => {
+      gsap.fromTo(
+        ".who-card",
+        { y: 60, opacity: 0 },
+        {
+          y: 0,
+          opacity: 1,
+          duration: 0.9,
+          stagger: 0.15,
+          ease: "power3.out",
+          scrollTrigger: {
+            trigger: sectionRef.current,
+            start: "top 95%",
+            toggleActions: "play none none none",
+          },
+        }
+      );
+    }, sectionRef);
+
+    return () => ctx.revert();
+  }, []);
 
   return (
     <section ref={sectionRef} className="who-section">
@@ -142,7 +157,6 @@ return () => ctx.revert();
             font-size: clamp(32px, 8vw, 48px);
             line-height: 1.0;
           }
-          /* Stack cards vertically, landscape ratio on mobile */
           .who-grid {
             grid-template-columns: 1fr;
             gap: 3px;
@@ -188,23 +202,54 @@ export function GlobalCTA() {
     const isMobile = window.innerWidth < 768;
 
     const ctx = gsap.context(() => {
-      // Parallax only on desktop
       if (!isMobile) {
         gsap.to(".gcta-bg", {
           yPercent: -20,
           ease: "none",
-          scrollTrigger: { trigger: ref.current, start: "top bottom", end: "bottom top", scrub: true },
+          scrollTrigger: {
+            trigger: ref.current,
+            start: "top bottom",
+            end: "bottom top",
+            scrub: true,
+          },
         });
       }
-     gsap.fromTo(".gcta-word", { y: isMobile ? 20 : 80, opacity: 1 }, {
-  y: 0, opacity: 1, duration: isMobile ? 0.6 : 1, stagger: isMobile ? 0.04 : 0.08, ease: "power3.out",
-  scrollTrigger: { trigger: ref.current, start: "top 95%", once: true },
-});
-gsap.fromTo(".gcta-sub", { y: isMobile ? 10 : 30, opacity: 1 }, {
-  y: 0, opacity: 1, duration: 0.9, delay: isMobile ? 0.2 : 0.5, ease: "power3.out",
-  scrollTrigger: { trigger: ref.current, start: "top 95%", once: true },
-});
+
+      gsap.fromTo(
+        ".gcta-word",
+        { y: isMobile ? 20 : 80, opacity: 0 },
+        {
+          y: 0,
+          opacity: 1,
+          duration: isMobile ? 0.6 : 1,
+          stagger: isMobile ? 0.04 : 0.08,
+          ease: "power3.out",
+          scrollTrigger: {
+            trigger: ref.current,
+            start: "top 95%",
+            toggleActions: "play none none none",
+          },
+        }
+      );
+
+      gsap.fromTo(
+        ".gcta-sub",
+        { y: isMobile ? 10 : 30, opacity: 0 },
+        {
+          y: 0,
+          opacity: 1,
+          duration: 0.9,
+          delay: isMobile ? 0.2 : 0.5,
+          ease: "power3.out",
+          scrollTrigger: {
+            trigger: ref.current,
+            start: "top 95%",
+            toggleActions: "play none none none",
+          },
+        }
+      );
     }, ref);
+
     return () => ctx.revert();
   }, []);
 
@@ -562,7 +607,6 @@ export function Footer() {
             gap: 36px;
             padding-bottom: 48px;
           }
-          /* Brand spans full width */
           .footer-brand {
             grid-column: 1 / -1;
             display: block;
@@ -571,7 +615,6 @@ export function Footer() {
             max-width: 100%;
             font-size: 13px;
           }
-          /* Offices and Contact side by side */
           .footer-col:nth-child(4),
           .footer-col:nth-child(5) {
             grid-column: auto;
@@ -599,7 +642,6 @@ export function Footer() {
             grid-template-columns: 1fr;
             gap: 32px;
           }
-          /* All cols full width */
           .footer-brand,
           .footer-col {
             grid-column: 1 / -1;
@@ -607,7 +649,6 @@ export function Footer() {
           .footer-logo {
             font-size: 24px;
           }
-          /* Horizontal scrollable office list */
           .footer-col:nth-child(4) .footer-links {
             flex-direction: row;
             flex-wrap: wrap;
