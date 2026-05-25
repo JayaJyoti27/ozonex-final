@@ -189,19 +189,15 @@ const CURRENCIES = [
 export function SavingsCalculator() {
   const [employees, setEmployees] = useState(500);
   const [trips, setTrips] = useState(8);
-  // FIX #12: Currency selector state
   const [currencyIdx, setCurrencyIdx] = useState(0);
   const currency = CURRENCIES[currencyIdx];
 
   const saving = Math.round(employees * trips * currency.multiplier * 0.23);
   const hours = Math.round(employees * 0.8);
-
-  // FIX #4: removed "rupee" label, now uses selected currency
-  const fmtMoney = (n: number) =>
-    currency.symbol + " " + n.toLocaleString(currency.locale);
+  const fmtMoney = (n: number) => currency.symbol + " " + n.toLocaleString(currency.locale);
 
   return (
-    <section className="relative grid-overlay" style={{ background: "#1C1410", padding: "120px 24px", position: "relative" }}>
+    <section className="relative grid-overlay calc-outer">
       <svg
         className="absolute top-[-1px] left-0 w-full"
         height="60" viewBox="0 0 1440 60" preserveAspectRatio="none"
@@ -209,109 +205,199 @@ export function SavingsCalculator() {
       >
         <path d="M0,30 C120,5 240,55 360,25 C480,0 600,50 720,25 C840,5 960,45 1080,30 C1200,15 1320,40 1440,18 L1440,0 L0,0 Z" fill="#F5F0EA" />
       </svg>
+
       <div className="relative z-10 max-w-[800px] mx-auto text-center">
-        <h2 className="font-display" style={{
-          fontSize: "clamp(40px, 5vw, 60px)", color: "#fff", fontWeight: 300, lineHeight: 1.0,
-        }}>
+        <h2 className="font-display calc-h2">
           HOW MUCH COULD<br />YOUR COMPANY SAVE?
         </h2>
-        <p style={{
-          fontFamily: "Inter, sans-serif", fontSize: 16,
-          color: "rgba(255,255,255,0.65)", maxWidth: 480, margin: "24px auto 0",
-          lineHeight: 1.75,
-        }}>
+        <p className="calc-intro">
           Tell us about your travel programme. We will show you the numbers.
         </p>
 
-        <div style={{
-          maxWidth: 640, margin: "56px auto 0",
-          background: "rgba(255,255,255,0.04)",
-          border: "1px solid rgba(255,255,255,0.08)",
-          padding: 48, textAlign: "left",
-        }}>
-
-          {/* FIX #12: Currency selector */}
-          <div style={{ marginBottom: 32, display: "flex", alignItems: "center", gap: 12 }}>
-            <span style={{
-              fontFamily: "Inter, sans-serif", fontSize: 11,
-              color: "rgba(255,255,255,0.5)", textTransform: "uppercase", letterSpacing: "0.1em",
-            }}>Currency</span>
-            <div style={{ display: "flex", gap: 8 }}>
+        <div className="calc-card">
+          {/* Currency selector */}
+          <div className="calc-currency-row">
+            <span className="calc-currency-lbl">Currency</span>
+            <div className="calc-currency-btns">
               {CURRENCIES.map((c, i) => (
                 <button
                   key={c.label}
                   onClick={() => setCurrencyIdx(i)}
-                  style={{
-                    padding: "6px 14px",
-                    borderRadius: 20,
-                    border: "1px solid",
-                    borderColor: currencyIdx === i ? "#2563EB" : "rgba(255,255,255,0.15)",
-                    background: currencyIdx === i ? "#2563EB" : "transparent",
-                    color: currencyIdx === i ? "#fff" : "rgba(255,255,255,0.5)",
-                    fontFamily: "Inter, sans-serif", fontSize: 11,
-                    cursor: "pointer", transition: "all 0.2s ease",
-                    letterSpacing: "0.05em",
-                  }}
+                  className={`calc-cur-btn${currencyIdx === i ? " active" : ""}`}
                 >{c.label}</button>
               ))}
             </div>
           </div>
 
-          <Slider
-            label="Number of employees who travel"
-            value={employees} min={50} max={5000} step={50}
-            onChange={setEmployees}
-          />
-          <div style={{ height: 40 }} />
-          <Slider
-            label="Average trips per employee per year"
-            value={trips} min={2} max={24} step={1}
-            onChange={setTrips}
-          />
+          <Slider label="Number of employees who travel" value={employees} min={50} max={5000} step={50} onChange={setEmployees} />
+          <div className="calc-spacer" />
+          <Slider label="Average trips per employee per year" value={trips} min={2} max={24} step={1} onChange={setTrips} />
 
-          <div style={{ marginTop: 40, display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 12 }}>
-            <ResultBox
-              label="Estimated annual saving"
-              value={fmtMoney(saving)} valueColor="#2563EB"
-              sub="vs unmanaged travel spend"
-            />
-            <ResultBox
-              label="Policy compliance rate"
-              value="94%"
-              sub="average on Ozonex vs 41% without a platform"
-            />
-            <ResultBox
-              label="Hours saved in finance"
-              value={`${hours} hrs/mo`}
-              sub="on expense reconciliation"
-            />
+          {/* Result boxes */}
+          <div className="calc-results">
+            <ResultBox label="Estimated annual saving" value={fmtMoney(saving)} valueColor="#2563EB" sub="vs unmanaged travel spend" />
+            <ResultBox label="Policy compliance rate" value="94%" sub="average on Ozonex vs 41% without a platform" />
+            <ResultBox label="Hours saved in finance" value={`${hours} hrs/mo`} sub="on expense reconciliation" />
           </div>
 
-          <div style={{ textAlign: "center", marginTop: 36 }}>
-            <a href="/contact" style={{
-              display: "inline-block",
-              background: "#2563EB", color: "#fff",
-              borderRadius: 50, padding: "14px 40px",
-              fontFamily: "Inter, sans-serif", fontSize: 12,
-              letterSpacing: "0.12em", textTransform: "uppercase",
-              fontWeight: 500, textDecoration: "none",
-              transition: "background 0.25s ease",
-            }}
-            onMouseEnter={(e) => (e.currentTarget.style.background = "#1D4ED8")}
-            onMouseLeave={(e) => (e.currentTarget.style.background = "#2563EB")}
+          <div className="calc-cta-wrap">
+            <a
+              href="/pricing#enquire"
+              className="calc-cta-btn"
+              onMouseEnter={(e) => (e.currentTarget.style.background = "#1D4ED8")}
+              onMouseLeave={(e) => (e.currentTarget.style.background = "#2563EB")}
             >Book a Free Demo</a>
-            <div style={{
-              fontFamily: "Inter, sans-serif", fontSize: 12,
-              color: "rgba(255,255,255,0.4)", marginTop: 14,
-            }}>
-              No commitment. 30 minutes. Built around your numbers.
-            </div>
+            <div className="calc-disclaimer">No commitment. 30 minutes. Built around your numbers.</div>
           </div>
         </div>
       </div>
+
+      <style>{`
+        /* ── CALCULATOR OUTER ── */
+        .calc-outer {
+          background: #1C1410;
+          padding: 120px 24px 100px;
+          position: relative;
+        }
+        .calc-h2 {
+          font-size: clamp(36px, 5vw, 60px);
+          color: #fff;
+          font-weight: 300;
+          line-height: 1.0;
+        }
+        .calc-intro {
+          font-family: Poppins, sans-serif;
+          font-size: 16px;
+          color: rgba(255,255,255,0.65);
+          max-width: 480px;
+          margin: 24px auto 0;
+          line-height: 1.75;
+        }
+
+        /* ── CARD ── */
+        .calc-card {
+          max-width: 640px;
+          margin: 56px auto 0;
+          background: rgba(255,255,255,0.04);
+          border: 1px solid rgba(255,255,255,0.08);
+          padding: 48px;
+          text-align: left;
+        }
+        .calc-spacer { height: 40px; }
+
+        /* ── CURRENCY ── */
+        .calc-currency-row {
+          display: flex;
+          align-items: center;
+          gap: 12px;
+          flex-wrap: wrap;
+          margin-bottom: 32px;
+        }
+        .calc-currency-lbl {
+          font-family: Poppins, sans-serif;
+          font-size: 11px;
+          color: rgba(255,255,255,0.5);
+          text-transform: uppercase;
+          letter-spacing: 0.1em;
+        }
+        .calc-currency-btns { display: flex; gap: 8px; flex-wrap: wrap; }
+        .calc-cur-btn {
+          padding: 6px 14px;
+          border-radius: 20px;
+          border: 1px solid rgba(255,255,255,0.15);
+          background: transparent;
+          color: rgba(255,255,255,0.5);
+          font-family: Poppins, sans-serif;
+          font-size: 11px;
+          cursor: pointer;
+          transition: all 0.2s ease;
+          letter-spacing: 0.05em;
+        }
+        .calc-cur-btn.active {
+          border-color: #2563EB;
+          background: #2563EB;
+          color: #fff;
+        }
+
+        /* ── RESULTS ── */
+        .calc-results {
+          margin-top: 40px;
+          display: grid;
+          grid-template-columns: repeat(3, 1fr);
+          gap: 12px;
+        }
+
+        /* ── CTA ── */
+        .calc-cta-wrap { text-align: center; margin-top: 36px; }
+        .calc-cta-btn {
+          display: inline-block;
+          background: #2563EB;
+          color: #fff;
+          border-radius: 50px;
+          padding: 14px 40px;
+          font-family: Poppins, sans-serif;
+          font-size: 12px;
+          letter-spacing: 0.12em;
+          text-transform: uppercase;
+          font-weight: 500;
+          text-decoration: none;
+          transition: background 0.25s ease;
+        }
+        .calc-disclaimer {
+          font-family: Poppins, sans-serif;
+          font-size: 12px;
+          color: rgba(255,255,255,0.4);
+          margin-top: 14px;
+        }
+
+        /* ── TABLET ── */
+        @media (max-width: 1024px) {
+          .calc-card { padding: 36px 28px; }
+        }
+
+        /* ── MOBILE ── */
+        @media (max-width: 768px) {
+          .calc-outer {
+            padding: 80px 16px 80px; /* bottom padding fixes overlap */
+          }
+          .calc-h2 { font-size: clamp(28px, 8vw, 44px); }
+          .calc-intro { font-size: 14px; }
+          .calc-card {
+            padding: 24px 16px;
+            margin-top: 32px;
+          }
+          .calc-spacer { height: 28px; }
+          .calc-currency-row { gap: 8px; margin-bottom: 24px; }
+          .calc-cur-btn { font-size: 10px; padding: 5px 10px; }
+
+          /* Stack results vertically */
+          .calc-results {
+            grid-template-columns: 1fr;
+            gap: 8px;
+            margin-top: 28px;
+          }
+
+          .calc-cta-btn {
+            display: block;
+            max-width: 260px;
+            margin: 0 auto;
+            text-align: center;
+            padding: 13px 20px;
+            font-size: 11px;
+          }
+          .calc-disclaimer { font-size: 11px; }
+        }
+
+        /* ── SMALL MOBILE ── */
+        @media (max-width: 480px) {
+          .calc-outer { padding: 60px 12px 80px; }
+          .calc-card { padding: 20px 14px; }
+        }
+      `}</style>
     </section>
   );
 }
+
 
 function Slider({ label, value, min, max, step, onChange }: {
   label: string; value: number; min: number; max: number; step: number;
