@@ -62,41 +62,85 @@ function DesktopHorizontalScroll() {
   const wrap = useRef<HTMLDivElement>(null);
   const track = useRef<HTMLDivElement>(null);
   const line = useRef<HTMLDivElement>(null);
+  const ctxRef = useRef<gsap.Context | null>(null);
 
   useEffect(() => {
-    if (!wrap.current || !track.current) return;
-    const ctx = gsap.context(() => {
-      const total = track.current!.scrollWidth - window.innerWidth;
-      const tween = gsap.to(track.current, {
-        x: -total, ease: "none",
-        scrollTrigger: {
-          trigger: wrap.current,
-          start: "top top",
-          end: () => `+=${total}`,
-          pin: true, scrub: 1,
-          invalidateOnRefresh: true,
-          onUpdate: (self) => {
-            if (line.current) line.current.style.width = self.progress * 100 + "%";
-          },
-        },
-      });
+    // Small delay so React finishes painting before GSAP touches the DOM
+    const timer = setTimeout(() => {
+      if (!wrap.current || !track.current) return;
 
-      gsap.utils.toArray<HTMLElement>(".hp-panel").forEach((p) => {
-        gsap.fromTo(p.querySelector(".hp-title"), { x: 60, opacity: 0 }, {
-          x: 0, opacity: 1, duration: 1, ease: "power3.out",
-          scrollTrigger: { trigger: p, containerAnimation: tween, start: "left 70%" },
+      // Kill any leftover ScrollTriggers before creating new ones
+      ScrollTrigger.getAll().forEach((t) => t.kill());
+
+      ctxRef.current = gsap.context(() => {
+        const total = track.current!.scrollWidth - window.innerWidth;
+
+        const tween = gsap.to(track.current, {
+          x: -total,
+          ease: "none",
+          scrollTrigger: {
+            trigger: wrap.current,
+            start: "top top",
+            end: () => `+=${total}`,
+            pin: true,
+            scrub: 1,
+            invalidateOnRefresh: true,
+            onUpdate: (self) => {
+              if (line.current) line.current.style.width = self.progress * 100 + "%";
+            },
+          },
         });
-        gsap.fromTo(p.querySelectorAll(".hp-item"), { y: 20, opacity: 0 }, {
-          y: 0, opacity: 1, duration: 0.7, ease: "power2.out", stagger: 0.1,
-          scrollTrigger: { trigger: p, containerAnimation: tween, start: "left 60%" },
+
+        gsap.utils.toArray<HTMLElement>(".hp-panel").forEach((p) => {
+          const titleEl = p.querySelector(".hp-title");
+          const itemEls = p.querySelectorAll(".hp-item");
+          const imgEl = p.querySelector(".hp-img");
+
+          if (titleEl) {
+            gsap.fromTo(
+              titleEl,
+              { x: 60, opacity: 0 },
+              {
+                x: 0, opacity: 1, duration: 1, ease: "power3.out",
+                scrollTrigger: { trigger: p, containerAnimation: tween, start: "left 70%" },
+              }
+            );
+          }
+
+          if (itemEls.length) {
+            gsap.fromTo(
+              itemEls,
+              { y: 20, opacity: 0 },
+              {
+                y: 0, opacity: 1, duration: 0.7, ease: "power2.out", stagger: 0.1,
+                scrollTrigger: { trigger: p, containerAnimation: tween, start: "left 60%" },
+              }
+            );
+          }
+
+          if (imgEl) {
+            gsap.fromTo(
+              imgEl,
+              { clipPath: "inset(0 100% 0 0)" },
+              {
+                clipPath: "inset(0 0% 0 0)", duration: 1.2, ease: "power3.out",
+                scrollTrigger: { trigger: p, containerAnimation: tween, start: "left 70%" },
+              }
+            );
+          }
         });
-        gsap.fromTo(p.querySelector(".hp-img"), { clipPath: "inset(0 100% 0 0)" }, {
-          clipPath: "inset(0 0% 0 0)", duration: 1.2, ease: "power3.out",
-          scrollTrigger: { trigger: p, containerAnimation: tween, start: "left 70%" },
-        });
-      });
-    }, wrap);
-    return () => ctx.revert();
+      }, wrap);
+    }, 100);
+
+    return () => {
+      clearTimeout(timer);
+      // Revert context first, then kill all triggers
+      if (ctxRef.current) {
+        ctxRef.current.revert();
+        ctxRef.current = null;
+      }
+      ScrollTrigger.getAll().forEach((t) => t.kill());
+    };
   }, []);
 
   return (
@@ -140,7 +184,6 @@ function MobileFeatureStack() {
 
   return (
     <section className="mobile-stack-section">
-      {/* Header */}
       <div className="mobile-stack-header">
         <div className="mobile-stack-eyebrow">Platform Features</div>
         <h2 className="font-display mobile-stack-heading">
@@ -148,7 +191,6 @@ function MobileFeatureStack() {
         </h2>
       </div>
 
-      {/* Tab nav */}
       <div className="mobile-stack-tabs">
         {panels.map((p, i) => (
           <button
@@ -162,7 +204,6 @@ function MobileFeatureStack() {
         ))}
       </div>
 
-      {/* Active panel */}
       <div className="mobile-stack-panel">
         <img
           src={panels[active].img}
@@ -184,118 +225,26 @@ function MobileFeatureStack() {
       </div>
 
       <style>{`
-        .mobile-stack-section {
-          background: var(--cream);
-          padding: 64px 0 0;
-        }
-        .mobile-stack-header {
-          padding: 0 20px 32px;
-        }
-        .mobile-stack-eyebrow {
-          font-family: Poppins, sans-serif;
-          font-size: 11px;
-          letter-spacing: 0.18em;
-          text-transform: uppercase;
-          color: #2563EB;
-          font-weight: 500;
-          margin-bottom: 12px;
-        }
-        .mobile-stack-heading {
-          font-size: clamp(32px, 8vw, 48px);
-          color: var(--ink);
-          font-weight: 300;
-          line-height: 1.0;
-        }
-
-        /* Horizontal scrollable tab row */
-        .mobile-stack-tabs {
-          display: flex;
-          overflow-x: auto;
-          gap: 0;
-          border-top: 1px solid rgba(37,99,235,0.15);
-          border-bottom: 1px solid rgba(37,99,235,0.15);
-          -webkit-overflow-scrolling: touch;
-          scrollbar-width: none;
-        }
+        .mobile-stack-section { background: var(--cream); padding: 64px 0 0; }
+        .mobile-stack-header { padding: 0 20px 32px; }
+        .mobile-stack-eyebrow { font-family: Poppins, sans-serif; font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; color: #2563EB; font-weight: 500; margin-bottom: 12px; }
+        .mobile-stack-heading { font-size: clamp(32px, 8vw, 48px); color: var(--ink); font-weight: 300; line-height: 1.0; }
+        .mobile-stack-tabs { display: flex; overflow-x: auto; gap: 0; border-top: 1px solid rgba(37,99,235,0.15); border-bottom: 1px solid rgba(37,99,235,0.15); -webkit-overflow-scrolling: touch; scrollbar-width: none; }
         .mobile-stack-tabs::-webkit-scrollbar { display: none; }
-
-        .mobile-stack-tab {
-          flex-shrink: 0;
-          display: flex;
-          flex-direction: column;
-          align-items: center;
-          gap: 4px;
-          padding: 14px 20px;
-          border: none;
-          background: transparent;
-          border-bottom: 2px solid transparent;
-          cursor: pointer;
-          transition: all 0.2s;
-        }
-        .mobile-stack-tab.active {
-          border-bottom-color: #2563EB;
-          background: rgba(37,99,235,0.05);
-        }
-        .mobile-tab-num {
-          font-family: Poppins, sans-serif;
-          font-size: 9px;
-          color: rgba(28,20,16,0.4);
-          letter-spacing: 0.1em;
-        }
-        .mobile-tab-label {
-          font-family: Poppins, sans-serif;
-          font-size: 11px;
-          font-weight: 500;
-          color: var(--ink);
-          white-space: nowrap;
-        }
+        .mobile-stack-tab { flex-shrink: 0; display: flex; flex-direction: column; align-items: center; gap: 4px; padding: 14px 20px; border: none; background: transparent; border-bottom: 2px solid transparent; cursor: pointer; transition: all 0.2s; }
+        .mobile-stack-tab.active { border-bottom-color: #2563EB; background: rgba(37,99,235,0.05); }
+        .mobile-tab-num { font-family: Poppins, sans-serif; font-size: 9px; color: rgba(28,20,16,0.4); letter-spacing: 0.1em; }
+        .mobile-tab-label { font-family: Poppins, sans-serif; font-size: 11px; font-weight: 500; color: var(--ink); white-space: nowrap; }
         .mobile-stack-tab.active .mobile-tab-label { color: #2563EB; }
         .mobile-stack-tab.active .mobile-tab-num { color: #2563EB; }
-
-        /* Panel */
-        .mobile-stack-panel {
-          padding: 0;
-        }
-        .mobile-stack-img {
-          width: 100%;
-          height: 220px;
-          object-fit: cover;
-          display: block;
-        }
-        .mobile-stack-content {
-          padding: 28px 20px 48px;
-        }
-        .mobile-stack-title {
-          font-size: clamp(28px, 7vw, 40px);
-          color: var(--ink);
-          font-weight: 300;
-          line-height: 1.05;
-          margin-bottom: 24px;
-        }
-        .mobile-stack-items {
-          display: grid;
-          grid-template-columns: 1fr 1fr;
-          gap: 20px;
-        }
-        .mobile-stack-item {
-          border-top: 1px solid rgba(37,99,235,0.2);
-          padding-top: 14px;
-        }
-        .mobile-item-label {
-          font-family: Poppins, sans-serif;
-          font-size: 13px;
-          font-weight: 600;
-          color: var(--ink);
-          line-height: 1.3;
-        }
-        .mobile-item-desc {
-          font-family: Poppins, sans-serif;
-          font-size: 12px;
-          color: var(--muted-warm);
-          line-height: 1.6;
-          margin-top: 6px;
-        }
-
+        .mobile-stack-panel { padding: 0; }
+        .mobile-stack-img { width: 100%; height: 220px; object-fit: cover; display: block; }
+        .mobile-stack-content { padding: 28px 20px 48px; }
+        .mobile-stack-title { font-size: clamp(28px, 7vw, 40px); color: var(--ink); font-weight: 300; line-height: 1.05; margin-bottom: 24px; }
+        .mobile-stack-items { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+        .mobile-stack-item { border-top: 1px solid rgba(37,99,235,0.2); padding-top: 14px; }
+        .mobile-item-label { font-family: Poppins, sans-serif; font-size: 13px; font-weight: 600; color: var(--ink); line-height: 1.3; }
+        .mobile-item-desc { font-family: Poppins, sans-serif; font-size: 12px; color: var(--muted-warm); line-height: 1.6; margin-top: 6px; }
         @media (max-width: 380px) {
           .mobile-stack-items { grid-template-columns: 1fr; }
           .mobile-stack-img { height: 180px; }
@@ -309,7 +258,7 @@ function MobileFeatureStack() {
 
 /* ─── EXPORTED COMPONENT — switches based on screen size ─── */
 export function HorizontalScroll() {
-  const [isMobile, setIsMobile] = useState(false);
+  const [isMobile, setIsMobile] = useState<boolean | null>(null);
 
   useEffect(() => {
     const check = () => setIsMobile(window.innerWidth < 768);
@@ -317,6 +266,9 @@ export function HorizontalScroll() {
     window.addEventListener("resize", check);
     return () => window.removeEventListener("resize", check);
   }, []);
+
+  // Don't render until we know screen size — prevents GSAP running on wrong layout
+  if (isMobile === null) return null;
 
   return isMobile ? <MobileFeatureStack /> : <DesktopHorizontalScroll />;
 }
