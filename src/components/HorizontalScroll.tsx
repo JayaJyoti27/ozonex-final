@@ -57,7 +57,7 @@ const panels = [
   },
 ];
 
-/* ─── DESKTOP: Horizontal pinned scroll ─── */
+/* ─── DESKTOP ─── */
 function DesktopHorizontalScroll() {
   const wrap = useRef<HTMLDivElement>(null);
   const track = useRef<HTMLDivElement>(null);
@@ -65,76 +65,56 @@ function DesktopHorizontalScroll() {
   const ctxRef = useRef<gsap.Context | null>(null);
 
   useEffect(() => {
-    // Small delay so React finishes painting before GSAP touches the DOM
-    const timer = setTimeout(() => {
-      if (!wrap.current || !track.current) return;
+    if (!wrap.current || !track.current) return;
 
-      // Kill any leftover ScrollTriggers before creating new ones
-      ScrollTrigger.getAll().forEach((t) => t.kill());
+    ScrollTrigger.getAll().forEach((t) => t.kill());
 
-      ctxRef.current = gsap.context(() => {
-        const total = track.current!.scrollWidth - window.innerWidth;
+    ctxRef.current = gsap.context(() => {
+      const total = track.current!.scrollWidth - window.innerWidth;
 
-        const tween = gsap.to(track.current, {
-          x: -total,
-          ease: "none",
-          scrollTrigger: {
-            trigger: wrap.current,
-            start: "top top",
-            end: () => `+=${total}`,
-            pin: true,
-            scrub: 1,
-            invalidateOnRefresh: true,
-            onUpdate: (self) => {
-              if (line.current) line.current.style.width = self.progress * 100 + "%";
-            },
+      const tween = gsap.to(track.current, {
+        x: -total,
+        ease: "none",
+        scrollTrigger: {
+          trigger: wrap.current,
+          start: "top top",
+          end: () => `+=${total}`,
+          pin: true,
+          scrub: 1,
+          invalidateOnRefresh: true,
+          onUpdate: (self) => {
+            if (line.current) line.current.style.width = self.progress * 100 + "%";
           },
-        });
+        },
+      });
 
-        gsap.utils.toArray<HTMLElement>(".hp-panel").forEach((p) => {
-          const titleEl = p.querySelector(".hp-title");
-          const itemEls = p.querySelectorAll(".hp-item");
-          const imgEl = p.querySelector(".hp-img");
+      gsap.utils.toArray<HTMLElement>(".hp-panel").forEach((p) => {
+        const titleEl = p.querySelector(".hp-title");
+        const itemEls = p.querySelectorAll(".hp-item");
+        const imgEl = p.querySelector(".hp-img");
 
-          if (titleEl) {
-            gsap.fromTo(
-              titleEl,
-              { x: 60, opacity: 0 },
-              {
-                x: 0, opacity: 1, duration: 1, ease: "power3.out",
-                scrollTrigger: { trigger: p, containerAnimation: tween, start: "left 70%" },
-              }
-            );
-          }
-
-          if (itemEls.length) {
-            gsap.fromTo(
-              itemEls,
-              { y: 20, opacity: 0 },
-              {
-                y: 0, opacity: 1, duration: 0.7, ease: "power2.out", stagger: 0.1,
-                scrollTrigger: { trigger: p, containerAnimation: tween, start: "left 60%" },
-              }
-            );
-          }
-
-          if (imgEl) {
-            gsap.fromTo(
-              imgEl,
-              { clipPath: "inset(0 100% 0 0)" },
-              {
-                clipPath: "inset(0 0% 0 0)", duration: 1.2, ease: "power3.out",
-                scrollTrigger: { trigger: p, containerAnimation: tween, start: "left 70%" },
-              }
-            );
-          }
-        });
-      }, wrap);
-    }, 100);
+        if (titleEl) {
+          gsap.fromTo(titleEl, { x: 60, opacity: 0 }, {
+            x: 0, opacity: 1, duration: 1, ease: "power3.out",
+            scrollTrigger: { trigger: p, containerAnimation: tween, start: "left 70%" },
+          });
+        }
+        if (itemEls.length) {
+          gsap.fromTo(itemEls, { y: 20, opacity: 0 }, {
+            y: 0, opacity: 1, duration: 0.7, ease: "power2.out", stagger: 0.1,
+            scrollTrigger: { trigger: p, containerAnimation: tween, start: "left 60%" },
+          });
+        }
+        if (imgEl) {
+          gsap.fromTo(imgEl, { clipPath: "inset(0 100% 0 0)" }, {
+            clipPath: "inset(0 0% 0 0)", duration: 1.2, ease: "power3.out",
+            scrollTrigger: { trigger: p, containerAnimation: tween, start: "left 70%" },
+          });
+        }
+      });
+    }, wrap);
 
     return () => {
-      clearTimeout(timer);
-      // Revert context first, then kill all triggers
       if (ctxRef.current) {
         ctxRef.current.revert();
         ctxRef.current = null;
@@ -178,7 +158,7 @@ function DesktopHorizontalScroll() {
   );
 }
 
-/* ─── MOBILE: Vertical accordion/card stack ─── */
+/* ─── MOBILE ─── */
 function MobileFeatureStack() {
   const [active, setActive] = useState(0);
 
@@ -205,12 +185,7 @@ function MobileFeatureStack() {
       </div>
 
       <div className="mobile-stack-panel">
-        <img
-          src={panels[active].img}
-          alt={panels[active].title}
-          className="mobile-stack-img"
-          loading="lazy"
-        />
+        <img src={panels[active].img} alt={panels[active].title} className="mobile-stack-img" loading="lazy" />
         <div className="mobile-stack-content">
           <h3 className="font-display mobile-stack-title">{panels[active].title}</h3>
           <div className="mobile-stack-items">
@@ -256,19 +231,15 @@ function MobileFeatureStack() {
   );
 }
 
-/* ─── EXPORTED COMPONENT — switches based on screen size ─── */
+/* ─── EXPORT ─── */
 export function HorizontalScroll() {
-  const [isMobile, setIsMobile] = useState<boolean | null>(null);
+  const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
 
   useEffect(() => {
     const check = () => setIsMobile(window.innerWidth < 768);
-    check();
     window.addEventListener("resize", check);
     return () => window.removeEventListener("resize", check);
   }, []);
-
-  // Don't render until we know screen size — prevents GSAP running on wrong layout
-  if (isMobile === null) return null;
 
   return isMobile ? <MobileFeatureStack /> : <DesktopHorizontalScroll />;
 }
