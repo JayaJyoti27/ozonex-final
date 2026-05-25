@@ -24,35 +24,47 @@ function Index() {
       duration: 1.2,
       easing: (t: number) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
     });
-    function raf(time: number) {
-      lenis.raf(time);
-      requestAnimationFrame(raf);
-    }
-    requestAnimationFrame(raf);
-    lenis.on("scroll", ScrollTrigger.update);
-    gsap.ticker.add((time) => lenis.raf(time * 1000));
+
+    gsap.ticker.add((time) => {
+      lenis.raf(time * 1000);
+    });
+
     gsap.ticker.lagSmoothing(0);
 
-    // Generic .reveal animation
+    lenis.on("scroll", () => ScrollTrigger.update());
+
+    const timer = setTimeout(() => {
+      ScrollTrigger.refresh();
+    }, 300);
+
     const reveals = gsap.utils.toArray<HTMLElement>(".reveal");
     reveals.forEach((el) => {
       gsap.fromTo(
         el,
         { y: 50, opacity: 0 },
         {
-          y: 0, opacity: 1, duration: 1, ease: "power3.out",
-          scrollTrigger: { trigger: el, start: "top 82%", toggleActions: "play none none none" },
+          y: 0,
+          opacity: 1,
+          duration: 1,
+          ease: "power3.out",
+          scrollTrigger: {
+            trigger: el,
+            start: "top 82%",
+            toggleActions: "play none none none",
+          },
         }
       );
     });
 
-    return () => {
+    return () => {                                              // ✅ cleanup opens
+      clearTimeout(timer);
       lenis.destroy();
+      gsap.ticker.remove((time) => lenis.raf(time * 1000));
       ScrollTrigger.getAll().forEach((s) => s.kill());
-    };
-  }, []);
+    };                                                          // ✅ cleanup closes
+  }, []);                                                       // ✅ useEffect closes
 
-  return (
+  return (                                                      // ✅ JSX return is here, OUTSIDE useEffect
     <main className="relative">
       <Nav />
       <ScrollLineV />
@@ -64,7 +76,7 @@ function Index() {
       <Stats />
       <SavingsCalculator />
       <HorizontalScroll />
-       <WhoSection />
+      <WhoSection />
       <PricingTeaser />
       <GlobalCTA />
       <Footer />
