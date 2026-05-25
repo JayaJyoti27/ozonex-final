@@ -148,46 +148,7 @@ export function WhoSection() {
           }
         }
 
-        /* ── MOBILE ── */
-        @media (max-width: 768px) {
-          .who-section {
-            padding: 80px 20px;
-          }
-          .who-heading {
-            font-size: clamp(32px, 8vw, 48px);
-            line-height: 1.0;
-          }
-          .who-grid {
-            grid-template-columns: 1fr;
-            gap: 3px;
-            margin-top: 40px;
-          }
-          .who-card-wrap {
-            aspect-ratio: 16/9;
-          }
-          .who-card-content {
-            padding: 20px;
-          }
-          .who-card-label {
-            font-size: 10px;
-          }
-          .who-card-desc {
-            font-size: 13px;
-          }
-          .who-cta-row {
-            margin-top: 32px;
-          }
-        }
-
-        /* ── SMALL MOBILE ── */
-        @media (max-width: 480px) {
-          .who-section {
-            padding: 64px 16px;
-          }
-          .who-card-wrap {
-            aspect-ratio: 4/3;
-          }
-        }
+        
       `}</style>
     </section>
   );
@@ -323,47 +284,7 @@ export function GlobalCTA() {
           text-decoration: none;
         }
 
-        /* ── MOBILE ── */
-        @media (max-width: 768px) {
-          .gcta-section {
-            min-height: 60vh;
-          }
-          .gcta-inner {
-            padding: 60px 0;
-          }
-          .gcta-heading {
-            font-size: clamp(40px, 10vw, 60px);
-            line-height: 0.95;
-          }
-          .gcta-heading .mr-4 {
-            margin-right: 10px;
-          }
-          .gcta-body {
-            font-size: 15px;
-            max-width: 100%;
-            margin-top: 24px;
-          }
-          .gcta-btn {
-            padding: 14px 36px;
-            margin-top: 28px;
-            font-size: 11px;
-            display: block;
-            max-width: 280px;
-            margin-left: auto;
-            margin-right: auto;
-            text-align: center;
-          }
-        }
-
-        /* ── SMALL MOBILE ── */
-        @media (max-width: 480px) {
-          .gcta-heading {
-            font-size: clamp(32px, 11vw, 48px);
-          }
-          .gcta-body {
-            font-size: 14px;
-          }
-        }
+       
       `}</style>
     </section>
   );
