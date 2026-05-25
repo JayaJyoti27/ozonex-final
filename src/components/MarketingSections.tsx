@@ -185,6 +185,58 @@ const CURRENCIES = [
   { label: "USD ($)", symbol: "$", locale: "en-US", multiplier: 50 },
   { label: "AED (د.إ)", symbol: "د.إ", locale: "ar-AE", multiplier: 184 },
 ];
+function Slider({ label, value, min, max, step, onChange }: {
+  label: string; value: number; min: number; max: number; step: number;
+  onChange: (v: number) => void;
+}) {
+  return (
+    <div>
+      <div style={{
+        fontFamily: "Inter, sans-serif", fontSize: 13,
+        color: "rgba(255,255,255,0.6)", textTransform: "uppercase",
+        letterSpacing: "0.1em", marginBottom: 12,
+      }}>{label}</div>
+      <div className="font-display" style={{ fontSize: 48, color: "#fff", fontWeight: 300, lineHeight: 1 }}>
+        {value.toLocaleString("en-IN")}
+      </div>
+      <input type="range" min={min} max={max} step={step} value={value}
+        onChange={(e) => onChange(Number(e.target.value))}
+        className="range-blue"
+        style={{
+          marginTop: 18,
+          background: `linear-gradient(to right, #2563EB 0%, #2563EB ${((value-min)/(max-min))*100}%, rgba(255,255,255,0.1) ${((value-min)/(max-min))*100}%, rgba(255,255,255,0.1) 100%)`,
+          borderRadius: 2, height: 4,
+        }}
+      />
+    </div>
+  );
+}
+
+function ResultBox({ label, value, valueColor = "#fff", sub }: {
+  label: string; value: string; valueColor?: string; sub: string;
+}) {
+  return (
+    <div style={{
+      padding: 20,
+      border: "1px solid rgba(37,99,235,0.2)",
+      background: "rgba(37,99,235,0.06)",
+    }}>
+      <div style={{
+        fontFamily: "Inter, sans-serif", fontSize: 10,
+        color: "rgba(255,255,255,0.5)", textTransform: "uppercase",
+        letterSpacing: "0.1em",
+      }}>{label}</div>
+      <div className="font-display" style={{
+        fontSize: 28, color: valueColor, fontWeight: 300,
+        marginTop: 10, lineHeight: 1,
+      }}>{value}</div>
+      <div style={{
+        fontFamily: "Inter, sans-serif", fontSize: 11,
+        color: "rgba(255,255,255,0.4)", marginTop: 10, lineHeight: 1.5,
+      }}>{sub}</div>
+    </div>
+  );
+}
 
 export function SavingsCalculator() {
   const [employees, setEmployees] = useState(500);
@@ -399,58 +451,7 @@ export function SavingsCalculator() {
 }
 
 
-function Slider({ label, value, min, max, step, onChange }: {
-  label: string; value: number; min: number; max: number; step: number;
-  onChange: (v: number) => void;
-}) {
-  return (
-    <div>
-      <div style={{
-        fontFamily: "Inter, sans-serif", fontSize: 13,
-        color: "rgba(255,255,255,0.6)", textTransform: "uppercase",
-        letterSpacing: "0.1em", marginBottom: 12,
-      }}>{label}</div>
-      <div className="font-display" style={{ fontSize: 48, color: "#fff", fontWeight: 300, lineHeight: 1 }}>
-        {value.toLocaleString("en-IN")}
-      </div>
-      <input type="range" min={min} max={max} step={step} value={value}
-        onChange={(e) => onChange(Number(e.target.value))}
-        className="range-blue"
-        style={{
-          marginTop: 18,
-          background: `linear-gradient(to right, #2563EB 0%, #2563EB ${((value-min)/(max-min))*100}%, rgba(255,255,255,0.1) ${((value-min)/(max-min))*100}%, rgba(255,255,255,0.1) 100%)`,
-          borderRadius: 2, height: 4,
-        }}
-      />
-    </div>
-  );
-}
 
-function ResultBox({ label, value, valueColor = "#fff", sub }: {
-  label: string; value: string; valueColor?: string; sub: string;
-}) {
-  return (
-    <div style={{
-      padding: 20,
-      border: "1px solid rgba(37,99,235,0.2)",
-      background: "rgba(37,99,235,0.06)",
-    }}>
-      <div style={{
-        fontFamily: "Inter, sans-serif", fontSize: 10,
-        color: "rgba(255,255,255,0.5)", textTransform: "uppercase",
-        letterSpacing: "0.1em",
-      }}>{label}</div>
-      <div className="font-display" style={{
-        fontSize: 28, color: valueColor, fontWeight: 300,
-        marginTop: 10, lineHeight: 1,
-      }}>{value}</div>
-      <div style={{
-        fontFamily: "Inter, sans-serif", fontSize: 11,
-        color: "rgba(255,255,255,0.4)", marginTop: 10, lineHeight: 1.5,
-      }}>{sub}</div>
-    </div>
-  );
-}
 
 /* ============ PRICING TEASER — FIX #9: Remove "See Pricing Plans" button ============ */
 export function PricingTeaser() {
