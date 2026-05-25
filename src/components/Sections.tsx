@@ -19,7 +19,7 @@ export function WhoSection() {
 const ctx = gsap.context(() => {
   gsap.fromTo(".who-card", { y: 60, opacity: 1 }, {
     y: 0, opacity: 1, duration: 0.9, stagger: 0.15, ease: "power3.out",
-    scrollTrigger: { trigger: ".who-cards", start: "top 95%", once: true },
+   scrollTrigger: { trigger: sectionRef.current, start: "top 95%", once: true },
   });
 }, sectionRef);
 return () => ctx.revert();
