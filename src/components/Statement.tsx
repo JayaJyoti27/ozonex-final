@@ -14,14 +14,14 @@ export function Statement() {
 
     const ctx = gsap.context(() => {
       // Simplified animations on mobile
-      gsap.fromTo(".st-h", { x: isMobile ? 0 : -80, opacity: 0 }, {
-        x: 0, opacity: 1, duration: isMobile ? 0.7 : 1.1, ease: "power3.out",
-        scrollTrigger: { trigger: ref.current, start: "top 70%" },
-      });
-      gsap.fromTo(".st-p", { y: isMobile ? 16 : 30, opacity: 0 }, {
-        y: 0, opacity: 1, duration: 0.9, ease: "power3.out", stagger: 0.12,
-        scrollTrigger: { trigger: ref.current, start: "top 70%" },
-      });
+     gsap.fromTo(".st-h", { x: isMobile ? 0 : -80, opacity: 1 }, {
+  x: 0, opacity: 1, duration: isMobile ? 0.7 : 1.1, ease: "power3.out",
+  scrollTrigger: { trigger: ref.current, start: "top 95%", once: true },
+});
+gsap.fromTo(".st-p", { y: isMobile ? 16 : 30, opacity: 1 }, {
+  y: 0, opacity: 1, duration: 0.9, ease: "power3.out", stagger: 0.12,
+  scrollTrigger: { trigger: ref.current, start: "top 95%", once: true },
+});
       // Parallax bg only on desktop
       if (!isMobile) {
         gsap.to(".st-bg", {
