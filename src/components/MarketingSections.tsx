@@ -51,17 +51,35 @@ const VALUE_PROPS = [
 
 export function ValueProps() {
   const ref = useRef<HTMLDivElement>(null);
+
   useEffect(() => {
     if (!ref.current) return;
     const isMobile = window.innerWidth < 768;
     if (isMobile) return;
+
+    const elements = ref.current.querySelectorAll(".vp-col");
+
     const ctx = gsap.context(() => {
-      gsap.fromTo(".vp-col", { y: 30, opacity: 0 }, {
-        y: 0, opacity: 1, duration: 0.8, ease: "power3.out", stagger: 0.1,
-        scrollTrigger: { trigger: ref.current, start: "top 78%" },
-      });
+      gsap.fromTo(
+        elements,
+        { y: 30, opacity: 0 },
+        {
+          y: 0, opacity: 1, duration: 0.8, ease: "power3.out", stagger: 0.1,
+          scrollTrigger: {
+            trigger: ref.current,
+            start: "top 78%",
+            once: true,
+          },
+        }
+      );
     }, ref);
-    return () => ctx.revert();
+
+    return () => {
+      ctx.revert();
+      ScrollTrigger.getAll()
+        .filter((t) => t.vars.trigger === ref.current)
+        .forEach((t) => t.kill());
+    };
   }, []);
 
   return (
@@ -114,15 +132,48 @@ const WITH = [
 
 export function Comparison() {
   const ref = useRef<HTMLDivElement>(null);
+
   useEffect(() => {
     if (!ref.current) return;
     const isMobile = window.innerWidth < 768;
     if (isMobile) return;
+
+    const leftEl = ref.current.querySelector(".cmp-left");
+    const rightEl = ref.current.querySelector(".cmp-right");
+
     const ctx = gsap.context(() => {
-      gsap.fromTo(".cmp-left",  { x: -40, opacity: 0 }, { x: 0, opacity: 1, duration: 0.8, ease: "power3.out", scrollTrigger: { trigger: ref.current, start: "top 78%" } });
-      gsap.fromTo(".cmp-right", { x:  40, opacity: 0 }, { x: 0, opacity: 1, duration: 0.8, ease: "power3.out", scrollTrigger: { trigger: ref.current, start: "top 78%" } });
+      gsap.fromTo(
+        leftEl,
+        { x: -40, opacity: 0 },
+        {
+          x: 0, opacity: 1, duration: 0.8, ease: "power3.out",
+          scrollTrigger: {
+            trigger: ref.current,
+            start: "top 78%",
+            once: true,
+          },
+        }
+      );
+      gsap.fromTo(
+        rightEl,
+        { x: 40, opacity: 0 },
+        {
+          x: 0, opacity: 1, duration: 0.8, ease: "power3.out",
+          scrollTrigger: {
+            trigger: ref.current,
+            start: "top 78%",
+            once: true,
+          },
+        }
+      );
     }, ref);
-    return () => ctx.revert();
+
+    return () => {
+      ctx.revert();
+      ScrollTrigger.getAll()
+        .filter((t) => t.vars.trigger === ref.current)
+        .forEach((t) => t.kill());
+    };
   }, []);
 
   return (
