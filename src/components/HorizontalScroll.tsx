@@ -67,8 +67,6 @@ function DesktopHorizontalScroll() {
   useEffect(() => {
     if (!wrap.current || !track.current) return;
 
-    ScrollTrigger.getAll().forEach((t) => t.kill());
-
     ctxRef.current = gsap.context(() => {
       const total = track.current!.scrollWidth - window.innerWidth;
 
@@ -119,7 +117,6 @@ function DesktopHorizontalScroll() {
         ctxRef.current.revert();
         ctxRef.current = null;
       }
-      ScrollTrigger.getAll().forEach((t) => t.kill());
     };
   }, []);
 

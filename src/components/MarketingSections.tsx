@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from "react";
+import { Link } from "@tanstack/react-router";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { PiggyBank, ShieldCheck, Zap, BarChart3 } from "lucide-react";
@@ -477,15 +478,14 @@ export function PricingTeaser() {
           No hidden charges. Just one monthly platform fee per traveller —
           and savings that more than cover it.
         </p>
-        {/* FIX #9: Removed "See Pricing Plans" button, kept only "Talk to Our Team" */}
         <div style={{ marginTop: 36, display: "flex", gap: 16, justifyContent: "center", flexWrap: "wrap" }}>
-          <a href="/contact" style={{
+          <Link to="/pricing" hash="enquire" style={{
             border: "1px solid rgba(107,98,88,0.4)", color: "#6B6258",
             background: "transparent", borderRadius: 50,
             padding: "12px 32px", fontFamily: "Inter, sans-serif",
             fontSize: 12, letterSpacing: "0.12em", textTransform: "uppercase",
             fontWeight: 500, textDecoration: "none",
-          }}>Talk to Our Team</a>
+          }}>Talk to Our Team</Link>
         </div>
       </div>
     </section>

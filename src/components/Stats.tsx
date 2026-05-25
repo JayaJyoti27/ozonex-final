@@ -18,7 +18,6 @@ export function Stats() {
     if (!ref.current) return;
     const ctx = gsap.context(() => {
       stats.forEach((s, i) => {
-        // ✅ Query inside ref.current, not document
         const el = ref.current!.querySelector(`#stat-num-${i}`);
         if (!el) return;
         const obj = { v: 0 };
@@ -26,7 +25,7 @@ export function Stats() {
           v: s.num,
           duration: 1.8,
           ease: "power2.out",
-          scrollTrigger: { trigger: el, start: "top 85%", once: true },
+          scrollTrigger: { trigger: ref.current, start: "top 75%", once: true },
           onUpdate: () => { el.textContent = Math.round(obj.v).toString(); },
         });
       });
