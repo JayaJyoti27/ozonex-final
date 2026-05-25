@@ -77,7 +77,7 @@ export function ValueProps() {
       gsap.fromTo(".vp-col",
         { y: 30, opacity: 0 },
         { y: 0, opacity: 1, duration: 0.8, ease: "power3.out", stagger: 0.1,
-          scrollTrigger: { trigger: ref.current, start: "top 78%" } });
+         scrollTrigger: { trigger: ref.current, start: "top 95%", once: true } });
     }, ref);
     return () => ctx.revert();
   }, []);
@@ -126,10 +126,10 @@ export function Comparison() {
   useEffect(() => {
     if (!ref.current) return;
     const ctx = gsap.context(() => {
-      gsap.fromTo(".cmp-left",  { x: -40, opacity: 0 }, { x: 0, opacity: 1, duration: 0.8, ease: "power3.out",
-        scrollTrigger: { trigger: ref.current, start: "top 78%" } });
+     gsap.fromTo(".cmp-left",  { x: -40, opacity: 0 }, { x: 0, opacity: 1, duration: 0.8, ease: "power3.out",
+        scrollTrigger: { trigger: ref.current, start: "top 95%", once: true } });
       gsap.fromTo(".cmp-right", { x:  40, opacity: 0 }, { x: 0, opacity: 1, duration: 0.8, ease: "power3.out",
-        scrollTrigger: { trigger: ref.current, start: "top 78%" } });
+        scrollTrigger: { trigger: ref.current, start: "top 95%", once: true } });
     }, ref);
     return () => ctx.revert();
   }, []);
