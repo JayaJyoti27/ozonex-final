@@ -16,15 +16,13 @@ export function WhoSection() {
     if (!sectionRef.current) return;
     const isMobile = window.innerWidth < 768;
     if (isMobile) return; // skip animations on mobile
-
-    const ctx = gsap.context(() => {
-      gsap.fromTo(".who-card", { y: 60, opacity: 0 }, {
-        y: 0, opacity: 1, duration: 0.9, stagger: 0.15, ease: "power3.out",
-        scrollTrigger: { trigger: ".who-cards", start: "top 78%" },
-      });
-    }, sectionRef);
-    return () => ctx.revert();
-  }, []);
+const ctx = gsap.context(() => {
+  gsap.fromTo(".who-card", { y: 60, opacity: 1 }, {
+    y: 0, opacity: 1, duration: 0.9, stagger: 0.15, ease: "power3.out",
+    scrollTrigger: { trigger: ".who-cards", start: "top 95%", once: true },
+  });
+}, sectionRef);
+return () => ctx.revert();
 
   const cards = [
     { img: enterprises, label: "Enterprises & MNCs", desc: "Multi-entity policy, consolidated reporting, ERP integration." },
@@ -198,14 +196,14 @@ export function GlobalCTA() {
           scrollTrigger: { trigger: ref.current, start: "top bottom", end: "bottom top", scrub: true },
         });
       }
-      gsap.fromTo(".gcta-word", { y: isMobile ? 20 : 80, opacity: 0 }, {
-        y: 0, opacity: 1, duration: isMobile ? 0.6 : 1, stagger: isMobile ? 0.04 : 0.08, ease: "power3.out",
-        scrollTrigger: { trigger: ref.current, start: "top 60%" },
-      });
-      gsap.fromTo(".gcta-sub", { y: isMobile ? 10 : 30, opacity: 0 }, {
-        y: 0, opacity: 1, duration: 0.9, delay: isMobile ? 0.2 : 0.5, ease: "power3.out",
-        scrollTrigger: { trigger: ref.current, start: "top 60%" },
-      });
+     gsap.fromTo(".gcta-word", { y: isMobile ? 20 : 80, opacity: 1 }, {
+  y: 0, opacity: 1, duration: isMobile ? 0.6 : 1, stagger: isMobile ? 0.04 : 0.08, ease: "power3.out",
+  scrollTrigger: { trigger: ref.current, start: "top 95%", once: true },
+});
+gsap.fromTo(".gcta-sub", { y: isMobile ? 10 : 30, opacity: 1 }, {
+  y: 0, opacity: 1, duration: 0.9, delay: isMobile ? 0.2 : 0.5, ease: "power3.out",
+  scrollTrigger: { trigger: ref.current, start: "top 95%", once: true },
+});
     }, ref);
     return () => ctx.revert();
   }, []);
