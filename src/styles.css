@@ -270,3 +270,49 @@
   background: #2563EB; cursor: pointer; border: none;
   box-shadow: 0 0 0 4px rgba(37,99,235,0.15);
 }
+/* ═══════════════════════════════════════
+   GLOBAL MOBILE SAFETY NET
+   ═══════════════════════════════════════ */
+@media (max-width: 768px) {
+
+  /* Kill hardcoded horizontal padding on all sections */
+  section, footer {
+    padding-left: 20px !important;
+    padding-right: 20px !important;
+  }
+
+  /* Force all inline-style grids to single column */
+  .grid {
+    grid-template-columns: 1fr !important;
+  }
+
+  /* Kill sticky on mobile — causes text overlap */
+  .lg\:sticky {
+    position: relative !important;
+    top: auto !important;
+  }
+
+  /* Prevent overflow on everything */
+  * {
+    max-width: 100%;
+    box-sizing: border-box;
+  }
+
+  /* Hide giant ghost numbers (140px decorative text) */
+  .font-display[style*="140px"],
+  .font-display[style*="font-size: 140"] {
+    display: none !important;
+  }
+
+  /* Prevent horizontal scroll */
+  body, main {
+    overflow-x: hidden;
+  }
+}
+
+@media (max-width: 480px) {
+  section, footer {
+    padding-left: 16px !important;
+    padding-right: 16px !important;
+  }
+}
