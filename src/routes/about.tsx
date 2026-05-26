@@ -117,11 +117,11 @@ function AboutPage() {
         </h1>
 
         <p className="hero-fade mt-10 mx-auto" style={{ maxWidth: 540, fontSize: 17, color: "rgba(255,255,255,0.65)", lineHeight: 1.8 }}>
-          Ozonex is the corporate travel management platform by Ozone Tourism and Travel — an IATA-certified travel company founded in Trivandrum in 2014, now operating across India, the Middle East, and nine global markets.
+          Ozonex is the corporate travel management platform by Ozone Tourism and Travel — an IATA-certified travel company founded in Trivandrum in 2014, now operating across India, the Middle East, and beyond.
         </p>
 
         <div className="hero-fade mt-8 flex flex-wrap justify-center gap-6" style={{ fontSize: 13, color: "rgba(255,255,255,0.45)", letterSpacing: "0.08em" }}>
-          {["IATA Certified", "Est. 2014", "9 Markets", "5 Offices", "24/7 Support"].map((t) => (
+          {["IATA Certified", "Est. 2014", "5 Countries", "6 Global Offices", "24/7 Support"].map((t) => (
             <span key={t} className="flex items-center gap-2">
               <span style={{ color: "var(--gold)" }}>✦</span> {t}
             </span>
@@ -145,7 +145,7 @@ function AboutPage() {
               Ozonex is our answer. It's a platform built from the operational reality of running corporate travel for hundreds of organisations — not a product designed in isolation from how businesses actually work.
             </p>
             <p className="st-para" style={{ fontSize: 16, color: "var(--muted-warm)", lineHeight: 1.85 }}>
-              Today we operate across India, the Middle East, Asia, and beyond — with offices in Trivandrum, Chennai, Cochin, Delhi, and Dubai.
+              Today we operate across India, the Middle East, Asia, and beyond — with offices in Trivandrum, Chennai, Cochin, Delhi, Dubai, and Kuwait.
             </p>
           </div>
         </div>
@@ -156,8 +156,8 @@ function AboutPage() {
         <div className="relative max-w-[1320px] mx-auto mt-16 grid grid-cols-2 lg:grid-cols-4 gap-12 text-center">
           {[
             { num: "2014", label: "Year founded" },
-            { num: "9+", label: "Markets served" },
-            { num: "5", label: "Global offices" },
+            { num: "5", label: "Countries" },
+            { num: "6", label: "Global offices" },
             { num: "IATA", label: "Certified operator" },
           ].map((s) => (
             <div key={s.label}>

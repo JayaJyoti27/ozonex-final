@@ -18,7 +18,7 @@ const offices = [
   { city: "Cochin", flag: "🇮🇳", detail: "Praveen Chandran Building, Pipeline JN, Palarivattam, Ernakulam, Kerala 682024", phone: "+91 9605766200" },
   { city: "Delhi", flag: "🇮🇳", detail: "2-A/3, S/F Front Side, Kundan Mansion, Asaf Ali Road, Turkman Gate, New Delhi 110002", phone: "+91 92092 86872" },
   { city: "Dubai", flag: "🇦🇪", detail: "Shop No. 51, Al Durrah Tower, Trade Center First, Sheikh Zayed Rd, Opp Museum of the Future", phone: "+971 56 455 7700" },
-  { city: "Kuwait", flag: "🇰🇼", detail: "Kuwait City, Kuwait", phone: "+965 000 0000" },
+  { city: "Kuwait", flag: "🇰🇼", detail: "Kuwait City, Kuwait", phone: "" },
 ];
 
 const teamSizes = ["1–50 travellers", "51–200 travellers", "201–500 travellers", "500+ travellers"];
@@ -327,7 +327,7 @@ function PricingPage() {
                 <span className="font-display text-white" style={{ fontSize: 20 }}>{o.city}</span>
               </div>
               <p style={{ fontSize: 13, color: "rgba(255,255,255,0.5)", lineHeight: 1.7, marginBottom: 12 }}>{o.detail}</p>
-              <a href={`tel:${o.phone.replace(/\s/g, "")}`} style={{ fontSize: 13, color: "var(--gold)", textDecoration: "none" }}>{o.phone}</a>
+              {o.phone && <a href={`tel:${o.phone.replace(/\s/g, "")}`} style={{ fontSize: 13, color: "var(--gold)", textDecoration: "none" }}>{o.phone}</a>}
             </div>
           ))}
         </div>

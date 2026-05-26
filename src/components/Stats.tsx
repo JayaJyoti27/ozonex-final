@@ -53,7 +53,7 @@ export function Stats() {
       <div className="relative z-10 max-w-[1400px] mx-auto">
         <div className="stats-header">
           <h2 className="font-display stats-heading">
-            4 Worldwide<br />Locations
+            4 World Wide<br />Locations
           </h2>
           <p className="stats-subtext">
             Strategic hubs across India, UAE and Kuwait — ensuring truly global coverage with seamless

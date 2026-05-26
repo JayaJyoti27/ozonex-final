@@ -116,9 +116,7 @@ export function Hero() {
         ref={textRef}
         className="hero-text relative z-10 w-full flex flex-col items-center justify-center px-6 text-center text-white"
       >
-        <p className="hero-eyebrow eyebrow text-white/70">
-          Corporate Travel Management Solution
-        </p>
+        
         <h1 className="hero-heading font-display mt-6">
           <span className="block">
             <span className="hero-word inline-block">Corporate</span>{" "}
