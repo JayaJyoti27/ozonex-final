@@ -83,13 +83,12 @@ export function ValueProps() {
     return () => ctx.revert();
   }, []);
   return (
-    <section ref={ref} style={{
+    <section ref={ref} className="vp-section" style={{
       background: "#F5F0EA",
-      padding: "60px 80px",
       borderTop: "1px solid rgba(37,99,235,0.1)",
       borderBottom: "1px solid rgba(37,99,235,0.1)",
     }}>
-      <div className="max-w-[1320px] mx-auto grid grid-cols-2 md:grid-cols-4 gap-10">
+      <div className="max-w-[1320px] mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-10">
         {VALUE_PROPS.map(({ Icon, title, body }) => (
           <div key={title} className="vp-col">
             <Icon size={28} color="#2563EB" strokeWidth={1.6} />
@@ -102,6 +101,12 @@ export function ValueProps() {
           </div>
         ))}
       </div>
+      <style>{`
+        .vp-section { padding: 60px 80px; }
+        @media (max-width: 1024px) { .vp-section { padding: 48px 40px; } }
+        @media (max-width: 768px) { .vp-section { padding: 40px 24px; } }
+        @media (max-width: 480px) { .vp-section { padding: 32px 16px; } }
+      `}</style>
     </section>
   );
 }
@@ -135,7 +140,7 @@ export function Comparison() {
     return () => ctx.revert();
   }, []);
   return (
-    <section ref={ref} style={{ background: "#F5F0EA", padding: "120px 80px" }}>
+    <section ref={ref} className="cmp-section" style={{ background: "#F5F0EA" }}>
       <h2 className="font-display text-center" style={{
         fontSize: "clamp(40px, 5vw, 56px)", lineHeight: 0.95,
         color: "#1C1410", fontWeight: 300, marginBottom: 64,
@@ -174,6 +179,12 @@ export function Comparison() {
           ))}
         </div>
       </div>
+      <style>{`
+        .cmp-section { padding: 120px 80px; }
+        @media (max-width: 1024px) { .cmp-section { padding: 80px 40px; } }
+        @media (max-width: 768px) { .cmp-section { padding: 60px 24px; } }
+        @media (max-width: 480px) { .cmp-section { padding: 40px 16px; } }
+      `}</style>
     </section>
   );
 }
