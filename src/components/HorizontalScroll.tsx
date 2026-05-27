@@ -66,6 +66,7 @@ function DesktopHorizontalScroll() {
 
   useEffect(() => {
     if (!wrap.current || !track.current) return;
+    if (window.innerWidth < 768) return; // skip GSAP on mobile — outer component will swap to MobileFeatureStack
 
     ctxRef.current = gsap.context(() => {
       const total = track.current!.scrollWidth - window.innerWidth;
