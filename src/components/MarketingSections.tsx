@@ -1,3 +1,7 @@
+/* =========================
+   FULLY RESPONSIVE VERSION
+========================= */
+
 import { useEffect, useRef, useState } from "react";
 import { Link } from "@tanstack/react-router";
 import { gsap } from "gsap";
@@ -6,9 +10,10 @@ import { PiggyBank, ShieldCheck, Zap, BarChart3 } from "lucide-react";
 
 gsap.registerPlugin(ScrollTrigger);
 
-/* ============ LOGO STRIP — FIX #6: "Sectors We Serve" ============ */
+/* =========================
+   LOGO STRIP
+========================= */
 
-// FIX #6: Replaced company names with sectors
 const SECTORS = [
   "Information Technology (IT)",
   "Healthcare & Medical",
@@ -26,479 +31,752 @@ const SECTORS = [
   "Interior Design & Furniture",
 ];
 
-// Split into two rows
 const ROW1 = SECTORS.slice(0, 7);
 const ROW2 = SECTORS.slice(7);
 
 export function LogoStrip() {
   return (
-    <section style={{ background: "#F5F0EA", padding: "0 0 60px" }}>
-      <div style={{
-        textAlign: "center",
-        fontFamily: "Inter, sans-serif", fontSize: 10,
-        textTransform: "uppercase", letterSpacing: "0.2em",
-        color: "#6B6258", padding: "60px 0 32px",
-      }}>
-        {/* FIX #6: Changed label */}
-        Sectors We Serve
-      </div>
+    <section className="logo-strip-section">
+      <div className="logo-strip-heading">Sectors We Serve</div>
+
       <MarqueeRow items={ROW1} />
       <div style={{ height: 16 }} />
       <MarqueeRow items={ROW2} reverse />
+
+      <style>{`
+        .logo-strip-section {
+          background: #F5F0EA;
+          padding: 0 0 60px;
+        }
+
+        .logo-strip-heading {
+          text-align: center;
+          font-family: Inter, sans-serif;
+          font-size: 10px;
+          text-transform: uppercase;
+          letter-spacing: 0.2em;
+          color: #6B6258;
+          padding: 60px 20px 32px;
+        }
+
+        @media (max-width: 768px) {
+          .logo-strip-heading {
+            padding: 40px 16px 24px;
+          }
+        }
+      `}</style>
     </section>
   );
 }
 
 function MarqueeRow({ items, reverse }: { items: string[]; reverse?: boolean }) {
   const doubled = [...items, ...items];
+
   return (
     <div className="marquee-mask marquee-row">
       <div className={reverse ? "marquee-track-reverse" : "marquee-track"}>
         {doubled.map((label, i) => (
-          <span key={i} className="marquee-item">{label}</span>
+          <span key={i} className="marquee-item">
+            {label}
+          </span>
         ))}
       </div>
     </div>
   );
 }
 
-/* ============ VALUE PROPOSITION ============ */
+/* =========================
+   VALUE PROPS
+========================= */
+
 const VALUE_PROPS = [
-  { Icon: PiggyBank,   title: "Save on Every Trip",       body: "Average 23% reduction in travel spend in the first 6 months." },
-  { Icon: ShieldCheck, title: "Stay Within Budget",       body: "Policy guardrails mean employees only see what they are allowed to book. No overspend. No surprises." },
-  { Icon: Zap,         title: "Approvals in Minutes",     body: "Multi-level approvals route automatically. Average approval time: under 6 minutes." },
-  { Icon: BarChart3,   title: "Expenses Close Themselves",body: "80% of expense reports auto-complete before the employee submits anything." },
+  {
+    Icon: PiggyBank,
+    title: "Save on Every Trip",
+    body: "Average 23% reduction in travel spend in the first 6 months.",
+  },
+  {
+    Icon: ShieldCheck,
+    title: "Stay Within Budget",
+    body: "Policy guardrails mean employees only see what they are allowed to book.",
+  },
+  {
+    Icon: Zap,
+    title: "Approvals in Minutes",
+    body: "Multi-level approvals route automatically.",
+  },
+  {
+    Icon: BarChart3,
+    title: "Expenses Close Themselves",
+    body: "80% of expense reports auto-complete automatically.",
+  },
 ];
 
 export function ValueProps() {
   const ref = useRef<HTMLDivElement>(null);
+
   useEffect(() => {
     if (!ref.current) return;
+
     const ctx = gsap.context(() => {
-      gsap.fromTo(".vp-col",
-        { y: 30, opacity: 1 },
-        { y: 0, opacity: 1, duration: 0.8, ease: "power3.out", stagger: 0.1,
-         scrollTrigger: { trigger: ref.current, start: "top 95%", once: true } });
+      gsap.fromTo(
+        ".vp-col",
+        { y: 30, opacity: 0 },
+        {
+          y: 0,
+          opacity: 1,
+          duration: 0.8,
+          ease: "power3.out",
+          stagger: 0.1,
+          scrollTrigger: {
+            trigger: ref.current,
+            start: "top 95%",
+            once: true,
+          },
+        },
+      );
     }, ref);
+
     return () => ctx.revert();
   }, []);
+
   return (
-    <section ref={ref} className="vp-section" style={{
-      background: "#F5F0EA",
-      borderTop: "1px solid rgba(37,99,235,0.1)",
-      borderBottom: "1px solid rgba(37,99,235,0.1)",
-    }}>
-      <div className="max-w-[1320px] mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-10">
+    <section ref={ref} className="vp-section">
+      <div className="vp-grid">
         {VALUE_PROPS.map(({ Icon, title, body }) => (
           <div key={title} className="vp-col">
             <Icon size={28} color="#2563EB" strokeWidth={1.6} />
-            <div style={{ fontFamily: "Inter, sans-serif", fontSize: 15, fontWeight: 600, color: "#1C1410", marginTop: 16 }}>
-              {title}
-            </div>
-            <p style={{ fontFamily: "Inter, sans-serif", fontSize: 13, color: "#6B6258", lineHeight: 1.7, marginTop: 8 }}>
-              {body}
-            </p>
+
+            <div className="vp-title">{title}</div>
+
+            <p className="vp-body">{body}</p>
           </div>
         ))}
       </div>
+
       <style>{`
-        .vp-section { padding: 60px 80px; }
-        @media (max-width: 1024px) { .vp-section { padding: 48px 40px; } }
-        @media (max-width: 768px) { .vp-section { padding: 40px 24px; } }
-        @media (max-width: 480px) { .vp-section { padding: 32px 16px; } }
+        .vp-section {
+          background: #F5F0EA;
+          border-top: 1px solid rgba(37,99,235,0.1);
+          border-bottom: 1px solid rgba(37,99,235,0.1);
+          padding: 70px 80px;
+        }
+
+        .vp-grid {
+          max-width: 1320px;
+          margin: 0 auto;
+          display: grid;
+          grid-template-columns: repeat(4, 1fr);
+          gap: 40px;
+        }
+
+        .vp-title {
+          font-family: Inter, sans-serif;
+          font-size: 16px;
+          font-weight: 600;
+          color: #1C1410;
+          margin-top: 16px;
+        }
+
+        .vp-body {
+          font-family: Inter, sans-serif;
+          font-size: 14px;
+          color: #6B6258;
+          line-height: 1.8;
+          margin-top: 10px;
+        }
+
+        @media (max-width: 1024px) {
+          .vp-section {
+            padding: 56px 40px;
+          }
+
+          .vp-grid {
+            grid-template-columns: repeat(2, 1fr);
+            gap: 32px;
+          }
+        }
+
+        @media (max-width: 768px) {
+          .vp-section {
+            padding: 44px 20px;
+          }
+
+          .vp-grid {
+            grid-template-columns: 1fr;
+            gap: 28px;
+          }
+        }
+
+        @media (max-width: 480px) {
+          .vp-section {
+            padding: 36px 16px;
+          }
+
+          .vp-title {
+            font-size: 15px;
+          }
+
+          .vp-body {
+            font-size: 13px;
+          }
+        }
       `}</style>
     </section>
   );
 }
 
-/* ============ COMPARISON ============ */
+/* =========================
+   COMPARISON
+========================= */
+
 const WITHOUT = [
-  "Employees book on personal cards or consumer apps outside policy",
-  "Finance chases receipts for weeks after every trip",
-  "Approvals happen over WhatsApp or email — no audit trail",
-  "CFO has no idea what travel actually costs until month-end",
-  "Policy violations discovered after the money is spent",
+  "Employees book outside policy",
+  "Finance chases receipts",
+  "Approvals over WhatsApp",
+  "No visibility on spend",
+  "Policy violations discovered later",
 ];
+
 const WITH = [
-  "Every booking is policy-compliant before it is confirmed",
-  "Expenses auto-capture at point of spend — zero receipt chasing",
-  "Approvals route automatically with full digital audit trail",
-  "CFO sees live travel spend updated with every booking",
-  "Non-compliant options never reach the employee's screen",
+  "Bookings stay policy-compliant",
+  "Expenses auto-captured",
+  "Automated approval routing",
+  "Live spend visibility",
+  "Non-compliant options blocked",
 ];
 
 export function Comparison() {
   const ref = useRef<HTMLDivElement>(null);
+
   useEffect(() => {
     if (!ref.current) return;
+
     const ctx = gsap.context(() => {
-     gsap.fromTo(".cmp-left",  { x: -40, opacity: 1 }, { x: 0, opacity: 1, duration: 0.8, ease: "power3.out",
-        scrollTrigger: { trigger: ref.current, start: "top 95%", once: true } });
-      gsap.fromTo(".cmp-right", { x:  40, opacity: 1 }, { x: 0, opacity: 1, duration: 0.8, ease: "power3.out",
-        scrollTrigger: { trigger: ref.current, start: "top 95%", once: true } });
+      gsap.fromTo(
+        ".cmp-left",
+        { x: -40, opacity: 0 },
+        {
+          x: 0,
+          opacity: 1,
+          duration: 0.8,
+          ease: "power3.out",
+          scrollTrigger: {
+            trigger: ref.current,
+            start: "top 95%",
+            once: true,
+          },
+        },
+      );
+
+      gsap.fromTo(
+        ".cmp-right",
+        { x: 40, opacity: 0 },
+        {
+          x: 0,
+          opacity: 1,
+          duration: 0.8,
+          ease: "power3.out",
+          scrollTrigger: {
+            trigger: ref.current,
+            start: "top 95%",
+            once: true,
+          },
+        },
+      );
     }, ref);
+
     return () => ctx.revert();
   }, []);
+
   return (
-    <section ref={ref} className="cmp-section" style={{ background: "#F5F0EA" }}>
-      <h2 className="font-display text-center" style={{
-        fontSize: "clamp(40px, 5vw, 56px)", lineHeight: 0.95,
-        color: "#1C1410", fontWeight: 300, marginBottom: 64,
-      }}>
-        THE DIFFERENCE IS<br />IMMEDIATE.
+    <section ref={ref} className="cmp-section">
+      <h2 className="cmp-heading">
+        THE DIFFERENCE IS
+        <br />
+        IMMEDIATE.
       </h2>
-      <div className="max-w-[960px] mx-auto grid grid-cols-1 md:grid-cols-2" style={{ gap: 2 }}>
-        <div className="cmp-left">
-          <div style={{
-            fontFamily: "Inter, sans-serif", fontSize: 12,
-            textTransform: "uppercase", letterSpacing: "0.12em",
-            color: "#6B6258", padding: "20px 32px",
-            background: "rgba(37,99,235,0.04)",
-            borderBottom: "1px solid rgba(37,99,235,0.15)",
-          }}>Without Ozonex</div>
+
+      <div className="cmp-grid">
+        <div className="cmp-card cmp-left">
+          <div className="cmp-card-head muted">Without Ozonex</div>
+
           {WITHOUT.map((t) => (
-            <div key={t} style={{ padding: "20px 32px", borderBottom: "1px solid rgba(37,99,235,0.08)",
-              fontFamily: "Inter, sans-serif", fontSize: 14, color: "#6B6258", lineHeight: 1.6 }}>
-              <span style={{ color: "rgba(107,98,88,0.6)", marginRight: 12 }}>✗</span>{t}
+            <div key={t} className="cmp-row">
+              ✗ {t}
             </div>
           ))}
         </div>
-        <div className="cmp-right">
-          <div style={{
-            fontFamily: "Inter, sans-serif", fontSize: 12,
-            textTransform: "uppercase", letterSpacing: "0.12em",
-            color: "#2563EB", padding: "20px 32px",
-            background: "rgba(37,99,235,0.06)",
-            borderBottom: "1px solid rgba(37,99,235,0.15)",
-          }}>With Ozonex</div>
+
+        <div className="cmp-card cmp-right">
+          <div className="cmp-card-head blue">With Ozonex</div>
+
           {WITH.map((t) => (
-            <div key={t} style={{ padding: "20px 32px", borderBottom: "1px solid rgba(37,99,235,0.08)",
-              fontFamily: "Inter, sans-serif", fontSize: 14, color: "#1C1410", lineHeight: 1.6 }}>
-              <span style={{ color: "#2563EB", marginRight: 12, fontWeight: 600 }}>✓</span>{t}
+            <div key={t} className="cmp-row dark">
+              ✓ {t}
             </div>
           ))}
         </div>
       </div>
+
       <style>{`
-        .cmp-section { padding: 120px 80px; }
-        @media (max-width: 1024px) { .cmp-section { padding: 80px 40px; } }
-        @media (max-width: 768px) { .cmp-section { padding: 60px 24px; } }
-        @media (max-width: 480px) { .cmp-section { padding: 40px 16px; } }
+        .cmp-section {
+          background: #F5F0EA;
+          padding: 120px 80px;
+        }
+
+        .cmp-heading {
+          text-align: center;
+          font-size: clamp(36px, 6vw, 60px);
+          line-height: 1;
+          font-weight: 300;
+          color: #1C1410;
+          margin-bottom: 64px;
+        }
+
+        .cmp-grid {
+          max-width: 1000px;
+          margin: 0 auto;
+          display: grid;
+          grid-template-columns: repeat(2, 1fr);
+          gap: 20px;
+        }
+
+        .cmp-card {
+          border: 1px solid rgba(37,99,235,0.08);
+          background: rgba(255,255,255,0.5);
+        }
+
+        .cmp-card-head {
+          padding: 20px 28px;
+          font-size: 12px;
+          text-transform: uppercase;
+          letter-spacing: 0.12em;
+          border-bottom: 1px solid rgba(37,99,235,0.08);
+        }
+
+        .cmp-card-head.muted {
+          color: #6B6258;
+        }
+
+        .cmp-card-head.blue {
+          color: #2563EB;
+        }
+
+        .cmp-row {
+          padding: 18px 28px;
+          border-bottom: 1px solid rgba(37,99,235,0.06);
+          font-size: 14px;
+          line-height: 1.7;
+          color: #6B6258;
+        }
+
+        .cmp-row.dark {
+          color: #1C1410;
+        }
+
+        @media (max-width: 768px) {
+          .cmp-section {
+            padding: 70px 20px;
+          }
+
+          .cmp-grid {
+            grid-template-columns: 1fr;
+          }
+
+          .cmp-heading {
+            margin-bottom: 40px;
+          }
+        }
+
+        @media (max-width: 480px) {
+          .cmp-section {
+            padding: 56px 16px;
+          }
+
+          .cmp-row {
+            padding: 16px 18px;
+            font-size: 13px;
+          }
+
+          .cmp-card-head {
+            padding: 16px 18px;
+          }
+        }
       `}</style>
     </section>
   );
 }
 
-/* ============ CALCULATOR — FIX #4: Rupee → Money, FIX #12: Dubai currency ============ */
+/* =========================
+   SAVINGS CALCULATOR
+========================= */
 
-// FIX #12: Currency options including Dubai (AED)
 const CURRENCIES = [
   { label: "INR (₹)", symbol: "₹", locale: "en-IN", multiplier: 4200 },
   { label: "USD ($)", symbol: "$", locale: "en-US", multiplier: 50 },
   { label: "AED (د.إ)", symbol: "د.إ", locale: "ar-AE", multiplier: 184 },
 ];
-function Slider({ label, value, min, max, step, onChange }: {
-  label: string; value: number; min: number; max: number; step: number;
-  onChange: (v: number) => void;
-}) {
-  return (
-    <div>
-      <div style={{
-        fontFamily: "Inter, sans-serif", fontSize: 13,
-        color: "rgba(255,255,255,0.6)", textTransform: "uppercase",
-        letterSpacing: "0.1em", marginBottom: 12,
-      }}>{label}</div>
-      <div className="font-display" style={{ fontSize: 48, color: "#fff", fontWeight: 300, lineHeight: 1 }}>
-        {value.toLocaleString("en-IN")}
-      </div>
-      <input type="range" min={min} max={max} step={step} value={value}
-        onChange={(e) => onChange(Number(e.target.value))}
-        className="range-blue"
-        style={{
-          marginTop: 18,
-          background: `linear-gradient(to right, #2563EB 0%, #2563EB ${((value-min)/(max-min))*100}%, rgba(255,255,255,0.1) ${((value-min)/(max-min))*100}%, rgba(255,255,255,0.1) 100%)`,
-          borderRadius: 2, height: 4,
-        }}
-      />
-    </div>
-  );
-}
-
-function ResultBox({ label, value, valueColor = "#fff", sub }: {
-  label: string; value: string; valueColor?: string; sub: string;
-}) {
-  return (
-    <div style={{
-      padding: 20,
-      border: "1px solid rgba(37,99,235,0.2)",
-      background: "rgba(37,99,235,0.06)",
-    }}>
-      <div style={{
-        fontFamily: "Inter, sans-serif", fontSize: 10,
-        color: "rgba(255,255,255,0.5)", textTransform: "uppercase",
-        letterSpacing: "0.1em",
-      }}>{label}</div>
-      <div className="font-display" style={{
-        fontSize: 28, color: valueColor, fontWeight: 300,
-        marginTop: 10, lineHeight: 1,
-      }}>{value}</div>
-      <div style={{
-        fontFamily: "Inter, sans-serif", fontSize: 11,
-        color: "rgba(255,255,255,0.4)", marginTop: 10, lineHeight: 1.5,
-      }}>{sub}</div>
-    </div>
-  );
-}
 
 export function SavingsCalculator() {
   const [employees, setEmployees] = useState(500);
   const [trips, setTrips] = useState(8);
   const [currencyIdx, setCurrencyIdx] = useState(0);
+
   const currency = CURRENCIES[currencyIdx];
 
   const saving = Math.round(employees * trips * currency.multiplier * 0.23);
-  const hours = Math.round(employees * 0.8);
+
   const fmtMoney = (n: number) => currency.symbol + " " + n.toLocaleString(currency.locale);
 
   return (
-    <section className="relative grid-overlay calc-outer">
-      <svg
-        className="absolute top-[-1px] left-0 w-full"
-        height="60" viewBox="0 0 1440 60" preserveAspectRatio="none"
-        style={{ display: "block", zIndex: 5 }}
-      >
-        <path d="M0,30 C120,5 240,55 360,25 C480,0 600,50 720,25 C840,5 960,45 1080,30 C1200,15 1320,40 1440,18 L1440,0 L0,0 Z" fill="#F5F0EA" />
-      </svg>
-
-      <div className="relative z-10 max-w-[800px] mx-auto text-center">
-        <h2 className="font-display calc-h2">
-          HOW MUCH COULD<br />YOUR COMPANY SAVE?
+    <section className="calc-section">
+      <div className="calc-wrap">
+        <h2 className="calc-heading">
+          HOW MUCH COULD
+          <br />
+          YOUR COMPANY SAVE?
         </h2>
-        <p className="calc-intro">
-          Tell us about your travel programme. We will show you the numbers.
-        </p>
+
+        <p className="calc-sub">Tell us about your travel programme.</p>
 
         <div className="calc-card">
-          {/* Currency selector */}
-          <div className="calc-currency-row">
-            <span className="calc-currency-lbl">Currency</span>
-            <div className="calc-currency-btns">
-              {CURRENCIES.map((c, i) => (
-                <button
-                  key={c.label}
-                  onClick={() => setCurrencyIdx(i)}
-                  className={`calc-cur-btn${currencyIdx === i ? " active" : ""}`}
-                >{c.label}</button>
-              ))}
+          <div className="calc-currency">
+            {CURRENCIES.map((c, i) => (
+              <button
+                key={c.label}
+                onClick={() => setCurrencyIdx(i)}
+                className={`calc-btn ${currencyIdx === i ? "active" : ""}`}
+              >
+                {c.label}
+              </button>
+            ))}
+          </div>
+
+          <div className="calc-slider-wrap">
+            <label>Employees</label>
+
+            <div className="calc-number">{employees.toLocaleString()}</div>
+
+            <input
+              type="range"
+              min={50}
+              max={5000}
+              step={50}
+              value={employees}
+              onChange={(e) => setEmployees(Number(e.target.value))}
+            />
+          </div>
+
+          <div className="calc-slider-wrap">
+            <label>Trips per year</label>
+
+            <div className="calc-number">{trips}</div>
+
+            <input
+              type="range"
+              min={2}
+              max={24}
+              step={1}
+              value={trips}
+              onChange={(e) => setTrips(Number(e.target.value))}
+            />
+          </div>
+
+          <div className="calc-results">
+            <div className="calc-result">
+              <span>Estimated Saving</span>
+              <strong>{fmtMoney(saving)}</strong>
+            </div>
+
+            <div className="calc-result">
+              <span>Compliance</span>
+              <strong>94%</strong>
+            </div>
+
+            <div className="calc-result">
+              <span>Finance Hours Saved</span>
+              <strong>80 hrs/mo</strong>
             </div>
           </div>
 
-          <Slider label="Number of employees who travel" value={employees} min={50} max={5000} step={50} onChange={setEmployees} />
-          <div className="calc-spacer" />
-          <Slider label="Average trips per employee per year" value={trips} min={2} max={24} step={1} onChange={setTrips} />
-
-          {/* Result boxes */}
-          <div className="calc-results">
-            <ResultBox label="Estimated annual saving" value={fmtMoney(saving)} valueColor="#2563EB" sub="vs unmanaged travel spend" />
-            <ResultBox label="Policy compliance rate" value="94%" sub="average on Ozonex vs 41% without a platform" />
-            <ResultBox label="Hours saved in finance" value={`${hours} hrs/mo`} sub="on expense reconciliation" />
-          </div>
-
           <div className="calc-cta-wrap">
-            <a
-              href="/pricing#enquire"
-              className="calc-cta-btn"
-              onMouseEnter={(e) => (e.currentTarget.style.background = "#1D4ED8")}
-              onMouseLeave={(e) => (e.currentTarget.style.background = "#2563EB")}
-            >Book a Free Demo</a>
-            <div className="calc-disclaimer">No commitment. 30 minutes. Built around your numbers.</div>
+            <a href="/pricing#enquire" className="calc-cta">
+              Book a Free Demo
+            </a>
           </div>
         </div>
       </div>
 
       <style>{`
-        /* ── CALCULATOR OUTER ── */
-        .calc-outer {
+        .calc-section {
           background: #1C1410;
-          padding: 120px 24px 100px;
-          position: relative;
-        }
-        .calc-h2 {
-          font-size: clamp(36px, 5vw, 60px);
-          color: #fff;
-          font-weight: 300;
-          line-height: 1.0;
-        }
-        .calc-intro {
-          font-family: Poppins, sans-serif;
-          font-size: 16px;
-          color: rgba(255,255,255,0.65);
-          max-width: 480px;
-          margin: 24px auto 0;
-          line-height: 1.75;
+          padding: 120px 20px;
         }
 
-        /* ── CARD ── */
+        .calc-wrap {
+          max-width: 850px;
+          margin: 0 auto;
+          text-align: center;
+        }
+
+        .calc-heading {
+          font-size: clamp(34px, 6vw, 64px);
+          color: white;
+          line-height: 1;
+          font-weight: 300;
+        }
+
+        .calc-sub {
+          color: rgba(255,255,255,0.7);
+          margin-top: 24px;
+          font-size: 16px;
+        }
+
         .calc-card {
-          max-width: 640px;
-          margin: 56px auto 0;
+          margin-top: 48px;
           background: rgba(255,255,255,0.04);
           border: 1px solid rgba(255,255,255,0.08);
-          padding: 48px;
+          padding: 40px;
           text-align: left;
         }
-        .calc-spacer { height: 40px; }
 
-        /* ── CURRENCY ── */
-        .calc-currency-row {
+        .calc-currency {
           display: flex;
-          align-items: center;
-          gap: 12px;
           flex-wrap: wrap;
+          gap: 10px;
           margin-bottom: 32px;
         }
-        .calc-currency-lbl {
-          font-family: Poppins, sans-serif;
-          font-size: 11px;
-          color: rgba(255,255,255,0.5);
-          text-transform: uppercase;
-          letter-spacing: 0.1em;
-        }
-        .calc-currency-btns { display: flex; gap: 8px; flex-wrap: wrap; }
-        .calc-cur-btn {
-          padding: 6px 14px;
-          border-radius: 20px;
+
+        .calc-btn {
+          padding: 8px 16px;
+          border-radius: 999px;
           border: 1px solid rgba(255,255,255,0.15);
           background: transparent;
-          color: rgba(255,255,255,0.5);
-          font-family: Poppins, sans-serif;
-          font-size: 11px;
+          color: rgba(255,255,255,0.7);
           cursor: pointer;
-          transition: all 0.2s ease;
-          letter-spacing: 0.05em;
-        }
-        .calc-cur-btn.active {
-          border-color: #2563EB;
-          background: #2563EB;
-          color: #fff;
         }
 
-        /* ── RESULTS ── */
+        .calc-btn.active {
+          background: #2563EB;
+          border-color: #2563EB;
+          color: white;
+        }
+
+        .calc-slider-wrap {
+          margin-bottom: 34px;
+        }
+
+        .calc-slider-wrap label {
+          display: block;
+          color: rgba(255,255,255,0.6);
+          margin-bottom: 10px;
+          font-size: 13px;
+          text-transform: uppercase;
+        }
+
+        .calc-number {
+          font-size: 48px;
+          color: white;
+          margin-bottom: 16px;
+        }
+
         .calc-results {
-          margin-top: 40px;
           display: grid;
           grid-template-columns: repeat(3, 1fr);
-          gap: 12px;
+          gap: 16px;
+          margin-top: 40px;
         }
 
-        /* ── CTA ── */
-        .calc-cta-wrap { text-align: center; margin-top: 36px; }
-        .calc-cta-btn {
-          display: inline-block;
-          background: #2563EB;
-          color: #fff;
-          border-radius: 50px;
-          padding: 14px 40px;
-          font-family: Poppins, sans-serif;
-          font-size: 12px;
-          letter-spacing: 0.12em;
+        .calc-result {
+          background: rgba(37,99,235,0.08);
+          border: 1px solid rgba(37,99,235,0.18);
+          padding: 20px;
+        }
+
+        .calc-result span {
+          display: block;
+          color: rgba(255,255,255,0.5);
+          font-size: 11px;
           text-transform: uppercase;
-          font-weight: 500;
+        }
+
+        .calc-result strong {
+          display: block;
+          margin-top: 10px;
+          color: white;
+          font-size: 26px;
+          font-weight: 400;
+        }
+
+        .calc-cta-wrap {
+          text-align: center;
+          margin-top: 40px;
+        }
+
+        .calc-cta {
+          display: inline-flex;
+          align-items: center;
+          justify-content: center;
+          background: #2563EB;
+          color: white;
           text-decoration: none;
-          transition: background 0.25s ease;
-        }
-        .calc-disclaimer {
-          font-family: Poppins, sans-serif;
+          padding: 14px 32px;
+          border-radius: 999px;
+          text-transform: uppercase;
+          letter-spacing: 0.1em;
           font-size: 12px;
-          color: rgba(255,255,255,0.4);
-          margin-top: 14px;
         }
 
-        /* ── TABLET ── */
-        @media (max-width: 1024px) {
-          .calc-card { padding: 36px 28px; }
-        }
-
-        /* ── MOBILE ── */
         @media (max-width: 768px) {
-          .calc-outer {
-            padding: 80px 16px 80px; /* bottom padding fixes overlap */
+          .calc-section {
+            padding: 80px 16px;
           }
-          .calc-h2 { font-size: clamp(28px, 8vw, 44px); }
-          .calc-intro { font-size: 14px; }
-          .calc-card {
-            padding: 24px 16px;
-            margin-top: 32px;
-          }
-          .calc-spacer { height: 28px; }
-          .calc-currency-row { gap: 8px; margin-bottom: 24px; }
-          .calc-cur-btn { font-size: 10px; padding: 5px 10px; }
 
-          /* Stack results vertically */
+          .calc-card {
+            padding: 24px 18px;
+          }
+
           .calc-results {
             grid-template-columns: 1fr;
-            gap: 8px;
-            margin-top: 28px;
           }
 
-          .calc-cta-btn {
-            display: block;
-            max-width: 260px;
-            margin: 0 auto;
-            text-align: center;
-            padding: 13px 20px;
-            font-size: 11px;
+          .calc-number {
+            font-size: 38px;
           }
-          .calc-disclaimer { font-size: 11px; }
+
+          .calc-cta {
+            width: 100%;
+          }
         }
 
-        /* ── SMALL MOBILE ── */
         @media (max-width: 480px) {
-          .calc-outer { padding: 60px 12px 80px; }
-          .calc-card { padding: 20px 14px; }
+          .calc-heading {
+            font-size: 30px;
+          }
+
+          .calc-sub {
+            font-size: 14px;
+          }
+
+          .calc-number {
+            font-size: 32px;
+          }
+
+          .calc-result strong {
+            font-size: 22px;
+          }
         }
       `}</style>
     </section>
   );
 }
 
+/* =========================
+   PRICING TEASER
+========================= */
 
-
-
-/* ============ PRICING TEASER — FIX #9: Remove "See Pricing Plans" button ============ */
 export function PricingTeaser() {
   return (
-    <section style={{ background: "#F5F0EA", padding: "80px 24px" }}>
-      <div className="max-w-[800px] mx-auto text-center">
-        <div style={{
-          fontFamily: "Inter, sans-serif", fontSize: 11,
-          color: "#2563EB", textTransform: "uppercase", letterSpacing: "0.2em", fontWeight: 500,
-        }}>Pricing</div>
-        <h2 className="font-display" style={{
-          fontSize: "clamp(40px, 5vw, 52px)", color: "#1C1410",
-          fontWeight: 300, lineHeight: 1.0, marginTop: 24,
-        }}>
-          TRANSPARENT PRICING.<br />NO SURPRISES.
+    <section className="pricing-section">
+      <div className="pricing-wrap">
+        <div className="pricing-tag">Pricing</div>
+
+        <h2 className="pricing-heading">
+          TRANSPARENT PRICING.
+          <br />
+          NO SURPRISES.
         </h2>
-        <p style={{
-          fontFamily: "Inter, sans-serif", fontSize: 16,
-          color: "#6B6258", maxWidth: 480, margin: "24px auto 0",
-          lineHeight: 1.75,
-        }}>
-          Plans that scale with your organisation. No per-booking fees.
-          No hidden charges. Just one monthly platform fee per traveller —
-          and savings that more than cover it.
+
+        <p className="pricing-text">
+          Plans that scale with your organisation. No hidden charges. Just one simple monthly fee.
         </p>
-        <div style={{ marginTop: 36, display: "flex", gap: 16, justifyContent: "center", flexWrap: "wrap" }}>
-          <Link to="/pricing" hash="enquire" style={{
-            border: "1px solid rgba(107,98,88,0.4)", color: "#6B6258",
-            background: "transparent", borderRadius: 50,
-            padding: "12px 32px", fontFamily: "Inter, sans-serif",
-            fontSize: 12, letterSpacing: "0.12em", textTransform: "uppercase",
-            fontWeight: 500, textDecoration: "none",
-          }}>Talk to Our Team</Link>
+
+        <div className="pricing-btn-wrap">
+          <Link to="/pricing" hash="enquire" className="pricing-btn">
+            Talk to Our Team
+          </Link>
         </div>
       </div>
+
+      <style>{`
+        .pricing-section {
+          background: #F5F0EA;
+          padding: 90px 20px;
+        }
+
+        .pricing-wrap {
+          max-width: 850px;
+          margin: 0 auto;
+          text-align: center;
+        }
+
+        .pricing-tag {
+          color: #2563EB;
+          text-transform: uppercase;
+          letter-spacing: 0.2em;
+          font-size: 11px;
+        }
+
+        .pricing-heading {
+          font-size: clamp(34px, 6vw, 58px);
+          line-height: 1;
+          color: #1C1410;
+          margin-top: 24px;
+          font-weight: 300;
+        }
+
+        .pricing-text {
+          max-width: 580px;
+          margin: 24px auto 0;
+          color: #6B6258;
+          line-height: 1.8;
+          font-size: 16px;
+        }
+
+        .pricing-btn-wrap {
+          margin-top: 36px;
+        }
+
+        .pricing-btn {
+          display: inline-flex;
+          align-items: center;
+          justify-content: center;
+          padding: 14px 32px;
+          border-radius: 999px;
+          border: 1px solid rgba(107,98,88,0.3);
+          text-decoration: none;
+          color: #6B6258;
+          text-transform: uppercase;
+          letter-spacing: 0.1em;
+          font-size: 12px;
+        }
+
+        @media (max-width: 768px) {
+          .pricing-section {
+            padding: 70px 16px;
+          }
+
+          .pricing-text {
+            font-size: 14px;
+          }
+
+          .pricing-btn {
+            width: 100%;
+            max-width: 320px;
+          }
+        }
+
+        @media (max-width: 480px) {
+          .pricing-heading {
+            font-size: 30px;
+          }
+
+          .pricing-text {
+            font-size: 13px;
+          }
+        }
+      `}</style>
     </section>
   );
 }

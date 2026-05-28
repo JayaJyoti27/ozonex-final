@@ -9,111 +9,493 @@ import cta from "@/assets/city-chennai-cta.jpg";
 const schema = {
   "@context": "https://schema.org",
   "@type": "Service",
+
   name: "Corporate Travel Management Chennai",
-  provider: { "@type": "Organization", name: "Ozonex" },
-  areaServed: { "@type": "City", name: "Chennai" },
+
+  provider: {
+    "@type": "Organization",
+    name: "Ozonex",
+  },
+
+  areaServed: {
+    "@type": "City",
+    name: "Chennai",
+  },
+
   description:
     "Enterprise corporate travel management software serving businesses in Chennai and Tamil Nadu.",
+
   url: "https://ozonex.com/corporate-travel-management-chennai",
 };
 
 const data: CityData = {
   city: "Chennai",
+
   eyebrow: "Corporate Travel Management · Chennai",
+
   hero: {
     image: hero,
+
     h1Lines: ["Chennai moves fast.", "Your travel platform", "should keep up."],
-    sub: "Ozonex gives Chennai's enterprises — from Old Mahabalipuram Road tech corridors to Ambattur industrial estates — a single platform to book, approve, track, and reconcile every corporate journey.",
+
+    sub: "Ozonex gives Chennai enterprises a single platform to book, approve, track, and reconcile every corporate journey.",
   },
+
   stats: [
-    { num: "4,200+", label: "Active corporate travellers managed in Chennai annually" },
-    { num: "38 min", label: "Average trip approval time for Chennai enterprise clients" },
-    { num: "₹ 2.1 Cr", label: "Average annual travel spend managed per Chennai enterprise" },
-    { num: "92%", label: "Policy compliance rate across Chennai-based Ozonex clients" },
+    {
+      num: "4,200+",
+      label: "Active corporate travellers managed annually",
+    },
+
+    {
+      num: "38 min",
+      label: "Average trip approval time",
+    },
+
+    {
+      num: "₹ 2.1 Cr",
+      label: "Average annual travel spend managed",
+    },
+
+    {
+      num: "92%",
+      label: "Policy compliance rate",
+    },
   ],
+
   why: {
     h2Lines: ["Built for the", "complexity", "Chennai runs on."],
-    body: "Chennai is home to some of India's most travel-intensive industries — automotive manufacturing, IT services, financial institutions, and port-linked logistics. Each sector has distinct travel patterns, approval structures, and compliance needs. Ozonex handles all of them on one platform.",
+
+    body: "Chennai is home to some of India's most travel-intensive industries. Ozonex handles approvals, compliance, and travel visibility in one platform.",
+
     keyStatNum: "68%",
+
     keyStatLabel:
-      "of Chennai enterprise travel spend happens outside declared policy without a platform like Ozonex",
+      "of enterprise travel spend happens outside declared policy without a platform like Ozonex",
+
     cards: [
       {
         title: "Multi-Location Approvals",
-        body: "Chennai enterprises often have approvers in Mumbai or Bengaluru while travellers are based locally. Ozonex routes approvals to the right person automatically — geography is never a bottleneck.",
+
+        body: "Automatically route approvals to the right manager regardless of geography.",
       },
+
       {
         title: "Manufacturing Sector Complexity",
-        body: "Automotive and manufacturing companies in Chennai run high-frequency travel between plant locations, vendor sites, and client offices. Ozonex manages recurring routes, preferred vendors, and per-diem policies without manual intervention.",
+
+        body: "Manage recurring routes, preferred vendors, and per-diem policies automatically.",
       },
+
       {
         title: "Port & Logistics Coordination",
-        body: "Chennai's port-connected businesses require rapid, often same-day travel bookings for operations teams. Ozonex supports urgent booking workflows with accelerated approval paths and 24/7 operational backup.",
+
+        body: "Accelerated workflows for urgent operational travel bookings.",
       },
     ],
   },
+
   industries: {
     h2Lines: ["Every sector that", "keeps Chennai moving."],
+
     tiles: [
-      { title: "AUTOMOTIVE & MANUFACTURING", body: "From OEMs to tier-2 suppliers — manage high-frequency plant visits, vendor trips, and executive travel across Chennai's automotive belt." },
-      { title: "IT & TECHNOLOGY SERVICES", body: "OMR and Tidel Park tech companies run global delivery teams with constant client-site travel. Ozonex manages visa tracking, international bookings, and per-diem automation." },
-      { title: "BANKING & FINANCIAL SERVICES", body: "Chennai's banking sector requires strict travel policy compliance and audit-ready expense reporting. Ozonex delivers both without adding administrative overhead." },
-      { title: "HEALTHCARE & PHARMA", body: "Medical device companies and pharma distributors based in Chennai run field-force travel programmes that demand real-time tracking and rapid rebooking capabilities." },
-      { title: "LOGISTICS & SUPPLY CHAIN", body: "Port-connected logistics operations need same-day booking capability and live traveller visibility for ops teams coordinating across multiple locations simultaneously." },
-      { title: "ENGINEERING & INFRASTRUCTURE", body: "EPC contractors and infrastructure companies based in Chennai manage project-site travel across multiple states. Ozonex tracks cost by project code automatically." },
+      {
+        title: "AUTOMOTIVE & MANUFACTURING",
+
+        body: "Manage high-frequency plant visits, vendor trips, and executive travel.",
+      },
+
+      {
+        title: "IT & TECHNOLOGY SERVICES",
+
+        body: "International bookings, visa tracking, and automated per-diem management.",
+      },
+
+      {
+        title: "BANKING & FINANCIAL SERVICES",
+
+        body: "Strict policy compliance and audit-ready expense reporting.",
+      },
+
+      {
+        title: "HEALTHCARE & PHARMA",
+
+        body: "Field-force travel with live tracking and rapid rebooking support.",
+      },
+
+      {
+        title: "LOGISTICS & SUPPLY CHAIN",
+
+        body: "Same-day bookings and live traveller visibility across operations.",
+      },
+
+      {
+        title: "ENGINEERING & INFRASTRUCTURE",
+
+        body: "Project-site travel with automated project-code tracking.",
+      },
     ],
   },
+
   how: {
     h2Lines: ["Up and running in", "Chennai in 3 weeks."],
+
     steps: [
       {
         title: "Onboard your organisation",
-        body: "Connect your HRIS, configure your travel policy, and map your approval hierarchy. Our implementation team manages the entire setup — your IT team needs less than 2 hours.",
+
+        body: "Connect HRIS, configure policies, and map approval structures quickly.",
+
         image: s1,
       },
+
       {
         title: "Your team books with guardrails",
-        body: "Every employee sees only what they are entitled to book. Policy compliance is automatic from the first search. Approvals route to the right manager in seconds.",
+
+        body: "Every booking is filtered automatically through live policy controls.",
+
         image: s2,
       },
+
       {
         title: "Finance closes fast",
-        body: "Expenses are captured automatically. GL codes are assigned at booking. Your finance team gets a reconciled, audit-ready report — not a pile of receipts.",
+
+        body: "Automated expense capture and audit-ready reporting for finance teams.",
+
         image: s3,
       },
     ],
   },
+
   testimonial: {
-    quote:
-      "We manage travel for 340 employees across 6 plant locations in Tamil Nadu. Before Ozonex, reconciliation alone took our finance team 4 days every month. Now it takes 3 hours. The policy compliance rate went from 61% to 94% in the first quarter.",
+    quote: "Our policy compliance rate went from 61% to 94% in the first quarter.",
+
     attribution: "VP Operations, Automotive Components Manufacturer, Chennai",
   },
+
   cta: {
     image: cta,
+
     h2Lines: ["Ready to bring", "order to Chennai's", "corporate travel?"],
-    body: "Book a 30-minute live walkthrough. We will show you exactly how Ozonex works for your Chennai operation — your team size, your approval structure, your travel patterns.",
+
+    body: "Book a live walkthrough built around your Chennai operation and travel workflows.",
   },
 };
 
 export const Route = createFileRoute("/corporate-travel-management-chennai")({
   head: () => ({
     meta: [
-      { title: "Corporate Travel Management in Chennai | Ozonex" },
+      {
+        title: "Corporate Travel Management in Chennai | Ozonex",
+      },
+
       {
         name: "description",
+
         content:
-          "Ozonex delivers enterprise corporate travel management for Chennai-based companies. Policy compliance, automated approvals, and real-time expense tracking — built for Tamil Nadu's fastest-growing enterprises.",
+          "Ozonex delivers enterprise corporate travel management for Chennai-based companies.",
       },
-      { property: "og:title", content: "Corporate Travel Management in Chennai | Ozonex" },
+
+      {
+        property: "og:title",
+
+        content: "Corporate Travel Management in Chennai | Ozonex",
+      },
+
       {
         property: "og:description",
-        content:
-          "Enterprise corporate travel management software for Chennai and Tamil Nadu businesses.",
+
+        content: "Enterprise corporate travel management software for Chennai businesses.",
       },
-      { property: "og:type", content: "website" },
+
+      {
+        property: "og:type",
+
+        content: "website",
+      },
     ],
-    links: [{ rel: "canonical", href: "https://ozonex.com/corporate-travel-management-chennai" }],
-    scripts: [{ type: "application/ld+json", children: JSON.stringify(schema) }],
+
+    links: [
+      {
+        rel: "canonical",
+
+        href: "https://ozonex.com/corporate-travel-management-chennai",
+      },
+    ],
+
+    scripts: [
+      {
+        type: "application/ld+json",
+
+        children: JSON.stringify(schema),
+      },
+    ],
   }),
-  component: () => <CityPage data={data} />,
+
+  component: () => (
+    <>
+      <style>{`
+        /* =========================
+           ROOT
+        ========================= */
+
+        :root {
+          --container-padding: 24px;
+        }
+
+        @media (max-width: 768px) {
+          :root {
+            --container-padding: 20px;
+          }
+        }
+
+        @media (max-width: 480px) {
+          :root {
+            --container-padding: 16px;
+          }
+        }
+
+        /* =========================
+           GLOBAL FIXES
+        ========================= */
+
+        html,
+        body {
+          overflow-x: hidden;
+        }
+
+        * {
+          max-width: 100%;
+          box-sizing: border-box;
+        }
+
+        img {
+          width: 100%;
+          max-width: 100%;
+          height: auto;
+          display: block;
+        }
+
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6,
+        p {
+          word-break: break-word;
+        }
+
+        /* =========================
+           SECTIONS
+        ========================= */
+
+        section {
+          overflow-x: hidden;
+          padding-top: clamp(72px, 8vw, 140px) !important;
+          padding-bottom: clamp(72px, 8vw, 140px) !important;
+        }
+
+        @media (max-width: 480px) {
+          section {
+            padding-top: 56px !important;
+            padding-bottom: 56px !important;
+          }
+        }
+
+        /* =========================
+           HERO
+        ========================= */
+
+        .city-hero,
+        .hero-section {
+          padding-left: var(--container-padding) !important;
+          padding-right: var(--container-padding) !important;
+        }
+
+        .city-hero h1,
+        .hero-section h1 {
+          font-size: clamp(36px, 8vw, 88px) !important;
+          line-height: 0.95 !important;
+        }
+
+        .city-hero p,
+        .hero-section p {
+          max-width: 760px !important;
+          font-size: clamp(14px, 2vw, 17px) !important;
+          line-height: 1.8 !important;
+        }
+
+        /* =========================
+           STATS
+        ========================= */
+
+        .stats-grid,
+        .city-stats-grid {
+          display: grid !important;
+          grid-template-columns: repeat(4, 1fr) !important;
+          gap: 24px !important;
+        }
+
+        @media (max-width: 1024px) {
+          .stats-grid,
+          .city-stats-grid {
+            grid-template-columns: repeat(2, 1fr) !important;
+          }
+        }
+
+        @media (max-width: 480px) {
+          .stats-grid,
+          .city-stats-grid {
+            grid-template-columns: 1fr !important;
+            gap: 18px !important;
+          }
+        }
+
+        /* =========================
+           GRID LAYOUTS
+        ========================= */
+
+        .two-col-grid,
+        .city-two-col-grid {
+          display: grid !important;
+          grid-template-columns: 1fr 1fr !important;
+          gap: 56px !important;
+        }
+
+        @media (max-width: 992px) {
+          .two-col-grid,
+          .city-two-col-grid {
+            grid-template-columns: 1fr !important;
+            gap: 34px !important;
+          }
+        }
+
+        /* =========================
+           CARDS
+        ========================= */
+
+        .card-grid,
+        .industry-grid,
+        .services-grid,
+        .city-card-grid {
+          display: grid !important;
+          grid-template-columns: repeat(3, 1fr) !important;
+          gap: 24px !important;
+        }
+
+        @media (max-width: 1024px) {
+          .card-grid,
+          .industry-grid,
+          .services-grid,
+          .city-card-grid {
+            grid-template-columns: repeat(2, 1fr) !important;
+          }
+        }
+
+        @media (max-width: 768px) {
+          .card-grid,
+          .industry-grid,
+          .services-grid,
+          .city-card-grid {
+            grid-template-columns: 1fr !important;
+            gap: 18px !important;
+          }
+        }
+
+        .card,
+        .industry-tile,
+        .city-card {
+          padding: 28px 24px !important;
+          border-radius: 18px !important;
+        }
+
+        @media (max-width: 480px) {
+          .card,
+          .industry-tile,
+          .city-card {
+            padding: 22px 18px !important;
+          }
+        }
+
+        /* =========================
+           TYPOGRAPHY
+        ========================= */
+
+        h2,
+        .section-heading {
+          font-size: clamp(30px, 6vw, 58px) !important;
+          line-height: 1 !important;
+        }
+
+        h3 {
+          font-size: clamp(20px, 4vw, 30px) !important;
+          line-height: 1.2 !important;
+        }
+
+        p,
+        .body-copy,
+        .section-copy {
+          font-size: clamp(13px, 2vw, 16px) !important;
+          line-height: 1.8 !important;
+        }
+
+        /* =========================
+           CTA
+        ========================= */
+
+        .city-cta,
+        .cta-section {
+          padding-left: var(--container-padding) !important;
+          padding-right: var(--container-padding) !important;
+        }
+
+        .cta-buttons {
+          display: flex !important;
+          flex-wrap: wrap !important;
+          justify-content: center !important;
+          gap: 16px !important;
+        }
+
+        @media (max-width: 768px) {
+          .cta-buttons {
+            flex-direction: column !important;
+            align-items: center !important;
+          }
+
+          .cta-buttons a,
+          .cta-buttons button {
+            width: 100% !important;
+            max-width: 320px !important;
+          }
+        }
+
+        /* =========================
+           IMAGES
+        ========================= */
+
+        .city-image,
+        .step-image img {
+          width: 100% !important;
+          object-fit: cover !important;
+          border-radius: 18px !important;
+        }
+
+        /* =========================
+           MOBILE CENTER ALIGN
+        ========================= */
+
+        @media (max-width: 768px) {
+          .mobile-center {
+            text-align: center !important;
+          }
+
+          .mobile-center * {
+            text-align: center !important;
+          }
+        }
+      `}</style>
+
+      <CityPage data={data} />
+    </>
+  ),
 });

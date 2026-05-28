@@ -11,7 +11,7 @@ gsap.registerPlugin(ScrollTrigger);
 
 export type CityData = {
   city: string;
-  eyebrow: string; // CORPORATE TRAVEL MANAGEMENT · CHENNAI
+  eyebrow: string;
   hero: {
     image: string;
     h1Lines: string[];
@@ -44,7 +44,55 @@ export type CityData = {
   };
 };
 
-function WordsH1({ lines, className, style }: { lines: string[]; className?: string; style?: React.CSSProperties }) {
+/* ─── responsive helpers injected once ─────────────────────────── */
+const GLOBAL_STYLES = `
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ── Hero ── */
+  .city-hero-eyebrow { animation: fadeUp 0.8s 0.2s ease forwards; }
+  .city-hero-sub     { animation: fadeUp 0.9s 0.7s ease forwards; }
+  .city-hero-ctas    { animation: fadeUp 0.9s 0.85s ease forwards; }
+
+  /* ── Why cards ── */
+  .city-why-card:hover {
+    background: rgba(255,255,255,0.05);
+    border-color: rgba(29,78,216,0.25);
+  }
+
+  /* ── Industry tiles ── */
+  .city-tile:hover {
+    box-shadow: 0 12px 40px rgba(28,20,16,0.08);
+    transform: translateY(-6px);
+    position: relative;
+    z-index: 1;
+  }
+
+  /* ── Button group: stack on very small screens ── */
+  @media (max-width: 400px) {
+    .city-hero-ctas { flex-direction: column; align-items: stretch; }
+    .city-hero-ctas a { text-align: center; }
+  }
+
+  /* ── How-it-works: always stack image on top on mobile ── */
+  @media (max-width: 1023px) {
+    .how-step-img  { order: 0 !important; }
+    .how-step-text { order: 1 !important; }
+  }
+`;
+
+/* ─── WordsH1 ───────────────────────────────────────────────────── */
+function WordsH1({
+  lines,
+  className,
+  style,
+}: {
+  lines: string[];
+  className?: string;
+  style?: React.CSSProperties;
+}) {
   const ref = useRef<HTMLHeadingElement>(null);
   useEffect(() => {
     if (!ref.current) return;
@@ -52,7 +100,13 @@ function WordsH1({ lines, className, style }: { lines: string[]; className?: str
     gsap.fromTo(
       inners,
       { yPercent: 110 },
-      { yPercent: 0, duration: 1, ease: "power3.out", stagger: 0.08, delay: 0.15 }
+      {
+        yPercent: 0,
+        duration: 1,
+        ease: "power3.out",
+        stagger: 0.08,
+        delay: 0.15,
+      },
     );
   }, []);
   return (
@@ -63,10 +117,15 @@ function WordsH1({ lines, className, style }: { lines: string[]; className?: str
             /\s+/.test(w) ? (
               <span key={i}>{w}</span>
             ) : (
-              <span key={i} style={{ display: "inline-block", overflow: "hidden", verticalAlign: "bottom" }}>
-                <span className="word-inner" style={{ display: "inline-block" }}>{w}</span>
+              <span
+                key={i}
+                style={{ display: "inline-block", overflow: "hidden", verticalAlign: "bottom" }}
+              >
+                <span className="word-inner" style={{ display: "inline-block" }}>
+                  {w}
+                </span>
               </span>
-            )
+            ),
           )}
         </span>
       ))}
@@ -74,6 +133,7 @@ function WordsH1({ lines, className, style }: { lines: string[]; className?: str
   );
 }
 
+/* ─── Stat ──────────────────────────────────────────────────────── */
 function Stat({ value, label }: { value: string; label: string }) {
   const ref = useRef<HTMLDivElement>(null);
   useEffect(() => {
@@ -99,17 +159,22 @@ function Stat({ value, label }: { value: string; label: string }) {
   }, [value]);
 
   return (
-    <div ref={ref} className="reveal text-center px-4">
+    <div ref={ref} className="reveal text-center px-4 py-4">
       <div
         className="font-display stat-num"
-        style={{ fontSize: 64, color: "var(--ink)", fontWeight: 300, lineHeight: 1 }}
+        style={{
+          fontSize: "clamp(36px, 6vw, 64px)",
+          color: "var(--ink)",
+          fontWeight: 300,
+          lineHeight: 1,
+        }}
       >
         {value.replace(/[\d,.]+/, "0")}
       </div>
       <div
         className="mx-auto mt-3"
         style={{
-          fontSize: 13,
+          fontSize: "clamp(11px, 1.2vw, 13px)",
           color: "#6B6258",
           letterSpacing: "0.08em",
           textTransform: "uppercase",
@@ -123,19 +188,22 @@ function Stat({ value, label }: { value: string; label: string }) {
   );
 }
 
+/* ─── CityPage ──────────────────────────────────────────────────── */
 export function CityPage({ data }: { data: CityData }) {
   const pageRef = useRef<HTMLDivElement>(null);
 
+  /* smooth scroll */
   useEffect(() => {
     const lenis = new Lenis({ duration: 1.1, smoothWheel: true });
-    function raf(time: number) {
-      lenis.raf(time);
+    const raf = (t: number) => {
+      lenis.raf(t);
       requestAnimationFrame(raf);
-    }
+    };
     requestAnimationFrame(raf);
     return () => lenis.destroy();
   }, []);
 
+  /* scroll animations */
   useEffect(() => {
     if (!pageRef.current) return;
     const ctx = gsap.context(() => {
@@ -149,7 +217,7 @@ export function CityPage({ data }: { data: CityData }) {
             duration: 0.9,
             ease: "power3.out",
             scrollTrigger: { trigger: el, start: "top 78%" },
-          }
+          },
         );
       });
       gsap.utils.toArray<HTMLElement>(".reveal-stagger").forEach((wrap) => {
@@ -164,13 +232,18 @@ export function CityPage({ data }: { data: CityData }) {
             ease: "power3.out",
             stagger: 0.1,
             scrollTrigger: { trigger: wrap, start: "top 78%" },
-          }
+          },
         );
       });
       gsap.to(".cta-parallax", {
         yPercent: -20,
         ease: "none",
-        scrollTrigger: { trigger: ".cta-section", start: "top bottom", end: "bottom top", scrub: true },
+        scrollTrigger: {
+          trigger: ".cta-section",
+          start: "top bottom",
+          end: "bottom top",
+          scrub: true,
+        },
       });
     }, pageRef);
     return () => ctx.revert();
@@ -178,11 +251,20 @@ export function CityPage({ data }: { data: CityData }) {
 
   return (
     <div ref={pageRef} style={{ background: "var(--ink)" }}>
+      <style>{GLOBAL_STYLES}</style>
       <Nav />
       <ScrollLineV />
 
-      {/* SECTION 1: HERO */}
-      <section className="relative w-full h-screen overflow-hidden grid-overlay" style={{ background: "#1C1410" }}>
+      {/* ── SECTION 1: HERO ──────────────────────────────────────── */}
+      <section
+        className="relative w-full overflow-hidden grid-overlay"
+        style={{
+          background: "#1C1410",
+          minHeight: "100svh" /* safer than 100vh on mobile */,
+          display: "flex",
+          alignItems: "center",
+        }}
+      >
         <div
           className="absolute inset-0"
           style={{
@@ -194,54 +276,73 @@ export function CityPage({ data }: { data: CityData }) {
         <div
           className="absolute inset-0"
           style={{
-            background:
-              "linear-gradient(rgba(28,20,16,0.72) 0%, rgba(28,20,16,0.85) 100%)",
+            background: "linear-gradient(rgba(28,20,16,0.72) 0%, rgba(28,20,16,0.85) 100%)",
           }}
         />
-        <span className="absolute left-12 top-1/2 -translate-y-1/2 text-lg select-none hidden md:block" style={{ color: "#3B82F6", opacity: 0.5 }}>✦</span>
-        <span className="absolute right-12 top-1/2 -translate-y-1/2 text-lg select-none hidden md:block" style={{ color: "#3B82F6", opacity: 0.5 }}>✦</span>
 
-        <div className="relative z-10 h-full flex flex-col items-center justify-center text-center px-6 max-w-[1200px] mx-auto">
+        {/* decorative marks — hidden on small screens */}
+        <span
+          className="absolute left-12 top-1/2 -translate-y-1/2 text-lg select-none hidden lg:block"
+          style={{ color: "#3B82F6", opacity: 0.5 }}
+        >
+          ✦
+        </span>
+        <span
+          className="absolute right-12 top-1/2 -translate-y-1/2 text-lg select-none hidden lg:block"
+          style={{ color: "#3B82F6", opacity: 0.5 }}
+        >
+          ✦
+        </span>
+
+        <div
+          className="relative z-10 w-full flex flex-col items-center justify-center text-center px-5 sm:px-8"
+          style={{ maxWidth: 1200, margin: "0 auto", paddingTop: 96, paddingBottom: 96 }}
+        >
+          {/* eyebrow */}
           <div
-            className="opacity-0"
+            className="opacity-0 city-hero-eyebrow"
             style={{
-              fontSize: 11,
+              fontSize: "clamp(9px, 1.5vw, 11px)",
               letterSpacing: "0.2em",
               textTransform: "uppercase",
               color: "#3B82F6",
-              marginBottom: 28,
-              animation: "fadeUp 0.8s 0.2s ease forwards",
+              marginBottom: 24,
             }}
           >
             {data.eyebrow}
           </div>
+
+          {/* headline */}
           <WordsH1
             lines={data.hero.h1Lines}
             className="font-display"
             style={{
-              fontSize: "clamp(44px, 7vw, 84px)",
+              fontSize: "clamp(36px, 7vw, 84px)",
               color: "white",
               fontWeight: 300,
               lineHeight: 0.92,
               letterSpacing: "-0.02em",
             }}
           />
+
+          {/* sub */}
           <p
-            className="opacity-0"
+            className="opacity-0 city-hero-sub"
             style={{
-              fontSize: 17,
+              fontSize: "clamp(14px, 2vw, 17px)",
               color: "rgba(255,255,255,0.68)",
               maxWidth: 560,
               lineHeight: 1.75,
-              marginTop: 36,
-              animation: "fadeUp 0.9s 0.7s ease forwards",
+              marginTop: 28,
             }}
           >
             {data.hero.sub}
           </p>
+
+          {/* CTAs */}
           <div
-            className="flex flex-wrap items-center justify-center gap-4 opacity-0"
-            style={{ marginTop: 48, animation: "fadeUp 0.9s 0.85s ease forwards" }}
+            className="city-hero-ctas flex flex-wrap items-center justify-center gap-3 opacity-0"
+            style={{ marginTop: 40 }}
           >
             <a
               href="/pricing#enquire"
@@ -249,12 +350,13 @@ export function CityPage({ data }: { data: CityData }) {
                 background: "#2563EB",
                 color: "white",
                 borderRadius: 50,
-                padding: "14px 40px",
-                fontSize: 12,
+                padding: "13px 32px",
+                fontSize: "clamp(10px, 1.2vw, 12px)",
                 letterSpacing: "0.12em",
                 textTransform: "uppercase",
                 fontWeight: 500,
                 transition: "all 0.25s ease",
+                whiteSpace: "nowrap",
               }}
               onMouseEnter={(e) => {
                 e.currentTarget.style.background = "#3B82F6";
@@ -274,12 +376,13 @@ export function CityPage({ data }: { data: CityData }) {
                 color: "white",
                 border: "1px solid rgba(255,255,255,0.4)",
                 borderRadius: 50,
-                padding: "14px 40px",
-                fontSize: 12,
+                padding: "13px 32px",
+                fontSize: "clamp(10px, 1.2vw, 12px)",
                 letterSpacing: "0.12em",
                 textTransform: "uppercase",
                 fontWeight: 500,
                 transition: "all 0.25s ease",
+                whiteSpace: "nowrap",
               }}
               onMouseEnter={(e) => {
                 e.currentTarget.style.borderColor = "rgba(255,255,255,0.7)";
@@ -293,18 +396,20 @@ export function CityPage({ data }: { data: CityData }) {
           </div>
         </div>
         <TornEdge fill="#F5F0EA" position="bottom" />
-        <style>{`@keyframes fadeUp { from { opacity:0; transform:translateY(30px);} to {opacity:1; transform:translateY(0);} }`}</style>
       </section>
 
-      {/* SECTION 2: CITY STATS BAR */}
-      <section className="relative w-full" style={{ background: "#F5F0EA", padding: "80px 24px" }}>
+      {/* ── SECTION 2: STATS BAR ────────────────────────────────── */}
+      <section
+        className="relative w-full"
+        style={{ background: "#F5F0EA", padding: "clamp(48px,8vw,80px) clamp(16px,4vw,24px)" }}
+      >
         <div className="relative max-w-[1320px] mx-auto">
           <div
             className="grid grid-cols-2 md:grid-cols-4 reveal-stagger"
             style={{
               borderTop: "1px solid rgba(37,99,235,0.2)",
               borderBottom: "1px solid rgba(37,99,235,0.2)",
-              padding: "48px 0",
+              padding: "clamp(28px,5vw,48px) 0",
             }}
           >
             {data.stats.map((s, i) => (
@@ -312,7 +417,10 @@ export function CityPage({ data }: { data: CityData }) {
                 key={i}
                 className="reveal-child"
                 style={{
+                  /* on 2-col grid only even items (0,2) get left borders at md+ */
                   borderLeft: i > 0 ? "1px solid rgba(37,99,235,0.2)" : "none",
+                  /* on mobile 2-col, add top border to bottom row */
+                  borderTop: i >= 2 ? "1px solid rgba(37,99,235,0.2)" : "none",
                 }}
               >
                 <Stat value={s.num} label={s.label} />
@@ -322,10 +430,20 @@ export function CityPage({ data }: { data: CityData }) {
         </div>
       </section>
 
-      {/* SECTION 3: WHY OZONEX IN [CITY] */}
-      <section className="relative w-full grid-overlay" style={{ background: "#1C1410", padding: "140px 24px" }}>
+      {/* ── SECTION 3: WHY ──────────────────────────────────────── */}
+      <section
+        className="relative w-full grid-overlay"
+        style={{
+          background: "#1C1410",
+          padding: "clamp(80px,10vw,140px) clamp(16px,4vw,24px)",
+        }}
+      >
         <TornEdge fill="#1C1410" position="top" />
-        <div className="relative max-w-[1320px] mx-auto grid grid-cols-1 lg:grid-cols-2" style={{ gap: 80 }}>
+        <div
+          className="relative max-w-[1320px] mx-auto grid grid-cols-1 lg:grid-cols-2"
+          style={{ gap: "clamp(40px,6vw,80px)" }}
+        >
+          {/* sticky left col — only sticky on desktop */}
           <div className="lg:sticky lg:top-32 self-start">
             <div
               className="reveal"
@@ -334,7 +452,7 @@ export function CityPage({ data }: { data: CityData }) {
                 color: "#2563EB",
                 letterSpacing: "0.15em",
                 textTransform: "uppercase",
-                marginBottom: 24,
+                marginBottom: 20,
               }}
             >
               Why {data.city} Enterprises Choose Ozonex
@@ -342,10 +460,10 @@ export function CityPage({ data }: { data: CityData }) {
             <h2
               className="font-display reveal"
               style={{
-                fontSize: "clamp(40px, 5vw, 64px)",
+                fontSize: "clamp(32px,5vw,64px)",
                 color: "white",
                 fontWeight: 300,
-                lineHeight: 0.92,
+                lineHeight: 0.95,
                 letterSpacing: "-0.02em",
               }}
             >
@@ -358,39 +476,52 @@ export function CityPage({ data }: { data: CityData }) {
             <p
               className="reveal"
               style={{
-                fontSize: 16,
+                fontSize: "clamp(14px,1.6vw,16px)",
                 color: "rgba(255,255,255,0.65)",
                 maxWidth: 440,
                 lineHeight: 1.82,
-                marginTop: 28,
+                marginTop: 24,
               }}
             >
               {data.why.body}
             </p>
             <div
               className="reveal"
-              style={{
-                marginTop: 48,
-                borderLeft: "3px solid #2563EB",
-                paddingLeft: 20,
-              }}
+              style={{ marginTop: 40, borderLeft: "3px solid #2563EB", paddingLeft: 20 }}
             >
-              <div className="font-display" style={{ fontSize: 52, color: "white", fontWeight: 300, lineHeight: 1 }}>
+              <div
+                className="font-display"
+                style={{
+                  fontSize: "clamp(36px,5vw,52px)",
+                  color: "white",
+                  fontWeight: 300,
+                  lineHeight: 1,
+                }}
+              >
                 {data.why.keyStatNum}
               </div>
-              <p style={{ fontSize: 13, color: "rgba(255,255,255,0.5)", maxWidth: 300, marginTop: 8, lineHeight: 1.6 }}>
+              <p
+                style={{
+                  fontSize: 13,
+                  color: "rgba(255,255,255,0.5)",
+                  maxWidth: 300,
+                  marginTop: 8,
+                  lineHeight: 1.6,
+                }}
+              >
                 {data.why.keyStatLabel}
               </p>
             </div>
           </div>
 
+          {/* cards */}
           <div className="reveal-stagger flex flex-col" style={{ gap: 2 }}>
             {data.why.cards.map((c, i) => (
               <div
                 key={i}
                 className="reveal-child city-why-card"
                 style={{
-                  padding: "40px 44px",
+                  padding: "clamp(24px,4vw,40px) clamp(20px,4vw,44px)",
                   border: "1px solid rgba(255,255,255,0.07)",
                   background: "rgba(255,255,255,0.02)",
                   transition: "all 0.3s ease",
@@ -399,10 +530,25 @@ export function CityPage({ data }: { data: CityData }) {
                 <div style={{ fontSize: 11, color: "#2563EB", letterSpacing: "0.15em" }}>
                   {String(i + 1).padStart(2, "0")}
                 </div>
-                <h3 className="font-display" style={{ fontSize: 28, color: "white", fontWeight: 300, marginTop: 12 }}>
+                <h3
+                  className="font-display"
+                  style={{
+                    fontSize: "clamp(20px,3vw,28px)",
+                    color: "white",
+                    fontWeight: 300,
+                    marginTop: 10,
+                  }}
+                >
                   {c.title}
                 </h3>
-                <p style={{ fontSize: 14, color: "rgba(255,255,255,0.6)", lineHeight: 1.75, marginTop: 12 }}>
+                <p
+                  style={{
+                    fontSize: "clamp(13px,1.4vw,14px)",
+                    color: "rgba(255,255,255,0.6)",
+                    lineHeight: 1.75,
+                    marginTop: 10,
+                  }}
+                >
                   {c.body}
                 </p>
               </div>
@@ -410,11 +556,16 @@ export function CityPage({ data }: { data: CityData }) {
           </div>
         </div>
         <TornEdge fill="#F5F0EA" position="bottom" />
-        <style>{`.city-why-card:hover{background:rgba(255,255,255,0.05);border-color:rgba(29,78,216,0.25);}`}</style>
       </section>
 
-      {/* SECTION 4: INDUSTRIES */}
-      <section className="relative w-full" style={{ background: "#F5F0EA", padding: "140px 24px" }}>
+      {/* ── SECTION 4: INDUSTRIES ───────────────────────────────── */}
+      <section
+        className="relative w-full"
+        style={{
+          background: "#F5F0EA",
+          padding: "clamp(80px,10vw,140px) clamp(16px,4vw,24px)",
+        }}
+      >
         <div className="max-w-[1320px] mx-auto">
           <div className="text-center">
             <div
@@ -424,7 +575,7 @@ export function CityPage({ data }: { data: CityData }) {
                 color: "#2563EB",
                 letterSpacing: "0.15em",
                 textTransform: "uppercase",
-                marginBottom: 24,
+                marginBottom: 20,
               }}
             >
               Industries We Serve in {data.city}
@@ -432,7 +583,7 @@ export function CityPage({ data }: { data: CityData }) {
             <h2
               className="font-display reveal"
               style={{
-                fontSize: "clamp(40px, 5vw, 60px)",
+                fontSize: "clamp(32px,5vw,60px)",
                 color: "var(--ink)",
                 fontWeight: 300,
                 lineHeight: 1.0,
@@ -448,18 +599,18 @@ export function CityPage({ data }: { data: CityData }) {
           </div>
 
           <div
-            className="reveal-stagger grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3"
-            style={{ marginTop: 80, gap: 0 }}
+            className="reveal-stagger grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3"
+            style={{ marginTop: "clamp(48px,6vw,80px)", gap: 0 }}
           >
             {data.industries.tiles.map((t, i) => (
               <div
                 key={i}
                 className="reveal-child city-tile"
                 style={{
-                  padding: "40px 36px",
+                  padding: "clamp(24px,3.5vw,40px) clamp(20px,3.5vw,36px)",
                   border: "1px solid rgba(37,99,235,0.2)",
                   background: "white",
-                  minHeight: 220,
+                  minHeight: "clamp(160px,20vw,220px)",
                   marginLeft: -1,
                   marginTop: -1,
                   transition: "all 0.35s ease",
@@ -475,25 +626,37 @@ export function CityPage({ data }: { data: CityData }) {
                 >
                   {t.title}
                 </div>
-                <p style={{ fontSize: 14, color: "#6B6258", lineHeight: 1.75, marginTop: 16 }}>
+                <p
+                  style={{
+                    fontSize: "clamp(13px,1.4vw,14px)",
+                    color: "#6B6258",
+                    lineHeight: 1.75,
+                    marginTop: 14,
+                  }}
+                >
                   {t.body}
                 </p>
               </div>
             ))}
           </div>
         </div>
-        <style>{`.city-tile:hover{box-shadow:0 12px 40px rgba(28,20,16,0.08);transform:translateY(-6px);position:relative;z-index:1;}`}</style>
       </section>
 
-      {/* SECTION 5: HOW IT WORKS */}
-      <section className="relative w-full grid-overlay" style={{ background: "#1C1410", padding: "140px 24px" }}>
+      {/* ── SECTION 5: HOW IT WORKS ─────────────────────────────── */}
+      <section
+        className="relative w-full grid-overlay"
+        style={{
+          background: "#1C1410",
+          padding: "clamp(80px,10vw,140px) clamp(16px,4vw,24px)",
+        }}
+      >
         <TornEdge fill="#1C1410" position="top" />
         <div className="max-w-[1320px] mx-auto">
-          <div className="text-center" style={{ marginBottom: 100 }}>
+          <div className="text-center" style={{ marginBottom: "clamp(56px,8vw,100px)" }}>
             <h2
               className="font-display reveal"
               style={{
-                fontSize: "clamp(40px, 5vw, 60px)",
+                fontSize: "clamp(32px,5vw,60px)",
                 color: "white",
                 fontWeight: 300,
                 lineHeight: 1.0,
@@ -508,35 +671,33 @@ export function CityPage({ data }: { data: CityData }) {
             </h2>
           </div>
 
-          <div className="flex flex-col" style={{ gap: 120 }}>
+          <div className="flex flex-col" style={{ gap: "clamp(64px,10vw,120px)" }}>
             {data.how.steps.map((step, i) => {
               const reversed = i % 2 === 1;
               return (
                 <div
                   key={i}
                   className="grid grid-cols-1 lg:grid-cols-2 items-center reveal"
-                  style={{ gap: 80 }}
+                  style={{ gap: "clamp(32px,5vw,80px)" }}
                 >
-                  <div
-                    style={{ order: reversed ? 2 : 1 }}
-                  >
+                  <div className="how-step-img" style={{ order: reversed ? 2 : 1 }}>
                     <img
                       src={step.image}
                       alt={step.title}
                       loading="lazy"
                       style={{
                         width: "100%",
-                        height: 460,
+                        height: "clamp(220px,35vw,460px)",
                         objectFit: "cover",
                         display: "block",
                       }}
                     />
                   </div>
-                  <div style={{ order: reversed ? 1 : 2 }}>
+                  <div className="how-step-text" style={{ order: reversed ? 1 : 2 }}>
                     <div
                       style={{
-                        width: 56,
-                        height: 56,
+                        width: 48,
+                        height: 48,
                         borderRadius: "50%",
                         background: "rgba(255,255,255,0.06)",
                         border: "1px solid rgba(29,78,216,0.4)",
@@ -544,23 +705,32 @@ export function CityPage({ data }: { data: CityData }) {
                         display: "flex",
                         alignItems: "center",
                         justifyContent: "center",
-                        fontSize: 18,
+                        fontSize: 16,
                         fontFamily: "var(--font-display)",
-                        marginBottom: 24,
+                        marginBottom: 20,
+                        flexShrink: 0,
                       }}
                     >
                       {i + 1}
                     </div>
-                    <h3 className="font-display" style={{ fontSize: 44, color: "white", fontWeight: 300, lineHeight: 1.05 }}>
+                    <h3
+                      className="font-display"
+                      style={{
+                        fontSize: "clamp(28px,4vw,44px)",
+                        color: "white",
+                        fontWeight: 300,
+                        lineHeight: 1.05,
+                      }}
+                    >
                       {step.title}
                     </h3>
                     <p
                       style={{
-                        fontSize: 15,
+                        fontSize: "clamp(13px,1.5vw,15px)",
                         color: "rgba(255,255,255,0.65)",
                         maxWidth: 440,
                         lineHeight: 1.82,
-                        marginTop: 20,
+                        marginTop: 16,
                       }}
                     >
                       {step.body}
@@ -574,18 +744,25 @@ export function CityPage({ data }: { data: CityData }) {
         <TornEdge fill="#F5F0EA" position="bottom" />
       </section>
 
-      {/* SECTION 6: TESTIMONIAL */}
-      <section className="relative w-full" style={{ background: "#F5F0EA", padding: "140px 24px" }}>
+      {/* ── SECTION 6: TESTIMONIAL ──────────────────────────────── */}
+      <section
+        className="relative w-full"
+        style={{
+          background: "#F5F0EA",
+          padding: "clamp(80px,10vw,140px) clamp(16px,5vw,24px)",
+        }}
+      >
         <div className="relative max-w-[860px] mx-auto text-center">
           <span
             className="font-display absolute"
             style={{
-              fontSize: 120,
+              fontSize: "clamp(64px,12vw,120px)",
               color: "#3B82F6",
               opacity: 0.2,
-              top: -40,
+              top: -20,
               left: 0,
               lineHeight: 1,
+              pointerEvents: "none",
             }}
           >
             "
@@ -593,7 +770,7 @@ export function CityPage({ data }: { data: CityData }) {
           <p
             className="font-display reveal"
             style={{
-              fontSize: "clamp(24px, 3vw, 36px)",
+              fontSize: "clamp(18px,3vw,36px)",
               color: "var(--ink)",
               fontWeight: 300,
               lineHeight: 1.5,
@@ -608,13 +785,13 @@ export function CityPage({ data }: { data: CityData }) {
               width: 80,
               height: 1,
               background: "rgba(37,99,235,0.3)",
-              margin: "40px auto",
+              margin: "32px auto",
             }}
           />
           <p
             className="reveal"
             style={{
-              fontSize: 14,
+              fontSize: "clamp(11px,1.4vw,14px)",
               color: "#6B6258",
               letterSpacing: "0.05em",
               textTransform: "uppercase",
@@ -625,8 +802,16 @@ export function CityPage({ data }: { data: CityData }) {
         </div>
       </section>
 
-      {/* SECTION 7: CTA */}
-      <section className="cta-section relative w-full h-screen overflow-hidden grid-overlay" style={{ background: "#1C1410" }}>
+      {/* ── SECTION 7: CTA ──────────────────────────────────────── */}
+      <section
+        className="cta-section relative w-full overflow-hidden grid-overlay"
+        style={{
+          background: "#1C1410",
+          minHeight: "clamp(480px,80vh,100vh)",
+          display: "flex",
+          alignItems: "center",
+        }}
+      >
         <div
           className="cta-parallax absolute inset-0"
           style={{
@@ -637,11 +822,14 @@ export function CityPage({ data }: { data: CityData }) {
           }}
         />
         <div className="absolute inset-0" style={{ background: "rgba(28,20,16,0.76)" }} />
-        <div className="relative z-10 h-full flex flex-col items-center justify-center text-center px-6 max-w-[1100px] mx-auto">
+        <div
+          className="relative z-10 w-full flex flex-col items-center justify-center text-center px-5 sm:px-8"
+          style={{ maxWidth: 1100, margin: "0 auto", paddingTop: 80, paddingBottom: 80 }}
+        >
           <h2
             className="font-display reveal"
             style={{
-              fontSize: "clamp(48px, 7vw, 84px)",
+              fontSize: "clamp(36px,7vw,84px)",
               color: "white",
               fontWeight: 300,
               lineHeight: 0.95,
@@ -657,11 +845,11 @@ export function CityPage({ data }: { data: CityData }) {
           <p
             className="reveal"
             style={{
-              fontSize: 17,
+              fontSize: "clamp(14px,2vw,17px)",
               color: "rgba(255,255,255,0.68)",
               maxWidth: 500,
               lineHeight: 1.75,
-              marginTop: 28,
+              marginTop: 24,
             }}
           >
             {data.cta.body}
@@ -670,16 +858,17 @@ export function CityPage({ data }: { data: CityData }) {
             href="/pricing#enquire"
             className="reveal"
             style={{
-              marginTop: 40,
+              marginTop: 36,
               background: "#2563EB",
               color: "white",
               borderRadius: 50,
-              padding: "16px 48px",
-              fontSize: 12,
+              padding: "clamp(12px,1.5vw,16px) clamp(32px,4vw,48px)",
+              fontSize: "clamp(10px,1.2vw,12px)",
               letterSpacing: "0.15em",
               textTransform: "uppercase",
               fontWeight: 500,
               transition: "all 0.25s ease",
+              whiteSpace: "nowrap",
             }}
             onMouseEnter={(e) => {
               e.currentTarget.style.background = "#3B82F6";

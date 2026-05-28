@@ -11,10 +11,13 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as SolutionsRouteImport } from './routes/solutions'
 import { Route as ProductRouteImport } from './routes/product'
+import { Route as PrivacyRouteImport } from './routes/privacy'
+import { Route as PricingRouteImport } from './routes/pricing'
 import { Route as MiceEventsRouteImport } from './routes/mice-events'
 import { Route as CorporateTravelManagementDelhiRouteImport } from './routes/corporate-travel-management-delhi'
 import { Route as CorporateTravelManagementChennaiRouteImport } from './routes/corporate-travel-management-chennai'
 import { Route as CorporateTravelManagementBangaloreRouteImport } from './routes/corporate-travel-management-bangalore'
+import { Route as AboutRouteImport } from './routes/about'
 import { Route as IndexRouteImport } from './routes/index'
 
 const SolutionsRoute = SolutionsRouteImport.update({
@@ -25,6 +28,16 @@ const SolutionsRoute = SolutionsRouteImport.update({
 const ProductRoute = ProductRouteImport.update({
   id: '/product',
   path: '/product',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PrivacyRoute = PrivacyRouteImport.update({
+  id: '/privacy',
+  path: '/privacy',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PricingRoute = PricingRouteImport.update({
+  id: '/pricing',
+  path: '/pricing',
   getParentRoute: () => rootRouteImport,
 } as any)
 const MiceEventsRoute = MiceEventsRouteImport.update({
@@ -50,6 +63,11 @@ const CorporateTravelManagementBangaloreRoute =
     path: '/corporate-travel-management-bangalore',
     getParentRoute: () => rootRouteImport,
   } as any)
+const AboutRoute = AboutRouteImport.update({
+  id: '/about',
+  path: '/about',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
@@ -58,29 +76,38 @@ const IndexRoute = IndexRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/about': typeof AboutRoute
   '/corporate-travel-management-bangalore': typeof CorporateTravelManagementBangaloreRoute
   '/corporate-travel-management-chennai': typeof CorporateTravelManagementChennaiRoute
   '/corporate-travel-management-delhi': typeof CorporateTravelManagementDelhiRoute
   '/mice-events': typeof MiceEventsRoute
+  '/pricing': typeof PricingRoute
+  '/privacy': typeof PrivacyRoute
   '/product': typeof ProductRoute
   '/solutions': typeof SolutionsRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/about': typeof AboutRoute
   '/corporate-travel-management-bangalore': typeof CorporateTravelManagementBangaloreRoute
   '/corporate-travel-management-chennai': typeof CorporateTravelManagementChennaiRoute
   '/corporate-travel-management-delhi': typeof CorporateTravelManagementDelhiRoute
   '/mice-events': typeof MiceEventsRoute
+  '/pricing': typeof PricingRoute
+  '/privacy': typeof PrivacyRoute
   '/product': typeof ProductRoute
   '/solutions': typeof SolutionsRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/about': typeof AboutRoute
   '/corporate-travel-management-bangalore': typeof CorporateTravelManagementBangaloreRoute
   '/corporate-travel-management-chennai': typeof CorporateTravelManagementChennaiRoute
   '/corporate-travel-management-delhi': typeof CorporateTravelManagementDelhiRoute
   '/mice-events': typeof MiceEventsRoute
+  '/pricing': typeof PricingRoute
+  '/privacy': typeof PrivacyRoute
   '/product': typeof ProductRoute
   '/solutions': typeof SolutionsRoute
 }
@@ -88,38 +115,50 @@ export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/about'
     | '/corporate-travel-management-bangalore'
     | '/corporate-travel-management-chennai'
     | '/corporate-travel-management-delhi'
     | '/mice-events'
+    | '/pricing'
+    | '/privacy'
     | '/product'
     | '/solutions'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
+    | '/about'
     | '/corporate-travel-management-bangalore'
     | '/corporate-travel-management-chennai'
     | '/corporate-travel-management-delhi'
     | '/mice-events'
+    | '/pricing'
+    | '/privacy'
     | '/product'
     | '/solutions'
   id:
     | '__root__'
     | '/'
+    | '/about'
     | '/corporate-travel-management-bangalore'
     | '/corporate-travel-management-chennai'
     | '/corporate-travel-management-delhi'
     | '/mice-events'
+    | '/pricing'
+    | '/privacy'
     | '/product'
     | '/solutions'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AboutRoute: typeof AboutRoute
   CorporateTravelManagementBangaloreRoute: typeof CorporateTravelManagementBangaloreRoute
   CorporateTravelManagementChennaiRoute: typeof CorporateTravelManagementChennaiRoute
   CorporateTravelManagementDelhiRoute: typeof CorporateTravelManagementDelhiRoute
   MiceEventsRoute: typeof MiceEventsRoute
+  PricingRoute: typeof PricingRoute
+  PrivacyRoute: typeof PrivacyRoute
   ProductRoute: typeof ProductRoute
   SolutionsRoute: typeof SolutionsRoute
 }
@@ -138,6 +177,20 @@ declare module '@tanstack/react-router' {
       path: '/product'
       fullPath: '/product'
       preLoaderRoute: typeof ProductRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/privacy': {
+      id: '/privacy'
+      path: '/privacy'
+      fullPath: '/privacy'
+      preLoaderRoute: typeof PrivacyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/pricing': {
+      id: '/pricing'
+      path: '/pricing'
+      fullPath: '/pricing'
+      preLoaderRoute: typeof PricingRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/mice-events': {
@@ -168,6 +221,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof CorporateTravelManagementBangaloreRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/about': {
+      id: '/about'
+      path: '/about'
+      fullPath: '/about'
+      preLoaderRoute: typeof AboutRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
@@ -180,11 +240,14 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AboutRoute: AboutRoute,
   CorporateTravelManagementBangaloreRoute:
     CorporateTravelManagementBangaloreRoute,
   CorporateTravelManagementChennaiRoute: CorporateTravelManagementChennaiRoute,
   CorporateTravelManagementDelhiRoute: CorporateTravelManagementDelhiRoute,
   MiceEventsRoute: MiceEventsRoute,
+  PricingRoute: PricingRoute,
+  PrivacyRoute: PrivacyRoute,
   ProductRoute: ProductRoute,
   SolutionsRoute: SolutionsRoute,
 }
