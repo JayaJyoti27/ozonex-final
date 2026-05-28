@@ -153,10 +153,11 @@ export function Nav() {
           display: "flex",
           flexDirection: "column",
           justifyContent: "center",
-          padding: "80px 40px",
+          padding: "60px 24px",
+          overflowY: "auto",
         }}
       >
-        <div ref={linksRef} className="flex flex-col" style={{ gap: 8 }}>
+        <div ref={linksRef} className="flex flex-col" style={{ gap: 4 }}>
           {mainLinks.map((l) => (
             <button
               key={l.href}
@@ -166,15 +167,15 @@ export function Nav() {
                 border: "none",
                 cursor: "pointer",
                 display: "flex",
-                alignItems: "baseline",
-                gap: 20,
-                padding: "16px 0",
+                alignItems: "center",
+                gap: 14,
+                padding: "11px 0",
                 borderBottom: "1px solid rgba(255,255,255,0.06)",
                 textAlign: "left",
               }}
             >
-              <span style={{ fontFamily: "Poppins, sans-serif", fontSize: 11, color: "rgba(255,255,255,0.3)", letterSpacing: "0.1em" }}>{l.n}</span>
-              <span style={{ fontFamily: "'Playfair Display', serif", fontSize: 42, color: "#fff", fontWeight: 300 }}>{l.label}</span>
+              <span style={{ fontFamily: "Poppins, sans-serif", fontSize: 10, color: "rgba(255,255,255,0.3)", letterSpacing: "0.1em", minWidth: 20 }}>{l.n}</span>
+              <span style={{ fontFamily: "'Playfair Display', serif", fontSize: 26, color: "#fff", fontWeight: 300, lineHeight: 1.2 }}>{l.label}</span>
             </button>
           ))}
           <a
@@ -182,13 +183,13 @@ export function Nav() {
             onClick={() => setOpen(false)}
             style={{
               display: "inline-block",
-              marginTop: 32,
+              marginTop: 20,
               background: "#2563EB",
               color: "#fff",
               borderRadius: 50,
-              padding: "14px 40px",
+              padding: "12px 28px",
               fontFamily: "Poppins, sans-serif",
-              fontSize: 12,
+              fontSize: 11,
               letterSpacing: "0.12em",
               textTransform: "uppercase",
               fontWeight: 500,

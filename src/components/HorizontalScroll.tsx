@@ -66,8 +66,7 @@ function DesktopHorizontalScroll() {
 
   useEffect(() => {
     if (!wrap.current || !track.current) return;
-
-    ScrollTrigger.getAll().forEach((t) => t.kill());
+    if (window.innerWidth < 768) return; // skip GSAP on mobile — outer component will swap to MobileFeatureStack
 
     ctxRef.current = gsap.context(() => {
       const total = track.current!.scrollWidth - window.innerWidth;
@@ -119,7 +118,6 @@ function DesktopHorizontalScroll() {
         ctxRef.current.revert();
         ctxRef.current = null;
       }
-      ScrollTrigger.getAll().forEach((t) => t.kill());
     };
   }, []);
 
@@ -233,10 +231,11 @@ function MobileFeatureStack() {
 
 /* ─── EXPORT ─── */
 export function HorizontalScroll() {
-  const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
+  const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
     const check = () => setIsMobile(window.innerWidth < 768);
+    check();
     window.addEventListener("resize", check);
     return () => window.removeEventListener("resize", check);
   }, []);

@@ -95,28 +95,28 @@ gsap.fromTo(".st-p", { y: isMobile ? 16 : 30, opacity: 1 }, {
 
         /* ── TABLET ── */
         @media (max-width: 1024px) {
-          .st-inner { padding: 80px 32px; gap: 24px; }
-          .st-heading { font-size: clamp(40px, 6vw, 80px); }
-          .st-body { max-width: 100%; }
+          .st-overlay {
+            background: linear-gradient(to bottom, rgba(28,20,16,0.82) 0%, rgba(28,20,16,0.95) 100%);
+          }
+          .st-inner {
+            grid-template-columns: 1fr;
+            align-items: flex-start;
+            padding: 100px 32px 80px;
+            gap: 28px;
+          }
+          .st-heading { font-size: clamp(40px, 6vw, 80px); line-height: 1.0; }
+          .st-body { max-width: 560px; }
         }
 
         /* ── MOBILE ── */
         @media (max-width: 768px) {
           .st-section { min-height: auto; }
-          .st-overlay {
-            background: linear-gradient(to bottom, rgba(28,20,16,0.75) 0%, rgba(28,20,16,0.92) 100%);
-          }
-          /* Stack vertically on mobile */
           .st-inner {
-            grid-template-columns: 1fr;
-            align-items: flex-start;
             padding: 100px 20px 80px;
-            gap: 28px;
-            min-height: 100vh;
+            gap: 24px;
           }
           .st-heading {
             font-size: clamp(36px, 9vw, 56px);
-            line-height: 1.0;
           }
           .st-body {
             max-width: 100%;
