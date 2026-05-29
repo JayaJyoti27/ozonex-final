@@ -644,12 +644,14 @@ export function Footer() {
               </a>
 
               <a
-                href="https://wa.me/918139831118"
+                href="https://wa.me/918139831118?text=Hi%2C%20I%20want%20to%20know%20more%20about%20the%20OzoNeX%20Platform"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="footer-link"
+                className="flex items-start gap-3"
+                style={{ color: "rgba(255,255,255,0.8)", fontSize: 14, textDecoration: "none" }}
               >
-                WhatsApp: +91 81398 31118
+                <span style={{ color: "var(--gold)", marginTop: 2 }}>💬</span>
+                <span>WhatsApp: +91 81398 31118</span>
               </a>
 
               <a href="/pricing#enquire" className="footer-enquire">
