@@ -3,5 +3,9 @@
   "name": "ozonex-final",
   "compatibility_date": "2025-09-24",
   "compatibility_flags": ["nodejs_compat"],
-  "pages_build_output_dir": "dist/client",
+  "main": "dist/server/server.js",
+  "assets": {
+    "directory": "dist/client",
+    "binding": "ASSETS",
+  },
 }
