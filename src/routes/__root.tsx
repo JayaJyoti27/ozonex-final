@@ -109,7 +109,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       // FIX #3: Added Poppins font
       {
         rel: "icon",
-        href: "/favicon.png",
+        href: "images/favicon.png",
       },
       {
         rel: "preconnect",
