@@ -137,6 +137,7 @@ export function Hero() {
       >
         <h1 className="hero-heading font-display">
           <span className="block">
+            <span className="hero-word inline-block">Smartest</span>{" "}
             <span className="hero-word inline-block">Corporate</span>{" "}
             <span className="hero-word inline-block">Travel</span>
           </span>
