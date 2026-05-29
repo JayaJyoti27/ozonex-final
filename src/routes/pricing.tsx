@@ -473,7 +473,7 @@ function PricingPage() {
                   <span>{CONTACT_EMAIL}</span>
                 </a>
                 <a
-                  href="https://wa.me/918139831118?text=Hi%2C%20I%20want%20to%20know%20more%20about%20the%20OzoNeX%20Platform"
+                  href="https://wa.me/918139831118?text=Hi%2C%20I%20want%20to%20know%20more%20about%20the%20OzoneX%20Platform"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="flex items-start gap-3"
