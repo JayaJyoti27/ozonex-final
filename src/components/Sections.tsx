@@ -647,7 +647,7 @@ export function Footer() {
                   wordBreak: "break-word",
                 }}
               >
-                tresaj@ozonegroupglobal.com
+                tresaj@ozonegroupglobal
               </a>
 
               <a
