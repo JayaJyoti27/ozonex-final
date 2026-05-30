@@ -639,7 +639,14 @@ export function Footer() {
             <div className="footer-col-heading">Contact</div>
 
             <div className="footer-links">
-              <a href="mailto:tresaj@ozonegroupglobal.com" className="footer-link footer-email">
+              <a
+                href="mailto:tresaj@ozonegroupglobal.com"
+                className="footer-link footer-email"
+                style={{
+                  fontSize: "13px",
+                  wordBreak: "break-word",
+                }}
+              >
                 tresaj@ozonegroupglobal.com
               </a>
 
