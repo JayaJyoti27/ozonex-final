@@ -498,13 +498,13 @@ function ProductPage() {
         <div className="relative max-w-[1320px] mx-auto grid grid-cols-1 lg:grid-cols-2 gap-20">
           <h2
             className="st-headline font-display"
-            style={{ fontSize: "clamp(48px,6vw,88px)", color: "var(--ink)", lineHeight: 0.95 }}
+            style={{ fontSize: "clamp(40px,6vw,88px)", color: "var(--ink)", lineHeight: 0.95 }}
           >
             What takes your
             <br />
-            team days takes
+            team days
             <br />
-            Ozonex seconds
+            Ozonex does in seconds
           </h2>
           <div className="flex flex-col gap-6" style={{ maxWidth: 480 }}>
             <p

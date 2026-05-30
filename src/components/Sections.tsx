@@ -650,7 +650,6 @@ export function Footer() {
                 className="flex items-start gap-3"
                 style={{ color: "rgba(255,255,255,0.8)", fontSize: 14, textDecoration: "none" }}
               >
-                <span style={{ color: "var(--gold)", marginTop: 2 }}>💬</span>
                 <span>WhatsApp: +91 81398 31118</span>
               </a>
 
