@@ -247,8 +247,7 @@ function Hero() {
       <div
         className="absolute inset-0"
         style={{
-          background:
-            "linear-gradient(rgba(28,20,16,0.55) 0%, rgba(28,20,16,0.82) 100%)",
+          background: "linear-gradient(rgba(28,20,16,0.55) 0%, rgba(28,20,16,0.82) 100%)",
           zIndex: 1,
         }}
       />
@@ -287,12 +286,14 @@ function Hero() {
         <div
           ref={eyebrowRef}
           style={{
-            color: "#3B82F6",
-            opacity: 0.95,
-            letterSpacing: "0.22em",
-            marginBottom: "20px",
-            fontSize: "12px",
+            fontFamily: "Inter",
+            fontSize: 11,
+            letterSpacing: "0.18em",
             textTransform: "uppercase",
+            color: "rgba(255,255,255,0.6)",
+            marginTop: 55,
+            marginBottom: 24,
+            fontWeight: 500,
           }}
         >
           MICE & EVENTS
@@ -324,10 +325,9 @@ function Hero() {
               marginTop: "28px",
             }}
           >
-            From 50-person offsites to 5,000-delegate global conferences,
-            Ozonex manages every logistical layer — travel, accommodation,
-            ground movement, and event operations — in one coordinated
-            platform.
+            From 50-person offsites to 5,000-delegate global conferences, Ozonex manages every
+            logistical layer — travel, accommodation, ground movement, and event operations — in one
+            coordinated platform.
           </p>
 
           {/* Pills */}
@@ -357,14 +357,11 @@ function Hero() {
                 }}
                 onMouseEnter={(e) => {
                   e.currentTarget.style.borderColor = "#3B82F6";
-                  e.currentTarget.style.background =
-                    "rgba(37,99,235,0.14)";
+                  e.currentTarget.style.background = "rgba(37,99,235,0.14)";
                 }}
                 onMouseLeave={(e) => {
-                  e.currentTarget.style.borderColor =
-                    "rgba(255,255,255,0.18)";
-                  e.currentTarget.style.background =
-                    "rgba(255,255,255,0.06)";
+                  e.currentTarget.style.borderColor = "rgba(255,255,255,0.18)";
+                  e.currentTarget.style.background = "rgba(255,255,255,0.06)";
                 }}
               >
                 {p}
@@ -403,10 +400,7 @@ function Hero() {
   );
 }
 
-
-
 /* ---------------- 2. SCALE STATEMENT ---------------- */
-
 
 function ScaleStatement() {
   const headRef = useRef<HTMLDivElement>(null);
@@ -493,8 +487,7 @@ function ScaleStatement() {
           zIndex: 2,
           gap: "clamp(40px, 6vw, 80px)",
           minHeight: "90vh",
-          padding:
-            "clamp(80px, 10vw, 140px) clamp(20px, 5vw, 80px)",
+          padding: "clamp(80px, 10vw, 140px) clamp(20px, 5vw, 80px)",
         }}
       >
         {/* Left Content */}
@@ -524,11 +517,9 @@ function ScaleStatement() {
               fontSize: "clamp(14px, 2vw, 16px)",
             }}
           >
-            The best corporate events are not just logistical
-            achievements. They are moments that shift culture,
-            reward performance, and demonstrate what an organisation
-            truly values. Ozonex makes the logistics invisible —
-            so the experience is all that anyone remembers.
+            The best corporate events are not just logistical achievements. They are moments that
+            shift culture, reward performance, and demonstrate what an organisation truly values.
+            Ozonex makes the logistics invisible — so the experience is all that anyone remembers.
           </p>
         </div>
 
@@ -542,10 +533,7 @@ function ScaleStatement() {
           }}
         >
           {stats.map((s) => (
-            <div
-              key={s.l}
-              className="w-full lg:text-right"
-            >
+            <div key={s.l} className="w-full lg:text-right">
               <div
                 className="font-display text-white"
                 style={{
@@ -581,8 +569,6 @@ function ScaleStatement() {
     </section>
   );
 }
-
-
 
 /* ---------------- 3. FOUR EVENT VERTICALS ---------------- */
 
@@ -646,23 +632,17 @@ function EditorialBlock({
 
   const bg = dark ? "#1C1410" : "#F5F0EA";
   const fg = dark ? "#fff" : "var(--ink)";
-  const muted = dark
-    ? "rgba(255,255,255,0.68)"
-    : "#6B6258";
+  const muted = dark ? "rgba(255,255,255,0.68)" : "#6B6258";
 
   return (
     <section
       id={id}
-      className={`relative overflow-hidden ${
-        dark ? "grid-overlay" : ""
-      }`}
+      className={`relative overflow-hidden ${dark ? "grid-overlay" : ""}`}
       style={{
         background: bg,
       }}
     >
-      {dark && (
-        <TornEdge fill="#1C1410" position="top" />
-      )}
+      {dark && <TornEdge fill="#1C1410" position="top" />}
 
       <div
         className="grid grid-cols-1 lg:grid-cols-2"
@@ -673,9 +653,7 @@ function EditorialBlock({
         {/* Image */}
         <div
           ref={photoRef}
-          className={`relative ${
-            photoLeft ? "lg:order-1" : "lg:order-2"
-          }`}
+          className={`relative ${photoLeft ? "lg:order-1" : "lg:order-2"}`}
           style={{
             minHeight: "clamp(320px, 50vw, 700px)",
           }}
@@ -691,12 +669,9 @@ function EditorialBlock({
         {/* Content */}
         <div
           ref={contentRef}
-          className={`flex flex-col justify-center ${
-            photoLeft ? "lg:order-2" : "lg:order-1"
-          }`}
+          className={`flex flex-col justify-center ${photoLeft ? "lg:order-2" : "lg:order-1"}`}
           style={{
-            padding:
-              "clamp(60px, 8vw, 120px) clamp(20px, 5vw, 80px)",
+            padding: "clamp(60px, 8vw, 120px) clamp(20px, 5vw, 80px)",
           }}
         >
           {/* Eyebrow */}
@@ -755,9 +730,7 @@ function EditorialBlock({
         </div>
       </div>
 
-      {dark && (
-        <TornEdge fill="#F5F0EA" position="bottom" />
-      )}
+      {dark && <TornEdge fill="#F5F0EA" position="bottom" />}
     </section>
   );
 }
@@ -768,22 +741,10 @@ function EditorialBlock({
 
 function CorporateBlock() {
   const rows = [
-    [
-      "Multi-venue coordination",
-      "Simultaneous management of multiple sites",
-    ],
-    [
-      "Delegate travel booking",
-      "Policy-compliant group fares in one batch",
-    ],
-    [
-      "Real-time attendance tracking",
-      "Live headcount and logistics dashboard",
-    ],
-    [
-      "Post-event spend reporting",
-      "Full cost breakdown within 24 hours of close",
-    ],
+    ["Multi-venue coordination", "Simultaneous management of multiple sites"],
+    ["Delegate travel booking", "Policy-compliant group fares in one batch"],
+    ["Real-time attendance tracking", "Live headcount and logistics dashboard"],
+    ["Post-event spend reporting", "Full cost breakdown within 24 hours of close"],
   ];
 
   return (
@@ -810,8 +771,7 @@ function CorporateBlock() {
             className="flex flex-col sm:flex-row sm:items-center sm:justify-between"
             style={{
               padding: "18px 0",
-              borderBottom:
-                "1px solid rgba(37,99,235,0.18)",
+              borderBottom: "1px solid rgba(37,99,235,0.18)",
               gap: "10px",
             }}
           >
@@ -869,18 +829,9 @@ function ConferencesBlock() {
   }, []);
 
   const boxes = [
-    [
-      "BATCH GROUP BOOKING",
-      "Upload a delegate list. Ozonex generates individual itineraries.",
-    ],
-    [
-      "ARRIVAL COORDINATION",
-      "Live dashboard showing confirmed arrivals and transfers.",
-    ],
-    [
-      "ON-GROUND COMMUNICATION",
-      "Automated itinerary delivery via SMS, email, and app.",
-    ],
+    ["BATCH GROUP BOOKING", "Upload a delegate list. Ozonex generates individual itineraries."],
+    ["ARRIVAL COORDINATION", "Live dashboard showing confirmed arrivals and transfers."],
+    ["ON-GROUND COMMUNICATION", "Automated itinerary delivery via SMS, email, and app."],
   ];
 
   return (
@@ -912,12 +863,9 @@ function ConferencesBlock() {
           <div
             key={t}
             style={{
-              border:
-                "1px solid rgba(255,255,255,0.08)",
-              background:
-                "rgba(255,255,255,0.03)",
-              padding:
-                "clamp(20px, 4vw, 28px)",
+              border: "1px solid rgba(255,255,255,0.08)",
+              background: "rgba(255,255,255,0.03)",
+              padding: "clamp(20px, 4vw, 28px)",
             }}
           >
             <div
@@ -1008,22 +956,10 @@ function IncentiveBlock() {
 
 function GroupBlock() {
   const items = [
-    [
-      "Centralised movement",
-      "Track entire group movement from one dashboard",
-    ],
-    [
-      "Rooming list automation",
-      "Auto-allocate accommodation at scale",
-    ],
-    [
-      "Transport coordination",
-      "Assign buses, cars, and airport transfers instantly",
-    ],
-    [
-      "Live communication",
-      "Broadcast updates to all delegates in real time",
-    ],
+    ["Centralised movement", "Track entire group movement from one dashboard"],
+    ["Rooming list automation", "Auto-allocate accommodation at scale"],
+    ["Transport coordination", "Assign buses, cars, and airport transfers instantly"],
+    ["Live communication", "Broadcast updates to all delegates in real time"],
   ];
 
   return (
@@ -1055,8 +991,7 @@ function GroupBlock() {
             key={title}
             style={{
               paddingBottom: "18px",
-              borderBottom:
-                "1px solid rgba(255,255,255,0.08)",
+              borderBottom: "1px solid rgba(255,255,255,0.08)",
             }}
           >
             <div
@@ -1088,7 +1023,6 @@ function GroupBlock() {
 
 /* ---------------- 4. PROCESS ---------------- */
 
-
 function ProcessSection() {
   const steps = [
     {
@@ -1096,55 +1030,35 @@ function ProcessSection() {
       t: "Define the Event",
       b: "Your ops team submits the event brief through Ozonex — delegate count, destination, dates, accommodation tier, ground transport requirements, and budget ceiling.",
       img: s1,
-      tags: [
-        "Delegate Count",
-        "Budget Ceiling",
-        "Accommodation Tier",
-      ],
+      tags: ["Delegate Count", "Budget Ceiling", "Accommodation Tier"],
     },
     {
       n: 2,
       t: "Invite and Capture",
       b: "Delegates receive personalised onboarding links and submit preferences, passport details, and requirements.",
       img: s2,
-      tags: [
-        "Preference Capture",
-        "Passport Upload",
-        "Dietary Requirements",
-      ],
+      tags: ["Preference Capture", "Passport Upload", "Dietary Requirements"],
     },
     {
       n: 3,
       t: "Book. Assign. Confirm.",
       b: "Ozonex generates optimal group itineraries and confirms bookings automatically.",
       img: s3,
-      tags: [
-        "Batch Booking",
-        "Policy-Compliant",
-        "Auto-Confirmation",
-      ],
+      tags: ["Batch Booking", "Policy-Compliant", "Auto-Confirmation"],
     },
     {
       n: 4,
       t: "The Day Runs Itself",
       b: "Live operations dashboard shows every delegate’s status and transfer assignments in real time.",
       img: s4,
-      tags: [
-        "Live Flight Tracking",
-        "Auto-Reschedule",
-        "Ground Transfer Dashboard",
-      ],
+      tags: ["Live Flight Tracking", "Auto-Reschedule", "Ground Transfer Dashboard"],
     },
     {
       n: 5,
       t: "Close the Books Fast",
       b: "Complete event spend reports are generated within 48 hours of close.",
       img: s5,
-      tags: [
-        "Per-Delegate Costs",
-        "GL-Ready Export",
-        "48-Hour Close",
-      ],
+      tags: ["Per-Delegate Costs", "GL-Ready Export", "48-Hour Close"],
     },
   ];
 
@@ -1152,8 +1066,7 @@ function ProcessSection() {
     <section
       style={{
         background: "var(--cream)",
-        padding:
-          "clamp(80px, 10vw, 160px) clamp(20px, 5vw, 80px)",
+        padding: "clamp(80px, 10vw, 160px) clamp(20px, 5vw, 80px)",
         overflow: "hidden",
       }}
     >
@@ -1203,9 +1116,8 @@ function ProcessSection() {
             marginInline: "auto",
           }}
         >
-          Every event moves through the same critical phases.
-          Ozonex gives your ops team a structured workflow
-          for each.
+          Every event moves through the same critical phases. Ozonex gives your ops team a
+          structured workflow for each.
         </p>
       </div>
 
@@ -1218,14 +1130,9 @@ function ProcessSection() {
       >
         {steps.map((s, i) => (
           <div key={s.n}>
-            <ProcessStep
-              step={s}
-              reverse={i % 2 === 1}
-            />
+            <ProcessStep step={s} reverse={i % 2 === 1} />
 
-            {i < steps.length - 1 && (
-              <Squiggle flip={i % 2 === 1} />
-            )}
+            {i < steps.length - 1 && <Squiggle flip={i % 2 === 1} />}
           </div>
         ))}
       </div>
@@ -1361,9 +1268,7 @@ function ProcessStep({
       {/* Image */}
       <div
         ref={photoRef}
-        className={
-          reverse ? "lg:order-1" : "lg:order-2"
-        }
+        className={reverse ? "lg:order-1" : "lg:order-2"}
         style={{
           minHeight: "clamp(280px, 45vw, 520px)",
         }}
@@ -1380,12 +1285,7 @@ function ProcessStep({
       </div>
 
       {/* Content */}
-      <div
-        ref={contentRef}
-        className={
-          reverse ? "lg:order-2" : "lg:order-1"
-        }
-      >
+      <div ref={contentRef} className={reverse ? "lg:order-2" : "lg:order-1"}>
         {/* Number */}
         <div
           ref={numRef}
@@ -1460,10 +1360,7 @@ function ProcessStep({
   );
 }
 
-
-
 /* ---------------- 5. PINNED HORIZONTAL CAPABILITIES ---------------- */
-
 
 function CapabilitiesScroll() {
   const wrapRef = useRef<HTMLDivElement>(null);
@@ -1471,18 +1368,11 @@ function CapabilitiesScroll() {
   const lineRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    if (
-      !wrapRef.current ||
-      !trackRef.current ||
-      window.innerWidth < 1024
-    )
-      return;
+    if (!wrapRef.current || !trackRef.current || window.innerWidth < 1024) return;
 
-    const panels =
-      trackRef.current.querySelectorAll(".cap-panel");
+    const panels = trackRef.current.querySelectorAll(".cap-panel");
 
-    const scrollAmt =
-      (panels.length - 1) * window.innerWidth;
+    const scrollAmt = (panels.length - 1) * window.innerWidth;
 
     const ctx = gsap.context(() => {
       const tween = gsap.to(trackRef.current, {
@@ -1531,8 +1421,7 @@ function CapabilitiesScroll() {
         </>
       ),
       h: "DELEGATE MANAGEMENT",
-      body:
-        "The Ozonex delegate management module handles groups from 10 to 10,000.",
+      body: "The Ozonex delegate management module handles groups from 10 to 10,000.",
       caps: [
         "Bulk delegate upload via CSV or HRIS sync",
         "Individual delegate portals",
@@ -1551,13 +1440,8 @@ function CapabilitiesScroll() {
         </>
       ),
       h: "BUDGET CONTROL",
-      body:
-        "Ozonex shows live budget burn throughout the planning and execution period.",
-      caps: [
-        "Live spend tracking",
-        "Per-delegate cost tracking",
-        "One-click GL export",
-      ],
+      body: "Ozonex shows live budget burn throughout the planning and execution period.",
+      caps: ["Live spend tracking", "Per-delegate cost tracking", "One-click GL export"],
     },
     {
       letter: "V",
@@ -1571,13 +1455,8 @@ function CapabilitiesScroll() {
         </>
       ),
       h: "VENDOR COORDINATION",
-      body:
-        "Ozonex coordinates your preferred event vendors through a unified layer.",
-      caps: [
-        "Room block management",
-        "Group airline coordination",
-        "Ground transport scheduling",
-      ],
+      body: "Ozonex coordinates your preferred event vendors through a unified layer.",
+      caps: ["Room block management", "Group airline coordination", "Ground transport scheduling"],
     },
   ];
 
@@ -1594,8 +1473,7 @@ function CapabilitiesScroll() {
       {/* Heading */}
       <div
         style={{
-          padding:
-            "clamp(80px, 10vw, 120px) clamp(20px, 5vw, 80px) clamp(40px, 6vw, 60px)",
+          padding: "clamp(80px, 10vw, 120px) clamp(20px, 5vw, 80px) clamp(40px, 6vw, 60px)",
         }}
       >
         <div
@@ -1650,10 +1528,8 @@ function CapabilitiesScroll() {
               style={{
                 width: "100vw",
                 height: "100vh",
-                padding:
-                  "80px clamp(40px, 8vw, 100px)",
-                background:
-                  "rgba(255,255,255,0.02)",
+                padding: "80px clamp(40px, 8vw, 100px)",
+                background: "rgba(255,255,255,0.02)",
               }}
             >
               {/* Background Letter */}
@@ -1704,10 +1580,8 @@ function CapabilitiesScroll() {
 
                 <p
                   style={{
-                    color:
-                      "rgba(255,255,255,0.65)",
-                    fontSize:
-                      "clamp(14px, 2vw, 16px)",
+                    color: "rgba(255,255,255,0.65)",
+                    fontSize: "clamp(14px, 2vw, 16px)",
                     lineHeight: 1.9,
                     maxWidth: "620px",
                     marginTop: "28px",
@@ -1727,8 +1601,7 @@ function CapabilitiesScroll() {
                     <div
                       key={c}
                       style={{
-                        borderLeft:
-                          "2px solid #2563EB",
+                        borderLeft: "2px solid #2563EB",
                         paddingLeft: "18px",
                         color: "#fff",
                         fontSize: "15px",
@@ -1749,8 +1622,7 @@ function CapabilitiesScroll() {
           className="relative"
           style={{
             height: 2,
-            background:
-              "rgba(255,255,255,0.1)",
+            background: "rgba(255,255,255,0.1)",
           }}
         >
           <div
@@ -1773,10 +1645,8 @@ function CapabilitiesScroll() {
           <div
             key={p.h}
             style={{
-              padding:
-                "60px 20px",
-              borderTop:
-                "1px solid rgba(255,255,255,0.06)",
+              padding: "60px 20px",
+              borderTop: "1px solid rgba(255,255,255,0.06)",
               position: "relative",
             }}
           >
@@ -1812,8 +1682,7 @@ function CapabilitiesScroll() {
             <h3
               className="font-display text-white"
               style={{
-                fontSize:
-                  "clamp(30px, 8vw, 42px)",
+                fontSize: "clamp(30px, 8vw, 42px)",
                 lineHeight: 1,
                 fontWeight: 300,
                 marginTop: "18px",
@@ -1826,8 +1695,7 @@ function CapabilitiesScroll() {
 
             <p
               style={{
-                color:
-                  "rgba(255,255,255,0.65)",
+                color: "rgba(255,255,255,0.65)",
                 fontSize: "14px",
                 lineHeight: 1.9,
                 marginTop: "24px",
@@ -1851,8 +1719,7 @@ function CapabilitiesScroll() {
                 <div
                   key={c}
                   style={{
-                    borderLeft:
-                      "2px solid #2563EB",
+                    borderLeft: "2px solid #2563EB",
                     paddingLeft: "16px",
                     color: "#fff",
                     fontSize: "14px",
@@ -1869,8 +1736,6 @@ function CapabilitiesScroll() {
     </section>
   );
 }
-
-
 
 /* ---------------- 6. EVENT TYPES GRID ---------------- */
 
@@ -1935,8 +1800,7 @@ function EventTypesGrid() {
       className="relative overflow-hidden"
       style={{
         background: "var(--cream)",
-        padding:
-          "clamp(80px, 10vw, 160px) 0",
+        padding: "clamp(80px, 10vw, 160px) 0",
       }}
     >
       {/* Top Torn */}
@@ -1948,8 +1812,7 @@ function EventTypesGrid() {
         style={{
           maxWidth: "760px",
           paddingInline: "20px",
-          marginBottom:
-            "clamp(50px, 8vw, 100px)",
+          marginBottom: "clamp(50px, 8vw, 100px)",
         }}
       >
         <h2
@@ -1976,17 +1839,13 @@ function EventTypesGrid() {
             marginInline: "auto",
           }}
         >
-          From intimate leadership retreats to global
-          multi-city roadshows — if it involves moving
+          From intimate leadership retreats to global multi-city roadshows — if it involves moving
           people for business, Ozonex manages it.
         </p>
       </div>
 
       {/* Grid */}
-      <div
-        ref={gridRef}
-        className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3"
-      >
+      <div ref={gridRef} className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
         {tiles.map((tile) => (
           <Tile key={tile.t} tile={tile} />
         ))}
@@ -2028,9 +1887,7 @@ function Tile({
         loading="lazy"
         className="absolute inset-0 w-full h-full object-cover transition-transform"
         style={{
-          transform: hover
-            ? "scale(1.06)"
-            : "scale(1)",
+          transform: hover ? "scale(1.06)" : "scale(1)",
           transitionDuration: "700ms",
           filter: "brightness(0.72)",
         }}
@@ -2052,11 +1909,8 @@ function Tile({
         className="absolute inset-0 flex flex-col justify-end"
         style={{
           zIndex: 2,
-          padding:
-            "clamp(20px, 4vw, 32px)",
-          transform: hover
-            ? "translateY(-8px)"
-            : "translateY(0)",
+          padding: "clamp(20px, 4vw, 32px)",
+          transform: hover ? "translateY(-8px)" : "translateY(0)",
           transitionDuration: "400ms",
         }}
       >
@@ -2081,12 +1935,8 @@ function Tile({
             maxWidth: "90%",
             marginTop: "14px",
             opacity: hover ? 1 : 0.9,
-            transform:
-              hover || window.innerWidth < 768
-                ? "translateY(0)"
-                : "translateY(10px)",
-            transition:
-              "all 400ms ease",
+            transform: hover || window.innerWidth < 768 ? "translateY(0)" : "translateY(10px)",
+            transition: "all 400ms ease",
           }}
         >
           {tile.d}
@@ -2095,8 +1945,6 @@ function Tile({
     </div>
   );
 }
-
-
 
 /* ---------------- 7. WHY ---------------- */
 
@@ -2130,8 +1978,7 @@ function WhyMice() {
       className="relative overflow-hidden"
       style={{
         background: "#1C1410",
-        padding:
-          "clamp(80px, 10vw, 160px) clamp(20px, 5vw, 80px)",
+        padding: "clamp(80px, 10vw, 160px) clamp(20px, 5vw, 80px)",
       }}
     >
       {/* Top Torn */}
@@ -2187,11 +2034,9 @@ function WhyMice() {
               fontSize: "clamp(14px, 2vw, 16px)",
             }}
           >
-            Event planners are exceptional at designing
-            experiences. What exhausts them is the operational
-            machinery underneath — the booking spreadsheets,
-            delegate email chains, hotel reallocations, and
-            finance reconciliation.
+            Event planners are exceptional at designing experiences. What exhausts them is the
+            operational machinery underneath — the booking spreadsheets, delegate email chains,
+            hotel reallocations, and finance reconciliation.
           </p>
 
           {/* Quote */}
@@ -2211,8 +2056,7 @@ function WhyMice() {
                 fontStyle: "italic",
               }}
             >
-              "The ops team ran our 800-person annual
-              conference from one screen. Every delegate
+              "The ops team ran our 800-person annual conference from one screen. Every delegate
               arrived on time."
             </p>
 
@@ -2224,8 +2068,7 @@ function WhyMice() {
                 letterSpacing: "0.04em",
               }}
             >
-              Head of Events, Diversified Conglomerate,
-              UAE
+              Head of Events, Diversified Conglomerate, UAE
             </div>
           </div>
         </div>
@@ -2256,27 +2099,14 @@ function WhyMice() {
             }}
           >
             {[
-              [
-                "800",
-                "+",
-                "MAX DELEGATES IN SINGLE EVENT",
-              ],
-              [
-                "48",
-                " hrs",
-                "FULL RECONCILIATION AFTER CLOSE",
-              ],
-              [
-                "1",
-                "",
-                "PLATFORM FOR EVERY EVENT FUNCTION",
-              ],
+              ["800", "+", "MAX DELEGATES IN SINGLE EVENT"],
+              ["48", " hrs", "FULL RECONCILIATION AFTER CLOSE"],
+              ["1", "", "PLATFORM FOR EVERY EVENT FUNCTION"],
             ].map(([n, suf, l]) => (
               <div
                 key={l}
                 style={{
-                  borderTop:
-                    "1px solid rgba(255,255,255,0.07)",
+                  borderTop: "1px solid rgba(255,255,255,0.07)",
                   paddingTop: "22px",
                   paddingBottom: "22px",
                 }}
@@ -2284,23 +2114,17 @@ function WhyMice() {
                 <div
                   className="font-display text-white"
                   style={{
-                    fontSize:
-                      "clamp(34px, 6vw, 48px)",
+                    fontSize: "clamp(34px, 6vw, 48px)",
                     fontWeight: 300,
                     lineHeight: 1,
                   }}
                 >
-                  <CountUp
-                    to={Number(n)}
-                    suffix={suf}
-                    className="font-display text-white"
-                  />
+                  <CountUp to={Number(n)} suffix={suf} className="font-display text-white" />
                 </div>
 
                 <div
                   style={{
-                    color:
-                      "rgba(255,255,255,0.45)",
+                    color: "rgba(255,255,255,0.45)",
                     fontSize: "11px",
                     letterSpacing: "0.1em",
                     textTransform: "uppercase",
@@ -2347,10 +2171,7 @@ function CTA() {
       );
     }
 
-    if (
-      photoRef.current &&
-      window.innerWidth > 768
-    ) {
+    if (photoRef.current && window.innerWidth > 768) {
       gsap.to(photoRef.current, {
         yPercent: 20,
         ease: "none",
@@ -2375,22 +2196,21 @@ function CTA() {
     >
       {/* Background Image */}
       <img
-  ref={photoRef}
-  src={ctaImg}
-  alt="Empty stage before event"
-  loading="lazy"
-  className="absolute inset-0 w-full h-full md:h-[120%] object-cover"
-  style={{
-    zIndex: 0,
-  }}
-/>
+        ref={photoRef}
+        src={ctaImg}
+        alt="Empty stage before event"
+        loading="lazy"
+        className="absolute inset-0 w-full h-full md:h-[120%] object-cover"
+        style={{
+          zIndex: 0,
+        }}
+      />
 
       {/* Overlay */}
       <div
         className="absolute inset-0"
         style={{
-          background:
-            "rgba(28,20,16,0.74)",
+          background: "rgba(28,20,16,0.74)",
           zIndex: 1,
         }}
       />
@@ -2423,8 +2243,7 @@ function CTA() {
           zIndex: 3,
           maxWidth: "1000px",
           width: "100%",
-          padding:
-            "0 clamp(20px, 5vw, 80px)",
+          padding: "0 clamp(20px, 5vw, 80px)",
         }}
       >
         {/* Title */}
@@ -2441,19 +2260,16 @@ function CTA() {
         {/* Paragraph */}
         <p
           style={{
-            color:
-              "rgba(255,255,255,0.72)",
-            fontSize:
-              "clamp(14px, 2vw, 17px)",
+            color: "rgba(255,255,255,0.72)",
+            fontSize: "clamp(14px, 2vw, 17px)",
             lineHeight: 1.85,
             maxWidth: "620px",
             marginInline: "auto",
             marginTop: "30px",
           }}
         >
-          Tell us your event type, delegate count,
-          and timeline. Our MICE team will show you
-          exactly how Ozonex would run it.
+          Tell us your event type, delegate count, and timeline. Our MICE team will show you exactly
+          how Ozonex would run it.
         </p>
 
         {/* Buttons */}
@@ -2473,26 +2289,20 @@ function CTA() {
               color: "#fff",
               border: "none",
               borderRadius: "999px",
-              padding:
-                "16px clamp(28px, 5vw, 48px)",
+              padding: "16px clamp(28px, 5vw, 48px)",
               fontSize: "12px",
               letterSpacing: "0.15em",
               textTransform: "uppercase",
               fontWeight: 500,
               cursor: "pointer",
-              
             }}
             onMouseEnter={(e) => {
-              e.currentTarget.style.background =
-                "#3B82F6";
-              e.currentTarget.style.transform =
-                "scale(1.02)";
+              e.currentTarget.style.background = "#3B82F6";
+              e.currentTarget.style.transform = "scale(1.02)";
             }}
             onMouseLeave={(e) => {
-              e.currentTarget.style.background =
-                "#2563EB";
-              e.currentTarget.style.transform =
-                "scale(1)";
+              e.currentTarget.style.background = "#2563EB";
+              e.currentTarget.style.transform = "scale(1)";
             }}
           >
             PLAN YOUR EVENT
@@ -2504,25 +2314,20 @@ function CTA() {
             style={{
               background: "transparent",
               color: "#fff",
-              border:
-                "1px solid rgba(255,255,255,0.4)",
+              border: "1px solid rgba(255,255,255,0.4)",
               borderRadius: "999px",
-              padding:
-                "16px clamp(28px, 5vw, 48px)",
+              padding: "16px clamp(28px, 5vw, 48px)",
               fontSize: "12px",
               letterSpacing: "0.15em",
               textTransform: "uppercase",
               fontWeight: 500,
               cursor: "pointer",
-             
             }}
             onMouseEnter={(e) => {
-              e.currentTarget.style.background =
-                "rgba(255,255,255,0.08)";
+              e.currentTarget.style.background = "rgba(255,255,255,0.08)";
             }}
             onMouseLeave={(e) => {
-              e.currentTarget.style.background =
-                "transparent";
+              e.currentTarget.style.background = "transparent";
             }}
           >
             GET A MICE BRIEF
@@ -2532,5 +2337,3 @@ function CTA() {
     </section>
   );
 }
-
-

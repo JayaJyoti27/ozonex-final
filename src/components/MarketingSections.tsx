@@ -688,9 +688,7 @@ export function PricingTeaser() {
           NO SURPRISES.
         </h2>
 
-        <p className="pricing-text">
-          Plans that scale with your organisation. No hidden charges. Just one simple monthly fee.
-        </p>
+        <p className="pricing-text">Plans that scale with your organisation. No hidden charges.</p>
 
         <div className="pricing-btn-wrap">
           <Link to="/pricing" hash="enquire" className="pricing-btn">

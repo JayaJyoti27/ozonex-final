@@ -113,7 +113,8 @@ export function Hero() {
             style={{
               backgroundImage: `url(${jet})`,
               backgroundSize: "cover",
-              backgroundPosition: "center",
+              backgroundPosition: "center 90%",
+
               maskImage: "url(/images/world.svg)",
               WebkitMaskImage: "url(/images/world.svg)",
               maskSize: "contain",
@@ -122,8 +123,12 @@ export function Hero() {
               WebkitMaskRepeat: "no-repeat",
               maskPosition: "center",
               WebkitMaskPosition: "center",
-              mixBlendMode: "luminosity",
-              opacity: 0.85,
+
+              opacity: 0.78,
+              mixBlendMode: "normal",
+              filter: "contrast(1.05)",
+
+              zIndex: 2,
               willChange: "transform",
             }}
           />
@@ -195,13 +200,15 @@ export function Hero() {
         />
       </svg>
 
-      <style>{`
+      <style>
+        {`
         /* =========================
            HERO SECTION
         ========================== */
 
         .hero-section {
           min-height: 100vh;
+          margin-bottom: -1px;
         }
 
         .hero-text {
@@ -215,8 +222,9 @@ export function Hero() {
         ========================== */
 
         .map-container {
-          opacity: 1;
-        }
+  opacity: 1;
+  padding-top: 30px;
+}
 
         .map-inner {
           position: relative;
@@ -226,9 +234,14 @@ export function Hero() {
         }
 
         .map-layer {
-          position: absolute;
-          inset: 0;
-        }
+  position: absolute;
+  inset: 0;
+}
+
+.map-layer:first-child {
+  opacity: 0.88;
+  background-color: var(--sand);
+}
 
         /* =========================
            ASTERISKS
@@ -496,8 +509,8 @@ export function Hero() {
           .hero-trust {
             font-size: 10px;
           }
-        }
-      `}</style>
+        `}
+      </style>
     </section>
   );
 }

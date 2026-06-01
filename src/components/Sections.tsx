@@ -638,26 +638,32 @@ export function Footer() {
           <div className="footer-col">
             <div className="footer-col-heading">Contact</div>
 
-            <div className="footer-links">
+            <div className="footer-links flex flex-col gap-3">
               <a
                 href="mailto:tresaj@ozonegroupglobal.com"
                 className="footer-link footer-email"
                 style={{
-                  fontSize: "13px",
-                  wordBreak: "break-word",
+                  fontSize: "12px",
+                  whiteSpace: "nowrap", // prevent breaking
+                  display: "inline-block",
                 }}
               >
-                tresaj@ozonegroupglobal
+                tresaj@ozonegroupglobal.com
               </a>
 
               <a
                 href="https://wa.me/918139831118?text=Hi%2C%20I%20want%20to%20know%20more%20about%20the%20OzoneX%20Platform"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-start gap-3"
-                style={{ color: "rgba(255,255,255,0.8)", fontSize: 14, textDecoration: "none" }}
+                style={{
+                  color: "rgba(255,255,255,0.8)",
+                  fontSize: "12px",
+                  textDecoration: "none",
+                  whiteSpace: "nowrap", // keep whole number in one line
+                  display: "inline-block",
+                }}
               >
-                <span>WhatsApp: +91 81398 31118</span>
+                WhatsApp: +91 81398 31118
               </a>
 
               <a href="/pricing#enquire" className="footer-enquire">

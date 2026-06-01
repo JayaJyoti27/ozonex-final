@@ -284,7 +284,7 @@ function PricingPage() {
           className="hero-fade mt-8 flex flex-wrap justify-center gap-6"
           style={{ fontSize: 13, color: "rgba(255,255,255,0.45)", letterSpacing: "0.08em" }}
         >
-          {["IATA Certified", "Est. 2014", "5 Offices"].map((t) => (
+          {["IATA Accredited", "Est. 2014", "6 Offices"].map((t) => (
             <span key={t} className="flex items-center gap-2">
               <span style={{ color: "var(--gold)" }}>✦</span> {t}
             </span>
@@ -539,7 +539,7 @@ function PricingPage() {
               }}
             >
               <div className="flex flex-wrap gap-4">
-                {["IATA Certified", "Est. 2014", "9 Markets", "24/7 Support"].map((b) => (
+                {["IATA Accredited", "Est. 2014", "9 Markets", "24/7 Support"].map((b) => (
                   <span
                     key={b}
                     style={{
