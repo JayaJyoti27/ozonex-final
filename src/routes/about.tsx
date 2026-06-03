@@ -44,7 +44,7 @@ const milestones = [
   },
   {
     year: "2018",
-    event: "Achieved IATA certification.",
+    event: "Achieved IATA Accreditation.",
   },
   {
     year: "2020",
