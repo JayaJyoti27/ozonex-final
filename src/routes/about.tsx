@@ -226,7 +226,7 @@ function AboutPage() {
         </p>
 
         <div className="hero-fade about-tags">
-          {["IATA Certified", "Est. 2014", "5 Countries", "6 Global Offices", "24/7 Support"].map(
+          {["IATA Accredited", "Est. 2014", "3 Countries", "6 Global Offices", "24/7 Support"].map(
             (t) => (
               <span key={t} className="about-tag">
                 <span className="about-tag-dot">✦</span>
@@ -271,7 +271,7 @@ function AboutPage() {
             { num: "2014", label: "Year founded" },
             { num: "5", label: "Countries" },
             { num: "6", label: "Global offices" },
-            { num: "IATA", label: "Certified operator" },
+            { num: "IATA", label: "Accredited operator" },
           ].map((s) => (
             <div key={s.label} className="about-stat">
               <div className="about-stat-num font-display">{s.num}</div>

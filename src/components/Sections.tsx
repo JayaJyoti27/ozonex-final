@@ -592,7 +592,7 @@ export function Footer() {
               growing businesses.
             </p>
 
-            <div className="footer-cert">IATA Certified · Est. 2014</div>
+            <div className="footer-cert">IATA Accredited · Est. 2014</div>
           </div>
 
           {/* Navigation */}
