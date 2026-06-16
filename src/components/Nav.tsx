@@ -29,14 +29,24 @@ export function Nav() {
   useEffect(() => {
     if (!overlayRef.current || !linksRef.current) return;
     if (open) {
-      gsap.to(overlayRef.current, { opacity: 1, pointerEvents: "all", duration: 0.35, ease: "power2.out" });
+      gsap.to(overlayRef.current, {
+        opacity: 1,
+        pointerEvents: "all",
+        duration: 0.35,
+        ease: "power2.out",
+      });
       gsap.fromTo(
         linksRef.current.children,
         { y: 40, opacity: 0 },
-        { y: 0, opacity: 1, duration: 0.6, stagger: 0.07, ease: "power3.out", delay: 0.1 }
+        { y: 0, opacity: 1, duration: 0.6, stagger: 0.07, ease: "power3.out", delay: 0.1 },
       );
     } else {
-      gsap.to(overlayRef.current, { opacity: 0, pointerEvents: "none", duration: 0.25, ease: "power2.in" });
+      gsap.to(overlayRef.current, {
+        opacity: 0,
+        pointerEvents: "none",
+        duration: 0.25,
+        ease: "power2.in",
+      });
     }
   }, [open]);
 
@@ -58,7 +68,14 @@ export function Nav() {
         }}
       >
         <a href="/" style={{ display: "flex", alignItems: "center", gap: 10 }}>
-          <img src={ozonexLogo} alt="Ozonex" style={{ height: 32, width: "auto" }} />
+          <img
+            src={ozonexLogo}
+            alt="Ozonex"
+            style={{
+              height: 42, // 32 × 1.3 ≈ 42
+              width: "auto",
+            }}
+          />
         </a>
 
         <div className="hidden lg:flex items-center" style={{ gap: 36 }}>
@@ -134,9 +151,36 @@ export function Nav() {
           onClick={() => setOpen((v) => !v)}
           aria-label="Toggle menu"
         >
-          <span style={{ display: "block", width: 24, height: 1.5, background: "#fff", transition: "all 0.3s", transform: open ? "rotate(45deg) translate(4px, 4px)" : "none" }} />
-          <span style={{ display: "block", width: 24, height: 1.5, background: "#fff", transition: "all 0.3s", opacity: open ? 0 : 1 }} />
-          <span style={{ display: "block", width: 24, height: 1.5, background: "#fff", transition: "all 0.3s", transform: open ? "rotate(-45deg) translate(4px, -4px)" : "none" }} />
+          <span
+            style={{
+              display: "block",
+              width: 24,
+              height: 1.5,
+              background: "#fff",
+              transition: "all 0.3s",
+              transform: open ? "rotate(45deg) translate(4px, 4px)" : "none",
+            }}
+          />
+          <span
+            style={{
+              display: "block",
+              width: 24,
+              height: 1.5,
+              background: "#fff",
+              transition: "all 0.3s",
+              opacity: open ? 0 : 1,
+            }}
+          />
+          <span
+            style={{
+              display: "block",
+              width: 24,
+              height: 1.5,
+              background: "#fff",
+              transition: "all 0.3s",
+              transform: open ? "rotate(-45deg) translate(4px, -4px)" : "none",
+            }}
+          />
         </button>
       </nav>
 
@@ -174,8 +218,28 @@ export function Nav() {
                 textAlign: "left",
               }}
             >
-              <span style={{ fontFamily: "Poppins, sans-serif", fontSize: 10, color: "rgba(255,255,255,0.3)", letterSpacing: "0.1em", minWidth: 20 }}>{l.n}</span>
-              <span style={{ fontFamily: "'Playfair Display', serif", fontSize: 26, color: "#fff", fontWeight: 300, lineHeight: 1.2 }}>{l.label}</span>
+              <span
+                style={{
+                  fontFamily: "Poppins, sans-serif",
+                  fontSize: 10,
+                  color: "rgba(255,255,255,0.3)",
+                  letterSpacing: "0.1em",
+                  minWidth: 20,
+                }}
+              >
+                {l.n}
+              </span>
+              <span
+                style={{
+                  fontFamily: "'Playfair Display', serif",
+                  fontSize: 26,
+                  color: "#fff",
+                  fontWeight: 300,
+                  lineHeight: 1.2,
+                }}
+              >
+                {l.label}
+              </span>
             </button>
           ))}
           <a
