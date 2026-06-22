@@ -45,6 +45,9 @@ function Index() {
 
     const reveals = gsap.utils.toArray<HTMLElement>(".reveal");
     reveals.forEach((el) => {
+      // Make visible by default in case ScrollTrigger fails
+      el.style.opacity = "1";
+
       gsap.fromTo(
         el,
         { y: 50, opacity: 0 },
@@ -67,7 +70,6 @@ function Index() {
       clearTimeout(timer);
       lenis.destroy();
       gsap.ticker.remove((time) => lenis.raf(time * 1000));
-      ScrollTrigger.getAll().forEach((s) => s.kill());
     }; // ✅ cleanup closes
   }, []); // ✅ useEffect closes
 

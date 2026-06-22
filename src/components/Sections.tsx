@@ -42,7 +42,6 @@ export function WhoSection() {
 
     const init = () => {
       ctx?.kill(false);
-      ScrollTrigger.getAll().forEach((t) => t.kill());
 
       const mobile = window.innerWidth < 768;
 
@@ -78,7 +77,6 @@ export function WhoSection() {
     return () => {
       window.removeEventListener("resize", onResize);
       clearTimeout(resizeTimer);
-      ScrollTrigger.getAll().forEach((t) => t.kill());
       ctx?.kill(false);
     };
   }, []);
@@ -343,7 +341,6 @@ export function GlobalCTA() {
 
     const init = () => {
       ctx?.kill(false);
-      ScrollTrigger.getAll().forEach((t) => t.kill());
 
       const mobile = window.innerWidth < 768;
 
@@ -407,7 +404,6 @@ export function GlobalCTA() {
     return () => {
       window.removeEventListener("resize", onResize);
       clearTimeout(resizeTimer);
-      ScrollTrigger.getAll().forEach((t) => t.kill());
       ctx?.kill(false);
     };
   }, []);

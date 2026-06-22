@@ -130,7 +130,7 @@ export function ValueProps() {
           stagger: 0.1,
           scrollTrigger: {
             trigger: ref.current,
-            start: "top 95%",
+            start: "top 115%",
             once: true,
           },
         },
@@ -263,7 +263,7 @@ export function Comparison() {
           ease: "power3.out",
           scrollTrigger: {
             trigger: ref.current,
-            start: "top 95%",
+            start: "top 115%",
             once: true,
           },
         },
@@ -279,7 +279,7 @@ export function Comparison() {
           ease: "power3.out",
           scrollTrigger: {
             trigger: ref.current,
-            start: "top 95%",
+            start: "top 115%",
             once: true,
           },
         },
