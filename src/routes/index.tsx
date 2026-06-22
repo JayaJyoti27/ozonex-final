@@ -84,10 +84,10 @@ function Index() {
       <Stats />
       <SavingsCalculator />
       <HorizontalScroll />
-      {/* <WhoSection />*/}
-      {/*<PricingTeaser />*/}
-      {/*<GlobalCTA />*/}
-      {/* <Footer />*/}
+      <WhoSection />
+      <PricingTeaser />
+      <GlobalCTA />
+      <Footer />
     </main>
   );
 }
