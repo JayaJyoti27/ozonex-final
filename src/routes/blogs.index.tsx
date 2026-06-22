@@ -1,7 +1,27 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { client } from "../lib/sanity";
 import { createImageUrlBuilder } from "@sanity/image-url";
-
+function BlogsSkeleton() {
+  return (
+    <div className="min-h-screen bg-[#090A12] text-white">
+      <div className="max-w-7xl mx-auto px-6 md:px-8 py-24">
+        <h1 className="text-4xl md:text-6xl font-light mb-14">Insights</h1>
+        <div className="grid md:grid-cols-2 xl:grid-cols-3 gap-8">
+          {[1, 2, 3].map((i) => (
+            <div key={i} className="rounded-[28px] bg-[#14141D] overflow-hidden">
+              <div className="w-full h-[220px] bg-white/5 animate-pulse" />
+              <div className="p-8 space-y-3">
+                <div className="h-6 bg-white/5 rounded animate-pulse w-3/4" />
+                <div className="h-4 bg-white/5 rounded animate-pulse w-full" />
+                <div className="h-4 bg-white/5 rounded animate-pulse w-2/3" />
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+}
 export const Route = createFileRoute("/blogs/")({
   loader: async () => {
     try {
@@ -20,7 +40,7 @@ export const Route = createFileRoute("/blogs/")({
       return [];
     }
   },
-
+  pendingComponent: BlogsSkeleton,
   component: BlogsPage,
 });
 
