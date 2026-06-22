@@ -2,7 +2,8 @@ import { createFileRoute } from "@tanstack/react-router";
 import { client } from "../lib/sanity";
 import { createImageUrlBuilder } from "@sanity/image-url";
 import { PortableText } from "@portabletext/react";
-
+import { useEffect } from "react";
+import { gsap } from "gsap";
 export const Route = createFileRoute("/blogs/$slug")({
   loader: async ({ params }) => {
     const blog = await client.fetch(
@@ -38,6 +39,22 @@ function urlFor(source: any) {
 }
 
 function BlogPage() {
+  useEffect(() => {
+    gsap.fromTo(
+      ".blog-top-animate",
+      {
+        opacity: 0,
+        y: 80,
+      },
+      {
+        opacity: 1,
+        y: 0,
+        duration: 1,
+        stagger: 0.18,
+        ease: "power3.out",
+      },
+    );
+  }, []);
   const blog = Route.useLoaderData();
 
   if (!blog) {

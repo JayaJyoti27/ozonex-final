@@ -117,6 +117,7 @@ export function Nav() {
       >
         <div
           style={{
+            position: "relative",
             maxWidth: 1440,
             margin: "0 auto",
 
@@ -144,53 +145,74 @@ export function Nav() {
             />
           </button>
 
-          <div className="hidden lg:flex items-center gap-8">
+          <div
+            className="hidden lg:flex"
+            style={{
+              position: "absolute",
+              left: "50%",
+              transform: "translateX(-50%)",
+
+              display: "flex",
+              alignItems: "center",
+
+              gap: 28,
+            }}
+          >
             {mainLinks.map((item) => (
               <button
                 key={item.href}
                 onClick={() => navigate(item.href)}
-                className="text-white/75 hover:text-white text-sm uppercase"
                 style={{
                   background: "transparent",
                   border: 0,
                   cursor: "pointer",
+
+                  color: "rgba(255,255,255,.75)",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  fontSize: 12,
+                  fontWeight: 500,
+
+                  textTransform: "uppercase",
                 }}
               >
                 {item.label}
               </button>
             ))}
-
             <button
               onClick={() => navigate("/about")}
               className="text-white/75"
               style={{
                 background: "transparent",
                 border: 0,
+                fontSize: 12,
+                fontWeight: 500,
+                textTransform: "uppercase",
               }}
             >
               About
             </button>
-
-            <button
-              onClick={() => navigate("/pricing#enquire")}
-              style={{
-                background: "#2563EB",
-
-                color: "#fff",
-
-                border: 0,
-
-                borderRadius: 999,
-
-                padding: "12px 20px",
-
-                cursor: "pointer",
-              }}
-            >
-              Talk to Our Team
-            </button>
           </div>
 
+          <button
+            onClick={() => navigate("/pricing#enquire")}
+            style={{
+              background: "#2563EB",
+
+              color: "#fff",
+
+              border: 0,
+
+              borderRadius: 999,
+
+              padding: "12px 20px",
+
+              cursor: "pointer",
+            }}
+          >
+            Talk to Our Team
+          </button>
           {isMobile && (
             <button
               onClick={() => setOpen(!open)}
