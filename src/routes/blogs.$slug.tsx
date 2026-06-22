@@ -6,25 +6,18 @@ import { useEffect } from "react";
 import { gsap } from "gsap";
 export const Route = createFileRoute("/blogs/$slug")({
   loader: async ({ params }) => {
-    const blog = await client.fetch(
-      `
-      *[
-        _type=="blog" &&
-        slug.current == $slug
-      ][0]{
-        _id,
-        title,
-        excerpt,
-        coverImage,
-        content
-      }
-      `,
-      {
-        slug: params.slug,
-      },
-    );
-
-    return blog;
+    try {
+      const blog = await client.fetch(
+        `*[_type=="blog" && slug.current == $slug][0]{
+          _id, title, excerpt, coverImage, content
+        }`,
+        { slug: params.slug },
+      );
+      return blog ?? null;
+    } catch (error) {
+      console.error("Failed to fetch blog:", error);
+      return null;
+    }
   },
 
   component: BlogPage,

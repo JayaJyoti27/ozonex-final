@@ -4,15 +4,21 @@ import { createImageUrlBuilder } from "@sanity/image-url";
 
 export const Route = createFileRoute("/blogs/")({
   loader: async () => {
-    return await client.fetch(`
-      *[_type=="blog"] | order(_createdAt desc){
-        _id,
-        title,
-        excerpt,
-        slug,
-        coverImage
-      }
-    `);
+    try {
+      const blogs = await client.fetch(`
+        *[_type=="blog"] | order(_createdAt desc){
+          _id,
+          title,
+          excerpt,
+          slug,
+          coverImage
+        }
+      `);
+      return blogs ?? [];
+    } catch (error) {
+      console.error("Failed to fetch blogs:", error);
+      return [];
+    }
   },
 
   component: BlogsPage,
