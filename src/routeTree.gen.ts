@@ -17,8 +17,11 @@ import { Route as MiceEventsRouteImport } from './routes/mice-events'
 import { Route as CorporateTravelManagementDelhiRouteImport } from './routes/corporate-travel-management-delhi'
 import { Route as CorporateTravelManagementChennaiRouteImport } from './routes/corporate-travel-management-chennai'
 import { Route as CorporateTravelManagementBangaloreRouteImport } from './routes/corporate-travel-management-bangalore'
+import { Route as BlogsRouteImport } from './routes/blogs'
 import { Route as AboutRouteImport } from './routes/about'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as BlogsIndexRouteImport } from './routes/blogs.index'
+import { Route as BlogsSlugRouteImport } from './routes/blogs.$slug'
 
 const SolutionsRoute = SolutionsRouteImport.update({
   id: '/solutions',
@@ -63,6 +66,11 @@ const CorporateTravelManagementBangaloreRoute =
     path: '/corporate-travel-management-bangalore',
     getParentRoute: () => rootRouteImport,
   } as any)
+const BlogsRoute = BlogsRouteImport.update({
+  id: '/blogs',
+  path: '/blogs',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const AboutRoute = AboutRouteImport.update({
   id: '/about',
   path: '/about',
@@ -73,10 +81,21 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const BlogsIndexRoute = BlogsIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => BlogsRoute,
+} as any)
+const BlogsSlugRoute = BlogsSlugRouteImport.update({
+  id: '/$slug',
+  path: '/$slug',
+  getParentRoute: () => BlogsRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
+  '/blogs': typeof BlogsRouteWithChildren
   '/corporate-travel-management-bangalore': typeof CorporateTravelManagementBangaloreRoute
   '/corporate-travel-management-chennai': typeof CorporateTravelManagementChennaiRoute
   '/corporate-travel-management-delhi': typeof CorporateTravelManagementDelhiRoute
@@ -85,6 +104,8 @@ export interface FileRoutesByFullPath {
   '/privacy': typeof PrivacyRoute
   '/product': typeof ProductRoute
   '/solutions': typeof SolutionsRoute
+  '/blogs/$slug': typeof BlogsSlugRoute
+  '/blogs/': typeof BlogsIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -97,11 +118,14 @@ export interface FileRoutesByTo {
   '/privacy': typeof PrivacyRoute
   '/product': typeof ProductRoute
   '/solutions': typeof SolutionsRoute
+  '/blogs/$slug': typeof BlogsSlugRoute
+  '/blogs': typeof BlogsIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
+  '/blogs': typeof BlogsRouteWithChildren
   '/corporate-travel-management-bangalore': typeof CorporateTravelManagementBangaloreRoute
   '/corporate-travel-management-chennai': typeof CorporateTravelManagementChennaiRoute
   '/corporate-travel-management-delhi': typeof CorporateTravelManagementDelhiRoute
@@ -110,12 +134,15 @@ export interface FileRoutesById {
   '/privacy': typeof PrivacyRoute
   '/product': typeof ProductRoute
   '/solutions': typeof SolutionsRoute
+  '/blogs/$slug': typeof BlogsSlugRoute
+  '/blogs/': typeof BlogsIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
     | '/about'
+    | '/blogs'
     | '/corporate-travel-management-bangalore'
     | '/corporate-travel-management-chennai'
     | '/corporate-travel-management-delhi'
@@ -124,6 +151,8 @@ export interface FileRouteTypes {
     | '/privacy'
     | '/product'
     | '/solutions'
+    | '/blogs/$slug'
+    | '/blogs/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -136,10 +165,13 @@ export interface FileRouteTypes {
     | '/privacy'
     | '/product'
     | '/solutions'
+    | '/blogs/$slug'
+    | '/blogs'
   id:
     | '__root__'
     | '/'
     | '/about'
+    | '/blogs'
     | '/corporate-travel-management-bangalore'
     | '/corporate-travel-management-chennai'
     | '/corporate-travel-management-delhi'
@@ -148,11 +180,14 @@ export interface FileRouteTypes {
     | '/privacy'
     | '/product'
     | '/solutions'
+    | '/blogs/$slug'
+    | '/blogs/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AboutRoute: typeof AboutRoute
+  BlogsRoute: typeof BlogsRouteWithChildren
   CorporateTravelManagementBangaloreRoute: typeof CorporateTravelManagementBangaloreRoute
   CorporateTravelManagementChennaiRoute: typeof CorporateTravelManagementChennaiRoute
   CorporateTravelManagementDelhiRoute: typeof CorporateTravelManagementDelhiRoute
@@ -221,6 +256,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof CorporateTravelManagementBangaloreRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/blogs': {
+      id: '/blogs'
+      path: '/blogs'
+      fullPath: '/blogs'
+      preLoaderRoute: typeof BlogsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/about': {
       id: '/about'
       path: '/about'
@@ -235,12 +277,39 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/blogs/': {
+      id: '/blogs/'
+      path: '/'
+      fullPath: '/blogs/'
+      preLoaderRoute: typeof BlogsIndexRouteImport
+      parentRoute: typeof BlogsRoute
+    }
+    '/blogs/$slug': {
+      id: '/blogs/$slug'
+      path: '/$slug'
+      fullPath: '/blogs/$slug'
+      preLoaderRoute: typeof BlogsSlugRouteImport
+      parentRoute: typeof BlogsRoute
+    }
   }
 }
+
+interface BlogsRouteChildren {
+  BlogsSlugRoute: typeof BlogsSlugRoute
+  BlogsIndexRoute: typeof BlogsIndexRoute
+}
+
+const BlogsRouteChildren: BlogsRouteChildren = {
+  BlogsSlugRoute: BlogsSlugRoute,
+  BlogsIndexRoute: BlogsIndexRoute,
+}
+
+const BlogsRouteWithChildren = BlogsRoute._addFileChildren(BlogsRouteChildren)
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AboutRoute: AboutRoute,
+  BlogsRoute: BlogsRouteWithChildren,
   CorporateTravelManagementBangaloreRoute:
     CorporateTravelManagementBangaloreRoute,
   CorporateTravelManagementChennaiRoute: CorporateTravelManagementChennaiRoute,

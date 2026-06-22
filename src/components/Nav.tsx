@@ -9,259 +9,274 @@ const mainLinks = [
   { n: "03", label: "Solutions", href: "/solutions" },
   { n: "04", label: "MICE & Events", href: "/mice-events" },
   { n: "05", label: "Pricing", href: "/pricing" },
-  { n: "06", label: "About", href: "/about" },
-  { n: "07", label: "Privacy Policy", href: "/privacy" },
+  { n: "06", label: "Blogs", href: "/blogs" },
 ];
 
 export function Nav() {
-  const [open, setOpen] = useState(false);
-  const [scrolled, setScrolled] = useState(false);
-  const overlayRef = useRef<HTMLDivElement>(null);
-  const linksRef = useRef<HTMLDivElement>(null);
   const router = useRouter();
 
+  const [open, setOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
+
+  const overlayRef = useRef<HTMLDivElement>(null);
+  const linksRef = useRef<HTMLDivElement>(null);
+
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 40);
-    window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
+    if (typeof window === "undefined") return;
+
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 20);
+    };
+
+    handleScroll();
+
+    window.addEventListener("scroll", handleScroll);
+
+    return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   useEffect(() => {
-    if (!overlayRef.current || !linksRef.current) return;
+    if (typeof window === "undefined") return;
+
+    const handleResize = () => {
+      setIsMobile(window.innerWidth < 1024);
+
+      if (window.innerWidth >= 1024) {
+        setOpen(false);
+      }
+    };
+
+    handleResize();
+
+    window.addEventListener("resize", handleResize);
+
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
+  useEffect(() => {
+    if (!overlayRef.current) return;
+
     if (open) {
       gsap.to(overlayRef.current, {
         opacity: 1,
+        duration: 0.3,
         pointerEvents: "all",
-        duration: 0.35,
-        ease: "power2.out",
       });
-      gsap.fromTo(
-        linksRef.current.children,
-        { y: 40, opacity: 0 },
-        { y: 0, opacity: 1, duration: 0.6, stagger: 0.07, ease: "power3.out", delay: 0.1 },
-      );
+
+      if (linksRef.current) {
+        gsap.fromTo(
+          Array.from(linksRef.current.children),
+          {
+            opacity: 0,
+            y: 20,
+          },
+          {
+            opacity: 1,
+            y: 0,
+            stagger: 0.05,
+            duration: 0.4,
+          },
+        );
+      }
     } else {
       gsap.to(overlayRef.current, {
         opacity: 0,
-        pointerEvents: "none",
         duration: 0.25,
-        ease: "power2.in",
+        pointerEvents: "none",
       });
     }
   }, [open]);
 
   const navigate = (href: string) => {
     setOpen(false);
-    router.navigate({ to: href });
+
+    router.navigate({
+      to: href,
+    });
+
+    if (typeof window !== "undefined") {
+      window.scrollTo({
+        top: 0,
+        behavior: "smooth",
+      });
+    }
   };
 
   return (
     <>
       <nav
-        className="fixed top-0 left-0 right-0 z-50 flex items-center justify-between transition-all"
+        className="fixed top-0 left-0 right-0 z-50 transition-all"
         style={{
-          padding: scrolled ? "16px 40px" : "28px 40px",
-          background: scrolled ? "rgba(28,20,16,0.96)" : "transparent",
-          backdropFilter: scrolled ? "blur(12px)" : "none",
-          borderBottom: scrolled ? "1px solid rgba(255,255,255,0.06)" : "none",
-          transition: "all 0.4s ease",
+          background: scrolled ? "rgba(14,12,10,.92)" : "transparent",
+
+          backdropFilter: scrolled ? "blur(14px)" : "none",
         }}
       >
-        <a href="/" style={{ display: "flex", alignItems: "center", gap: 10 }}>
-          <img
-            src={ozonexLogo}
-            alt="Ozonex"
-            style={{
-              height: 42, // 32 × 1.3 ≈ 42
-              width: "auto",
-            }}
-          />
-        </a>
+        <div
+          style={{
+            maxWidth: 1440,
+            margin: "0 auto",
 
-        <div className="hidden lg:flex items-center" style={{ gap: 36 }}>
-          {[
-            { label: "Home", href: "/" },
-            { label: "Product", href: "/product" },
-            { label: "Solutions", href: "/solutions" },
-            { label: "MICE & Events", href: "/mice-events" },
-            { label: "Pricing", href: "/pricing" },
-          ].map((l) => (
-            <a
-              key={l.href}
-              href={l.href}
-              style={{
-                fontFamily: "Poppins, sans-serif",
-                fontSize: 12,
-                letterSpacing: "0.08em",
-                textTransform: "uppercase",
-                color: "rgba(255,255,255,0.7)",
-                fontWeight: 400,
-                transition: "color 0.2s",
-              }}
-              onMouseEnter={(e) => (e.currentTarget.style.color = "#fff")}
-              onMouseLeave={(e) => (e.currentTarget.style.color = "rgba(255,255,255,0.7)")}
-            >
-              {l.label}
-            </a>
-          ))}
-        </div>
+            padding: isMobile ? "16px 18px" : "22px 40px",
 
-        <div className="hidden lg:flex items-center" style={{ gap: 16 }}>
-          <a
-            href="/about"
-            style={{
-              fontFamily: "Poppins, sans-serif",
-              fontSize: 12,
-              letterSpacing: "0.08em",
-              textTransform: "uppercase",
-              color: "rgba(255,255,255,0.6)",
-              fontWeight: 400,
-            }}
-            onMouseEnter={(e) => (e.currentTarget.style.color = "#fff")}
-            onMouseLeave={(e) => (e.currentTarget.style.color = "rgba(255,255,255,0.6)")}
-          >
-            About
-          </a>
-          <a
-            href="/pricing#enquire"
-            style={{
-              background: "#2563EB",
-              color: "#fff",
-              border: "none",
-              borderRadius: 50,
-              padding: "10px 28px",
-              fontFamily: "Poppins, sans-serif",
-              fontSize: 12,
-              letterSpacing: "0.1em",
-              textTransform: "uppercase",
-              fontWeight: 500,
-              transition: "background 0.2s",
-            }}
-            onMouseEnter={(e) => (e.currentTarget.style.background = "#3B82F6")}
-            onMouseLeave={(e) => (e.currentTarget.style.background = "#2563EB")}
-          >
-            Talk to Our Team
-          </a>
-        </div>
-
-        {/* Hamburger */}
-        <button
-          className="lg:hidden flex flex-col justify-center items-center"
-          style={{ gap: 5, background: "none", border: "none", cursor: "pointer", padding: 8 }}
-          onClick={() => setOpen((v) => !v)}
-          aria-label="Toggle menu"
+            display: "flex",
+            justifyContent: "space-between",
+            alignItems: "center",
+          }}
         >
-          <span
+          <button
+            onClick={() => navigate("/")}
             style={{
-              display: "block",
-              width: 24,
-              height: 1.5,
-              background: "#fff",
-              transition: "all 0.3s",
-              transform: open ? "rotate(45deg) translate(4px, 4px)" : "none",
+              background: "none",
+              border: 0,
+              cursor: "pointer",
             }}
-          />
-          <span
+          >
+            <img
+              src={ozonexLogo}
+              alt="Ozonex"
+              style={{
+                height: isMobile ? 34 : 42,
+              }}
+            />
+          </button>
+
+          <div className="hidden lg:flex items-center gap-8">
+            {mainLinks.map((item) => (
+              <button
+                key={item.href}
+                onClick={() => navigate(item.href)}
+                className="text-white/75 hover:text-white text-sm uppercase"
+                style={{
+                  background: "transparent",
+                  border: 0,
+                  cursor: "pointer",
+                }}
+              >
+                {item.label}
+              </button>
+            ))}
+
+            <button
+              onClick={() => navigate("/about")}
+              className="text-white/75"
+              style={{
+                background: "transparent",
+                border: 0,
+              }}
+            >
+              About
+            </button>
+
+            <button
+              onClick={() => navigate("/pricing#enquire")}
+              style={{
+                background: "#2563EB",
+
+                color: "#fff",
+
+                border: 0,
+
+                borderRadius: 999,
+
+                padding: "12px 20px",
+
+                cursor: "pointer",
+              }}
+            >
+              Talk to Our Team
+            </button>
+          </div>
+
+          <button
+            className="lg:hidden"
+            onClick={() => setOpen(!open)}
             style={{
-              display: "block",
-              width: 24,
-              height: 1.5,
-              background: "#fff",
-              transition: "all 0.3s",
-              opacity: open ? 0 : 1,
+              background: "transparent",
+              border: 0,
             }}
-          />
-          <span
-            style={{
-              display: "block",
-              width: 24,
-              height: 1.5,
-              background: "#fff",
-              transition: "all 0.3s",
-              transform: open ? "rotate(-45deg) translate(4px, -4px)" : "none",
-            }}
-          />
-        </button>
+          >
+            ☰
+          </button>
+        </div>
       </nav>
 
-      {/* Mobile overlay */}
       <div
         ref={overlayRef}
         style={{
           position: "fixed",
           inset: 0,
-          zIndex: 49,
-          background: "#1C1410",
+
+          background: "rgba(14,12,10,.98)",
+
+          zIndex: 45,
+
           opacity: 0,
+
           pointerEvents: "none",
-          display: "flex",
-          flexDirection: "column",
-          justifyContent: "center",
-          padding: "60px 24px",
-          overflowY: "auto",
+
+          padding: "90px 24px 40px",
         }}
       >
-        <div ref={linksRef} className="flex flex-col" style={{ gap: 4 }}>
-          {mainLinks.map((l) => (
+        <div
+          ref={linksRef}
+          style={{
+            display: "flex",
+
+            flexDirection: "column",
+
+            maxWidth: 420,
+
+            margin: "0 auto",
+
+            gap: 12,
+          }}
+        >
+          {mainLinks.map((item) => (
             <button
-              key={l.href}
-              onClick={() => navigate(l.href)}
+              key={item.href}
+              onClick={() => navigate(item.href)}
               style={{
-                background: "none",
-                border: "none",
-                cursor: "pointer",
-                display: "flex",
-                alignItems: "center",
-                gap: 14,
-                padding: "11px 0",
-                borderBottom: "1px solid rgba(255,255,255,0.06)",
+                background: "transparent",
+
+                border: 0,
+
+                color: "#fff",
+
+                fontSize: 24,
+
                 textAlign: "left",
+
+                padding: "14px 0",
+
+                borderBottom: "1px solid rgba(255,255,255,.08)",
               }}
             >
-              <span
-                style={{
-                  fontFamily: "Poppins, sans-serif",
-                  fontSize: 10,
-                  color: "rgba(255,255,255,0.3)",
-                  letterSpacing: "0.1em",
-                  minWidth: 20,
-                }}
-              >
-                {l.n}
-              </span>
-              <span
-                style={{
-                  fontFamily: "'Playfair Display', serif",
-                  fontSize: 26,
-                  color: "#fff",
-                  fontWeight: 300,
-                  lineHeight: 1.2,
-                }}
-              >
-                {l.label}
-              </span>
+              {item.label}
             </button>
           ))}
-          <a
-            href="/pricing#enquire"
-            onClick={() => setOpen(false)}
+
+          <button
+            onClick={() => navigate("/pricing#enquire")}
             style={{
-              display: "inline-block",
               marginTop: 20,
+
+              width: "fit-content",
+
+              padding: "14px 22px",
+
               background: "#2563EB",
+
               color: "#fff",
-              borderRadius: 50,
-              padding: "12px 28px",
-              fontFamily: "Poppins, sans-serif",
-              fontSize: 11,
-              letterSpacing: "0.12em",
-              textTransform: "uppercase",
-              fontWeight: 500,
-              alignSelf: "flex-start",
+
+              border: 0,
+
+              borderRadius: 999,
             }}
           >
             Talk to Our Team
-          </a>
+          </button>
         </div>
       </div>
     </>
