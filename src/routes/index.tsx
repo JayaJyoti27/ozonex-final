@@ -10,7 +10,13 @@ import { Statement } from "@/components/Statement";
 import { Stats } from "@/components/Stats";
 import { HorizontalScroll } from "@/components/HorizontalScroll";
 import { WhoSection, GlobalCTA, Footer } from "@/components/Sections";
-import { LogoStrip, ValueProps, Comparison, SavingsCalculator, PricingTeaser } from "@/components/MarketingSections";
+import {
+  LogoStrip,
+  ValueProps,
+  Comparison,
+  SavingsCalculator,
+  PricingTeaser,
+} from "@/components/MarketingSections";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -52,19 +58,21 @@ function Index() {
             start: "top 82%",
             toggleActions: "play none none none",
           },
-        }
+        },
       );
     });
 
-    return () => {                                              // ✅ cleanup opens
+    return () => {
+      // ✅ cleanup opens
       clearTimeout(timer);
       lenis.destroy();
       gsap.ticker.remove((time) => lenis.raf(time * 1000));
       ScrollTrigger.getAll().forEach((s) => s.kill());
-    };                                                          // ✅ cleanup closes
-  }, []);                                                       // ✅ useEffect closes
+    }; // ✅ cleanup closes
+  }, []); // ✅ useEffect closes
 
-  return (                                                      // ✅ JSX return is here, OUTSIDE useEffect
+  return (
+    // ✅ JSX return is here, OUTSIDE useEffect
     <main className="relative">
       <Nav />
       <ScrollLineV />
@@ -76,10 +84,10 @@ function Index() {
       <Stats />
       <SavingsCalculator />
       <HorizontalScroll />
-      <WhoSection />
-      <PricingTeaser />
-      <GlobalCTA />
-      <Footer />
+      {/* <WhoSection />*/}
+      {/*<PricingTeaser />*/}
+      {/*<GlobalCTA />*/}
+      {/* <Footer />*/}
     </main>
   );
 }

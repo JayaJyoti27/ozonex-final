@@ -33,36 +33,55 @@ export function WhoSection() {
     },
   ];
 
+  // WhoSection useEffect
   useEffect(() => {
     if (!sectionRef.current) return;
 
-    const isMobile = window.innerWidth < 768;
+    let ctx: gsap.Context;
+    let resizeTimer: ReturnType<typeof setTimeout>;
 
-    const ctx = gsap.context(() => {
-      gsap.fromTo(
-        ".who-card",
-        {
-          y: isMobile ? 20 : 60,
-          opacity: 0,
-        },
-        {
-          y: 0,
-          opacity: 1,
-          duration: isMobile ? 0.6 : 0.9,
-          stagger: isMobile ? 0.08 : 0.15,
-          ease: "power3.out",
-          scrollTrigger: {
-            trigger: sectionRef.current,
-            start: "top 92%",
-            toggleActions: "play none none none",
+    const init = () => {
+      ctx?.kill(false);
+      ScrollTrigger.getAll().forEach((t) => t.kill());
+
+      const mobile = window.innerWidth < 768;
+
+      ctx = gsap.context(() => {
+        gsap.fromTo(
+          ".who-card",
+          { y: mobile ? 20 : 60, opacity: 0 },
+          {
+            y: 0,
+            opacity: 1,
+            duration: mobile ? 0.6 : 0.9,
+            stagger: mobile ? 0.08 : 0.15,
+            ease: "power3.out",
+            scrollTrigger: {
+              trigger: sectionRef.current,
+              start: "top 92%",
+              toggleActions: "play none none none",
+            },
           },
-        },
-      );
-    }, sectionRef);
+        );
+      }, sectionRef);
+    };
 
-    return () => ctx.revert();
+    init();
+
+    const onResize = () => {
+      clearTimeout(resizeTimer);
+      resizeTimer = setTimeout(() => ScrollTrigger.refresh(), 150);
+    };
+
+    window.addEventListener("resize", onResize);
+
+    return () => {
+      window.removeEventListener("resize", onResize);
+      clearTimeout(resizeTimer);
+      ScrollTrigger.getAll().forEach((t) => t.kill());
+      ctx?.kill(false);
+    };
   }, []);
-
   return (
     <section ref={sectionRef} className="who-section">
       <div className="who-container">
@@ -319,62 +338,78 @@ export function GlobalCTA() {
   useEffect(() => {
     if (!ref.current) return;
 
-    const isMobile = window.innerWidth < 768;
+    let ctx: gsap.Context;
+    let resizeTimer: ReturnType<typeof setTimeout>;
 
-    const ctx = gsap.context(() => {
-      if (!isMobile) {
-        gsap.to(".gcta-bg", {
-          yPercent: -20,
-          ease: "none",
-          scrollTrigger: {
-            trigger: ref.current,
-            start: "top bottom",
-            end: "bottom top",
-            scrub: true,
+    const init = () => {
+      ctx?.kill(false);
+      ScrollTrigger.getAll().forEach((t) => t.kill());
+
+      const mobile = window.innerWidth < 768;
+
+      ctx = gsap.context(() => {
+        if (!mobile) {
+          gsap.to(".gcta-bg", {
+            yPercent: -20,
+            ease: "none",
+            scrollTrigger: {
+              trigger: ref.current,
+              start: "top bottom",
+              end: "bottom top",
+              scrub: true,
+            },
+          });
+        }
+
+        gsap.fromTo(
+          ".gcta-word",
+          { y: mobile ? 20 : 80, opacity: 0 },
+          {
+            y: 0,
+            opacity: 1,
+            duration: mobile ? 0.6 : 1,
+            stagger: mobile ? 0.04 : 0.08,
+            ease: "power3.out",
+            scrollTrigger: {
+              trigger: ref.current,
+              start: "top 92%",
+            },
           },
-        });
-      }
+        );
 
-      gsap.fromTo(
-        ".gcta-word",
-        {
-          y: isMobile ? 20 : 80,
-          opacity: 0,
-        },
-        {
-          y: 0,
-          opacity: 1,
-          duration: isMobile ? 0.6 : 1,
-          stagger: isMobile ? 0.04 : 0.08,
-          ease: "power3.out",
-          scrollTrigger: {
-            trigger: ref.current,
-            start: "top 92%",
+        gsap.fromTo(
+          ".gcta-sub",
+          { y: mobile ? 10 : 30, opacity: 0 },
+          {
+            y: 0,
+            opacity: 1,
+            duration: 0.8,
+            delay: mobile ? 0.2 : 0.5,
+            ease: "power3.out",
+            scrollTrigger: {
+              trigger: ref.current,
+              start: "top 92%",
+            },
           },
-        },
-      );
+        );
+      }, ref);
+    };
 
-      gsap.fromTo(
-        ".gcta-sub",
-        {
-          y: isMobile ? 10 : 30,
-          opacity: 0,
-        },
-        {
-          y: 0,
-          opacity: 1,
-          duration: 0.8,
-          delay: isMobile ? 0.2 : 0.5,
-          ease: "power3.out",
-          scrollTrigger: {
-            trigger: ref.current,
-            start: "top 92%",
-          },
-        },
-      );
-    }, ref);
+    init();
 
-    return () => ctx.revert();
+    const onResize = () => {
+      clearTimeout(resizeTimer);
+      resizeTimer = setTimeout(() => ScrollTrigger.refresh(), 150);
+    };
+
+    window.addEventListener("resize", onResize);
+
+    return () => {
+      window.removeEventListener("resize", onResize);
+      clearTimeout(resizeTimer);
+      ScrollTrigger.getAll().forEach((t) => t.kill());
+      ctx?.kill(false);
+    };
   }, []);
 
   return (

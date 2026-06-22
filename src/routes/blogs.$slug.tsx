@@ -48,26 +48,30 @@ function BlogPage() {
 
   return (
     <div className="min-h-screen bg-[#111827] text-white">
-      {blog?.coverImage && (
-        <img
-          src={urlFor(blog.coverImage).width(1600).height(800).url()}
-          alt={blog?.title || "Blog"}
-          className="
-            w-full
-            h-[300px]
-            md:h-[500px]
-            object-cover
-          "
-        />
-      )}
+      <div className="relative">
+        {blog?.coverImage && (
+          <img
+            src={urlFor(blog.coverImage).width(1800).url()}
+            alt={blog?.title}
+            className="
+        w-full
+        h-[40vh]
+        md:h-[65vh]
+        object-cover
+        rounded-b-[40px]
+      "
+          />
+        )}
 
+        <div className="absolute inset-0 bg-gradient-to-t from-[#081325]" />
+      </div>
       <div
         className="
-          max-w-4xl
-          mx-auto
-          px-6
-          py-14
-        "
+max-w-6xl
+mx-auto
+px-6
+py-20
+"
       >
         <div
           className="
@@ -86,32 +90,55 @@ function BlogPage() {
 
         <h1
           className="
-            text-4xl
-            md:text-6xl
-            font-bold
-            mb-8
-          "
+text-5xl
+md:text-7xl
+font-light
+leading-[1]
+mb-10
+"
         >
           {blog.title}
         </h1>
 
         <p
           className="
-            text-lg
-            text-gray-300
-            leading-8
-            mb-12
-          "
+text-2xl
+text-white/70
+leading-relaxed
+mb-16
+"
         >
           {blog.excerpt}
         </p>
 
         <div
           className="
-            prose
-            prose-invert
-            max-w-none
-          "
+prose
+prose-invert
+prose-lg
+max-w-none
+
+prose-headings:text-white
+prose-headings:font-medium
+
+prose-p:text-white/80
+prose-p:leading-[2]
+
+prose-h2:text-4xl
+prose-h2:mt-20
+
+prose-h3:text-2xl
+
+prose-strong:text-white
+
+prose-ul:text-white/80
+prose-li:marker:text-blue-400
+
+prose-blockquote:
+border-l-2
+border-blue-500
+pl-6
+"
         >
           <PortableText
             value={blog?.content ?? []}

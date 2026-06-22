@@ -14,63 +14,57 @@ export function Hero() {
   useEffect(() => {
     if (!heroRef.current) return;
 
-    const isMobile = window.innerWidth < 768;
-
     const ctx = gsap.context(() => {
+      const isMobile = window.matchMedia("(max-width:767px)").matches;
+
       gsap.fromTo(
         ".hero-word",
-        { y: 80, opacity: 0 },
+        {
+          y: 80,
+          opacity: 0,
+        },
         {
           y: 0,
           opacity: 1,
           duration: 1,
-          ease: "power3.out",
           stagger: 0.1,
-          delay: 0.2,
         },
       );
 
-      gsap.fromTo(
-        mapRef.current,
-        { scale: 0.92, opacity: 0 },
-        {
-          scale: 1,
-          opacity: 1,
-          duration: 1.4,
-          ease: "power2.out",
-        },
-      );
-
-      gsap.fromTo(
-        ".hero-eyebrow, .hero-sub, .hero-cta",
-        { y: 30, opacity: 0 },
-        {
-          y: 0,
-          opacity: 1,
-          duration: 1,
-          ease: "power3.out",
-          stagger: 0.12,
-          delay: 0.6,
-        },
-      );
-
-      if (!isMobile) {
-        const tl = gsap.timeline({
-          scrollTrigger: {
-            trigger: heroRef.current,
-            start: "top top",
-            end: "+=600",
-            scrub: true,
+      if (mapRef.current) {
+        gsap.fromTo(
+          mapRef.current,
+          {
+            scale: 0.92,
+            opacity: 0,
           },
-        });
+          {
+            scale: 1,
+            opacity: 1,
+            duration: 1.4,
+          },
+        );
+      }
 
-        tl.to(mapRef.current, { scale: 1.8, ease: "none" }, 0);
-        tl.to(photoRef.current, { yPercent: -25, ease: "none" }, 0);
-        tl.to(textRef.current, { opacity: 0, y: -40, ease: "none" }, 0);
+      if (!isMobile && mapRef.current && photoRef.current && textRef.current) {
+        gsap
+          .timeline({
+            scrollTrigger: {
+              trigger: heroRef.current,
+              start: "top top",
+              end: "+=600",
+              scrub: true,
+            },
+          })
+          .to(mapRef.current, { scale: 1.8 }, 0)
+          .to(photoRef.current, { yPercent: -25 }, 0)
+          .to(textRef.current, { opacity: 0, y: -40 }, 0);
       }
     }, heroRef);
 
-    return () => ctx.revert();
+    return () => {
+      ctx.revert();
+    };
   }, []);
 
   return (

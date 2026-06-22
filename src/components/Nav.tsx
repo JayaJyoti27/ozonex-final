@@ -108,9 +108,11 @@ export function Nav() {
       <nav
         className="fixed top-0 left-0 right-0 z-50 transition-all"
         style={{
-          background: scrolled ? "rgba(14,12,10,.92)" : "transparent",
+          background: scrolled ? "rgba(14,12,10,.92)" : "black",
 
-          backdropFilter: scrolled ? "blur(14px)" : "none",
+          backdropFilter: "blur(18px)",
+
+          borderBottom: scrolled ? "1px solid rgba(255,255,255,.06)" : "none",
         }}
       >
         <div
@@ -189,16 +191,27 @@ export function Nav() {
             </button>
           </div>
 
-          <button
-            className="lg:hidden"
-            onClick={() => setOpen(!open)}
-            style={{
-              background: "transparent",
-              border: 0,
-            }}
-          >
-            ☰
-          </button>
+          {isMobile && (
+            <button
+              onClick={() => setOpen(!open)}
+              aria-label="Open menu"
+              style={{
+                width: 44,
+                height: 44,
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                background: open ? "rgba(255,255,255,.08)" : "rgba(255,255,255,.06)",
+                border: "1px solid rgba(255,255,255,.12)",
+                borderRadius: 999,
+                color: "#fff",
+                cursor: "pointer",
+                backdropFilter: "blur(12px)",
+              }}
+            >
+              {" "}
+            </button>
+          )}
         </div>
       </nav>
 
