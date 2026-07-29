@@ -624,6 +624,17 @@ export function Footer() {
             </p>
 
             <div className="footer-cert">IATA Accredited · Est. 2014</div>
+            <iframe
+              id="Iframe1"
+              src="https://dunsregistered.dnb.com/SealAuthentication.aspx?Cid=1"
+              width="114"
+              height="97"
+              frameBorder="0"
+              scrolling="no"
+              allowTransparency={true}
+              title="D-U-N-S Registered Seal"
+              style={{ marginTop: "18px" }}
+            />
           </div>
 
           {/* Navigation */}
