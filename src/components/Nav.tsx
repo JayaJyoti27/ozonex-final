@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { gsap } from "gsap";
 import { useRouter } from "@tanstack/react-router";
-import ozonexlogo from "@/assets/ozonex_logo_full_transparent.png";
+import ozonexlogo from "@/assets/OZONEX -white.PNG";
 const mainLinks = [
   { n: "01", label: "Home", href: "/" },
   { n: "02", label: "Product", href: "/product" },
@@ -152,7 +152,7 @@ export function Nav() {
             onClick={() => navigate("/")}
             style={{ background: "none", border: 0, cursor: "pointer" }}
           >
-            <img src={ozonexlogo} alt="Ozonex" style={{ height: isMobile ? 40 : 56 }} />
+            <img src={ozonexlogo} alt="Ozonex" style={{ height: isMobile ? 40 : 60 }} />
           </button>
 
           {/* Desktop nav links — hidden on mobile */}
