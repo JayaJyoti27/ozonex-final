@@ -152,7 +152,7 @@ export function Nav() {
             onClick={() => navigate("/")}
             style={{ background: "none", border: 0, cursor: "pointer" }}
           >
-            <img src={ozonexlogo} alt="Ozonex" style={{ height: isMobile ? 40 : 60 }} />
+            <img src={ozonexlogo} alt="Ozonex" style={{ height: isMobile ? 25 : 40 }} />
           </button>
 
           {/* Desktop nav links — hidden on mobile */}
