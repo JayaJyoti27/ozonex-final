@@ -27,7 +27,7 @@ export const Route = createFileRoute("/blogs/$slug")({
 
     const title = loaderData.seo?.metaTitle || loaderData.title;
     const description = loaderData.seo?.metaDescription || loaderData.excerpt;
-    const canonicalUrl = loaderData.seo?.canonicalUrl || `https://ozonex.co/blogs/${params.slug}`; // ⚠️ replace with your real domain
+    const canonicalUrl = loaderData.seo?.canonicalUrl || `https://ozonex.co/blogs/${params.slug}`;
 
     return {
       meta: [
@@ -178,6 +178,11 @@ pl-6
           <PortableText
             value={blog?.content ?? []}
             components={{
+              block: {
+                // Cap any H1 authored in Sanity content to H2, so the page
+                // never has more than one H1 (the actual page title above).
+                h1: ({ children }) => <h2 className="text-4xl mt-20">{children}</h2>,
+              },
               types: {
                 table: ({ value }) => (
                   <div className="overflow-x-auto my-10">
