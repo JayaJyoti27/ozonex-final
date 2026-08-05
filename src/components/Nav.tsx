@@ -16,14 +16,13 @@ function HamburgerIcon({ open }: { open: boolean }) {
   return (
     <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
       {open ? (
-        // X icon
         <>
           <line
             x1="4"
             y1="4"
             x2="16"
             y2="16"
-            stroke="white"
+            stroke="black"
             strokeWidth="1.8"
             strokeLinecap="round"
           />
@@ -32,20 +31,19 @@ function HamburgerIcon({ open }: { open: boolean }) {
             y1="4"
             x2="4"
             y2="16"
-            stroke="white"
+            stroke="black"
             strokeWidth="1.8"
             strokeLinecap="round"
           />
         </>
       ) : (
-        // Hamburger iconsrc/assets/ozonex-logo.png
         <>
           <line
             x1="3"
             y1="5"
             x2="17"
             y2="5"
-            stroke="white"
+            stroke="black"
             strokeWidth="1.8"
             strokeLinecap="round"
           />
@@ -54,7 +52,7 @@ function HamburgerIcon({ open }: { open: boolean }) {
             y1="10"
             x2="17"
             y2="10"
-            stroke="white"
+            stroke="black"
             strokeWidth="1.8"
             strokeLinecap="round"
           />
@@ -63,7 +61,7 @@ function HamburgerIcon({ open }: { open: boolean }) {
             y1="15"
             x2="17"
             y2="15"
-            stroke="white"
+            stroke="black"
             strokeWidth="1.8"
             strokeLinecap="round"
           />
@@ -131,9 +129,9 @@ export function Nav() {
       <nav
         className="fixed top-0 left-0 right-0 z-50 transition-all"
         style={{
-          background: scrolled ? "rgba(14,12,10,.92)" : "black",
+          background: scrolled ? "rgba(245,241,236,.95)" : "#F5F1EC",
           backdropFilter: "blur(18px)",
-          borderBottom: scrolled ? "1px solid rgba(255,255,255,.06)" : "none",
+          borderBottom: scrolled ? "1px solid rgba(0,0,0,.08)" : "none",
         }}
       >
         <div
@@ -152,14 +150,7 @@ export function Nav() {
             onClick={() => navigate("/")}
             style={{ background: "none", border: 0, cursor: "pointer" }}
           >
-            <img
-              src={ozonexlogo}
-              alt="Ozonex"
-              style={{
-                height: isMobile ? 32 : 48,
-                filter: "drop-shadow(0 1px 3px rgba(0,0,0,0.5))",
-              }}
-            />
+            <img src={ozonexlogo} alt="Ozonex" style={{ height: isMobile ? 40 : 55 }} />
           </button>
 
           {/* Desktop nav links — hidden on mobile */}
@@ -182,7 +173,7 @@ export function Nav() {
                     background: "transparent",
                     border: 0,
                     cursor: "pointer",
-                    color: "rgba(255,255,255,.75)",
+                    color: "rgba(0,0,0,.7)",
                     fontSize: 12,
                     fontWeight: 500,
                     textTransform: "uppercase",
@@ -196,8 +187,6 @@ export function Nav() {
 
           {/* Right side */}
           <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
-            {/* CTA button — always visible */}
-            {/* CTA button — desktop only */}
             {!isMobile && (
               <button
                 onClick={() => navigate("/pricing#enquire")}
@@ -216,7 +205,6 @@ export function Nav() {
               </button>
             )}
 
-            {/* Hamburger — mobile only */}
             {isMobile && (
               <button
                 onClick={() => setOpen(!open)}
@@ -227,8 +215,8 @@ export function Nav() {
                   display: "flex",
                   alignItems: "center",
                   justifyContent: "center",
-                  background: open ? "rgba(255,255,255,.08)" : "rgba(255,255,255,.06)",
-                  border: "1px solid rgba(255,255,255,.12)",
+                  background: open ? "rgba(0,0,0,.06)" : "rgba(0,0,0,.04)",
+                  border: "1px solid rgba(0,0,0,.12)",
                   borderRadius: 999,
                   cursor: "pointer",
                   backdropFilter: "blur(12px)",
@@ -247,7 +235,7 @@ export function Nav() {
         style={{
           position: "fixed",
           inset: 0,
-          background: "rgba(14,12,10,.98)",
+          background: "rgba(245,241,236,.98)",
           zIndex: 45,
           opacity: 0,
           pointerEvents: "none",
@@ -271,11 +259,11 @@ export function Nav() {
               style={{
                 background: "transparent",
                 border: 0,
-                color: "#fff",
+                color: "#000",
                 fontSize: 24,
                 textAlign: "left",
                 padding: "14px 0",
-                borderBottom: "1px solid rgba(255,255,255,.08)",
+                borderBottom: "1px solid rgba(0,0,0,.08)",
                 cursor: "pointer",
               }}
             >
