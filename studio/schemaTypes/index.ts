@@ -1,3 +1,3 @@
 import blog from './blog'
-
-export const schemaTypes = [blog]
+import seo from './seo'
+export const schemaTypes = [blog, seo]

@@ -32,7 +32,11 @@ export default defineType({
       title: 'Cover Image',
       type: 'image',
     }),
-
+    defineField({
+      name: 'seo',
+      title: 'SEO & Social',
+      type: 'seo',
+    }),
     defineField({
       name: 'content',
       title: 'Content',

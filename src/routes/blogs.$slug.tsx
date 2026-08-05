@@ -4,12 +4,14 @@ import { createImageUrlBuilder } from "@sanity/image-url";
 import { PortableText } from "@portabletext/react";
 import { useEffect } from "react";
 import { gsap } from "gsap";
+
 export const Route = createFileRoute("/blogs/$slug")({
   loader: async ({ params }) => {
     try {
       const blog = await client.fetch(
         `*[_type=="blog" && slug.current == $slug][0]{
-          _id, title, excerpt, coverImage, content
+          _id, title, excerpt, coverImage, content,
+          seo
         }`,
         { slug: params.slug },
       );
@@ -18,6 +20,29 @@ export const Route = createFileRoute("/blogs/$slug")({
       console.error("Failed to fetch blog:", error);
       return null;
     }
+  },
+
+  head: ({ loaderData, params }) => {
+    if (!loaderData) return {};
+
+    const title = loaderData.seo?.metaTitle || loaderData.title;
+    const description = loaderData.seo?.metaDescription || loaderData.excerpt;
+    const canonicalUrl = loaderData.seo?.canonicalUrl || `https://ozonex.co/blogs/${params.slug}`; // ⚠️ replace with your real domain
+
+    return {
+      meta: [
+        { title },
+        { name: "description", content: description },
+        { property: "og:title", content: title },
+        { property: "og:description", content: description },
+        { property: "og:url", content: canonicalUrl },
+        { property: "og:type", content: "article" },
+        { name: "twitter:card", content: "summary_large_image" },
+        { name: "twitter:title", content: title },
+        { name: "twitter:description", content: description },
+      ],
+      links: [{ rel: "canonical", href: canonicalUrl }],
+    };
   },
 
   component: BlogPage,
