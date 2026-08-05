@@ -137,9 +137,9 @@ export function Nav() {
         <div
           style={{
             position: "relative",
-            maxWidth: 1440,
+            maxWidth: 1100,
             margin: "0 auto",
-            padding: isMobile ? "16px 18px" : "22px 40px",
+            padding: isMobile ? "16px 18px" : "14px 35px",
             display: "flex",
             justifyContent: "space-between",
             alignItems: "center",
@@ -150,7 +150,7 @@ export function Nav() {
             onClick={() => navigate("/")}
             style={{ background: "none", border: 0, cursor: "pointer" }}
           >
-            <img src={ozonexlogo} alt="Ozonex" style={{ height: isMobile ? 40 : 55 }} />
+            <img src={ozonexlogo} alt="Ozonex" style={{ height: isMobile ? 40 : 65 }} />
           </button>
 
           {/* Desktop nav links — hidden on mobile */}
