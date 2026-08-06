@@ -139,7 +139,7 @@ export function Nav() {
             position: "relative",
             width: "100%",
             margin: 0,
-            padding: isMobile ? "12px 16px" : "12px 24px",
+            padding: isMobile ? "16px 16px" : "20px 24px",
             display: "flex",
             justifyContent: "space-between",
             alignItems: "center",
