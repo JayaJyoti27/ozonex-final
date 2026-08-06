@@ -27,7 +27,8 @@ export const Route = createFileRoute("/blogs/$slug")({
 
     const title = loaderData.seo?.metaTitle || loaderData.title;
     const description = loaderData.seo?.metaDescription || loaderData.excerpt;
-    const canonicalUrl = loaderData.seo?.canonicalUrl || `https://ozonex.co/blogs/${params.slug}`;
+    const canonicalUrl =
+      loaderData.seo?.canonicalUrl || `https://ozonextravel.com/blogs/${params.slug}`;
 
     return {
       meta: [

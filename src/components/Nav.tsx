@@ -22,7 +22,7 @@ function HamburgerIcon({ open }: { open: boolean }) {
             y1="4"
             x2="16"
             y2="16"
-            stroke="black"
+            stroke="white"
             strokeWidth="1.8"
             strokeLinecap="round"
           />
@@ -31,7 +31,7 @@ function HamburgerIcon({ open }: { open: boolean }) {
             y1="4"
             x2="4"
             y2="16"
-            stroke="black"
+            stroke="white"
             strokeWidth="1.8"
             strokeLinecap="round"
           />
@@ -43,7 +43,7 @@ function HamburgerIcon({ open }: { open: boolean }) {
             y1="5"
             x2="17"
             y2="5"
-            stroke="black"
+            stroke="white"
             strokeWidth="1.8"
             strokeLinecap="round"
           />
@@ -52,7 +52,7 @@ function HamburgerIcon({ open }: { open: boolean }) {
             y1="10"
             x2="17"
             y2="10"
-            stroke="black"
+            stroke="white"
             strokeWidth="1.8"
             strokeLinecap="round"
           />
@@ -61,7 +61,7 @@ function HamburgerIcon({ open }: { open: boolean }) {
             y1="15"
             x2="17"
             y2="15"
-            stroke="black"
+            stroke="white"
             strokeWidth="1.8"
             strokeLinecap="round"
           />
@@ -129,17 +129,17 @@ export function Nav() {
       <nav
         className="fixed top-0 left-0 right-0 z-50 transition-all"
         style={{
-          background: scrolled ? "rgba(245,241,236,.95)" : "#F5F1EC",
+          background: scrolled ? "rgba(14,12,10,.92)" : "black",
           backdropFilter: "blur(18px)",
-          borderBottom: scrolled ? "1px solid rgba(0,0,0,.08)" : "none",
+          borderBottom: scrolled ? "1px solid rgba(255,255,255,.06)" : "none",
         }}
       >
         <div
           style={{
             position: "relative",
-            maxWidth: 1100,
-            margin: "0 auto",
-            padding: isMobile ? "16px 18px" : "14px 35px",
+            width: "100%",
+            margin: 0,
+            padding: isMobile ? "12px 16px" : "12px 24px",
             display: "flex",
             justifyContent: "space-between",
             alignItems: "center",
@@ -150,7 +150,7 @@ export function Nav() {
             onClick={() => navigate("/")}
             style={{ background: "none", border: 0, cursor: "pointer" }}
           >
-            <img src={ozonexlogo} alt="Ozonex" style={{ height: isMobile ? 40 : 65 }} />
+            <img src={ozonexlogo} alt="Ozonex" style={{ height: isMobile ? 30 : 45 }} />
           </button>
 
           {/* Desktop nav links — hidden on mobile */}
@@ -173,7 +173,7 @@ export function Nav() {
                     background: "transparent",
                     border: 0,
                     cursor: "pointer",
-                    color: "rgba(0,0,0,.7)",
+                    color: "rgba(255,255,255,.75)",
                     fontSize: 12,
                     fontWeight: 500,
                     textTransform: "uppercase",
@@ -215,8 +215,8 @@ export function Nav() {
                   display: "flex",
                   alignItems: "center",
                   justifyContent: "center",
-                  background: open ? "rgba(0,0,0,.06)" : "rgba(0,0,0,.04)",
-                  border: "1px solid rgba(0,0,0,.12)",
+                  background: open ? "rgba(255,255,255,.08)" : "rgba(255,255,255,.06)",
+                  border: "1px solid rgba(255,255,255,.12)",
                   borderRadius: 999,
                   cursor: "pointer",
                   backdropFilter: "blur(12px)",
@@ -235,7 +235,7 @@ export function Nav() {
         style={{
           position: "fixed",
           inset: 0,
-          background: "rgba(245,241,236,.98)",
+          background: "rgba(14,12,10,.98)",
           zIndex: 45,
           opacity: 0,
           pointerEvents: "none",
@@ -259,11 +259,11 @@ export function Nav() {
               style={{
                 background: "transparent",
                 border: 0,
-                color: "#000",
+                color: "#fff",
                 fontSize: 24,
                 textAlign: "left",
                 padding: "14px 0",
-                borderBottom: "1px solid rgba(0,0,0,.08)",
+                borderBottom: "1px solid rgba(255,255,255,.08)",
                 cursor: "pointer",
               }}
             >
