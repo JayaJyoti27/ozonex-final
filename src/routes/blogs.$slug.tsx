@@ -15,13 +15,50 @@ function urlFor(source: any) {
   return builder.image(source);
 }
 
+// Prevents `</script>` (or any `<`) inside JSON-LD from breaking out of the
+// inline <script> tag when it's injected via dangerouslySetInnerHTML.
+function safeJsonLd(data: unknown) {
+  return JSON.stringify(data).replace(/</g, "\\u003c");
+}
+
+function buildArticleSchema(blog: any, canonicalUrl: string, ogImage: string) {
+  const publishedDate = blog.publishedAt || blog._createdAt;
+  const modifiedDate = blog._updatedAt || publishedDate;
+
+  return {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    headline: blog.title,
+    description: blog.excerpt,
+    image: ogImage ? [ogImage] : undefined,
+    datePublished: publishedDate,
+    dateModified: modifiedDate,
+    author: {
+      "@type": blog.author?.name ? "Person" : "Organization",
+      name: blog.author?.name || "Ozonex",
+    },
+    publisher: {
+      "@type": "Organization",
+      name: "Ozonex",
+      logo: {
+        "@type": "ImageObject",
+        url: "https://ozonextravel.com/assets/logo-DTdbA1Mw.png",
+      },
+    },
+    mainEntityOfPage: {
+      "@type": "WebPage",
+      "@id": canonicalUrl,
+    },
+  };
+}
+
 export const Route = createFileRoute("/blogs/$slug")({
   loader: async ({ params }) => {
     try {
       const blog = await client.fetch(
         `*[_type=="blog" && slug.current == $slug][0]{
           _id, title, excerpt, coverImage, content,
-          seo
+          seo, _createdAt, _updatedAt, publishedAt, author
         }`,
         { slug: params.slug },
       );
@@ -85,6 +122,7 @@ function BlogPage() {
     );
   }, []);
   const blog = Route.useLoaderData();
+  const { slug } = Route.useParams();
 
   if (!blog) {
     return (
@@ -92,8 +130,18 @@ function BlogPage() {
     );
   }
 
+  const canonicalUrl = blog.seo?.canonicalUrl || `https://ozonextravel.com/blogs/${slug}`;
+  const ogImage = blog.coverImage
+    ? urlFor(blog.coverImage).width(1200).height(630).fit("crop").url()
+    : DEFAULT_OG_IMAGE;
+  const articleSchema = buildArticleSchema(blog, canonicalUrl, ogImage);
+
   return (
     <div className="min-h-screen bg-[#111827] text-white">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: safeJsonLd(articleSchema) }}
+      />
       <div className="relative">
         {blog?.coverImage && (
           <img
