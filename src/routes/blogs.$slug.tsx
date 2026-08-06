@@ -5,6 +5,16 @@ import { PortableText } from "@portabletext/react";
 import { useEffect } from "react";
 import { gsap } from "gsap";
 
+const DEFAULT_OG_IMAGE =
+  "https://storage.googleapis.com/gpt-engineer-file-uploads/qXbErmlRR7MTjCnlxOOKyq58jYW2/social-images/social-1778904108837-Ozonex_new_1-01-removebg-preview.webp";
+
+const builder = createImageUrlBuilder(client);
+
+function urlFor(source: any) {
+  if (!source) return "";
+  return builder.image(source);
+}
+
 export const Route = createFileRoute("/blogs/$slug")({
   loader: async ({ params }) => {
     try {
@@ -30,6 +40,10 @@ export const Route = createFileRoute("/blogs/$slug")({
     const canonicalUrl =
       loaderData.seo?.canonicalUrl || `https://ozonextravel.com/blogs/${params.slug}`;
 
+    const ogImage = loaderData.coverImage
+      ? urlFor(loaderData.coverImage).width(1200).height(630).fit("crop").url()
+      : DEFAULT_OG_IMAGE;
+
     return {
       meta: [
         { title },
@@ -38,9 +52,13 @@ export const Route = createFileRoute("/blogs/$slug")({
         { property: "og:description", content: description },
         { property: "og:url", content: canonicalUrl },
         { property: "og:type", content: "article" },
+        { property: "og:image", content: ogImage },
+        { property: "og:image:width", content: "1200" },
+        { property: "og:image:height", content: "630" },
         { name: "twitter:card", content: "summary_large_image" },
         { name: "twitter:title", content: title },
         { name: "twitter:description", content: description },
+        { name: "twitter:image", content: ogImage },
       ],
       links: [{ rel: "canonical", href: canonicalUrl }],
     };
@@ -48,14 +66,6 @@ export const Route = createFileRoute("/blogs/$slug")({
 
   component: BlogPage,
 });
-
-const builder = createImageUrlBuilder(client);
-
-function urlFor(source: any) {
-  if (!source) return "";
-
-  return builder.image(source);
-}
 
 function BlogPage() {
   useEffect(() => {
