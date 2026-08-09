@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { gsap } from "gsap";
 import { useRouter } from "@tanstack/react-router";
-import ozonexlogo from "@/assets/newlogo.png";
+import ozonexlogo from "@/assets/fix.png";
 const mainLinks = [
   { n: "01", label: "Home", href: "/" },
   { n: "02", label: "Product", href: "/product" },
@@ -139,7 +139,7 @@ export function Nav() {
             position: "relative",
             width: "100%",
             margin: 0,
-            padding: isMobile ? "16px 16px" : "20px px",
+            padding: isMobile ? "16px 16px" : "24px 24px",
             display: "flex",
             justifyContent: "space-between",
             alignItems: "center",
