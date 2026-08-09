@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { gsap } from "gsap";
 import { useRouter } from "@tanstack/react-router";
-import ozonexlogo from "@/assets/fix.png";
+import ozonexlogo from "@/assets/whiteeeeelogo.png";
 const mainLinks = [
   { n: "01", label: "Home", href: "/" },
   { n: "02", label: "Product", href: "/product" },
