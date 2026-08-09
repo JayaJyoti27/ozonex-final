@@ -129,9 +129,9 @@ export function Nav() {
       <nav
         className="fixed top-0 left-0 right-0 z-50 transition-all"
         style={{
-          background: scrolled ? "rgba(14,12,10,.92)" : "black",
+          background: scrolled ? "rgba(255,255,255,.95)" : "#FFFFFF",
           backdropFilter: "blur(18px)",
-          borderBottom: scrolled ? "1px solid rgba(255,255,255,.06)" : "none",
+          borderBottom: scrolled ? "1px solid rgba(0,0,0,.08)" : "1px solid rgba(0,0,0,.04)",
         }}
       >
         <div
