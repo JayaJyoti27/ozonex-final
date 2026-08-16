@@ -12,6 +12,11 @@ const mainLinks = [
   { n: "07", label: "About", href: "/about" },
 ];
 
+const loginLinks = [
+  { label: "Agent Login", href: "https://portal.ozonextravel.com/agent" },
+  { label: "Corporate Login", href: "https://portal.ozonextravel.com/corporate" },
+];
+
 function HamburgerIcon({ open }: { open: boolean }) {
   return (
     <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -77,6 +82,7 @@ export function Nav() {
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
+  const [loginOpen, setLoginOpen] = useState(false);
 
   const overlayRef = useRef<HTMLDivElement>(null);
   const linksRef = useRef<HTMLDivElement>(null);
@@ -129,7 +135,7 @@ export function Nav() {
       <nav
         className="fixed top-0 left-0 right-0 z-50 transition-all"
         style={{
-          background: scrolled ? "rgba(255,255,255,.95)" : "#FFFFFF",
+          background: scrolled ? "rgba(255,255,255,.95)" : "rgba(0,0,0,.04)",
           backdropFilter: "blur(18px)",
           borderBottom: scrolled ? "1px solid rgba(0,0,0,.08)" : "1px solid rgba(0,0,0,.04)",
         }}
@@ -188,21 +194,79 @@ export function Nav() {
           {/* Right side */}
           <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
             {!isMobile && (
-              <button
-                onClick={() => navigate("/pricing#enquire")}
-                style={{
-                  background: "#2563EB",
-                  color: "#fff",
-                  border: 0,
-                  borderRadius: 999,
-                  padding: "12px 20px",
-                  fontSize: 14,
-                  cursor: "pointer",
-                  whiteSpace: "nowrap",
-                }}
-              >
-                Talk to Our Team
-              </button>
+              <>
+                <div
+                  style={{ position: "relative" }}
+                  onMouseEnter={() => setLoginOpen(true)}
+                  onMouseLeave={() => setLoginOpen(false)}
+                >
+                  <button
+                    style={{
+                      background: "transparent",
+                      border: "1px solid rgba(255,255,255,.35)",
+                      color: "#fff",
+                      borderRadius: 999,
+                      padding: "12px 18px",
+                      fontSize: 14,
+                      cursor: "pointer",
+                      whiteSpace: "nowrap",
+                    }}
+                  >
+                    Login
+                  </button>
+
+                  {loginOpen && (
+                    <div
+                      style={{
+                        position: "absolute",
+                        top: "100%",
+                        right: 0,
+                        marginTop: 8,
+                        background: "#fff",
+                        borderRadius: 12,
+                        overflow: "hidden",
+                        boxShadow: "0 8px 24px rgba(0,0,0,.15)",
+                        minWidth: 180,
+                      }}
+                    >
+                      {loginLinks.map((item) => (
+                        <a
+                          key={item.href}
+                          href={item.href}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          style={{
+                            display: "block",
+                            padding: "12px 16px",
+                            fontSize: 14,
+                            color: "#0E0C0A",
+                            textDecoration: "none",
+                            whiteSpace: "nowrap",
+                          }}
+                        >
+                          {item.label}
+                        </a>
+                      ))}
+                    </div>
+                  )}
+                </div>
+
+                <button
+                  onClick={() => navigate("/pricing#enquire")}
+                  style={{
+                    background: "#2563EB",
+                    color: "#fff",
+                    border: 0,
+                    borderRadius: 999,
+                    padding: "12px 20px",
+                    fontSize: 14,
+                    cursor: "pointer",
+                    whiteSpace: "nowrap",
+                  }}
+                >
+                  Talk to Our Team
+                </button>
+              </>
             )}
 
             {isMobile && (
@@ -269,6 +333,25 @@ export function Nav() {
             >
               {item.label}
             </button>
+          ))}
+
+          {loginLinks.map((item) => (
+            <a
+              key={item.href}
+              href={item.href}
+              target="_blank"
+              rel="noopener noreferrer"
+              style={{
+                color: "#fff",
+                fontSize: 24,
+                textAlign: "left",
+                padding: "14px 0",
+                borderBottom: "1px solid rgba(255,255,255,.08)",
+                textDecoration: "none",
+              }}
+            >
+              {item.label}
+            </a>
           ))}
 
           <button
