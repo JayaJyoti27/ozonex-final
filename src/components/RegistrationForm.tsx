@@ -1,6 +1,5 @@
-import { useState } from "react";
-import { supabase } from "@/lib/supabaseClient"; // adjust path to your actual Supabase client
-
+import { useState, useRef } from "react";
+import { publicSupabase } from "@/lib/supabaseClient"; // adjust path to your actual publicSupabase client
 type BusinessCategory = "b2b_travel_agent" | "b2e_corporate_standard" | "cbt_company_platinum";
 
 type Country = "india" | "uae";
@@ -48,6 +47,8 @@ interface FormState {
 }
 
 export function RegistrationForm() {
+  const formRef = useRef<HTMLFormElement>(null);
+
   const [form, setForm] = useState<FormState>({
     name: "",
     email: "",
@@ -110,13 +111,19 @@ export function RegistrationForm() {
     e.preventDefault();
     setSubmitError(null);
 
-    if (!validate()) return;
+    if (!validate()) {
+      setSubmitError("Please fix the highlighted fields below before submitting.");
+      // Scroll to top of the form so the user actually sees what's wrong,
+      // instead of the button silently doing nothing.
+      formRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
+      return;
+    }
 
     setSubmitting(true);
 
     try {
       // 1. Insert the registration row
-      const { data: registration, error: insertError } = await supabase
+      const { data: registration, error: insertError } = await publicSupabase
         .from("registrations")
         .insert({
           name: form.name.trim(),
@@ -142,7 +149,7 @@ export function RegistrationForm() {
         const ext = file.name.split(".").pop();
         const path = `${registrationId}/${doc.type}.${ext}`;
 
-        const { error: uploadError } = await supabase.storage
+        const { error: uploadError } = await publicSupabase.storage
           .from("registration-documents")
           .upload(path, file, { upsert: false });
 
@@ -150,12 +157,14 @@ export function RegistrationForm() {
           throw new Error(`Failed to upload ${doc.label}: ${uploadError.message}`);
         }
 
-        const { error: docInsertError } = await supabase.from("registration_documents").insert({
-          registration_id: registrationId,
-          doc_type: doc.type,
-          file_url: path,
-          file_name: file.name,
-        });
+        const { error: docInsertError } = await publicSupabase
+          .from("registration_documents")
+          .insert({
+            registration_id: registrationId,
+            doc_type: doc.type,
+            storage_path: path,
+            file_name: file.name,
+          });
 
         if (docInsertError) {
           throw new Error(`Failed to save ${doc.label} record: ${docInsertError.message}`);
@@ -185,11 +194,22 @@ export function RegistrationForm() {
   }
 
   return (
-    <form onSubmit={handleSubmit} className="max-w-xl mx-auto py-16 px-6 space-y-8" noValidate>
+    <form
+      ref={formRef}
+      onSubmit={handleSubmit}
+      className="max-w-xl mx-auto py-16 px-6 space-y-8"
+      noValidate
+    >
       <div>
         <h2 className="text-2xl font-semibold mb-1">Registration</h2>
         <p className="text-gray-500 text-sm">Fill in your details to get started.</p>
       </div>
+
+      {submitError && (
+        <div className="rounded-md border border-red-200 bg-red-50 px-4 py-3">
+          <p className="text-red-700 text-sm font-medium">{submitError}</p>
+        </div>
+      )}
 
       {/* Basic details */}
       <div className="space-y-4">
@@ -273,8 +293,6 @@ export function RegistrationForm() {
           ))}
         </div>
       )}
-
-      {submitError && <p className="text-red-600 text-sm">{submitError}</p>}
 
       <button
         type="submit"

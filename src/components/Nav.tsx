@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import { gsap } from "gsap";
 import { useRouter } from "@tanstack/react-router";
 import ozonexlogo from "@/assets/whiteeeeelogo.png";
+import { User, Briefcase } from "lucide-react";
 const mainLinks = [
   { n: "01", label: "Home", href: "/" },
   { n: "02", label: "Product", href: "/product" },
@@ -10,11 +11,23 @@ const mainLinks = [
   { n: "05", label: "Pricing", href: "/pricing" },
   { n: "06", label: "Blogs", href: "/blogs" },
   { n: "07", label: "About", href: "/about" },
+  { n: "08", label: "Register", href: "/register" },
+  { n: "09", label: "Admin", href: "/admin/login" },
 ];
 
 const loginLinks = [
-  { label: "Agent Login", href: "https://portal.ozonextravel.com/agent" },
-  { label: "Corporate Login", href: "https://portal.ozonextravel.com/corporate" },
+  {
+    label: "Agent",
+    href: "https://portal.ozonextravel.com/agent",
+    icon: User,
+    bg: "#C9963A",
+  },
+  {
+    label: "Corporate",
+    href: "https://portal.ozonextravel.com/corporate",
+    icon: Briefcase,
+    bg: "#1B1F4B",
+  },
 ];
 
 function HamburgerIcon({ open }: { open: boolean }) {
@@ -82,7 +95,6 @@ export function Nav() {
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
-  const [loginOpen, setLoginOpen] = useState(false);
 
   const overlayRef = useRef<HTMLDivElement>(null);
   const linksRef = useRef<HTMLDivElement>(null);
@@ -194,79 +206,40 @@ export function Nav() {
           {/* Right side */}
           <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
             {!isMobile && (
-              <>
-                <div
-                  style={{ position: "relative" }}
-                  onMouseEnter={() => setLoginOpen(true)}
-                  onMouseLeave={() => setLoginOpen(false)}
-                >
-                  <button
-                    style={{
-                      background: "transparent",
-                      border: "1px solid rgba(255,255,255,.35)",
-                      color: "#fff",
-                      borderRadius: 999,
-                      padding: "12px 18px",
-                      fontSize: 14,
-                      cursor: "pointer",
-                      whiteSpace: "nowrap",
-                    }}
-                  >
-                    Login
-                  </button>
-
-                  {loginOpen && (
-                    <div
+              <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
+                {loginLinks.map((item) => {
+                  const Icon = item.icon;
+                  return (
+                    <a
+                      key={item.href}
+                      href={item.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
                       style={{
-                        position: "absolute",
-                        top: "100%",
-                        right: 0,
-                        marginTop: 8,
-                        background: "#fff",
-                        borderRadius: 12,
-                        overflow: "hidden",
-                        boxShadow: "0 8px 24px rgba(0,0,0,.15)",
-                        minWidth: 180,
+                        display: "flex",
+                        alignItems: "center",
+                        gap: 8,
+                        background: item.bg,
+                        color: "#fff",
+                        border: 0,
+                        borderRadius: 999,
+                        padding: "10px 20px",
+                        fontSize: 14,
+                        fontWeight: 500,
+                        cursor: "pointer",
+                        whiteSpace: "nowrap",
+                        textDecoration: "none",
+                        transition: "filter 0.15s ease",
                       }}
+                      onMouseEnter={(e) => (e.currentTarget.style.filter = "brightness(1.08)")}
+                      onMouseLeave={(e) => (e.currentTarget.style.filter = "brightness(1)")}
                     >
-                      {loginLinks.map((item) => (
-                        <a
-                          key={item.href}
-                          href={item.href}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          style={{
-                            display: "block",
-                            padding: "12px 16px",
-                            fontSize: 14,
-                            color: "#0E0C0A",
-                            textDecoration: "none",
-                            whiteSpace: "nowrap",
-                          }}
-                        >
-                          {item.label}
-                        </a>
-                      ))}
-                    </div>
-                  )}
-                </div>
-
-                <button
-                  onClick={() => navigate("/pricing#enquire")}
-                  style={{
-                    background: "#2563EB",
-                    color: "#fff",
-                    border: 0,
-                    borderRadius: 999,
-                    padding: "12px 20px",
-                    fontSize: 14,
-                    cursor: "pointer",
-                    whiteSpace: "nowrap",
-                  }}
-                >
-                  Talk to Our Team
-                </button>
-              </>
+                      <Icon size={16} strokeWidth={2} />
+                      {item.label}
+                    </a>
+                  );
+                })}
+              </div>
             )}
 
             {isMobile && (
@@ -335,40 +308,38 @@ export function Nav() {
             </button>
           ))}
 
-          {loginLinks.map((item) => (
-            <a
-              key={item.href}
-              href={item.href}
-              target="_blank"
-              rel="noopener noreferrer"
-              style={{
-                color: "#fff",
-                fontSize: 24,
-                textAlign: "left",
-                padding: "14px 0",
-                borderBottom: "1px solid rgba(255,255,255,.08)",
-                textDecoration: "none",
-              }}
-            >
-              {item.label}
-            </a>
-          ))}
-
-          <button
-            onClick={() => navigate("/pricing#enquire")}
-            style={{
-              marginTop: 20,
-              width: "fit-content",
-              padding: "14px 22px",
-              background: "#2563EB",
-              color: "#fff",
-              border: 0,
-              borderRadius: 999,
-              cursor: "pointer",
-            }}
-          >
-            Talk to Our Team
-          </button>
+          <div style={{ display: "flex", gap: 12, marginTop: 20 }}>
+            {loginLinks.map((item) => {
+              const Icon = item.icon;
+              return (
+                <a
+                  key={item.href}
+                  href={item.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  style={{
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    gap: 8,
+                    flex: 1,
+                    background: item.bg,
+                    color: "#fff",
+                    border: 0,
+                    borderRadius: 999,
+                    padding: "14px 18px",
+                    fontSize: 15,
+                    fontWeight: 500,
+                    cursor: "pointer",
+                    textDecoration: "none",
+                  }}
+                >
+                  <Icon size={17} strokeWidth={2} />
+                  {item.label}
+                </a>
+              );
+            })}
+          </div>
         </div>
       </div>
     </>
