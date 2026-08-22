@@ -5,7 +5,7 @@ import enterprises from "@/assets/who-enterprises.jpg";
 import hr from "@/assets/who-hr.jpg";
 import exec from "@/assets/who-exec.jpg";
 import cta from "@/assets/cta-skyline.jpg";
-
+import { CONTACT } from "@/config/contact";
 gsap.registerPlugin(ScrollTrigger);
 
 /* =========================
@@ -583,7 +583,7 @@ export function GlobalCTA() {
 ========================= */
 
 export function Footer() {
-  const officeLocations = ["Trivandrum", "Chennai", "Cochin", "Delhi", "Dubai", "Kuwait"];
+  const officeLocations = CONTACT.officeLocations;
 
   const footerLinks = [
     { label: "Home", href: "/" },
@@ -695,7 +695,7 @@ export function Footer() {
               </a>
 
               <a
-                href="https://wa.me/918139831118?text=Hi%2C%20I%20want%20to%20know%20more%20about%20the%20OzoneX%20Platform"
+                href={`https://wa.me/${CONTACT.whatsappNumber}?text=Hi%2C%20I%20want%20to%20know%20more%20about%20the%20OzoneX%20Platform`}
                 target="_blank"
                 rel="noopener noreferrer"
                 style={{
@@ -706,7 +706,7 @@ export function Footer() {
                   display: "inline-block",
                 }}
               >
-                WhatsApp: +91 81398 31118
+                WhatsApp: {CONTACT.whatsappDisplay}
               </a>
 
               <a href="/pricing#enquire" className="footer-enquire">
