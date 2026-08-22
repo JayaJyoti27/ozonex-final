@@ -1,4 +1,4 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
 import worldMap from "@/assets/world-map.jpg";
 
 export const Route = createFileRoute("/")({
@@ -49,18 +49,20 @@ function Index() {
               finance closes faster.
             </p>
             <div className="mt-6 flex flex-wrap gap-3">
-              <button
+              <Link
+                to="/register"
                 className="rounded-full px-7 py-3.5 text-sm font-semibold text-white transition-colors"
                 style={{ backgroundColor: INK }}
               >
                 Book a demo
-              </button>
-              <button
+              </Link>
+              <Link
+                to="/about"
                 className="rounded-full px-7 py-3.5 text-sm font-semibold text-white transition-colors"
                 style={{ backgroundColor: BRONZE }}
               >
-                Explore platform
-              </button>
+                Know More
+              </Link>
             </div>
 
             <dl className="mt-7 grid max-w-md grid-cols-3 gap-4 margin-top-4 border-ink/10 pt-5 sm:gap-6">

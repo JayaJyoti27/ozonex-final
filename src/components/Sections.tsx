@@ -6,7 +6,8 @@ import hr from "@/assets/who-hr.jpg";
 import exec from "@/assets/who-exec.jpg";
 import cta from "@/assets/cta-skyline.jpg";
 import { CONTACT } from "@/config/contact";
-import demoVideo from "@/assets/OzoneX CBTFinal_Full_HD 3.mp4";
+import demoVideo from "@/assets/ozonex-demo.mp4";
+
 gsap.registerPlugin(ScrollTrigger);
 
 /* =========================
