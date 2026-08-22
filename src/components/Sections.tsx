@@ -6,6 +6,7 @@ import hr from "@/assets/who-hr.jpg";
 import exec from "@/assets/who-exec.jpg";
 import cta from "@/assets/cta-skyline.jpg";
 import { CONTACT } from "@/config/contact";
+import demoVideo from "@/assets/OzoneX CBTFinal_Full_HD 3.mp4";
 gsap.registerPlugin(ScrollTrigger);
 
 /* =========================
@@ -574,6 +575,91 @@ export function GlobalCTA() {
           }
         }
       `}</style>
+    </section>
+  );
+}
+
+/* =========================
+   VIDEO SHOWCASE
+========================= */
+
+export function VideoShowcase() {
+  return (
+    <section
+      style={{
+        position: "relative",
+        width: "100%",
+        height: "70vh",
+        minHeight: "420px",
+        overflow: "hidden",
+      }}
+    >
+      <video
+        autoPlay
+        muted
+        loop
+        playsInline
+        preload="metadata"
+        style={{
+          position: "absolute",
+          top: "50%",
+          left: "50%",
+          width: "100%",
+          height: "100%",
+          objectFit: "cover",
+          transform: "translate(-50%, -50%)",
+        }}
+      >
+        <source src={demoVideo} type="video/mp4" />
+      </video>
+
+      <div
+        style={{
+          position: "absolute",
+          inset: 0,
+          background: "linear-gradient(180deg, rgba(26,23,18,0.35) 0%, rgba(26,23,18,0.55) 100%)",
+        }}
+      />
+
+      <div
+        style={{
+          position: "relative",
+          zIndex: 1,
+          height: "100%",
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+          justifyContent: "center",
+          textAlign: "center",
+          padding: "0 24px",
+        }}
+      >
+        <p
+          style={{
+            color: "rgba(255,255,255,0.7)",
+            fontSize: "0.65rem",
+            fontWeight: 600,
+            letterSpacing: "0.2em",
+            textTransform: "uppercase",
+            marginBottom: "12px",
+          }}
+        >
+          See It In Action
+        </p>
+        <h2
+          className="font-display"
+          style={{
+            color: "#fff",
+            fontSize: "clamp(1.75rem, 4vw, 3rem)",
+            fontWeight: 600,
+            lineHeight: 1.1,
+            maxWidth: "700px",
+            marginBottom: "20px",
+          }}
+        >
+          Corporate travel, simplified end to end.
+        </h2>
+      </div>
     </section>
   );
 }

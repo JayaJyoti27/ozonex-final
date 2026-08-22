@@ -4,14 +4,13 @@ import { useRouter } from "@tanstack/react-router";
 import ozonexlogo from "@/assets/finallogo.jpg";
 import { User, Briefcase } from "lucide-react";
 const mainLinks = [
-  { n: "01", label: "Home", href: "/" },
-  { n: "02", label: "Product", href: "/product" },
-  { n: "03", label: "Solutions", href: "/solutions" },
-  { n: "04", label: "MICE & Events", href: "/mice-events" },
-  { n: "05", label: "Pricing", href: "/pricing" },
-  { n: "06", label: "Blogs", href: "/blogs" },
-  { n: "07", label: "About", href: "/about" },
-  { n: "08", label: "Register", href: "/register" },
+  { n: "01", label: "Product", href: "/product" },
+  { n: "02", label: "Solutions", href: "/solutions" },
+  { n: "03", label: "MICE & Events", href: "/mice-events" },
+  { n: "04", label: "Pricing", href: "/pricing" },
+  { n: "05", label: "Blogs", href: "/blogs" },
+  { n: "06", label: "About", href: "/about" },
+  { n: "07", label: "Register", href: "/register" },
   { n: "09", label: "Admin", href: "/admin/login" },
 ];
 
