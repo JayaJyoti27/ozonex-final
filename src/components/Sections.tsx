@@ -588,53 +588,13 @@ export function VideoShowcase() {
   return (
     <section
       style={{
-        position: "relative",
         width: "100%",
-        height: "70vh",
-        minHeight: "420px",
-        overflow: "hidden",
+        background: "#1A1712",
+        padding: "clamp(60px, 8vw, 100px) 24px",
       }}
     >
-      <video
-        autoPlay
-        muted
-        loop
-        playsInline
-        preload="metadata"
-        style={{
-          position: "absolute",
-          top: "50%",
-          left: "50%",
-          width: "100%",
-          height: "100%",
-          objectFit: "cover",
-          transform: "translate(-50%, -50%)",
-        }}
-      >
-        <source src={demoVideo} type="video/mp4" />
-      </video>
-
-      <div
-        style={{
-          position: "absolute",
-          inset: 0,
-          background: "linear-gradient(180deg, rgba(26,23,18,0.35) 0%, rgba(26,23,18,0.55) 100%)",
-        }}
-      />
-
-      <div
-        style={{
-          position: "relative",
-          zIndex: 1,
-          height: "100%",
-          display: "flex",
-          flexDirection: "column",
-          alignItems: "center",
-          justifyContent: "center",
-          textAlign: "center",
-          padding: "0 24px",
-        }}
-      >
+      {/* Text now sits ABOVE the video in normal flow */}
+      <div style={{ textAlign: "center", maxWidth: 700, margin: "0 auto 40px" }}>
         <p
           style={{
             color: "rgba(255,255,255,0.7)",
@@ -654,12 +614,40 @@ export function VideoShowcase() {
             fontSize: "clamp(1.75rem, 4vw, 3rem)",
             fontWeight: 600,
             lineHeight: 1.1,
-            maxWidth: "700px",
-            marginBottom: "20px",
+            margin: "0 auto",
           }}
         >
           Corporate travel, simplified end to end.
         </h2>
+      </div>
+
+      {/* Video in its own fixed-aspect box — nothing gets cropped */}
+      <div
+        style={{
+          position: "relative",
+          width: "100%",
+          maxWidth: 1100,
+          margin: "0 auto",
+          aspectRatio: "16 / 9",
+          borderRadius: "1.5rem",
+          overflow: "hidden",
+          background: "#000",
+        }}
+      >
+        <video
+          autoPlay
+          muted
+          loop
+          playsInline
+          preload="metadata"
+          style={{
+            width: "100%",
+            height: "100%",
+            objectFit: "contain", // <-- key change: shows full video, never crops
+          }}
+        >
+          <source src={demoVideo} type="video/mp4" />
+        </video>
       </div>
     </section>
   );

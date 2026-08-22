@@ -23,16 +23,19 @@ export const Route = createFileRoute("/")({
   component: Index,
 });
 
-// Hardcoded to match Lovable design exactly (local project doesn't define --bronze)
 const BRONZE = "#6B4423";
 const INK = "#1A1712";
 
 function Index() {
   return (
-    <main className="flex min-h-screen flex-col overflow-x-hidden bg-sand font-body text-ink lg:h-screen lg:overflow-hidden">
+    <main className="flex flex-col overflow-x-hidden bg-sand font-body text-ink lg:h-screen lg:overflow-hidden">
       <section className="mx-auto flex w-full max-w-[1400px] grow flex-col px-6 py-6 lg:min-h-0 lg:flex-row lg:items-center lg:px-10 lg:py-4">
         <div className="grid w-full items-center gap-8 lg:h-full lg:grid-cols-[0.9fr_1.1fr]">
-          <div className="relative z-20 max-w-xl">
+          {/* FIX A: `max-w-xl` moved behind `lg:` — was capping the text
+              block at 576px on ALL screen sizes, leaving a big blank gap
+              on the right at tablet widths where the layout is still
+              single-column and has much more room to use. */}
+          <div className="relative mt-20 z-20 flex flex-col items-center text-center lg:items-start lg:text-left lg:max-w-xl">
             <p className="mb-3 inline-flex items-center gap-2 rounded-full border border-ink/15 px-4 py-1.5 text-[0.65rem] font-semibold tracking-[0.2em] uppercase text-ink/60">
               Intelligent Travel
             </p>
@@ -43,12 +46,12 @@ function Index() {
               <br />
               <span style={{ color: BRONZE }}>Management</span> Solution.
             </h1>
-            <p className="mt-4 max-w-lg text-sm leading-relaxed text-ink/70 lg:text-base">
+            <p className="mt-4 max-w-lg text-lg leading-relaxed text-ink/70 sm:max-w-xl lg:max-w-lg lg:text-base">
               Ozonex is the all-in-one corporate travel platform that handles bookings, approvals,
               expenses, and policy — automatically. So your team travels more, spends less, and
               finance closes faster.
             </p>
-            <div className="mt-6 flex flex-wrap gap-3">
+            <div className="mt-6 flex flex-wrap justify-center gap-3 lg:justify-start">
               <Link
                 to="/register"
                 className="rounded-full px-7 py-3.5 text-sm font-semibold text-white transition-colors"
@@ -65,13 +68,13 @@ function Index() {
               </Link>
             </div>
 
-            <dl className="mt-7 grid max-w-md grid-cols-3 gap-4 margin-top-4 border-ink/10 pt-5 sm:gap-6">
+            <dl className="mt-7 grid max-w-md grid-cols-3 gap-4 border-t border-ink/10 pt-5 sm:gap-6">
               {[
                 ["3 min", "Avg. booking time"],
                 ["98%", "Policy compliance"],
                 ["22%", "Travel spend saved"],
               ].map(([value, label]) => (
-                <div key={label}>
+                <div key={label} className="flex flex-col items-center lg:items-start">
                   <dt className="font-display text-xl font-semibold text-ink sm:text-2xl">
                     {value}
                   </dt>
@@ -81,8 +84,7 @@ function Index() {
             </dl>
           </div>
 
-          <div className="relative mt-8 h-[420px] pt-2 sm:h-[500px] lg:mt-0 lg:h-full lg:pt-8">
-            {/* Wavy image panel — full height of the hero section */}
+          <div className="relative mt-8 h-[420px] pt-2 sm:h-[560px] md:h-[620px] lg:mt-0 lg:h-full lg:pt-8">
             <svg width="0" height="0" className="absolute" aria-hidden="true">
               <defs>
                 <clipPath id="waveEdge" clipPathUnits="objectBoundingBox">
@@ -101,7 +103,6 @@ function Index() {
                 height={800}
                 className="relative h-full min-h-[280px] pt-6 lg:min-h-0 lg:pt-8"
               />
-              {/* Soft blend into the beige page background */}
               <div
                 className="pointer-events-none absolute inset-y-0 left-0 w-1/3"
                 style={{
@@ -111,7 +112,6 @@ function Index() {
               />
             </div>
 
-            {/* Route arc overlapping the wavy edge */}
             <svg
               viewBox="0 0 600 400"
               className="pointer-events-none absolute top-1/2 left-[6%] z-10 w-[92%] max-w-none -translate-y-1/2"
@@ -148,7 +148,6 @@ function Index() {
               />
             </svg>
 
-            {/* Floating simplified booking card */}
             <div className="absolute bottom-4 left-1/2 z-20 w-[88%] max-w-[19rem] -translate-x-1/2 rounded-3xl border border-ink/10 bg-sand/90 p-4 shadow-[0_24px_60px_-20px_rgba(0,0,0,0.45)] backdrop-blur-md sm:bottom-8 sm:left-2 sm:w-[19rem] sm:translate-x-0 sm:p-5 lg:bottom-16 lg:left-6">
               <p className="text-[0.65rem] font-semibold tracking-[0.2em] uppercase text-ink/50">
                 Simplified booking
@@ -175,17 +174,15 @@ function Index() {
               </button>
             </div>
 
-            {/* Floating approval chip */}
-            <div className="absolute top-4 right-2 z-20 hidden rounded-2xl border border-ink/10 bg-sand/85 px-4 py-3 shadow-[0_18px_40px_-18px_rgba(0,0,0,0.5)] backdrop-blur-md sm:block sm:right-4 lg:top-8">
+            <div className="absolute top-4 right-2 z-20 hidden rounded-2xl border border-ink/10 bg-sand/85 px-4 py-3 shadow-[0_18px_40px_-18px_rgba(0,0,0,0.5)] backdrop-blur-md lg:block lg:top-8 lg:right-4">
               <p className="text-[0.65rem] font-semibold tracking-[0.18em] uppercase text-ink/50">
                 Approval
               </p>
               <p className="mt-1 text-sm font-semibold text-ink">Auto-approved in 12s</p>
             </div>
 
-            {/* Floating expense chip */}
             <div
-              className="absolute top-1/3 right-2 z-20 hidden -translate-y-1/2 rounded-2xl px-4 py-3 text-white shadow-[0_18px_40px_-18px_rgba(0,0,0,0.6)] backdrop-blur-md sm:block sm:right-4 lg:top-1/2 lg:-translate-y-[140%] lg:right-8"
+              className="absolute top-1/3 right-2 z-20 hidden -translate-y-1/2 rounded-2xl px-4 py-3 text-white shadow-[0_18px_40px_-18px_rgba(0,0,0,0.6)] backdrop-blur-md lg:block lg:top-1/2 lg:-translate-y-[140%] lg:right-8"
               style={{ backgroundColor: `${INK}E6` }}
             >
               <p className="text-[0.65rem] font-semibold tracking-[0.18em] uppercase opacity-60">
@@ -194,7 +191,6 @@ function Index() {
               <p className="mt-1 text-sm font-semibold">Receipts auto-matched</p>
             </div>
 
-            {/* Floating duty of care chip */}
             <div className="absolute bottom-20 right-6 z-20 hidden rounded-2xl border border-ink/10 bg-sand/85 px-4 py-3 shadow-[0_18px_40px_-18px_rgba(0,0,0,0.5)] backdrop-blur-md lg:block">
               <p className="text-[0.65rem] font-semibold tracking-[0.18em] uppercase text-ink/50">
                 Duty of care
