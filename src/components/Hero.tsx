@@ -1,510 +1,208 @@
-import { useEffect, useRef } from "react";
-import { gsap } from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
-import jet from "@/assets/hero-jet.jpg";
+import { createFileRoute } from "@tanstack/react-router";
+import worldMap from "@/assets/world-map.jpg";
 
-gsap.registerPlugin(ScrollTrigger);
+export const Route = createFileRoute("/")({
+  head: () => ({
+    meta: [
+      { title: "Ozonex — Smartest Corporate Travel Management" },
+      {
+        name: "description",
+        content:
+          "Ozonex is the all-in-one corporate travel platform for bookings, approvals, expenses and policy — automated end to end.",
+      },
+      { property: "og:title", content: "Ozonex — Smartest Corporate Travel Management" },
+      {
+        property: "og:description",
+        content:
+          "Bookings, approvals, expenses and policy — automated. Teams travel more, spend less, finance closes faster.",
+      },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
+    ],
+  }),
+  component: Index,
+});
 
-export function Hero() {
-  const heroRef = useRef<HTMLDivElement>(null);
-  const mapRef = useRef<HTMLDivElement>(null);
-  const photoRef = useRef<HTMLDivElement>(null);
-  const textRef = useRef<HTMLDivElement>(null);
+// Hardcoded to match Lovable design exactly (local project doesn't define --bronze)
+const BRONZE = "#6B4423";
+const INK = "#1A1712";
 
-  useEffect(() => {
-    if (!heroRef.current) return;
-
-    const ctx = gsap.context(() => {
-      const isMobile = window.matchMedia("(max-width:767px)").matches;
-
-      gsap.fromTo(
-        ".hero-word",
-        {
-          y: 80,
-          opacity: 0,
-        },
-        {
-          y: 0,
-          opacity: 1,
-          duration: 1,
-          stagger: 0.1,
-        },
-      );
-
-      if (mapRef.current) {
-        gsap.fromTo(
-          mapRef.current,
-          {
-            scale: 0.92,
-            opacity: 0,
-          },
-          {
-            scale: 1,
-            opacity: 1,
-            duration: 1.4,
-          },
-        );
-      }
-
-      if (!isMobile && mapRef.current && photoRef.current && textRef.current) {
-        gsap
-          .timeline({
-            scrollTrigger: {
-              trigger: heroRef.current,
-              start: "top top",
-              end: "+=600",
-              scrub: true,
-            },
-          })
-          .to(mapRef.current, { scale: 1.8 }, 0)
-          .to(photoRef.current, { yPercent: -25 }, 0)
-          .to(textRef.current, { opacity: 0, y: -40 }, 0);
-      }
-    }, heroRef);
-
-    return () => {
-      ctx.revert();
-    };
-  }, []);
-
+function Index() {
   return (
-    <section
-      ref={heroRef}
-      className="hero-section relative w-full overflow-hidden grid-overlay"
-      style={{ background: "var(--ink)" }}
-    >
-      {/* Decorative asterisks */}
-      <span className="asterisk asterisk-left-mid">✦</span>
-      <span className="asterisk asterisk-right-mid">✦</span>
-      <span className="asterisk asterisk-left-top">✦</span>
-      <span className="asterisk asterisk-right-bot">✦</span>
+    <main className="flex min-h-screen flex-col overflow-x-hidden bg-sand font-body text-ink lg:h-screen lg:overflow-hidden">
+      <section className="mx-auto flex w-full max-w-[1400px] grow flex-col px-6 py-6 lg:min-h-0 lg:flex-row lg:items-center lg:px-10 lg:py-4">
+        <div className="grid w-full items-center gap-8 lg:h-full lg:grid-cols-[0.9fr_1.1fr]">
+          <div className="relative z-20 max-w-xl">
+            <p className="mb-3 inline-flex items-center gap-2 rounded-full border border-ink/15 px-4 py-1.5 text-[0.65rem] font-semibold tracking-[0.2em] uppercase text-ink/60">
+              Intelligent Travel
+            </p>
+            <h1 className="font-display text-3xl leading-[0.95] font-semibold tracking-tight text-ink sm:text-4xl md:text-5xl lg:text-[3.4rem]">
+              Smartest
+              <br />
+              Corporate Travel
+              <br />
+              <span style={{ color: BRONZE }}>Management</span> Solution.
+            </h1>
+            <p className="mt-4 max-w-lg text-sm leading-relaxed text-ink/70 lg:text-base">
+              Ozonex is the all-in-one corporate travel platform that handles bookings, approvals,
+              expenses, and policy — automatically. So your team travels more, spends less, and
+              finance closes faster.
+            </p>
+            <div className="mt-6 flex flex-wrap gap-3">
+              <button
+                className="rounded-full px-7 py-3.5 text-sm font-semibold text-white transition-colors"
+                style={{ backgroundColor: INK }}
+              >
+                Book a demo
+              </button>
+              <button
+                className="rounded-full px-7 py-3.5 text-sm font-semibold text-white transition-colors"
+                style={{ backgroundColor: BRONZE }}
+              >
+                Explore platform
+              </button>
+            </div>
 
-      {/* Map Background */}
-      <div
-        ref={mapRef}
-        className="map-container absolute inset-0 flex items-center justify-center"
-        style={{ willChange: "transform" }}
-      >
-        <div className="map-inner relative">
-          <div
-            className="map-layer"
-            style={{
-              backgroundColor: "var(--sand)",
-              maskImage: "url(/images/world.svg)",
-              WebkitMaskImage: "url(/images/world.svg)",
-              maskSize: "contain",
-              WebkitMaskSize: "contain",
-              maskRepeat: "no-repeat",
-              WebkitMaskRepeat: "no-repeat",
-              maskPosition: "center",
-              WebkitMaskPosition: "center",
-            }}
-          />
+            <dl className="mt-7 grid max-w-md grid-cols-3 gap-4 margin-top-4 border-ink/10 pt-5 sm:gap-6">
+              {[
+                ["3 min", "Avg. booking time"],
+                ["98%", "Policy compliance"],
+                ["22%", "Travel spend saved"],
+              ].map(([value, label]) => (
+                <div key={label}>
+                  <dt className="font-display text-xl font-semibold text-ink sm:text-2xl">
+                    {value}
+                  </dt>
+                  <dd className="mt-1 text-xs leading-snug text-ink/60">{label}</dd>
+                </div>
+              ))}
+            </dl>
+          </div>
 
-          <div
-            ref={photoRef}
-            className="map-layer"
-            style={{
-              backgroundImage: `url(${jet})`,
-              backgroundSize: "cover",
-              backgroundPosition: "center 90%",
+          <div className="relative mt-8 h-[420px] pt-2 sm:h-[500px] lg:mt-0 lg:h-full lg:pt-8">
+            {/* Wavy image panel — full height of the hero section */}
+            <svg width="0" height="0" className="absolute" aria-hidden="true">
+              <defs>
+                <clipPath id="waveEdge" clipPathUnits="objectBoundingBox">
+                  <path d="M0.14,0 C0.06,0.25 0.16,0.5 0.10,0.75 C0.07,0.88 0.10,0.94 0.09,1 L1,1 L1,0 Z" />
+                </clipPath>
+              </defs>
+            </svg>
+            <div
+              className="relative h-full overflow-hidden rounded-[2rem] lg:rounded-l-[3rem] lg:rounded-r-[2rem]"
+              style={{ clipPath: "url(#waveEdge)" }}
+            >
+              <img
+                src={worldMap}
+                alt="World map with global flight routes"
+                width={1000}
+                height={800}
+                className="relative h-full min-h-[280px] pt-6 lg:min-h-0 lg:pt-8"
+              />
+              {/* Soft blend into the beige page background */}
+              <div
+                className="pointer-events-none absolute inset-y-0 left-0 w-1/3"
+                style={{
+                  background:
+                    "linear-gradient(to right, var(--sand) 0%, color-mix(in oklab, var(--sand) 55%, transparent) 45%, transparent 100%)",
+                }}
+              />
+            </div>
 
-              maskImage: "url(/images/world.svg)",
-              WebkitMaskImage: "url(/images/world.svg)",
-              maskSize: "contain",
-              WebkitMaskSize: "contain",
-              maskRepeat: "no-repeat",
-              WebkitMaskRepeat: "no-repeat",
-              maskPosition: "center",
-              WebkitMaskPosition: "center",
+            {/* Route arc overlapping the wavy edge */}
+            <svg
+              viewBox="0 0 600 400"
+              className="pointer-events-none absolute top-1/2 left-[6%] z-10 w-[92%] max-w-none -translate-y-1/2"
+              aria-hidden="true"
+            >
+              <path
+                d="M40,320 C180,60 420,60 560,220"
+                fill="none"
+                stroke="var(--sand)"
+                strokeWidth="3"
+                strokeDasharray="10 12"
+                strokeLinecap="round"
+                opacity="0.85"
+              />
+              <circle cx="40" cy="320" r="12" fill={BRONZE} />
+              <circle
+                cx="40"
+                cy="320"
+                r="22"
+                fill="none"
+                stroke="var(--sand)"
+                strokeWidth="2"
+                opacity="0.6"
+              />
+              <circle cx="560" cy="220" r="12" fill="var(--ink)" />
+              <circle
+                cx="560"
+                cy="220"
+                r="22"
+                fill="none"
+                stroke="var(--sand)"
+                strokeWidth="2"
+                opacity="0.6"
+              />
+            </svg>
 
-              opacity: 0.78,
-              mixBlendMode: "normal",
-              filter: "contrast(1.05)",
+            {/* Floating simplified booking card */}
+            <div className="absolute bottom-4 left-1/2 z-20 w-[88%] max-w-[19rem] -translate-x-1/2 rounded-3xl border border-ink/10 bg-sand/90 p-4 shadow-[0_24px_60px_-20px_rgba(0,0,0,0.45)] backdrop-blur-md sm:bottom-8 sm:left-2 sm:w-[19rem] sm:translate-x-0 sm:p-5 lg:bottom-16 lg:left-6">
+              <p className="text-[0.65rem] font-semibold tracking-[0.2em] uppercase text-ink/50">
+                Simplified booking
+              </p>
+              <div className="mt-3 flex items-center gap-3 text-sm font-semibold text-ink">
+                <span>BLR</span>
+                <span className="h-px grow bg-ink/20" />
+                <span>SIN</span>
+              </div>
+              <div className="mt-3 flex items-center justify-between text-xs text-ink/60">
+                <span>Mon, 24 Aug · 1 traveller</span>
+                <span
+                  className="rounded-full px-3 py-1 text-[0.65rem] font-semibold text-white"
+                  style={{ backgroundColor: INK }}
+                >
+                  In policy
+                </span>
+              </div>
+              <button
+                className="mt-4 w-full rounded-full py-2.5 text-xs font-semibold text-white transition-colors"
+                style={{ backgroundColor: INK }}
+              >
+                Search flights
+              </button>
+            </div>
 
-              zIndex: 2,
-              willChange: "transform",
-            }}
-          />
+            {/* Floating approval chip */}
+            <div className="absolute top-4 right-2 z-20 hidden rounded-2xl border border-ink/10 bg-sand/85 px-4 py-3 shadow-[0_18px_40px_-18px_rgba(0,0,0,0.5)] backdrop-blur-md sm:block sm:right-4 lg:top-8">
+              <p className="text-[0.65rem] font-semibold tracking-[0.18em] uppercase text-ink/50">
+                Approval
+              </p>
+              <p className="mt-1 text-sm font-semibold text-ink">Auto-approved in 12s</p>
+            </div>
+
+            {/* Floating expense chip */}
+            <div
+              className="absolute top-1/3 right-2 z-20 hidden -translate-y-1/2 rounded-2xl px-4 py-3 text-white shadow-[0_18px_40px_-18px_rgba(0,0,0,0.6)] backdrop-blur-md sm:block sm:right-4 lg:top-1/2 lg:-translate-y-[140%] lg:right-8"
+              style={{ backgroundColor: `${INK}E6` }}
+            >
+              <p className="text-[0.65rem] font-semibold tracking-[0.18em] uppercase opacity-60">
+                Expenses
+              </p>
+              <p className="mt-1 text-sm font-semibold">Receipts auto-matched</p>
+            </div>
+
+            {/* Floating duty of care chip */}
+            <div className="absolute bottom-20 right-6 z-20 hidden rounded-2xl border border-ink/10 bg-sand/85 px-4 py-3 shadow-[0_18px_40px_-18px_rgba(0,0,0,0.5)] backdrop-blur-md lg:block">
+              <p className="text-[0.65rem] font-semibold tracking-[0.18em] uppercase text-ink/50">
+                Duty of care
+              </p>
+              <p className="mt-1 text-sm font-semibold text-ink">24/7 traveller tracking</p>
+            </div>
+          </div>
         </div>
-      </div>
-
-      {/* Hero Content */}
-      <div
-        ref={textRef}
-        className="hero-text relative z-10 flex flex-col items-center justify-center text-center text-white"
-      >
-        <h1 className="hero-heading font-display">
-          <span className="block">
-            <span className="hero-word inline-block">Smartest</span>{" "}
-            <span className="hero-word inline-block">Corporate</span>{" "}
-            <span className="hero-word inline-block">Travel</span>
-          </span>
-
-          <span className="block">
-            <span className="hero-word inline-block">Management</span>
-          </span>
-
-          <span className="block">
-            <span className="hero-word inline-block">Solution.</span>
-          </span>
-        </h1>
-
-        <p className="hero-sub hero-subtext">
-          Ozonex is the all-in-one corporate travel platform that handles bookings, approvals,
-          expenses, and policy — automatically. So your team travels more, spends less, and finance
-          closes faster.
-        </p>
-
-        <div className="hero-cta hero-cta-row">
-          <a
-            href="/pricing#enquire"
-            className="hero-btn-primary"
-            onMouseEnter={(e) => {
-              e.currentTarget.style.background = "#1D4ED8";
-              e.currentTarget.style.transform = "scale(1.02)";
-            }}
-            onMouseLeave={(e) => {
-              e.currentTarget.style.background = "#2563EB";
-              e.currentTarget.style.transform = "scale(1)";
-            }}
-          >
-            Get Started Free
-          </a>
-
-          <a href="/pricing#enquire" className="pill hero-btn-secondary">
-            Book a Free Demo
-          </a>
-        </div>
-
-        <p className="hero-cta hero-trust">Trusted by 200+ enterprises across India and UAE</p>
-      </div>
-
-      {/* Bottom SVG */}
-      <svg
-        className="absolute bottom-[-1px] left-0 w-full"
-        height="80"
-        viewBox="0 0 1440 80"
-        preserveAspectRatio="none"
-        style={{ display: "block", zIndex: 5 }}
-      >
-        <path
-          d="M0,40 C120,10 240,70 360,35 C480,5 600,65 720,30 C840,0 960,60 1080,40 C1200,20 1320,55 1440,28 L1440,80 L0,80 Z"
-          fill="var(--cream)"
-        />
-      </svg>
-
-      <style>
-        {`
-        /* =========================
-           HERO SECTION
-        ========================== */
-
-        .hero-section {
-          min-height: 100vh;
-          margin-bottom: -1px;
-        }
-
-        .hero-text {
-          width: 100%;
-          min-height: 100vh;
-          padding: 120px 24px 100px;
-        }
-
-        /* =========================
-           MAP
-        ========================== */
-
-        .map-container {
-  opacity: 1;
-  padding-top: 30px;
-}
-
-        .map-inner {
-          position: relative;
-          width: 110%;
-          height: 80%;
-          min-height: 500px;
-        }
-
-        .map-layer {
-  position: absolute;
-  inset: 0;
-}
-
-.map-layer:first-child {
-  opacity: 0.88;
-  background-color: var(--sand);
-}
-
-        /* =========================
-           ASTERISKS
-        ========================== */
-
-        .asterisk {
-          position: absolute;
-          color: rgba(255,255,255,0.35);
-          font-size: 18px;
-          user-select: none;
-          pointer-events: none;
-        }
-
-        .asterisk-left-mid {
-          left: 40px;
-          top: 50%;
-          transform: translateY(-50%);
-        }
-
-        .asterisk-right-mid {
-          right: 40px;
-          top: 50%;
-          transform: translateY(-50%);
-        }
-
-        .asterisk-left-top {
-          left: 90px;
-          top: 26%;
-          font-size: 14px;
-        }
-
-        .asterisk-right-bot {
-          right: 90px;
-          top: 74%;
-          font-size: 14px;
-        }
-
-        /* =========================
-           TYPOGRAPHY
-        ========================== */
-
-        .hero-heading {
-          font-size: clamp(2.8rem, 7vw, 6.5rem);
-          line-height: 0.98;
-          letter-spacing: -0.04em;
-          max-width: 1200px;
-        }
-
-        .hero-subtext {
-          margin-top: 32px;
-          max-width: 720px;
-          font-size: clamp(14px, 1.4vw, 18px);
-          line-height: 1.8;
-          color: rgba(255,255,255,0.78);
-        }
-
-        /* =========================
-           BUTTONS
-        ========================== */
-
-        .hero-cta-row {
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          flex-wrap: wrap;
-          gap: 16px;
-          margin-top: 42px;
-        }
-
-        .hero-btn-primary {
-          display: inline-flex;
-          align-items: center;
-          justify-content: center;
-          min-height: 54px;
-          padding: 14px 38px;
-          border-radius: 999px;
-          background: #2563EB;
-          color: #fff;
-          text-decoration: none;
-          text-transform: uppercase;
-          letter-spacing: 0.12em;
-          font-size: 12px;
-          font-weight: 600;
-          transition: all 0.25s ease;
-          white-space: nowrap;
-        }
-
-        .hero-btn-secondary {
-          min-height: 54px;
-          display: inline-flex;
-          align-items: center;
-          justify-content: center;
-          white-space: nowrap;
-        }
-
-        .hero-trust {
-          margin-top: 18px;
-          font-size: 12px;
-          color: rgba(255,255,255,0.48);
-        }
-
-        /* =========================
-           LARGE SCREENS
-        ========================== */
-
-        @media (min-width: 1600px) {
-          .hero-heading {
-            font-size: 7rem;
-          }
-
-          .map-inner {
-            width: 100%;
-          }
-        }
-
-        /* =========================
-           LAPTOP
-        ========================== */
-
-        @media (max-width: 1200px) {
-          .hero-heading {
-            font-size: clamp(3rem, 8vw, 5.5rem);
-          }
-
-          .map-inner {
-            width: 125%;
-          }
-        }
-
-        /* =========================
-           TABLET
-        ========================== */
-
-        @media (max-width: 992px) {
-          .hero-text {
-            padding-top: 140px;
-            padding-left: 32px;
-            padding-right: 32px;
-          }
-
-          .map-inner {
-            width: 140%;
-            min-height: 420px;
-          }
-
-          .hero-subtext {
-            max-width: 620px;
-          }
-
-          .asterisk-left-top {
-            left: 40px;
-          }
-
-          .asterisk-right-bot {
-            right: 40px;
-          }
-        }
-
-        /* =========================
-           MOBILE
-        ========================== */
-
-        @media (max-width: 768px) {
-          .hero-section {
-            min-height: auto;
-          }
-
-          .hero-text {
-            min-height: 100vh;
-            padding: 120px 20px 90px;
-          }
-
-          .map-inner {
-            width: 170%;
-            height: 60%;
-            min-height: 320px;
-          }
-
-          .hero-heading {
-            font-size: clamp(2.4rem, 11vw, 4rem);
-            line-height: 1.04;
-          }
-
-          .hero-subtext {
-            margin-top: 24px;
-            font-size: 14px;
-            line-height: 1.7;
-            max-width: 100%;
-          }
-
-          .hero-cta-row {
-            flex-direction: column;
-            width: 100%;
-            margin-top: 34px;
-          }
-
-          .hero-btn-primary,
-          .hero-btn-secondary {
-            width: 100%;
-            max-width: 340px;
-          }
-
-          .hero-trust {
-            margin-top: 16px;
-            font-size: 11px;
-            line-height: 1.6;
-            padding: 0 10px;
-          }
-
-          .asterisk {
-            display: none;
-          }
-        }
-
-        /* =========================
-           SMALL MOBILE
-        ========================== */
-
-        @media (max-width: 480px) {
-          .hero-text {
-            padding: 110px 16px 80px;
-          }
-
-          .hero-heading {
-            font-size: clamp(2rem, 12vw, 3.2rem);
-          }
-
-          .hero-subtext {
-            font-size: 13px;
-          }
-
-          .hero-btn-primary,
-          .hero-btn-secondary {
-            max-width: 100%;
-            font-size: 11px;
-            padding: 14px 20px;
-          }
-
-          .map-inner {
-            width: 210%;
-            min-height: 260px;
-          }
-        }
-
-        /* =========================
-           EXTRA SMALL DEVICES
-        ========================== */
-
-        @media (max-width: 360px) {
-          .hero-heading {
-            font-size: 1.9rem;
-          }
-
-          .hero-subtext {
-            font-size: 12px;
-            line-height: 1.6;
-          }
-
-          .hero-btn-primary,
-          .hero-btn-secondary {
-            min-height: 50px;
-            font-size: 10px;
-          }
-
-          .hero-trust {
-            font-size: 10px;
-          }
-        `}
-      </style>
-    </section>
+      </section>
+    </main>
   );
 }
+export { Index as Hero };

@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { gsap } from "gsap";
 import { useRouter } from "@tanstack/react-router";
-import ozonexlogo from "@/assets/whiteeeeelogo.png";
+import ozonexlogo from "@/assets/finallogo.jpg";
 import { User, Briefcase } from "lucide-react";
 const mainLinks = [
   { n: "01", label: "Home", href: "/" },
@@ -147,7 +147,7 @@ export function Nav() {
       <nav
         className="fixed top-0 left-0 right-0 z-50 transition-all"
         style={{
-          background: scrolled ? "rgba(255,255,255,.95)" : "rgba(0,0,0,.04)",
+          background: "#F7F1E8",
           backdropFilter: "blur(18px)",
           borderBottom: scrolled ? "1px solid rgba(0,0,0,.08)" : "1px solid rgba(0,0,0,.04)",
         }}
@@ -157,7 +157,7 @@ export function Nav() {
             position: "relative",
             width: "100%",
             margin: 0,
-            padding: isMobile ? "16px 16px" : "24px 24px",
+            padding: isMobile ? "10px 10px" : "16px 16px",
             display: "flex",
             justifyContent: "space-between",
             alignItems: "center",
@@ -168,7 +168,7 @@ export function Nav() {
             onClick={() => navigate("/")}
             style={{ background: "none", border: 0, cursor: "pointer" }}
           >
-            <img src={ozonexlogo} alt="Ozonex" style={{ height: isMobile ? 30 : 45 }} />
+            <img src={ozonexlogo} alt="Ozonex" style={{ height: isMobile ? 25 : 40 }} />
           </button>
 
           {/* Desktop nav links — hidden on mobile */}
@@ -191,7 +191,7 @@ export function Nav() {
                     background: "transparent",
                     border: 0,
                     cursor: "pointer",
-                    color: "rgba(255,255,255,.75)",
+                    color: "black",
                     fontSize: 12,
                     fontWeight: 500,
                     textTransform: "uppercase",

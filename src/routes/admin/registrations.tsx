@@ -133,13 +133,6 @@ function AdminRegistrations() {
               Every agent and corporate signup, in one place.
             </p>
           </div>
-          <input
-            type="text"
-            placeholder="Search name, email, category..."
-            value={query}
-            onChange={(e) => setQuery(e.target.value)}
-            className="w-72 bg-white border border-[#14100C]/10 rounded-lg px-3.5 py-2.5 text-sm shadow-sm focus:outline-none focus:ring-2 focus:ring-[#C9A15E]"
-          />
         </div>
 
         {/* stat row */}

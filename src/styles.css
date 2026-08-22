@@ -8,6 +8,9 @@
 @custom-variant dark (&:is(.dark *));
 
 @theme inline {
+  --color-brown: var(--brown);
+  --color-brown-foreground: var(--brown-foreground);
+  --color-bronze: var(--bronze);
   --radius-sm: calc(var(--radius) - 4px);
   --radius-md: calc(var(--radius) - 2px);
   --radius-lg: var(--radius);
@@ -47,16 +50,18 @@
   --radius: 0.25rem;
   --ink: oklch(0.18 0.018 50);
   --cream: oklch(0.952 0.012 70);
-  --sand: oklch(0.82 0.08 80);
+
   --gold: oklch(0.75 0.12 75);
   --yellow-line: oklch(0.85 0.16 90);
   --muted-warm: oklch(0.5 0.012 60);
-
+  --brown: oklch(0.32 0.06 55);
+  --brown-foreground: oklch(0.97 0.01 80);
+  --bronze: oklch(0.62 0.1 65);
   --brand-blue: #2563eb;
   --brand-blue-hover: #1d4ed8;
   --brand-blue-light: rgba(37, 99, 235, 0.12);
   --brand-blue-glow: rgba(37, 99, 235, 0.25);
-
+  --sand: #f7f1e8;
   --background: var(--cream);
   --foreground: var(--ink);
   --card: var(--cream);
