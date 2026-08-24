@@ -1,5 +1,6 @@
 import { useState, useRef } from "react";
 import { publicSupabase } from "@/lib/supabaseClient"; // adjust path to your actual publicSupabase client
+
 type BusinessCategory = "b2b_travel_agent" | "b2e_corporate_standard" | "cbt_company_platinum";
 
 type Country = "india" | "uae";
@@ -38,6 +39,13 @@ const documentsByCountry: Record<Country, { type: DocType; label: string }[]> = 
 const MAX_FILE_SIZE_MB = 5;
 const ACCEPTED_TYPES = ["application/pdf", "image/jpeg", "image/png"];
 
+// Detects whether the form is being rendered on the .ae site so we can
+// tweak locale-specific UI bits (currently just the phone placeholder).
+function useIsUaeSite(): boolean {
+  if (typeof window === "undefined") return false;
+  return window.location.hostname.endsWith(".ae");
+}
+
 interface FormState {
   name: string;
   email: string;
@@ -48,6 +56,8 @@ interface FormState {
 
 export function RegistrationForm() {
   const formRef = useRef<HTMLFormElement>(null);
+  const isUaeSite = useIsUaeSite();
+  const phonePlaceholder = isUaeSite ? "+971" : "";
 
   const [form, setForm] = useState<FormState>({
     name: "",
@@ -90,8 +100,16 @@ export function RegistrationForm() {
     const newErrors: Record<string, string> = {};
 
     if (!form.name.trim()) newErrors.name = "Name is required";
-    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email)) newErrors.email = "Valid email required";
-    if (!/^[0-9+\-\s]{7,15}$/.test(form.phone)) newErrors.phone = "Valid phone number required";
+    if (!form.email.trim()) {
+      newErrors.email = "Email ID is required";
+    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email)) {
+      newErrors.email = "Valid email required";
+    }
+    if (!form.phone.trim()) {
+      newErrors.phone = "Phone Number is required";
+    } else if (!/^[0-9+\-\s]{7,15}$/.test(form.phone)) {
+      newErrors.phone = "Valid phone number required";
+    }
     if (!form.businessCategory) newErrors.businessCategory = "Select a business category";
     if (!form.country) newErrors.country = "Select a country";
 
@@ -222,21 +240,24 @@ export function RegistrationForm() {
           />
         </Field>
 
-        <Field label="Email ID" error={errors.email}>
+        <Field label="Email ID" error={errors.email} required>
           <input
             type="email"
             value={form.email}
             onChange={(e) => handleFieldChange("email", e.target.value)}
             className="w-full border rounded-md px-3 py-2"
+            required
           />
         </Field>
 
-        <Field label="Phone Number" error={errors.phone}>
+        <Field label="Phone Number" error={errors.phone} required>
           <input
             type="tel"
             value={form.phone}
             onChange={(e) => handleFieldChange("phone", e.target.value)}
+            placeholder={phonePlaceholder}
             className="w-full border rounded-md px-3 py-2"
+            required
           />
         </Field>
 
@@ -308,15 +329,20 @@ export function RegistrationForm() {
 function Field({
   label,
   error,
+  required,
   children,
 }: {
   label: string;
   error?: string;
+  required?: boolean;
   children: React.ReactNode;
 }) {
   return (
     <div>
-      <label className="block text-sm font-medium mb-1">{label}</label>
+      <label className="block text-sm font-medium mb-1">
+        {label}
+        {required && <span className="text-red-600 ml-0.5">*</span>}
+      </label>
       {children}
       {error && <p className="text-red-600 text-xs mt-1">{error}</p>}
     </div>

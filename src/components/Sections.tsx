@@ -657,8 +657,32 @@ export function VideoShowcase() {
    FOOTER
 ========================= */
 
+// Fixed display order for the "Offices" column, regardless of what order
+// CONTACT.officeLocations happens to be defined in.
+const OFFICE_DISPLAY_ORDER = ["Dubai", "Kuwait", "Trivandrum", "Kochi", "Chennai", "Delhi"];
+
+function sortOffices(offices: string[]): string[] {
+  return [...offices].sort((a, b) => {
+    const ai = OFFICE_DISPLAY_ORDER.indexOf(a);
+    const bi = OFFICE_DISPLAY_ORDER.indexOf(b);
+    // Anything not in the priority list falls to the end, in its original order.
+    if (ai === -1 && bi === -1) return 0;
+    if (ai === -1) return 1;
+    if (bi === -1) return -1;
+    return ai - bi;
+  });
+}
+
+// Detects whether the footer is being rendered on the .ae site so we can
+// swap in UAE-specific contact details, cities heading, and city list.
+function useIsUaeSite(): boolean {
+  if (typeof window === "undefined") return false;
+  return window.location.hostname.endsWith(".ae");
+}
+
 export function Footer() {
-  const officeLocations = CONTACT.officeLocations;
+  const isUaeSite = useIsUaeSite();
+  const officeLocations = sortOffices(CONTACT.officeLocations);
 
   const footerLinks = [
     { label: "Home", href: "/" },
@@ -671,7 +695,7 @@ export function Footer() {
     { label: "Privacy Policy", href: "/privacy" },
   ];
 
-  const cityLinks = [
+  const cityLinksIndia = [
     {
       label: "Bangalore",
       href: "/corporate-travel-management-bangalore",
@@ -685,6 +709,40 @@ export function Footer() {
       href: "/corporate-travel-management-delhi",
     },
   ];
+
+  const cityLinksUae = [
+    {
+      label: "Downtown Dubai",
+      href: "/corporate-travel-management-downtown-dubai",
+    },
+    {
+      label: "Dubai Marina",
+      href: "/corporate-travel-management-dubai-marina",
+    },
+    {
+      label: "Business Bay",
+      href: "/corporate-travel-management-business-bay",
+    },
+    {
+      label: "Deira",
+      href: "/corporate-travel-management-deira",
+    },
+    {
+      label: "Bur Dubai",
+      href: "/corporate-travel-management-bur-dubai",
+    },
+    {
+      label: "Jumeirah",
+      href: "/corporate-travel-management-jumeirah",
+    },
+  ];
+
+  const cityLinks = isUaeSite ? cityLinksUae : cityLinksIndia;
+  const citiesHeading = isUaeSite ? "Metro Cities in Dubai" : "Metro Cities in India";
+
+  const contactEmail = isUaeSite ? "info@flyozone.travel" : "tresaj@ozonegroupglobal.com";
+  const whatsappNumber = isUaeSite ? "971564557700" : CONTACT.whatsappNumber;
+  const whatsappDisplay = isUaeSite ? "+971 56 455 7700" : CONTACT.whatsappDisplay;
 
   return (
     <footer className="site-footer">
@@ -728,7 +786,7 @@ export function Footer() {
 
           {/* Cities */}
           <div className="footer-col">
-            <div className="footer-col-heading">Cities</div>
+            <div className="footer-col-heading">{citiesHeading}</div>
 
             <div className="footer-links">
               {cityLinks.map((l) => (
@@ -758,7 +816,7 @@ export function Footer() {
 
             <div className="footer-links flex flex-col gap-3">
               <a
-                href="mailto:tresaj@ozonegroupglobal.com"
+                href={`mailto:${contactEmail}`}
                 className="footer-link footer-email"
                 style={{
                   fontSize: "12px",
@@ -766,11 +824,11 @@ export function Footer() {
                   display: "inline-block",
                 }}
               >
-                tresaj@ozonegroupglobal.com
+                {contactEmail}
               </a>
 
               <a
-                href={`https://wa.me/${CONTACT.whatsappNumber}?text=Hi%2C%20I%20want%20to%20know%20more%20about%20the%20OzoneX%20Platform`}
+                href={`https://wa.me/${whatsappNumber}?text=Hi%2C%20I%20want%20to%20know%20more%20about%20the%20OzoneX%20Platform`}
                 target="_blank"
                 rel="noopener noreferrer"
                 style={{
@@ -781,7 +839,7 @@ export function Footer() {
                   display: "inline-block",
                 }}
               >
-                WhatsApp: {CONTACT.whatsappDisplay}
+                WhatsApp: {whatsappDisplay}
               </a>
 
               <a href="/pricing#enquire" className="footer-enquire">

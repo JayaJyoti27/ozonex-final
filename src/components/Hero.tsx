@@ -26,20 +26,38 @@ export const Route = createFileRoute("/")({
 const BRONZE = "#6B4423";
 const INK = "#1A1712";
 
+// Reused from RegistrationForm / Footer — keeps .ae vs .com behavior
+// consistent and in one place per file. If you've since centralized
+// this into a shared hook/util, swap this out for that import.
+function useIsUaeSite() {
+  if (typeof window === "undefined") return false;
+  return window.location.hostname.endsWith(".ae");
+}
+
 function Index() {
+  const isUae = useIsUaeSite();
+  const destinationCode = isUae ? "DXB" : "SIN";
+
   return (
-    <main className="flex flex-col overflow-x-hidden bg-sand font-body text-ink lg:h-screen lg:overflow-hidden">
-      <section className="mx-auto flex w-full max-w-[1400px] grow flex-col px-6 py-6 lg:min-h-0 lg:flex-row lg:items-center lg:px-10 lg:py-4">
+    // FIX B: the hard `h-screen + overflow-hidden` lock now only
+    // engages when there's ALSO enough height to fit the content
+    // (>=820px). Below that — e.g. 1366x768, 1440x810, etc — the
+    // hero falls back to `min-h-screen` and flows/scrolls naturally
+    // instead of clipping the bottom of the text column.
+    <main className="flex flex-col overflow-x-hidden bg-sand font-body text-ink lg:min-h-screen [@media(min-width:1024px)_and_(min-height:820px)]:h-screen [@media(min-width:1024px)_and_(min-height:820px)]:overflow-hidden">
+      <section className="mx-auto flex w-full max-w-[1400px] grow flex-col px-6 py-8 lg:min-h-0 lg:flex-row lg:items-center lg:px-10 lg:py-4">
         <div className="grid w-full items-center gap-8 lg:h-full lg:grid-cols-[0.9fr_1.1fr]">
-          {/* FIX A: `max-w-xl` moved behind `lg:` — was capping the text
-              block at 576px on ALL screen sizes, leaving a big blank gap
-              on the right at tablet widths where the layout is still
-              single-column and has much more room to use. */}
-          <div className="relative mt-20 z-20 flex flex-col items-center text-center lg:items-start lg:text-left lg:max-w-xl">
+          {/* FIX A (kept from before): max-w-xl behind lg: so tablet
+              widths use the extra room instead of leaving a gap.
+              FIX C (new): mt-20 and the heading size are dialed back
+              under the same short-height media query so the column's
+              natural content height fits inside 768px-tall viewports
+              without needing overflow-hidden to hide anything. */}
+          <div className="relative mt-8 [@media(min-width:1024px)_and_(min-height:820px)]:mt-20 z-20 flex flex-col items-center text-center lg:items-start lg:text-left lg:max-w-xl">
             <p className="mb-3 inline-flex items-center gap-2 rounded-full border border-ink/15 px-4 py-1.5 text-[0.65rem] font-semibold tracking-[0.2em] uppercase text-ink/60">
               Intelligent Travel
             </p>
-            <h1 className="font-display text-3xl leading-[0.95] font-semibold tracking-tight text-ink sm:text-4xl md:text-5xl lg:text-[3.4rem]">
+            <h1 className="font-display text-3xl leading-[0.95] font-semibold tracking-tight text-ink sm:text-4xl md:text-5xl lg:text-[2.7rem] [@media(min-width:1024px)_and_(min-height:820px)]:lg:text-[3.4rem]">
               Smartest
               <br />
               Corporate Travel
@@ -152,10 +170,11 @@ function Index() {
               <p className="text-[0.65rem] font-semibold tracking-[0.2em] uppercase text-ink/50">
                 Simplified booking
               </p>
+              {/* FIX D: destination swaps to DXB on .ae, stays SIN on .com */}
               <div className="mt-3 flex items-center gap-3 text-sm font-semibold text-ink">
                 <span>BLR</span>
                 <span className="h-px grow bg-ink/20" />
-                <span>SIN</span>
+                <span>{destinationCode}</span>
               </div>
               <div className="mt-3 flex items-center justify-between text-xs text-ink/60">
                 <span>Mon, 24 Aug · 1 traveller</span>

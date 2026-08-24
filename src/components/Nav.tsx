@@ -2,7 +2,8 @@ import { useEffect, useRef, useState } from "react";
 import { gsap } from "gsap";
 import { useRouter } from "@tanstack/react-router";
 import ozonexlogo from "@/assets/finallogo.jpg";
-import { User, Briefcase } from "lucide-react";
+import { User, Briefcase, ChevronDown } from "lucide-react";
+
 const mainLinks = [
   { n: "01", label: "Product", href: "/product" },
   { n: "02", label: "Solutions", href: "/solutions" },
@@ -10,24 +11,27 @@ const mainLinks = [
   { n: "04", label: "Pricing", href: "/pricing" },
   { n: "05", label: "Blogs", href: "/blogs" },
   { n: "06", label: "About", href: "/about" },
-  { n: "07", label: "Register", href: "/register" },
-  { n: "09", label: "Admin", href: "/admin/login" },
 ];
 
-const loginLinks = [
+const loginOptions = [
   {
     label: "Agent",
     href: "https://portal.ozonextravel.com/agent",
     icon: User,
-    bg: "#C9963A",
   },
   {
     label: "Corporate",
     href: "https://portal.ozonextravel.com/corporate",
     icon: Briefcase,
-    bg: "#1B1F4B",
   },
 ];
+
+const registerLink = {
+  label: "Register",
+  href: "/register",
+  icon: Briefcase,
+  bg: "#1B1F4B",
+};
 
 function HamburgerIcon({ open }: { open: boolean }) {
   return (
@@ -94,9 +98,11 @@ export function Nav() {
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
+  const [loginOpen, setLoginOpen] = useState(false);
 
   const overlayRef = useRef<HTMLDivElement>(null);
   const linksRef = useRef<HTMLDivElement>(null);
+  const loginMenuRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     if (typeof window === "undefined") return;
@@ -133,8 +139,20 @@ export function Nav() {
     }
   }, [open]);
 
+  useEffect(() => {
+    if (!loginOpen) return;
+    const handleClickOutside = (e: MouseEvent) => {
+      if (loginMenuRef.current && !loginMenuRef.current.contains(e.target as Node)) {
+        setLoginOpen(false);
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, [loginOpen]);
+
   const navigate = (href: string) => {
     setOpen(false);
+    setLoginOpen(false);
     router.navigate({ to: href });
     if (typeof window !== "undefined") {
       window.scrollTo({ top: 0, behavior: "smooth" });
@@ -203,41 +221,117 @@ export function Nav() {
           )}
 
           {/* Right side */}
-          <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
+          <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
             {!isMobile && (
-              <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
-                {loginLinks.map((item) => {
-                  const Icon = item.icon;
-                  return (
-                    <a
-                      key={item.href}
-                      href={item.href}
-                      target="_blank"
-                      rel="noopener noreferrer"
+              <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
+                {/* Login dropdown trigger — now filled to match Register */}
+                <div ref={loginMenuRef} style={{ position: "relative" }}>
+                  <button
+                    onClick={() => setLoginOpen((v) => !v)}
+                    aria-haspopup="true"
+                    aria-expanded={loginOpen}
+                    style={{
+                      display: "flex",
+                      alignItems: "center",
+                      gap: 6,
+                      background: "#1B1F4B",
+                      color: "#fff",
+                      border: 0,
+                      borderRadius: 999,
+                      padding: "10px 18px",
+                      fontSize: 14,
+                      fontWeight: 500,
+                      cursor: "pointer",
+                      whiteSpace: "nowrap",
+                      transition: "filter 0.15s ease",
+                    }}
+                    onMouseEnter={(e) => (e.currentTarget.style.filter = "brightness(1.08)")}
+                    onMouseLeave={(e) => (e.currentTarget.style.filter = "brightness(1)")}
+                  >
+                    Login
+                    <ChevronDown
+                      size={14}
+                      strokeWidth={2}
                       style={{
-                        display: "flex",
-                        alignItems: "center",
-                        gap: 8,
-                        background: item.bg,
-                        color: "#fff",
-                        border: 0,
-                        borderRadius: 999,
-                        padding: "10px 20px",
-                        fontSize: 14,
-                        fontWeight: 500,
-                        cursor: "pointer",
-                        whiteSpace: "nowrap",
-                        textDecoration: "none",
-                        transition: "filter 0.15s ease",
+                        transition: "transform 0.15s ease",
+                        transform: loginOpen ? "rotate(180deg)" : "rotate(0deg)",
                       }}
-                      onMouseEnter={(e) => (e.currentTarget.style.filter = "brightness(1.08)")}
-                      onMouseLeave={(e) => (e.currentTarget.style.filter = "brightness(1)")}
+                    />
+                  </button>
+
+                  {loginOpen && (
+                    <div
+                      style={{
+                        position: "absolute",
+                        top: "calc(100% + 8px)",
+                        right: 0,
+                        background: "#fff",
+                        borderRadius: 14,
+                        border: "1px solid rgba(0,0,0,.08)",
+                        boxShadow: "0 18px 40px -18px rgba(0,0,0,.35)",
+                        overflow: "hidden",
+                        minWidth: 170,
+                      }}
                     >
-                      <Icon size={16} strokeWidth={2} />
-                      {item.label}
-                    </a>
-                  );
-                })}
+                      {loginOptions.map((item) => {
+                        const Icon = item.icon;
+                        return (
+                          <a
+                            key={item.href}
+                            href={item.href}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            onClick={() => setLoginOpen(false)}
+                            style={{
+                              display: "flex",
+                              alignItems: "center",
+                              gap: 8,
+                              padding: "11px 14px",
+                              fontSize: 13,
+                              fontWeight: 500,
+                              color: "#1B1F4B",
+                              textDecoration: "none",
+                              cursor: "pointer",
+                            }}
+                            onMouseEnter={(e) =>
+                              (e.currentTarget.style.background = "rgba(27,31,75,.06)")
+                            }
+                            onMouseLeave={(e) => (e.currentTarget.style.background = "transparent")}
+                          >
+                            <Icon size={15} strokeWidth={2} />
+                            {item.label}
+                          </a>
+                        );
+                      })}
+                    </div>
+                  )}
+                </div>
+
+                {/* Standalone Register button */}
+                <a
+                  href={registerLink.href}
+                  style={{
+                    display: "flex",
+                    alignItems: "center",
+                    gap: 6,
+                    background: registerLink.bg,
+                    color: "#fff",
+                    border: 0,
+                    borderRadius: 999,
+                    padding: "10px 20px",
+                    fontSize: 14,
+                    fontWeight: 500,
+                    cursor: "pointer",
+                    whiteSpace: "nowrap",
+                    textDecoration: "none",
+                    transition: "filter 0.15s ease",
+                  }}
+                  onMouseEnter={(e) => (e.currentTarget.style.filter = "brightness(1.08)")}
+                  onMouseLeave={(e) => (e.currentTarget.style.filter = "brightness(1)")}
+                >
+                  <registerLink.icon size={16} strokeWidth={2} />
+                  {registerLink.label}
+                </a>
               </div>
             )}
 
@@ -307,8 +401,21 @@ export function Nav() {
             </button>
           ))}
 
-          <div style={{ display: "flex", gap: 12, marginTop: 20 }}>
-            {loginLinks.map((item) => {
+          <p
+            style={{
+              marginTop: 20,
+              color: "rgba(255,255,255,.4)",
+              fontSize: 11,
+              fontWeight: 600,
+              textTransform: "uppercase",
+              letterSpacing: "0.12em",
+            }}
+          >
+            Login
+          </p>
+          {/* Agent/Corporate now filled navy to match Register, not just bordered */}
+          <div style={{ display: "flex", gap: 12 }}>
+            {loginOptions.map((item) => {
               const Icon = item.icon;
               return (
                 <a
@@ -320,25 +427,48 @@ export function Nav() {
                     display: "flex",
                     alignItems: "center",
                     justifyContent: "center",
-                    gap: 8,
+                    gap: 6,
                     flex: 1,
-                    background: item.bg,
+                    background: "#1B1F4B",
                     color: "#fff",
                     border: 0,
                     borderRadius: 999,
-                    padding: "14px 18px",
-                    fontSize: 15,
+                    padding: "10px 14px",
+                    fontSize: 13,
                     fontWeight: 500,
                     cursor: "pointer",
                     textDecoration: "none",
                   }}
                 >
-                  <Icon size={17} strokeWidth={2} />
+                  <Icon size={16} strokeWidth={2} />
                   {item.label}
                 </a>
               );
             })}
           </div>
+
+          <a
+            href={registerLink.href}
+            style={{
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              gap: 6,
+              marginTop: 4,
+              background: registerLink.bg,
+              color: "#fff",
+              border: 0,
+              borderRadius: 999,
+              padding: "12px 14px",
+              fontSize: 14,
+              fontWeight: 500,
+              cursor: "pointer",
+              textDecoration: "none",
+            }}
+          >
+            <registerLink.icon size={17} strokeWidth={2} />
+            {registerLink.label}
+          </a>
         </div>
       </div>
     </>
