@@ -36,7 +36,7 @@ function useIsUaeSite() {
 
 function Index() {
   const isUae = useIsUaeSite();
-  const destinationCode = isUae ? "DXB" : "SIN";
+  const destinationCode = isUae ? "DXB" : "BLR";
 
   return (
     // FIX B: the hard `h-screen + overflow-hidden` lock now only
@@ -172,9 +172,9 @@ function Index() {
               </p>
               {/* FIX D: destination swaps to DXB on .ae, stays SIN on .com */}
               <div className="mt-3 flex items-center gap-3 text-sm font-semibold text-ink">
-                <span>BLR</span>
-                <span className="h-px grow bg-ink/20" />
                 <span>{destinationCode}</span>
+                <span className="h-px grow bg-ink/20" />
+                <span>SIN</span>
               </div>
               <div className="mt-3 flex items-center justify-between text-xs text-ink/60">
                 <span>Mon, 24 Aug · 1 traveller</span>
