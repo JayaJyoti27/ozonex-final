@@ -18,7 +18,10 @@ import { Route as MiceEventsRouteImport } from './routes/mice-events'
 import { Route as CorporateTravelManagementDelhiRouteImport } from './routes/corporate-travel-management-delhi'
 import { Route as CorporateTravelManagementChennaiRouteImport } from './routes/corporate-travel-management-chennai'
 import { Route as CorporateTravelManagementBangaloreRouteImport } from './routes/corporate-travel-management-bangalore'
+import { Route as CbtRouteImport } from './routes/cbt'
 import { Route as BlogsRouteImport } from './routes/blogs'
+import { Route as B2eRouteImport } from './routes/b2e'
+import { Route as B2bRouteImport } from './routes/b2b'
 import { Route as AboutRouteImport } from './routes/about'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as BlogsIndexRouteImport } from './routes/blogs.index'
@@ -74,9 +77,24 @@ const CorporateTravelManagementBangaloreRoute =
     path: '/corporate-travel-management-bangalore',
     getParentRoute: () => rootRouteImport,
   } as any)
+const CbtRoute = CbtRouteImport.update({
+  id: '/cbt',
+  path: '/cbt',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const BlogsRoute = BlogsRouteImport.update({
   id: '/blogs',
   path: '/blogs',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const B2eRoute = B2eRouteImport.update({
+  id: '/b2e',
+  path: '/b2e',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const B2bRoute = B2bRouteImport.update({
+  id: '/b2b',
+  path: '/b2b',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AboutRoute = AboutRouteImport.update({
@@ -113,7 +131,10 @@ const AdminLoginRoute = AdminLoginRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
+  '/b2b': typeof B2bRoute
+  '/b2e': typeof B2eRoute
   '/blogs': typeof BlogsRouteWithChildren
+  '/cbt': typeof CbtRoute
   '/corporate-travel-management-bangalore': typeof CorporateTravelManagementBangaloreRoute
   '/corporate-travel-management-chennai': typeof CorporateTravelManagementChennaiRoute
   '/corporate-travel-management-delhi': typeof CorporateTravelManagementDelhiRoute
@@ -131,6 +152,9 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
+  '/b2b': typeof B2bRoute
+  '/b2e': typeof B2eRoute
+  '/cbt': typeof CbtRoute
   '/corporate-travel-management-bangalore': typeof CorporateTravelManagementBangaloreRoute
   '/corporate-travel-management-chennai': typeof CorporateTravelManagementChennaiRoute
   '/corporate-travel-management-delhi': typeof CorporateTravelManagementDelhiRoute
@@ -149,7 +173,10 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
+  '/b2b': typeof B2bRoute
+  '/b2e': typeof B2eRoute
   '/blogs': typeof BlogsRouteWithChildren
+  '/cbt': typeof CbtRoute
   '/corporate-travel-management-bangalore': typeof CorporateTravelManagementBangaloreRoute
   '/corporate-travel-management-chennai': typeof CorporateTravelManagementChennaiRoute
   '/corporate-travel-management-delhi': typeof CorporateTravelManagementDelhiRoute
@@ -169,7 +196,10 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/about'
+    | '/b2b'
+    | '/b2e'
     | '/blogs'
+    | '/cbt'
     | '/corporate-travel-management-bangalore'
     | '/corporate-travel-management-chennai'
     | '/corporate-travel-management-delhi'
@@ -187,6 +217,9 @@ export interface FileRouteTypes {
   to:
     | '/'
     | '/about'
+    | '/b2b'
+    | '/b2e'
+    | '/cbt'
     | '/corporate-travel-management-bangalore'
     | '/corporate-travel-management-chennai'
     | '/corporate-travel-management-delhi'
@@ -204,7 +237,10 @@ export interface FileRouteTypes {
     | '__root__'
     | '/'
     | '/about'
+    | '/b2b'
+    | '/b2e'
     | '/blogs'
+    | '/cbt'
     | '/corporate-travel-management-bangalore'
     | '/corporate-travel-management-chennai'
     | '/corporate-travel-management-delhi'
@@ -223,7 +259,10 @@ export interface FileRouteTypes {
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AboutRoute: typeof AboutRoute
+  B2bRoute: typeof B2bRoute
+  B2eRoute: typeof B2eRoute
   BlogsRoute: typeof BlogsRouteWithChildren
+  CbtRoute: typeof CbtRoute
   CorporateTravelManagementBangaloreRoute: typeof CorporateTravelManagementBangaloreRoute
   CorporateTravelManagementChennaiRoute: typeof CorporateTravelManagementChennaiRoute
   CorporateTravelManagementDelhiRoute: typeof CorporateTravelManagementDelhiRoute
@@ -302,11 +341,32 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof CorporateTravelManagementBangaloreRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/cbt': {
+      id: '/cbt'
+      path: '/cbt'
+      fullPath: '/cbt'
+      preLoaderRoute: typeof CbtRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/blogs': {
       id: '/blogs'
       path: '/blogs'
       fullPath: '/blogs'
       preLoaderRoute: typeof BlogsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/b2e': {
+      id: '/b2e'
+      path: '/b2e'
+      fullPath: '/b2e'
+      preLoaderRoute: typeof B2eRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/b2b': {
+      id: '/b2b'
+      path: '/b2b'
+      fullPath: '/b2b'
+      preLoaderRoute: typeof B2bRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/about': {
@@ -369,7 +429,10 @@ const BlogsRouteWithChildren = BlogsRoute._addFileChildren(BlogsRouteChildren)
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AboutRoute: AboutRoute,
+  B2bRoute: B2bRoute,
+  B2eRoute: B2eRoute,
   BlogsRoute: BlogsRouteWithChildren,
+  CbtRoute: CbtRoute,
   CorporateTravelManagementBangaloreRoute:
     CorporateTravelManagementBangaloreRoute,
   CorporateTravelManagementChennaiRoute: CorporateTravelManagementChennaiRoute,

@@ -193,13 +193,6 @@ function Index() {
               </button>
             </div>
 
-            <div className="absolute top-4 right-2 z-20 hidden rounded-2xl border border-ink/10 bg-sand/85 px-4 py-3 shadow-[0_18px_40px_-18px_rgba(0,0,0,0.5)] backdrop-blur-md lg:block lg:top-8 lg:right-4">
-              <p className="text-[0.65rem] font-semibold tracking-[0.18em] uppercase text-ink/50">
-                Approval
-              </p>
-              <p className="mt-1 text-sm font-semibold text-ink">Auto-approved in 12s</p>
-            </div>
-
             <div
               className="absolute top-1/3 right-2 z-20 hidden -translate-y-1/2 rounded-2xl px-4 py-3 text-white shadow-[0_18px_40px_-18px_rgba(0,0,0,0.6)] backdrop-blur-md lg:block lg:top-1/2 lg:-translate-y-[140%] lg:right-8"
               style={{ backgroundColor: `${INK}E6` }}

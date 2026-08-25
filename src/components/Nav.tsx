@@ -13,6 +13,13 @@ const mainLinks = [
   { n: "06", label: "About", href: "/about" },
 ];
 
+// Sub-links shown in the "Product" dropdown
+const productLinks = [
+  { label: "Ozonex B2B", href: "/b2b" },
+  { label: "Ozonex B2E", href: "/b2e" },
+  { label: "Ozonex CBT", href: "/cbt" },
+];
+
 const loginOptions = [
   {
     label: "Agent",
@@ -99,10 +106,13 @@ export function Nav() {
   const [scrolled, setScrolled] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
   const [loginOpen, setLoginOpen] = useState(false);
+  const [productOpen, setProductOpen] = useState(false); // desktop dropdown
+  const [productExpanded, setProductExpanded] = useState(false); // mobile accordion
 
   const overlayRef = useRef<HTMLDivElement>(null);
   const linksRef = useRef<HTMLDivElement>(null);
   const loginMenuRef = useRef<HTMLDivElement>(null);
+  const productMenuRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     if (typeof window === "undefined") return;
@@ -150,9 +160,22 @@ export function Nav() {
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, [loginOpen]);
 
+  useEffect(() => {
+    if (!productOpen) return;
+    const handleClickOutside = (e: MouseEvent) => {
+      if (productMenuRef.current && !productMenuRef.current.contains(e.target as Node)) {
+        setProductOpen(false);
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, [productOpen]);
+
   const navigate = (href: string) => {
     setOpen(false);
     setLoginOpen(false);
+    setProductOpen(false);
+    setProductExpanded(false);
     router.navigate({ to: href });
     if (typeof window !== "undefined") {
       window.scrollTo({ top: 0, behavior: "smooth" });
@@ -200,23 +223,111 @@ export function Nav() {
                 gap: 28,
               }}
             >
-              {mainLinks.map((item) => (
-                <button
-                  key={item.href}
-                  onClick={() => navigate(item.href)}
-                  style={{
-                    background: "transparent",
-                    border: 0,
-                    cursor: "pointer",
-                    color: "black",
-                    fontSize: 12,
-                    fontWeight: 500,
-                    textTransform: "uppercase",
-                  }}
-                >
-                  {item.label}
-                </button>
-              ))}
+              {mainLinks.map((item) => {
+                if (item.label === "Product") {
+                  return (
+                    <div
+                      key={item.href}
+                      ref={productMenuRef}
+                      style={{ position: "relative" }}
+                      onMouseEnter={() => setProductOpen(true)}
+                      onMouseLeave={() => setProductOpen(false)}
+                    >
+                      <button
+                        onClick={() => setProductOpen((v) => !v)}
+                        aria-haspopup="true"
+                        aria-expanded={productOpen}
+                        style={{
+                          background: "transparent",
+                          border: 0,
+                          cursor: "pointer",
+                          color: "black",
+                          fontSize: 12,
+                          fontWeight: 500,
+                          textTransform: "uppercase",
+                          display: "flex",
+                          alignItems: "center",
+                          gap: 4,
+                        }}
+                      >
+                        {item.label}
+                        <ChevronDown
+                          size={12}
+                          strokeWidth={2}
+                          style={{
+                            transition: "transform 0.15s ease",
+                            transform: productOpen ? "rotate(180deg)" : "rotate(0deg)",
+                          }}
+                        />
+                      </button>
+
+                      {productOpen && (
+                        <div
+                          style={{
+                            position: "absolute",
+                            top: "calc(100% + 14px)",
+                            left: "50%",
+                            transform: "translateX(-50%)",
+                            background: "#fff",
+                            borderRadius: 14,
+                            border: "1px solid rgba(0,0,0,.08)",
+                            boxShadow: "0 18px 40px -18px rgba(0,0,0,.35)",
+                            overflow: "hidden",
+                            minWidth: 180,
+                          }}
+                        >
+                          {productLinks.map((p) => (
+                            <button
+                              key={p.href}
+                              onClick={() => navigate(p.href)}
+                              style={{
+                                display: "flex",
+                                width: "100%",
+                                alignItems: "center",
+                                padding: "12px 16px",
+                                fontSize: 13,
+                                fontWeight: 500,
+                                color: "#1B1F4B",
+                                background: "transparent",
+                                border: 0,
+                                textAlign: "left",
+                                cursor: "pointer",
+                                textTransform: "none",
+                              }}
+                              onMouseEnter={(e) =>
+                                (e.currentTarget.style.background = "rgba(27,31,75,.06)")
+                              }
+                              onMouseLeave={(e) =>
+                                (e.currentTarget.style.background = "transparent")
+                              }
+                            >
+                              {p.label}
+                            </button>
+                          ))}
+                        </div>
+                      )}
+                    </div>
+                  );
+                }
+
+                return (
+                  <button
+                    key={item.href}
+                    onClick={() => navigate(item.href)}
+                    style={{
+                      background: "transparent",
+                      border: 0,
+                      cursor: "pointer",
+                      color: "black",
+                      fontSize: 12,
+                      fontWeight: 500,
+                      textTransform: "uppercase",
+                    }}
+                  >
+                    {item.label}
+                  </button>
+                );
+              })}
             </div>
           )}
 
@@ -370,6 +481,7 @@ export function Nav() {
           opacity: 0,
           pointerEvents: "none",
           padding: "90px 24px 40px",
+          overflowY: "auto",
         }}
       >
         <div
@@ -382,24 +494,89 @@ export function Nav() {
             gap: 12,
           }}
         >
-          {mainLinks.map((item) => (
-            <button
-              key={item.href}
-              onClick={() => navigate(item.href)}
-              style={{
-                background: "transparent",
-                border: 0,
-                color: "#fff",
-                fontSize: 24,
-                textAlign: "left",
-                padding: "14px 0",
-                borderBottom: "1px solid rgba(255,255,255,.08)",
-                cursor: "pointer",
-              }}
-            >
-              {item.label}
-            </button>
-          ))}
+          {mainLinks.map((item) => {
+            if (item.label === "Product") {
+              return (
+                <div key={item.href}>
+                  <button
+                    onClick={() => setProductExpanded((v) => !v)}
+                    style={{
+                      width: "100%",
+                      background: "transparent",
+                      border: 0,
+                      color: "#fff",
+                      fontSize: 24,
+                      textAlign: "left",
+                      padding: "14px 0",
+                      borderBottom: "1px solid rgba(255,255,255,.08)",
+                      cursor: "pointer",
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "space-between",
+                    }}
+                  >
+                    {item.label}
+                    <ChevronDown
+                      size={20}
+                      strokeWidth={2}
+                      style={{
+                        transition: "transform 0.2s ease",
+                        transform: productExpanded ? "rotate(180deg)" : "rotate(0deg)",
+                      }}
+                    />
+                  </button>
+
+                  {productExpanded && (
+                    <div
+                      style={{
+                        display: "flex",
+                        flexDirection: "column",
+                        gap: 4,
+                        padding: "8px 0 8px 16px",
+                      }}
+                    >
+                      {productLinks.map((p) => (
+                        <button
+                          key={p.href}
+                          onClick={() => navigate(p.href)}
+                          style={{
+                            background: "transparent",
+                            border: 0,
+                            color: "rgba(255,255,255,.75)",
+                            fontSize: 16,
+                            textAlign: "left",
+                            padding: "10px 0",
+                            cursor: "pointer",
+                          }}
+                        >
+                          {p.label}
+                        </button>
+                      ))}
+                    </div>
+                  )}
+                </div>
+              );
+            }
+
+            return (
+              <button
+                key={item.href}
+                onClick={() => navigate(item.href)}
+                style={{
+                  background: "transparent",
+                  border: 0,
+                  color: "#fff",
+                  fontSize: 24,
+                  textAlign: "left",
+                  padding: "14px 0",
+                  borderBottom: "1px solid rgba(255,255,255,.08)",
+                  cursor: "pointer",
+                }}
+              >
+                {item.label}
+              </button>
+            );
+          })}
 
           <p
             style={{
