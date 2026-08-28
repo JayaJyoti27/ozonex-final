@@ -10,7 +10,56 @@ import { TornEdge } from "@/components/TornEdge";
 
 gsap.registerPlugin(ScrollTrigger);
 
-const CONTACT_EMAIL = "tresaj@ozonegroupglobal.com";
+// ---- Region detection ---------------------------------------------------
+// Mirrors the same hostname check used in Footer.tsx (useIsUaeSite) so both
+// components agree on which domain is being served, with no build-time env
+// var to keep in sync. Falls back to false during SSR / before hydration.
+function isUaeHostname(hostname: string): boolean {
+  return hostname.endsWith(".ae");
+}
+
+function getIsUaeSite(): boolean {
+  if (typeof window === "undefined") return false;
+  return isUaeHostname(window.location.hostname);
+}
+
+type SiteRegion = "com" | "ae";
+
+const siteConfig = {
+  com: {
+    contactEmail: "tresaj@ozonegroupglobal.com",
+    whatsapp: {
+      display: "+91 81398 31118",
+      href: "https://wa.me/918139831118?text=Hi%2C%20I%20want%20to%20know%20more%20about%20the%20OzoneX%20Platform",
+    },
+    hqPhone: {
+      display: "+91 471 3500 598 (HQ)",
+      href: "tel:+914713500598",
+    },
+    phonePlaceholder: "+91 98765 43210",
+    canonical: "https://ozonex.com/pricing",
+    title: "Get a Custom Quote | Ozonex",
+  },
+  ae: {
+    contactEmail: "info@flyozone.travel",
+    whatsapp: {
+      display: "+971 56 455 7700",
+      href: "https://wa.me/971564557700?text=Hi%2C%20I%20want%20to%20know%20more%20about%20the%20OzoneX%20Platform",
+    },
+    hqPhone: {
+      display: "+971 56 455 7700 (Dubai)",
+      href: "tel:+971564557700",
+    },
+    phonePlaceholder: "+971 56 455 7700",
+    canonical: "https://ozonextravel.ae/pricing",
+    title: "Get a Custom Quote | Ozonex UAE",
+  },
+} as const satisfies Record<SiteRegion, unknown>;
+
+function getSiteConfig(): (typeof siteConfig)[SiteRegion] {
+  return siteConfig[getIsUaeSite() ? "ae" : "com"];
+}
+// --------------------------------------------------------------------------
 
 const offices = [
   {
@@ -68,23 +117,30 @@ type FormState = {
 };
 
 export const Route = createFileRoute("/pricing")({
-  head: () => ({
-    meta: [
-      { title: "Get a Custom Quote | Ozonex" },
-      {
-        name: "description",
-        content:
-          "Ozonex pricing is tailored to your organisation. Tell us about your travel programme and we'll build a plan that fits your team size, policy complexity, and budget.",
-      },
-      { property: "og:title", content: "Get a Custom Quote | Ozonex" },
-      { property: "og:type", content: "website" },
-    ],
-    links: [{ rel: "canonical", href: "https://ozonex.com/pricing" }],
-  }),
+  head: () => {
+    const site = getSiteConfig();
+    return {
+      meta: [
+        { title: site.title },
+        {
+          name: "description",
+          content:
+            "Ozonex pricing is tailored to your organisation. Tell us about your travel programme and we'll build a plan that fits your team size, policy complexity, and budget.",
+        },
+        { property: "og:title", content: site.title },
+        { property: "og:type", content: "website" },
+      ],
+      links: [{ rel: "canonical", href: site.canonical }],
+    };
+  },
   component: PricingPage,
 });
 
 function PricingPage() {
+  // Re-evaluated per render, same as Footer's useIsUaeSite() pattern.
+  // Cheap string check — no need to memoize.
+  const site = getSiteConfig();
+
   const [form, setForm] = useState<FormState>({
     name: "",
     company: "",
@@ -199,7 +255,7 @@ function PricingPage() {
       `Message: ${form.message}`,
     ].join("\n");
 
-    const mailtoLink = `mailto:${CONTACT_EMAIL}?subject=Ozonex Enquiry from ${encodeURIComponent(form.name)} — ${encodeURIComponent(form.company)}&body=${encodeURIComponent(body)}`;
+    const mailtoLink = `mailto:${site.contactEmail}?subject=Ozonex Enquiry from ${encodeURIComponent(form.name)} — ${encodeURIComponent(form.company)}&body=${encodeURIComponent(body)}`;
     window.location.href = mailtoLink;
     setStatus("sent");
   };
@@ -368,7 +424,7 @@ function PricingPage() {
                   name="phone"
                   value={form.phone}
                   onChange={handleChange}
-                  placeholder="+91 98765 43210"
+                  placeholder={site.phonePlaceholder}
                   style={inputStyle}
                 />
               </div>
@@ -465,30 +521,30 @@ function PricingPage() {
               </h3>
               <div className="mt-6 flex flex-col gap-5">
                 <a
-                  href={`mailto:${CONTACT_EMAIL}`}
+                  href={`mailto:${site.contactEmail}`}
                   className="flex items-start gap-3"
                   style={{ color: "rgba(255,255,255,0.8)", fontSize: 14, textDecoration: "none" }}
                 >
                   <span style={{ color: "var(--gold)", marginTop: 2 }}>✉</span>
-                  <span>{CONTACT_EMAIL}</span>
+                  <span>{site.contactEmail}</span>
                 </a>
                 <a
-                  href="https://wa.me/918139831118?text=Hi%2C%20I%20want%20to%20know%20more%20about%20the%20OzoneX%20Platform"
+                  href={site.whatsapp.href}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="flex items-start gap-3"
                   style={{ color: "rgba(255,255,255,0.8)", fontSize: 14, textDecoration: "none" }}
                 >
                   <span style={{ color: "var(--gold)", marginTop: 2 }}>💬</span>
-                  <span>WhatsApp: +91 81398 31118</span>
+                  <span>WhatsApp: {site.whatsapp.display}</span>
                 </a>
                 <a
-                  href="tel:+914713500598"
+                  href={site.hqPhone.href}
                   className="flex items-start gap-3"
                   style={{ color: "rgba(255,255,255,0.8)", fontSize: 14, textDecoration: "none" }}
                 >
                   <span style={{ color: "var(--gold)", marginTop: 2 }}>✆</span>
-                  <span>+91 471 3500 598 (HQ)</span>
+                  <span>{site.hqPhone.display}</span>
                 </a>
               </div>
             </div>

@@ -674,17 +674,23 @@ function sortOffices(offices: string[]): string[] {
 }
 
 // Detects whether the footer is being rendered on the .ae site so we can
-// swap in UAE-specific contact details, cities heading, and city list.
+// swap in UAE-specific contact details, cities heading, city list, and
+// whether Navigation/Cities labels render as real links.
 function useIsUaeSite(): boolean {
   if (typeof window === "undefined") return false;
   return window.location.hostname.endsWith(".ae");
 }
 
+type FooterLinkItem = {
+  label: string;
+  href?: string;
+};
+
 export function Footer() {
   const isUaeSite = useIsUaeSite();
   const officeLocations = sortOffices(CONTACT.officeLocations);
 
-  const footerLinks = [
+  const footerLinks: FooterLinkItem[] = [
     { label: "Home", href: "/" },
     { label: "Product", href: "/product" },
     { label: "Solutions", href: "/solutions" },
@@ -695,46 +701,19 @@ export function Footer() {
     { label: "Privacy Policy", href: "/privacy" },
   ];
 
-  const cityLinksIndia = [
-    {
-      label: "Bangalore",
-      href: "/corporate-travel-management-bangalore",
-    },
-    {
-      label: "Chennai",
-      href: "/corporate-travel-management-chennai",
-    },
-    {
-      label: "Delhi",
-      href: "/corporate-travel-management-delhi",
-    },
+  const cityLinksIndia: FooterLinkItem[] = [
+    { label: "Bangalore", href: "/corporate-travel-management-bangalore" },
+    { label: "Chennai", href: "/corporate-travel-management-chennai" },
+    { label: "Delhi", href: "/corporate-travel-management-delhi" },
   ];
 
-  const cityLinksUae = [
-    {
-      label: "Downtown Dubai",
-      href: "/corporate-travel-management-downtown-dubai",
-    },
-    {
-      label: "Dubai Marina",
-      href: "/corporate-travel-management-dubai-marina",
-    },
-    {
-      label: "Business Bay",
-      href: "/corporate-travel-management-business-bay",
-    },
-    {
-      label: "Deira",
-      href: "/corporate-travel-management-deira",
-    },
-    {
-      label: "Bur Dubai",
-      href: "/corporate-travel-management-bur-dubai",
-    },
-    {
-      label: "Jumeirah",
-      href: "/corporate-travel-management-jumeirah",
-    },
+  const cityLinksUae: FooterLinkItem[] = [
+    { label: "Downtown Dubai" },
+    { label: "Dubai Marina" },
+    { label: "Business Bay" },
+    { label: "Deira" },
+    { label: "Bur Dubai" },
+    { label: "Jumeirah" },
   ];
 
   const cityLinks = isUaeSite ? cityLinksUae : cityLinksIndia;
@@ -743,6 +722,21 @@ export function Footer() {
   const contactEmail = isUaeSite ? "info@flyozone.travel" : "tresaj@ozonegroupglobal.com";
   const whatsappNumber = isUaeSite ? "971564557700" : CONTACT.whatsappNumber;
   const whatsappDisplay = isUaeSite ? "+971 56 455 7700" : CONTACT.whatsappDisplay;
+
+  // On the UAE site, Navigation and Cities labels render as plain text
+  // (no href) instead of real links; India keeps its links as-is.
+  const renderFooterLinkItem = (item: FooterLinkItem) => {
+    const href = isUaeSite ? undefined : item.href;
+    return href ? (
+      <a key={item.label} href={href} className="footer-link">
+        {item.label}
+      </a>
+    ) : (
+      <span key={item.label} className="footer-link footer-link--static">
+        {item.label}
+      </span>
+    );
+  };
 
   return (
     <footer className="site-footer">
@@ -775,26 +769,14 @@ export function Footer() {
           <div className="footer-col">
             <div className="footer-col-heading">Navigation</div>
 
-            <div className="footer-links">
-              {footerLinks.map((l) => (
-                <a key={l.href} href={l.href} className="footer-link">
-                  {l.label}
-                </a>
-              ))}
-            </div>
+            <div className="footer-links">{footerLinks.map(renderFooterLinkItem)}</div>
           </div>
 
           {/* Cities */}
           <div className="footer-col">
             <div className="footer-col-heading">{citiesHeading}</div>
 
-            <div className="footer-links">
-              {cityLinks.map((l) => (
-                <a key={l.href} href={l.href} className="footer-link">
-                  {l.label}
-                </a>
-              ))}
-            </div>
+            <div className="footer-links">{cityLinks.map(renderFooterLinkItem)}</div>
           </div>
 
           {/* Offices */}
@@ -939,6 +921,14 @@ export function Footer() {
 
         .footer-link:hover {
           color: white;
+        }
+
+        .footer-link--static {
+          cursor: default;
+        }
+
+        .footer-link--static:hover {
+          color: rgba(255,255,255,0.62);
         }
 
         .footer-email {

@@ -41,6 +41,7 @@ const registerLink = {
 };
 
 function HamburgerIcon({ open }: { open: boolean }) {
+  const strokeColor = "#3E2723"; // dark brown
   return (
     <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
       {open ? (
@@ -50,7 +51,7 @@ function HamburgerIcon({ open }: { open: boolean }) {
             y1="4"
             x2="16"
             y2="16"
-            stroke="white"
+            stroke={strokeColor}
             strokeWidth="1.8"
             strokeLinecap="round"
           />
@@ -59,7 +60,7 @@ function HamburgerIcon({ open }: { open: boolean }) {
             y1="4"
             x2="4"
             y2="16"
-            stroke="white"
+            stroke={strokeColor}
             strokeWidth="1.8"
             strokeLinecap="round"
           />
@@ -71,7 +72,7 @@ function HamburgerIcon({ open }: { open: boolean }) {
             y1="5"
             x2="17"
             y2="5"
-            stroke="white"
+            stroke={strokeColor}
             strokeWidth="1.8"
             strokeLinecap="round"
           />
@@ -80,7 +81,7 @@ function HamburgerIcon({ open }: { open: boolean }) {
             y1="10"
             x2="17"
             y2="10"
-            stroke="white"
+            stroke={strokeColor}
             strokeWidth="1.8"
             strokeLinecap="round"
           />
@@ -89,7 +90,7 @@ function HamburgerIcon({ open }: { open: boolean }) {
             y1="15"
             x2="17"
             y2="15"
-            stroke="white"
+            stroke={strokeColor}
             strokeWidth="1.8"
             strokeLinecap="round"
           />
@@ -226,13 +227,7 @@ export function Nav() {
               {mainLinks.map((item) => {
                 if (item.label === "Product") {
                   return (
-                    <div
-                      key={item.href}
-                      ref={productMenuRef}
-                      style={{ position: "relative" }}
-                      onMouseEnter={() => setProductOpen(true)}
-                      onMouseLeave={() => setProductOpen(false)}
-                    >
+                    <div key={item.href} ref={productMenuRef} style={{ position: "relative" }}>
                       <button
                         onClick={() => setProductOpen((v) => !v)}
                         aria-haspopup="true"
