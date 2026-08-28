@@ -675,7 +675,7 @@ function sortOffices(offices: string[]): string[] {
 
 // Detects whether the footer is being rendered on the .ae site so we can
 // swap in UAE-specific contact details, cities heading, city list, and
-// whether Navigation/Cities labels render as real links.
+// whether the D-U-N-S seal (India-only registration) is shown.
 function useIsUaeSite(): boolean {
   if (typeof window === "undefined") return false;
   return window.location.hostname.endsWith(".ae");
@@ -723,9 +723,15 @@ export function Footer() {
   const whatsappNumber = isUaeSite ? "971564557700" : CONTACT.whatsappNumber;
   const whatsappDisplay = isUaeSite ? "+971 56 455 7700" : CONTACT.whatsappDisplay;
 
-  // On the UAE site, Navigation and Cities labels render as plain text
-  // (no href) instead of real links; India keeps its links as-is.
-  const renderFooterLinkItem = (item: FooterLinkItem) => {
+  // Navigation links: always real links, on both .com and .ae
+  const renderNavLinkItem = (item: FooterLinkItem) => (
+    <a key={item.label} href={item.href} className="footer-link">
+      {item.label}
+    </a>
+  );
+
+  // Cities links: real links only on India (.com); static text on UAE (.ae)
+  const renderCityLinkItem = (item: FooterLinkItem) => {
     const href = isUaeSite ? undefined : item.href;
     return href ? (
       <a key={item.label} href={href} className="footer-link">
@@ -752,31 +758,34 @@ export function Footer() {
             </p>
 
             <div className="footer-cert">IATA Accredited · Est. 2014</div>
-            <iframe
-              id="Iframe1"
-              src="https://dunsregistered.dnb.com/SealAuthentication.aspx?Cid=1"
-              width="114"
-              height="97"
-              frameBorder="0"
-              scrolling="no"
-              allowTransparency={true}
-              title="D-U-N-S Registered Seal"
-              style={{ marginTop: "18px" }}
-            />
+
+            {!isUaeSite && (
+              <iframe
+                id="Iframe1"
+                src="https://dunsregistered.dnb.com/SealAuthentication.aspx?Cid=1"
+                width="114"
+                height="97"
+                frameBorder="0"
+                scrolling="no"
+                allowTransparency={true}
+                title="D-U-N-S Registered Seal"
+                style={{ marginTop: "18px" }}
+              />
+            )}
           </div>
 
           {/* Navigation */}
           <div className="footer-col">
             <div className="footer-col-heading">Navigation</div>
 
-            <div className="footer-links">{footerLinks.map(renderFooterLinkItem)}</div>
+            <div className="footer-links">{footerLinks.map(renderNavLinkItem)}</div>
           </div>
 
           {/* Cities */}
           <div className="footer-col">
             <div className="footer-col-heading">{citiesHeading}</div>
 
-            <div className="footer-links">{cityLinks.map(renderFooterLinkItem)}</div>
+            <div className="footer-links">{cityLinks.map(renderCityLinkItem)}</div>
           </div>
 
           {/* Offices */}
